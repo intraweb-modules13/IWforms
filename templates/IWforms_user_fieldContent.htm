@@ -10,7 +10,7 @@
 			</div>
 			<div class="field"><input type="text" size="<!--[$size]-->" name="field<!--[$field.fndid]-->" id="field<!--[$field.fndid]-->"/></div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->
 		<!--[else]-->
 			<div class="fieldTitleInnactive"><!--[$field.fieldName|pnvarprephtmldisplay]--><span class="required"><!--[$field.required]--></span></div>
@@ -32,7 +32,7 @@
 			</div>
 			<div class="field"><textarea cols="<!--[$cols]-->" rows="<!--[$rows]-->" name="field<!--[$field.fndid]-->" <!--[if $field.editor eq 1]-->id="intraweb"<!--[/if]-->></textarea></div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->			
 		</div>
 		<div style="clear:both"></div>
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->			
 		</div>
 	<!--[else]-->
@@ -117,7 +117,7 @@
 			<div class="field">
 				<!--[if $calendar]-->
 					<input type="text" size="8" maxlength="8" id="field<!--[$field.fndid]-->" name="field<!--[$field.fndid]-->" onFocus=blur() />
-					<a><img id="trigBegin<!--[$field.fndid]-->" name="trigBegin<!--[$field.fndid]-->" src="modules/iw_main/pnimages/calendar.gif" style="cursor:pointer;"/></a>
+					<a><img id="trigBegin<!--[$field.fndid]-->" name="trigBegin<!--[$field.fndid]-->" src="modules/IWmain/pnimages/calendar.gif" style="cursor:pointer;"/></a>
 					<script type="text/javascript">
 						Calendar.setup({
 							inputField     :    "field<!--[$field.fndid]-->",
@@ -152,7 +152,7 @@
 				<!--[/if]-->
 			</div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->
 		</div>
 	<!--[else]-->
@@ -190,7 +190,7 @@
 				</select>
 			</div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->
 		</div>
 	<!--[else]-->
@@ -220,7 +220,7 @@
 				</select>
 			</div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->
 		</div>
 	<!--[else]-->
@@ -251,12 +251,12 @@
 					<div class="helpHeader"><div class="helpTitle"><!--[gt text="Public File"]--></div></div>
 					<div class="helpContent"> 
 						<!--[gt text="If the file is public will be accessible to everyone from a URL like:"]--><br /><!--[$publicFileURL]-->
-						<div class="helpBoxClose"><a href="#" onClick="overlayclose('help1'); return false"><!--[gt text="Close the window"]--> <!--[pnimg modname='iw_main' src='postitcloseicon.png' set='pnimages']--></a></div>		
+						<div class="helpBoxClose"><a href="#" onClick="overlayclose('help1'); return false"><!--[gt text="Close the window"]--> <!--[pnimg modname='IWmain' src='postitcloseicon.png' set='pnimages']--></a></div>		
 					</div>
 				</div>
 			<!--[/if]-->
 			<!--[if $field.help neq '']-->
-				<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+				<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->
 			<!--[if $field.extensions != '']-->
 				<div style="clear:left;">
@@ -321,7 +321,7 @@
 				<input type="radio" name="field<!--[$field.fndid]-->" id="field<!--[$field.fndid]-->" <!--[if not $checked]-->checked<!--[/if]--> value="<!--[gt text="No"]-->"/><!--[gt text="No"]-->
 			</div>
 			<!--[if $field.help neq '']-->
-					<!--[include file="iw_forms_user_fieldContentHelp.htm"]-->
+					<!--[include file="IWforms_user_fieldContentHelp.htm"]-->
 			<!--[/if]-->			
 		</div>
 	<!--[else]-->

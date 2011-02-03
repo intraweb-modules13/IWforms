@@ -2,9 +2,9 @@
 	<div id="newFormField">
 		<div class="pn-adminpageicon"><!--[pnimg modname='core' src='filenew.gif' set='icons/medium']--></div>
 		<h2><!--[gt text="Create a new form field"]--></h2>
-		<form class="pn-adminform" name="newField" action="<!--[pnmodurl modname="iw_forms" type="admin" func="submitField"]-->" method="post" enctype="application/x-www-form-urlencoded">
+		<form class="pn-adminform" name="newField" action="<!--[pnmodurl modname="IWforms" type="admin" func="submitField"]-->" method="post" enctype="application/x-www-form-urlencoded">
 			<input type="hidden" name="fid" value="<!--[$item.fid]-->" />
-			<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+			<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 			<div class="pn-adminformrow">
 				<label for="fieldType"><!--[gt text="Type field"]--></label>
 				<select id="fieldType" name="fieldType">
@@ -25,7 +25,7 @@
 			<div class="formOptions">
 				<!--[*]--><!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Create" __title="Create"]--><!--[*]-->
 				<a href="javascript:createField(document.newField.fieldType.value,<!--[$item.fid]-->)"><!--[pnimg modname='core' src='button_ok.gif' set='icons/small'   __alt="Create" __title="Create"]--></a>			
-				<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="field" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+				<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 			</div>
 		</form>
 	</div>

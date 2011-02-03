@@ -20,33 +20,33 @@
 // To read the license please visit http://www.gnu.org/copyleft/gpl.html
 
 /**
- * iw_forms block
+ * IWforms block
  * 
- * The iw_forms block provides a list of the forms where user can access 
+ * The IWforms block provides a list of the forms where user can access 
  *
  * Purpose of file:  Create a block with the forms where the user can access
  *
  * @package      Intraweb_Modules
  * @subpackage   iw_agendas
  * @version      $Id: calendar.php
- * @author       Albert PÃ©rez Monfort
+ * @author       Albert Pérez Monfort
  * @link         http://phobos.xtec.cat/intraweb  The Intraweb Project Home Page
  * @copyright    Copyright (C) 2004 by the Intraweb Project Team
  * @license      http://www.gnu.org/copyleft/gpl.html GNU General Public License
  */ 
 
-function iw_forms_formslistblock_init()
+function IWforms_formslistblock_init()
 {
-    pnSecAddSchema("iw_forms:formslistblock:", "Block title::");
+    pnSecAddSchema("IWforms:formslistblock:", "Block title::");
 }
 
-function iw_forms_formslistblock_info()
+function IWforms_formslistblock_info()
 {
-	$dom = ZLanguage::getModuleDomain('iw_forms');
+	$dom = ZLanguage::getModuleDomain('IWforms');
     return array('text_type' => 'FormsList',
 				 'func_edit' => 'formslist_edit',
 				 'func_update' => 'formslist_update',
-				 'module' => 'iw_forms',
+				 'module' => 'IWforms',
 				 'text_type_long' => __('Display the list of forms where you can access the user', $dom),
 				 'allow_multiple' => true,
 				 'form_content' => false,
@@ -56,57 +56,57 @@ function iw_forms_formslistblock_info()
 
 /**
  * Show the list of forms for choosed categories
- * @autor:	Albert PÃ©rez Monfort
+ * @autor:	Albert Pérez Monfort
  * return:	The list of forms
 */
-function iw_forms_formslistblock_display($blockinfo)
+function IWforms_formslistblock_display($blockinfo)
 {
 	// Security check
-	if (!pnSecAuthAction(0, "iw_forms:formslistblock:", $blockinfo['title']."::", ACCESS_READ)) { 
+	if (!pnSecAuthAction(0, "IWforms:formslistblock:", $blockinfo['title']."::", ACCESS_READ)) { 
 		return; 
 	} 
 	// Check if the module is available
-	if(!pnModAvailable('iw_forms')){
+	if(!pnModAvailable('IWforms')){
 		return;
 	}
 	$uid = (pnUserLoggedIn()) ? pnUserGetVar('uid') : '-1';
 	//get the headlines saved in the user vars. It is renovate every 10 minutes
-	$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-	$exists = pnModApiFunc('iw_main', 'user', 'userVarExists',
+	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+	$exists = pnModApiFunc('IWmain', 'user', 'userVarExists',
 	                        array('name' => 'formsListBlock'.$blockinfo['bid'],
-								  'module' => 'iw_forms',
+								  'module' => 'IWforms',
 								  'uid' => $uid,
 								  'sv' => $sv));
-	$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-	$have_flags = pnModFunc('iw_main', 'user', 'userGetVar',
+	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+	$have_flags = pnModFunc('IWmain', 'user', 'userGetVar',
 	                         array('uid' => $uid,
 								   'name' => 'have_flags',
-								   'module' => 'iw_main_block_flagged',
+								   'module' => 'IWmain_block_flagged',
 								   'sv' => $sv));
 	if($exists && $have_flags != 'fr'){
-		$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-		$s = pnModFunc('iw_main', 'user', 'userGetVar',
+		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+		$s = pnModFunc('IWmain', 'user', 'userGetVar',
 		                array('uid' => $uid,
 							  'name' => 'formsListBlock'.$blockinfo['bid'],
-							  'module' => 'iw_forms',
+							  'module' => 'IWforms',
 							  'sv' => $sv,
 							  'nult' => true));
 		$blockinfo['content'] = $s;
 		return themesideblock($blockinfo);
 	}
 	//get all the active forms
-	$forms = pnModAPIFunc('iw_forms', 'user', 'getAllForms',
+	$forms = pnModAPIFunc('IWforms', 'user', 'getAllForms',
 	                       array('user' => 1));
 	//get all the groups of the user
-	$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-	$userGroups = pnModFunc('iw_main', 'user', 'getAllUserGroups',
+	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+	$userGroups = pnModFunc('IWmain', 'user', 'getAllUserGroups',
 	                         array('uid' => $uid,
 								   'sv' => $sv));
 	foreach($userGroups as $group){
 		$userGroupsArray[] = $group['id'];
 	}
-	$flagged = pnModAPIFunc('iw_forms', 'user', 'getWhereFlagged');
-	$validation = pnModAPIFunc('iw_forms', 'user', 'getWhereNeedValidation');
+	$flagged = pnModAPIFunc('IWforms', 'user', 'getWhereFlagged');
+	$validation = pnModAPIFunc('IWforms', 'user', 'getWhereNeedValidation');
 	$values = explode('---', $blockinfo['url']);
 	//get categories
 	$cats = explode('|', $values[0]);
@@ -119,13 +119,13 @@ function iw_forms_formslistblock_display($blockinfo)
 	//Filter the forms where the user can access
 	foreach($forms as $form){
 		if($catsString == '$' || strpos($catsString, '$' . $form['cid'] . '$') != false){
-			$access = pnModFunc('iw_forms', 'user', 'access',
+			$access = pnModFunc('IWforms', 'user', 'access',
 			                     array('fid' => $form['fid'],
 									   'userGroups' => $userGroupsArray));
 			if($access['level'] != 0){
 				$isFlagged = (array_key_exists($form['fid'], $flagged)) ? 1 : 0;
 				$needValidation = (array_key_exists($form['fid'], $validation)) ? 1 : 0;
-				$new = pnModFunc('iw_forms', 'user', 'makeTimeForm', $form['new']);
+				$new = pnModFunc('IWforms', 'user', 'makeTimeForm', $form['new']);
 				$new = mktime(23, 59, 00,substr($new, 3, 2), substr($new, 0, 2), substr($new, 6, 2));
 				$newLabel = ($new > time()) ? true : false;
                 $formShortName = (strlen($form['formName']) > 17) ?   $formShortName = mb_strimwidth($form['formName'], 0, 18, '...') : $formShortName = $form['formName'];
@@ -145,16 +145,16 @@ function iw_forms_formslistblock_display($blockinfo)
 		}
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('iw_forms', false);
+	$pnRender = pnRender::getInstance('IWforms', false);
 	$pnRender -> assign('forms' , $forms_array);
 	$pnRender -> assign('listBox', $values[1]);
-	$s = $pnRender -> fetch('iw_forms_block_formsList.htm');
+	$s = $pnRender -> fetch('IWforms_block_formsList.htm');
 	//Copy the block information into user vars
-	$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-	pnModFunc('iw_main', 'user', 'userSetVar',
+	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+	pnModFunc('IWmain', 'user', 'userSetVar',
 	           array('uid' => $uid,
 					 'name' => 'formsListBlock' . $blockinfo['bid'],
-					 'module' => 'iw_forms',
+					 'module' => 'IWforms',
 					 'sv' => $sv,
 					 'value' => $s,
 					 'lifetime' => '750'));
@@ -167,7 +167,7 @@ function iw_forms_formslistblock_display($blockinfo)
 function formslist_update($blockinfo)
 {
 	// Security check
-	if (!pnSecAuthAction(0, "iw_forms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) { 
+	if (!pnSecAuthAction(0, "IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) { 
 		return; 
 	}
 	$url = $blockinfo['categories'] . '---' . $blockinfo['listBox'];
@@ -177,9 +177,9 @@ function formslist_update($blockinfo)
 
 function formslist_edit($blockinfo)
 {
-	$dom = ZLanguage::getModuleDomain('iw_forms');
+	$dom = ZLanguage::getModuleDomain('IWforms');
 	// Security check
-	if (!pnSecAuthAction(0, "iw_forms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) {
+	if (!pnSecAuthAction(0, "IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) {
 		return; 
 	}
 	$values = explode('---', $blockinfo['url']);

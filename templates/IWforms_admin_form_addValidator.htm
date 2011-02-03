@@ -1,8 +1,8 @@
 <div class="formContent">
-	<div class="pn-adminpageicon"><!--[pnimg modname='iw_forms' src='add_user_medium.gif' set='pnimages']--></div>
+	<div class="pn-adminpageicon"><!--[pnimg modname='IWforms' src='add_user_medium.gif' set='pnimages']--></div>
 	<h2><!--[gt text="Add a validator"]--></h2>
-	<form name="addValidator" id="addValidator" class="pn-adminform" action="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="validators" do="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+	<form name="addValidator" id="addValidator" class="pn-adminform" action="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="validators" do="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
+		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 		<input type="hidden" name="fid" value="<!--[$item.fid]-->" />
 		<input type="hidden" name="aio" value="<!--[$aio]-->" />
 		<div class="pn-adminformrow">
@@ -33,9 +33,9 @@
 		<div class="formOptions">
 			<!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Add" __title="Add"]-->
 			<!--[if not isset($aio)]-->
-				<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="validators" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+				<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="validators" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 			<!--[else]-->
-				<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="infoForm" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+				<a href="<!--[pnmodurl modname="IWforms" type="admin" func="infoForm" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 			<!--[/if]-->
 		</div>
 	</form>

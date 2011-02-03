@@ -1,11 +1,11 @@
 <div class="formAdd">
 	<!--[if not isset($adminView)]-->
-		<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="validators" do="add" fid=$item.fid]-->">
+		<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="validators" do="add" fid=$item.fid]-->">
 			<!--[pnimg modname='core' src='add_user.gif' set='icons/extrasmall'   __alt="Add a validator" __title="Add a validator"]-->
 			<!--[gt text="Add a validator"]-->
 		</a>
 	<!--[else]-->
-		<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="validators" do="add" aio=1 fid=$fid]-->">
+		<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="validators" do="add" aio=1 fid=$fid]-->">
 			<!--[pnimg modname='core' src='add_user.gif' set='icons/extrasmall'   __alt="Add a validator" __title="Add a validator"]-->
 			<!--[gt text="Add a validator"]-->
 		</a>
@@ -39,9 +39,9 @@
 					<td valign="top" width="80" align="center">
 						
 						<!--[if not isset($adminView)]-->
-						<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="validators" do="delete" fid=$item.fid rfid=$validator.rfid]-->"><!--[pnimg modname='core' src='delete_user.gif' set='icons/extrasmall'   __alt="Delete the validator" __title="Delete the validator"]--></a>
+						<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="validators" do="delete" fid=$item.fid rfid=$validator.rfid]-->"><!--[pnimg modname='core' src='delete_user.gif' set='icons/extrasmall'   __alt="Delete the validator" __title="Delete the validator"]--></a>
 						<!--[else]-->
-						<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="validators" do="delete" fid=$fid aio=1 rfid=$validator.rfid]-->"><!--[pnimg modname='core' src='delete_user.gif' set='icons/extrasmall'   __alt="Delete the validator" __title="Delete the validator"]--></a>
+						<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="validators" do="delete" fid=$fid aio=1 rfid=$validator.rfid]-->"><!--[pnimg modname='core' src='delete_user.gif' set='icons/extrasmall'   __alt="Delete the validator" __title="Delete the validator"]--></a>
 						<!--[/if]-->
 
 					</td>

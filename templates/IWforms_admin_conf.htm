@@ -1,7 +1,7 @@
-<script type="text/javascript" src="modules/iw_main/js/ColorPicker2.js"></script>
-<script type="text/javascript" src="modules/iw_main/js/AnchorPosition.js"></script>
-<script type="text/javascript" src="modules/iw_main/js/PopupWindow.js"></script>
-<!--[include file="iw_forms_admin_menu.htm"]-->
+<script type="text/javascript" src="modules/IWmain/js/ColorPicker2.js"></script>
+<script type="text/javascript" src="modules/IWmain/js/AnchorPosition.js"></script>
+<script type="text/javascript" src="modules/IWmain/js/PopupWindow.js"></script>
+<!--[include file="IWforms_admin_menu.htm"]-->
 <div class="pn-admincontainer">
 	<div class="pn-adminpageicon"><!--[pnimg modname='core' src='package_settings.gif' set='icons/large' __alt=$templatetitle]--></div>
 	<h2><!--[gt text="Configure the module"]--></h2>
@@ -30,10 +30,10 @@
 						<!--[$cat.description]-->
 					</td>
 					<td align="center">
-						<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="editCat" cid=$cat.cid]-->">
+						<a href="<!--[pnmodurl modname="IWforms" type="admin" func="editCat" cid=$cat.cid]-->">
 							<!--[pnimg modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Edit" __title="Edit"]-->
 						</a>
-						<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="deleteCat" cid=$cat.cid]-->">
+						<a href="<!--[pnmodurl modname="IWforms" type="admin" func="deleteCat" cid=$cat.cid]-->">
 							<!--[pnimg modname='core' src='14_layer_deletelayer.gif' set='icons/extrasmall'   __alt="Delete" __title="Delete"]-->
 						</a>
 					</td>
@@ -48,11 +48,11 @@
 		</tbody>
 	</table>
 
-	<a href="index.php?module=iw_forms&type=admin&func=addCat"><!--[gt text="Creates a new category"]--></a>
+	<a href="index.php?module=IWforms&type=admin&func=addCat"><!--[gt text="Creates a new category"]--></a>
 
 
-	<form  class="pn-adminform" enctype="application/x-www-form-urlencoded" method="post" name="conf" id="conf" action="<!--[pnmodurl modname="iw_forms" type="admin" func="updateConf"]-->">
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+	<form  class="pn-adminform" enctype="application/x-www-form-urlencoded" method="post" name="conf" id="conf" action="<!--[pnmodurl modname="IWforms" type="admin" func="updateConf"]-->">
+		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 		<!--[if not $multizk]-->
 			<div class="pn-adminformrow">
 				<label for="directoriroot"><!--[gt text="Home directory of files"]--></label>
@@ -139,7 +139,7 @@
 	</form>
 	<div style="height: 20px;">&nbsp;</div>
 	<div style="clear:both; ">
-		<a href="<!--[pnmodurl modname=iw_forms type=admin func=module]-->"><!--[gt text="About this module"]--></a>
+		<a href="<!--[pnmodurl modname=IWforms type=admin func=module]-->"><!--[gt text="About this module"]--></a>
 	</div>
 </div>
 

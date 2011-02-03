@@ -11,7 +11,7 @@
 
 <!--[if $do eq 'edit']-->
 	<form name="submitValueFormO_<!--[$note.fmid]-->" id="submitValueFormO_<!--[$note.fmid]-->" class="pn-adminform" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 		<input type="hidden" name="fmid" value="<!--[$note.fmid]-->" />
 		<input type="hidden" name="toDo" value="observations" />
 		<textarea name="observations" style="width: 90%; margin: 10px;"><!--[$note.observations|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"]--></textarea>

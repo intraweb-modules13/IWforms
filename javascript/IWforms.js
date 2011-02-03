@@ -1,5 +1,5 @@
 function chgUsers(gid){
-	var pars = "module=iw_forms&func=chgUsers&gid=" + gid;
+	var pars = "module=IWforms&func=chgUsers&gid=" + gid;
         showinfo('chgInfo');
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
@@ -52,7 +52,7 @@ function modifyField(fieldId,char){
 	}else{
 		showfieldinfo(fieldId, modifyingfield);
 	}
-	var pars = "module=iw_forms&func=modifyField&fndid=" + fieldId + "&char=" + char;
+	var pars = "module=IWforms&func=modifyField&fndid=" + fieldId + "&char=" + char;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -76,7 +76,7 @@ function modifyField_failure(){
 }
 
 function changeContent(fndid){
-	var pars = "module=iw_forms&func=changeContent&fndid=" + fndid;
+	var pars = "module=IWforms&func=changeContent&fndid=" + fndid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -121,7 +121,7 @@ function send(){
 }
 
 function closeForm(fid){
-	var pars = "module=iw_forms&func=closeForm&fid=" + fid;
+	var pars = "module=IWforms&func=closeForm&fid=" + fid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -144,21 +144,21 @@ function closeForm_response(req){
 function closeForm_failure(){
 }
 
-function iw_forms_deleteNote(fmid){
+function IWforms_deleteNote(fmid){
 	resposta=confirm(deleteUserNote);
 	if(resposta){
-		var pars = "module=iw_forms&func=deleteNote&fmid=" + fmid;
+		var pars = "module=IWforms&func=deleteNote&fmid=" + fmid;
 		var myAjax = new Ajax.Request("ajax.php", 
 		{
 			method: 'get', 
 			parameters: pars, 
-			onComplete: iw_forms_deleteNote_response,
-			onFailure: iw_forms_deleteNote_failure
+			onComplete: IWforms_deleteNote_response,
+			onFailure: IWforms_deleteNote_failure
 		});
 	}
 }
 
-function iw_forms_deleteNote_response(req){
+function IWforms_deleteNote_response(req){
 	if (req.status != 200 ) { 
 		pnshowajaxerror(req.responseText);
 		return;
@@ -168,11 +168,11 @@ function iw_forms_deleteNote_response(req){
 	reloadFlaggedBlock();
 }
 
-function iw_forms_deleteNote_failure(){
+function IWforms_deleteNote_failure(){
 }
 
 function markNote(fmid){
-	var pars = "module=iw_forms&func=markNote&fmid=" + fmid;
+	var pars = "module=IWforms&func=markNote&fmid=" + fmid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -191,7 +191,7 @@ function markNote_response(req){
 	if(json.mark == 'marked'){
 		$(json.fmid).src="images/icons/small/flag.gif";
 	}else{
-		$(json.fmid).src="modules/iw_forms/pnimages/none.gif";
+		$(json.fmid).src="modules/IWforms/pnimages/none.gif";
 	}
 	Element.update('note_options_'+json.fmid, json.contentOptions).innerHTML;
 	reloadFlaggedBlock();
@@ -201,7 +201,7 @@ function markNote_failure(){
 }
 
 function setCompleted(fmid){
-	var pars = "module=iw_forms&func=setCompleted&fmid=" + fmid;
+	var pars = "module=IWforms&func=setCompleted&fmid=" + fmid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -225,7 +225,7 @@ function setCompleted_failure(){
 }
 
 function validateNote(fmid){
-	var pars = "module=iw_forms&func=validateNote&fmid=" + fmid;
+	var pars = "module=IWforms&func=validateNote&fmid=" + fmid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -249,7 +249,7 @@ function validateNote_failure(){
 }
 
 function editNoteManageContent(fmid,toDo){
-	var pars = "module=iw_forms&func=editNoteManageContent&fmid=" + fmid + "&do=" + toDo;
+	var pars = "module=IWforms&func=editNoteManageContent&fmid=" + fmid + "&do=" + toDo;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -293,7 +293,7 @@ function submitValue(toDo,fmid,checked){
 	value = replaceChars('&', "|amp|", value);
 	value = replaceChars('#', "|par|", value);
 	value = replaceChars('%', "|per|", value);
-	var pars = "module=iw_forms&func=submitValue&fmid=" + fmid + "&value=" + value + "&do=" + toDo + "&checked=" + checked;
+	var pars = "module=IWforms&func=submitValue&fmid=" + fmid + "&value=" + value + "&do=" + toDo + "&checked=" + checked;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -336,7 +336,7 @@ function submitValue_failure(){
 
 function modifyForm(formId,char){
 	showFormInfo(formId, modifyingform);
-	var pars = "module=iw_forms&func=modifyForm&fid=" + formId + "&char=" + char;
+	var pars = "module=IWforms&func=modifyForm&fid=" + formId + "&char=" + char;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -359,7 +359,7 @@ function modifyForm_failure(){
 }
 
 function changeFormContent(fid){
-	var pars = "module=iw_forms&func=changeFormContent&fid=" + fid;
+	var pars = "module=IWforms&func=changeFormContent&fid=" + fid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -402,7 +402,7 @@ function showFormInfo(fid, infotext){
 function deleteUserNote(fmid){
 	resposta=confirm(deleteUserNoteText);
 	if(resposta){
-		var pars = "module=iw_forms&func=deleteUserNote&fmid=" + fmid;
+		var pars = "module=IWforms&func=deleteUserNote&fmid=" + fmid;
 		var myAjax = new Ajax.Request("ajax.php", 
 		{
 			method: 'get', 
@@ -428,7 +428,7 @@ function deleteUserNote_failure(){
 function changeFilter(fid,filter){
 	if(filter != 0){
 		Element.update('filterValues', '<img src="images/ajax/circle-ball-dark-antialiased.gif">');
-		var pars = "module=iw_forms&func=changeFilter&fid=" + fid + "&filter=" + filter;
+		var pars = "module=IWforms&func=changeFilter&fid=" + fid + "&filter=" + filter;
 		var myAjax = new Ajax.Request("ajax.php", 
 		{
 			method: 'get', 
@@ -458,7 +458,7 @@ function changeFilter_failure(){
 function deleteForm(fid){
 	response = confirm(deleteFormText);
 	if (response) {
-		var pars = "module=iw_forms&func=deleteForm&fid=" + fid;
+		var pars = "module=IWforms&func=deleteForm&fid=" + fid;
 		var myAjax = new Ajax.Request("ajax.php", 
 		{
 			method: 'get', 
@@ -487,7 +487,7 @@ function createField(fieldType,fid){
 		exit;
 	}
 	Element.update('newFormField', '<img src="images/ajax/circle-ball-dark-antialiased.gif">');
-	var pars = "module=iw_forms&func=createField&fid=" + fid + "&fieldType=" + fieldType;
+	var pars = "module=IWforms&func=createField&fid=" + fid + "&fieldType=" + fieldType;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -512,7 +512,7 @@ function createField_failure(req){
 function deleteFormField(fndid,fid){
 	response = confirm(deleteFormFieldText);
 	if(response){
-		var pars = "module=iw_forms&func=deleteFormField&fid=" + fid + "&fndid=" + fndid;
+		var pars = "module=IWforms&func=deleteFormField&fid=" + fid + "&fndid=" + fndid;
 		var myAjax = new Ajax.Request("ajax.php", 
 		{
 			method: 'get', 
@@ -537,7 +537,7 @@ function deleteFormField_failure(){
 }
 
 function newField(fid){
-	var pars = "module=iw_forms&func=newField&fid=" + fid;
+	var pars = "module=IWforms&func=newField&fid=" + fid;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -560,7 +560,7 @@ function newField_failure(){
 }
 
 function actionToDo(fid,action){
-	var pars = "module=iw_forms&func=actionToDo&fid=" + fid + "&action=" + action ;
+	var pars = "module=IWforms&func=actionToDo&fid=" + fid + "&action=" + action ;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 
@@ -605,7 +605,7 @@ function expertModeActivation(fid, type) {
 		    skinByTemplate = 1;
 	    }
     }
-	var pars = "module=iw_forms&func=expertModeActivation&fid=" + fid + "&expertMode=" + expertMode + "&skinByTemplate=" + skinByTemplate;
+	var pars = "module=IWforms&func=expertModeActivation&fid=" + fid + "&expertMode=" + expertMode + "&skinByTemplate=" + skinByTemplate;
 	var myAjax = new Ajax.Request("ajax.php", 
 	{
 		method: 'get', 

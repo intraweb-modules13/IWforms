@@ -1,9 +1,9 @@
 <div class="formContent">
 	<div class="pn-adminpageicon"><!--[pnimg modname='core' src='edit.gif' set='icons/medium']--></div>
 	<h2><!--[gt text="Edit the field"]--> <!--[if $itemField.fieldType neq 51]--><!--[$itemField.fieldName]--><!--[/if]--></h2>
-	<form class="pn-adminform" id="edit" name="edit" action="<!--[pnmodurl modname="iw_forms" type="admin" func="updateField"]-->" method="post" enctype="application/x-www-form-urlencoded">
+	<form class="pn-adminform" id="edit" name="edit" action="<!--[pnmodurl modname="IWforms" type="admin" func="updateField"]-->" method="post" enctype="application/x-www-form-urlencoded">
 		<input type="hidden" name="fid" value="<!--[$item.fid]-->" />
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 		<input type="hidden" name="fndid" value="<!--[$itemField.fndid]-->" />
 
 		<div class="pn-adminformrow">
@@ -203,7 +203,7 @@
 
 		<div class="formOptions">
 			<!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Edit" __title="Edit"]-->
-			<a href="<!--[pnmodurl modname="iw_forms" type="admin" func="form" action="field" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+			<a href="<!--[pnmodurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 		</div>
 	</form>
 </div>
@@ -211,6 +211,6 @@
 	<div class="helpHeader"><div class="helpTitle"><!--[gt text="Public File"]--></div></div>
 	<div class="helpContent"> 
 		<!--[gt text="If the file is public will be accessible to everyone from a URL like:"]--><br /><!--[$publicFileURL]-->
-		<div class="helpBoxClose"><a href="#" onClick="overlayclose('help1'); return false"><!--[gt text="Close the window"]--> <!--[pnimg modname='iw_main' src='postitcloseicon.png' set='pnimages']--></a></div>		
+		<div class="helpBoxClose"><a href="#" onClick="overlayclose('help1'); return false"><!--[gt text="Close the window"]--> <!--[pnimg modname='IWmain' src='postitcloseicon.png' set='pnimages']--></a></div>		
 	</div>
 </div>

@@ -20,14 +20,14 @@
 // To read the license please visit http://www.gnu.org/copyleft/gpl.html
 
 /**
- * iw_forms block
+ * IWforms block
  * 
- * The iw_forms block provides a list of the forms where user can access 
+ * The IWforms block provides a list of the forms where user can access 
  *
  * Purpose of file:  Shows the content of a note in a bloc
  *
  * @package      Intraweb_Modules
- * @subpackage   iw_forms
+ * @subpackage   IWforms
  * @version      $Id: formnote.php
  * @author       Albert Pérez Monfort
  * @link         http://phobos.xtec.cat/intraweb  The Intraweb Project Home Page
@@ -35,18 +35,18 @@
  * @license      http://www.gnu.org/copyleft/gpl.html GNU General Public License
  */ 
 
-function iw_forms_formnoteblock_init()
+function IWforms_formnoteblock_init()
 {
-    pnSecAddSchema("iw_forms:formnoteblock:", "Note identity::");
+    pnSecAddSchema("IWforms:formnoteblock:", "Note identity::");
 }
 
-function iw_forms_formnoteblock_info()
+function IWforms_formnoteblock_info()
 {
-    $dom = ZLanguage::getModuleDomain('iw_forms');
+    $dom = ZLanguage::getModuleDomain('IWforms');
     return array('text_type' => 'FormNote',
 		  		 'func_edit' => 'formnote_edit',
 		  		 'func_update' => 'formnote_update',
-				 'module' => 'iw_forms',
+				 'module' => 'IWforms',
 				 'text_type_long' => __('Display the content of a note in a block', $dom),
 				 'allow_multiple' => true,
 				 'form_content' => false,
@@ -59,45 +59,45 @@ function iw_forms_formnoteblock_info()
  * @autor:	Albert Pérez Monfort
  * return:	The list of forms
 */
-function iw_forms_formnoteblock_display($blockinfo)
+function IWforms_formnoteblock_display($blockinfo)
 {
 	// Security check
-	if (!pnSecAuthAction(0, "iw_forms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_READ)) { 
+	if (!pnSecAuthAction(0, "IWforms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_READ)) { 
 		return; 
 	}
 	// Check if the module is available
-	if(!pnModAvailable('iw_forms')){
+	if(!pnModAvailable('IWforms')){
 		return;
 	}
     $content = explode('$$$$$$$[parameter]$$$$$$$', $blockinfo['content']);
     if ($content[1] == 1) $blockinfo['title'] = '';
 	$uid = (pnUserLoggedIn()) ? pnUserGetVar('uid') : '-1';
 	//get the headlines saved in the user vars. It is renovate every 10 minutes
-	$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-	$exists = pnModApiFunc('iw_main', 'user', 'userVarExists',
+	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+	$exists = pnModApiFunc('IWmain', 'user', 'userVarExists',
 						    array('name' => 'formNoteBlock'.$blockinfo['bid'],
-											'module' => 'iw_forms',
+											'module' => 'IWforms',
 											'uid' => $uid,
 											'sv' => $sv));
 	if ($exists) {
-		$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-		$s = pnModFunc('iw_main', 'user', 'userGetVar',
+		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+		$s = pnModFunc('IWmain', 'user', 'userGetVar',
 						array('uid' => $uid,
 							  'name' => 'formNoteBlock'.$blockinfo['bid'],
-							  'module' => 'iw_forms',
+							  'module' => 'IWforms',
 							  'sv' => $sv,
 							  'nult' => true));
 	    // get note
-	    $note = pnModAPIFunc('iw_forms', 'user', 'getNote',
+	    $note = pnModAPIFunc('IWforms', 'user', 'getNote',
 						      array('fmid' => $blockinfo['url']));
 	    //check user access to this form
-	    $access = pnModFunc('iw_forms', 'user', 'access',
+	    $access = pnModFunc('IWforms', 'user', 'access',
 	                         array('fid' => $note['fid']));
 	    if ($access['level'] < 2) {
 		    return false;
 	    }
 	    //Get item
-	    $form = pnModAPIFunc('iw_forms', 'user', 'getFormDefinition',
+	    $form = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
 		    				  array('fid' => $note['fid']));
 	    if ($form == false) {
 		    return false;
@@ -109,25 +109,25 @@ function iw_forms_formnoteblock_display($blockinfo)
 		    $skincssurl = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
 	    }
  	    // Create output object
-	    $pnRender = pnRender::getInstance('iw_forms', false);
+	    $pnRender = pnRender::getInstance('IWforms', false);
 	    $pnRender->assign('contentBySkin', pnvarprephtmldisplay(stripslashes($s)));
 	    $pnRender->assign('skincssurl', $skincssurl);
-	    $s = $pnRender -> fetch('iw_forms_block_formNote.htm');
+	    $s = $pnRender -> fetch('IWforms_block_formNote.htm');
 	    // Populate block info and pass to theme
 	    $blockinfo['content'] = $s;
     	return themesideblock($blockinfo);
 	}
 	// get note
-	$note = pnModAPIFunc('iw_forms', 'user', 'getNote',
+	$note = pnModAPIFunc('IWforms', 'user', 'getNote',
 						  array('fmid' => $blockinfo['url']));
 	//check user access to this form
-	$access = pnModFunc('iw_forms', 'user', 'access',
+	$access = pnModFunc('IWforms', 'user', 'access',
 	                     array('fid' => $note['fid']));
 	if ($access['level'] < 2) {
 		return false;
 	}
 	//Get item
-	$form = pnModAPIFunc('iw_forms', 'user', 'getFormDefinition',
+	$form = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
 						  array('fid' => $note['fid']));
 	if ($form == false) {
 		return false;
@@ -135,13 +135,13 @@ function iw_forms_formnoteblock_display($blockinfo)
 	if ($content[0] == '') {
 		return false;
 	}
-	$noteContent = pnModAPIFunc('iw_forms', 'user', 'getAllNoteContents',
+	$noteContent = pnModAPIFunc('IWforms', 'user', 'getAllNoteContents',
 								 array('fid' => $note['fid'],
 								       'fmid' => $note['fmid']));
 	if ($note['annonimous'] == 0 && ($uid != '-1' || ($uid == '-1' && $form['unregisterednotusersview'] == 0))) {
 		$userName = pnUserGetVar('uname',$note['user']);
-		$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-		$photo = pnModFunc('iw_main', 'user', 'getUserPicture',
+		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+		$photo = pnModFunc('IWmain', 'user', 'getUserPicture',
 							array('uname' => $userName,
 								  'sv' => $sv));
 		$user = ($note['user'] != '') ? $note['user'] : '-1';
@@ -156,7 +156,7 @@ function iw_forms_formnoteblock_display($blockinfo)
 	$contentBySkin = str_replace('[$formId$]', $note['fid'], $contentBySkin);
 	$contentBySkin = str_replace('[$date$]', date('d/m/Y', $note['time']), $contentBySkin);
 	if ($photo != '') {
-		$photo = '<img src="'. pnGetBaseURL() .'index.php?module=iw_forms&func=getFile&fileName=' . $photo . '" />';
+		$photo = '<img src="'. pnGetBaseURL() .'index.php?module=IWforms&func=getFile&fileName=' . $photo . '" />';
 	}
 	$contentBySkin = str_replace('[$avatar$]', $photo, $contentBySkin);
 	foreach ($noteContent as $key => $value) {
@@ -176,7 +176,7 @@ function iw_forms_formnoteblock_display($blockinfo)
     $isValidator = ($access['level'] == 7) ? 1 : 0;
     $isAdministrator = (SecurityUtil::checkPermission('blocks::', "::", ACCESS_ADMIN)) ? 1 : 0;
 	// create output object
-	$pnRender = pnRender::getInstance('iw_forms', false);
+	$pnRender = pnRender::getInstance('IWforms', false);
 	$pnRender->assign('contentBySkin', pnvarprephtmldisplay(stripslashes($contentBySkin)));
 	$pnRender->assign('skincssurl', $skincssurl);
     $pnRender->assign('isValidator', $isValidator);
@@ -184,13 +184,13 @@ function iw_forms_formnoteblock_display($blockinfo)
     $pnRender->assign('fmid', $blockinfo['url']);
     $pnRender->assign('bid', $blockinfo['bid']);
     $pnRender->assign('fid', $note['fid']);
-	$s = $pnRender -> fetch('iw_forms_block_formNote.htm');
+	$s = $pnRender -> fetch('IWforms_block_formNote.htm');
 	// copy the block information into user vars
-	$sv = pnModFunc('iw_main', 'user', 'genSecurityValue');
-	pnModFunc('iw_main', 'user', 'userSetVar',
+	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
+	pnModFunc('IWmain', 'user', 'userSetVar',
 			   array('uid' => $uid,
 					 'name' => 'formNoteBlock' . $blockinfo['bid'],
-					 'module' => 'iw_forms',
+					 'module' => 'IWforms',
 					 'sv' => $sv,
 					 'value' => $s,
 					 'lifetime' => '300'));
@@ -202,7 +202,7 @@ function iw_forms_formnoteblock_display($blockinfo)
 function formnote_update($blockinfo)
 {
 	// Security check
-	if (!pnSecAuthAction(0, "iw_forms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) { 
+	if (!pnSecAuthAction(0, "IWforms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) { 
 		return; 
 	}
 	$fmid = $blockinfo['fmid'];
@@ -215,9 +215,9 @@ function formnote_update($blockinfo)
 
 function formnote_edit($blockinfo)
 {
-	$dom = ZLanguage::getModuleDomain('iw_forms');
+	$dom = ZLanguage::getModuleDomain('IWforms');
 	// Security check
-	if (!pnSecAuthAction(0, "iw_forms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) {
+	if (!pnSecAuthAction(0, "IWforms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) {
 		return; 
 	}
 	$fmid = $blockinfo['url'];

@@ -1,13 +1,13 @@
-<!--[include file="iw_forms_user_menu.htm" fid=$form.fid]-->
+<!--[include file="IWforms_user_menu.htm" fid=$form.fid]-->
 <div class="usercontainer">
 	<div class="userpageicon"><!--[pnimg modname='core' src='windowlist.gif' set='icons/large']--></div>
 	<h2><!--[gt text="Export to CSV"]--></h2>
 	<div><!--[gt text="Form name"]-->: <!--[$form.formName]--></div>
 	<div><!--[gt text="Title of the annotations "]-->: <!--[$form.title]--></div>
 	<div style="height:15px;">&nbsp;</div>
-	<form class="pn-adminform" action="<!--[pnmodurl modname="iw_forms" type="user" func="generateCSV"]-->" method="post" enctype="application/x-www-form-urlencoded">
+	<form class="pn-adminform" action="<!--[pnmodurl modname="IWforms" type="user" func="generateCSV"]-->" method="post" enctype="application/x-www-form-urlencoded">
 		<input type="hidden" name="fid" value="<!--[$form.fid]-->">
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 		<table class="pn-admintable" width="100%">
 			<tr>
 				<td>
@@ -130,7 +130,7 @@
 		<div style="height:15px;">&nbsp;</div>
 		<div class="formOptions" style="text-align:center">
 			<!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Export" __title="Export"]--><!--[gt text="Export"]-->
-			<a href="<!--[pnmodurl modname="iw_forms" type="user" func="manage" fid=$form.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+			<a href="<!--[pnmodurl modname="IWforms" type="user" func="manage" fid=$form.fid]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 		</div>
 	</form>
 </div>

@@ -75,7 +75,7 @@ span.required{
 }
 
 div.helpBox{
-	background:url(../../iw_main/pnimages/postitleft.png) repeat-y;
+	background:url(../../IWmain/pnimages/postitleft.png) repeat-y;
 	padding-left:5px;
 	position:absolute;
 	width: 300px;
@@ -84,7 +84,7 @@ div.helpBox{
 }
 
 div.helpHeader{
-	background:url(../../iw_main/pnimages/postittop.png) no-repeat;
+	background:url(../../IWmain/pnimages/postittop.png) no-repeat;
 	height:32px;
 }
 

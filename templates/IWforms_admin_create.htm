@@ -1,21 +1,21 @@
-<link rel="stylesheet" type="text/css" href="modules/iw_main/js/calendar/css/calendar-blue.css" />	
-<script type="text/javascript" src="modules/iw_main/js/calendar/calendar.js"></script>
-<script type="text/javascript" src="modules/iw_main/js/calendar/calendar-setup.js"></script>
-<script type="text/javascript" src="modules/iw_main/js/calendar/calendar-ca.js"></script>
+<link rel="stylesheet" type="text/css" href="modules/IWmain/js/calendar/css/calendar-blue.css" />	
+<script type="text/javascript" src="modules/IWmain/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="modules/IWmain/js/calendar/calendar-setup.js"></script>
+<script type="text/javascript" src="modules/IWmain/js/calendar/calendar-ca.js"></script>
 
-<!--[include file="iw_forms_admin_menu.htm"]-->
+<!--[include file="IWforms_admin_menu.htm"]-->
 <div class="pn-admincontainer">
 	<div class="pn-adminpageicon"><!--[pnimg modname='core' src='filenew.gif' set='icons/large' __alt=$templatetitle]--></div>
 	<h2><!--[gt text="Create a new form"]--></h2>
 	<ul id="minitabs">
 		<li>
-			<a class="active" href="<!--[pnmodurl modname="iw_forms" type="admin" func="create"]-->" title="<!--[gt text="Define the form"]-->"><!--[gt text="Definition"]--></a>
+			<a class="active" href="<!--[pnmodurl modname="IWforms" type="admin" func="create"]-->" title="<!--[gt text="Define the form"]-->"><!--[gt text="Definition"]--></a>
 		</li>
 	</ul>
 	<div class="pn-admincontainer">
 		<div style="padding: 10px;">
-			<form id="formDefinition" class="pn-adminform" action="<!--[pnmodurl modname="iw_forms" type="admin" func="submit"]-->" method="post" enctype="application/x-www-form-urlencoded" onSubmit="return send()">
-				<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="iw_forms"]-->" />
+			<form id="formDefinition" class="pn-adminform" action="<!--[pnmodurl modname="IWforms" type="admin" func="submit"]-->" method="post" enctype="application/x-www-form-urlencoded" onSubmit="return send()">
+				<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
 				<div class="pn-adminformrow">
 					<label for="formName"><!--[gt text="Form name"]--></label>
 					<input id="formName" name="formName" type="text" size="50" maxlength="70" />
@@ -44,12 +44,12 @@
 				<div class="pn-adminformrow">
 					<label for="new"><!--[gt text="As a new until a..."]--></label>
 					<input id="new" name="new" type="text" size="8" maxlength="8" />
-					<a><img id="trigBegin1" name="trigBegin1" src="modules/iw_main/pnimages/calendar.gif" style="cursor:pointer;"/></a>
+					<a><img id="trigBegin1" name="trigBegin1" src="modules/IWmain/pnimages/calendar.gif" style="cursor:pointer;"/></a>
 				</div>
 				<div class="pn-adminformrow">
 					<label for="caducity"><!--[gt text="Make it expires automatically a..."]--></label>
 					<input id="caducity" name="caducity" type="text" size="8" maxlength="8" />
-					<a><img id="trigBegin2" name="trigBegin2" src="modules/iw_main/pnimages/calendar.gif" style="cursor:pointer;"/></a>
+					<a><img id="trigBegin2" name="trigBegin2" src="modules/IWmain/pnimages/calendar.gif" style="cursor:pointer;"/></a>
 				</div>
 				<div class="pn-adminformrow">
 					<label for="annonimous"><!--[gt text="Anonymous"]--></label>
@@ -104,7 +104,7 @@
         			<input id="expertMode" name="expertMode" type="checkbox" value="1" />
         		</div>
         		<div id="expertModeContent">
-        			<!--[include file="iw_forms_admin_form_definitionExpertMode.htm"]-->
+        			<!--[include file="IWforms_admin_form_definitionExpertMode.htm"]-->
                 </div>
         		<div class="pn-adminformrow">
         			<label for="active"><!--[gt text="Active / non-active"]--></label>
@@ -112,14 +112,14 @@
         		</div>
 				<div class="formOptions" style="text-align:center;">
 					<!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Create" __title="Create"]--><!--[gt text="Create"]-->
-					<a href="<!--[pnmodurl modname=iw_forms type=admin func=main]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+					<a href="<!--[pnmodurl modname=IWforms type=admin func=main]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 				</div>
 			</form>
 		</div>
 	</div>
 	<div style="height: 20px;">&nbsp;</div>
 	<div style="clear:both; ">
-		<a href="<!--[pnmodurl modname=iw_forms type=admin func=module]-->"><!--[gt text="About this module"]--></a>
+		<a href="<!--[pnmodurl modname=IWforms type=admin func=module]-->"><!--[gt text="About this module"]--></a>
 	</div>
 </div>
 
