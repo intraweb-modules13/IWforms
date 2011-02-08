@@ -7,7 +7,7 @@ function smarty_function_iwformsfileicon($params, &$smarty)
 	$fileExtension = strtolower(substr(strrchr($fileName,"."),1));
 
 	// get file icon
-	$ctypeArray = pnModFunc('IWmain', 'user', 'getMimetype', array('extension' => $fileExtension));
+	$ctypeArray = ModUtil::func('IWmain', 'user', 'getMimetype', array('extension' => $fileExtension));
 	$fileIcon = $ctypeArray['icon'];
 			
 	$formsfileicon = $fileIcon;

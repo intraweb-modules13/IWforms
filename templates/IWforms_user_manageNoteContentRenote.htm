@@ -1,43 +1,43 @@
-<!--[if $do eq 'print']-->
-	<div id="note_renote_<!--[$note.fmid]-->">
+{if $do eq 'print'}
+	<div id="note_renote_{$note.fmid}">
 		<div>
-			<!--[$note.renote|nl2br|pnvarcensor|pnvarprephtmldisplay|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"]-->
+			{$note.renote|nl2br|varcensor|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
 		</div>
 		<div style="float:left;">
-			<!--[if $note.publicResponse eq 1]-->
-				<span style="color: red;"><!--[gt text="The answer is visible to all users who have access to information"]--></span>
-			<!--[else]-->
-				<span style="color: red;"><!--[gt text="The answer only sees the user sender"]--></span>
-			<!--[/if]-->
+			{if $note.publicResponse eq 1}
+				<span style="color: red;">{gt text="The answer is visible to all users who have access to information"}</span>
+			{else}
+				<span style="color: red;">{gt text="The answer only sees the user sender"}</span>
+			{/if}
 		</div>
 		
 		<div style="text-align: right;">
-			<a href="javascript:editNoteManageContent(<!--[$note.fmid]-->,'renote')">
-				<!--[pnimg modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Edit the response to senders" __title="Edit the response to senders"]-->
+			<a href="javascript:editNoteManageContent({$note.fmid},'renote')">
+				{img modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Edit the response to senders" __title="Edit the response to senders"}
 			</a>
 		</div>
 	</div>
-<!--[/if]-->
-<!--[if $do eq 'edit']-->
-	<form name="submitValueFormR_<!--[$note.fmid]-->" id="submitValueFormR_<!--[$note.fmid]-->" class="pn-adminform" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
-		<textarea name="renote" style="width: 90%; margin: 10px;" rows="10"><!--[$note.renote|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"]--></textarea>
+{/if}
+{if $do eq 'edit'}
+	<form name="submitValueFormR_{$note.fmid}" id="submitValueFormR_{$note.fmid}" class="pn-adminform" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="authid" value="{secgenauthkey module="IWforms"}" />
+		<textarea name="renote" style="width: 90%; margin: 10px;" rows="10">{$note.renote|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
 		
 		<div style="float:left;">
-			<!--[if $note.publicResponse eq 1]-->
-				<span style="color: red;"><!--[gt text="The answer is visible to all users who have access to information"]--></span>
-			<!--[else]-->
-				<span style="color: red;"><!--[gt text="The answer only sees the user sender"]--></span>
-			<!--[/if]-->
+			{if $note.publicResponse eq 1}
+				<span style="color: red;">{gt text="The answer is visible to all users who have access to information"}</span>
+			{else}
+				<span style="color: red;">{gt text="The answer only sees the user sender"}</span>
+			{/if}
 		</div>
 		
 		<div style="text-align: right; cursor:pointer;">
-			<a onClick="javascript:submitValue('renote',<!--[$note.fmid]-->,document.submitValueFormR_<!--[$note.fmid]-->.copy.checked)" title="<!--[gt text="Send"]-->"><!--[pnimg modname='core' src='button_ok.gif' set='icons/small']--></a><!--[gt text="Send"]-->
+			<a onClick="javascript:submitValue('renote',{$note.fmid},document.submitValueFormR_{$note.fmid}.copy.checked)" title="{gt text="Send"}">{img modname='core' src='button_ok.gif' set='icons/small'}</a>{gt text="Send"}
 		</div>
 		<div>
-			<!--[if $note.annonimous neq 1]-->
-				<!--[gt text="Send a copy to the private"]--> <input type="checkbox" name="copy" />
-			<!--[/if]-->
+			{if $note.annonimous neq 1}
+				{gt text="Send a copy to the private"} <input type="checkbox" name="copy" />
+			{/if}
 		</div>
 	</form>
-<!--[/if]-->
+{/if}

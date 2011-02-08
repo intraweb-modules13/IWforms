@@ -1,16 +1,4 @@
 <?php
-
-/**
- * PostNuke Application Framework
- *
- * @copyright (c) 2002, PostNuke Development Team
- * @link http://www.postnuke.com
- * @version $Id: pntables.php 22139 2007-06-01 10:57:16Z markwest $
- * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_Value_Addons
- * @subpackage Noteboard
- */
-
 /**
  * Define module tables
  * @author Albert Pérez Monfort (aperezm@xtec.cat)
@@ -56,38 +44,38 @@ function IWforms_tables() {
                                                  'returnURL' => 'iw_returnURL',
                                                   );
 
-    $tables['IWforms_definition_column_def'] = array('fid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                                     'formName' => "VARCHAR(70) NOTNULL DEFAULT ''",
-                                                     'description' => "VARCHAR(255) NOTNULL DEFAULT ''",
-                                                     'active' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'title' => "VARCHAR(255) NOTNULL DEFAULT ''",
-                                                     'new' => "DATETIME NOTNULL",
-                                                     'cid' => "INT(10) NOTNULL DEFAULT '0'",
-                                                     'caducity' => "DATETIME NOTNULL",
-                                                     'annonimous' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'unique' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'answare' => "TEXT NOTNULL",
-                                                     'characters' => "INT(3) NOTNULL DEFAULT '0'",
-                                                     'closeableNotes' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'closeInsert' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'closeableInsert' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'unregisterednotusersview' => "TINYINT(1) NOTNULL DEFAULT '1'",
-                                                     'unregisterednotexport' => "TINYINT(1) NOTNULL DEFAULT '1'",
-                                                     'publicResponse' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'skin' => "TEXT NOTNULL",
-                                                     'skincss' => "VARCHAR(150) NOTNULL DEFAULT ''",
-                                                     'showFormName' => "TINYINT(1) NOTNULL DEFAULT '1'",
-                                                     'showNotesTitle' => "TINYINT(1) NOTNULL DEFAULT '1'",
-                                                     'skinForm' => "TEXT NOTNULL",
-                                                     'skinNote' => "TEXT NOTNULL",
-                                                     'expertMode' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'skinByTemplate' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'skinFormTemplate' => "VARCHAR(70) NOTNULL DEFAULT 'IWforms_user_new.htm'",
-                                                     'skinTemplate' => "VARCHAR(70) NOTNULL DEFAULT 'IWforms_user_read.htm'",
-                                                     'skinNoteTemplate' => "VARCHAR(70) NOTNULL DEFAULT 'IWforms_user_read.htm'",
-                                                     'allowComments' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'allowCommentsModerated' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                     'returnURL' => "VARCHAR(150) NOTNULL DEFAULT ''",
+    $tables['IWforms_definition_column_def'] = array('fid' => "I NOTNULL AUTO PRIMARY",
+                                                     'formName' => "C(70) NOTNULL DEFAULT ''",
+                                                     'description' => "C(255) NOTNULL DEFAULT ''",
+                                                     'active' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'title' => "C(255) NOTNULL DEFAULT ''",
+                                                     'new' => "T NOTNULL",
+                                                     'cid' => "I NOTNULL DEFAULT '0'",
+                                                     'caducity' => "T NOTNULL",
+                                                     'annonimous' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'unique' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'answare' => "X NOTNULL",
+                                                     'characters' => "I(3) NOTNULL DEFAULT '0'",
+                                                     'closeableNotes' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'closeInsert' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'closeableInsert' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'unregisterednotusersview' => "I(1) NOTNULL DEFAULT '1'",
+                                                     'unregisterednotexport' => "I(1) NOTNULL DEFAULT '1'",
+                                                     'publicResponse' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'skin' => "X NOTNULL",
+                                                     'skincss' => "C(150) NOTNULL DEFAULT ''",
+                                                     'showFormName' => "I(1) NOTNULL DEFAULT '1'",
+                                                     'showNotesTitle' => "I(1) NOTNULL DEFAULT '1'",
+                                                     'skinForm' => "X NOTNULL",
+                                                     'skinNote' => "X NOTNULL",
+                                                     'expertMode' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'skinByTemplate' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'skinFormTemplate' => "C(70) NOTNULL DEFAULT 'IWforms_user_new.htm'",
+                                                     'skinTemplate' => "C(70) NOTNULL DEFAULT 'IWforms_user_read.htm'",
+                                                     'skinNoteTemplate' => "C(70) NOTNULL DEFAULT 'IWforms_user_read.htm'",
+                                                     'allowComments' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'allowCommentsModerated' => "I(1) NOTNULL DEFAULT '0'",
+                                                     'returnURL' => "C(150) NOTNULL DEFAULT ''",
                                                     );
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_definition_column'], 'pn_');
@@ -99,9 +87,9 @@ function IWforms_tables() {
                                           'catName' => 'catName',
                                           'description' => 'iw_description');
 
-    $tables['IWforms_cat_column_def'] = array('cid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                              'catName' => "VARCHAR(70) NOTNULL DEFAULT ''",
-                                              'description' => "VARCHAR(255) NOTNULL DEFAULT ''");
+    $tables['IWforms_cat_column_def'] = array('cid' => "I NOTNULL AUTO PRIMARY",
+                                              'catName' => "C(70) NOTNULL DEFAULT ''",
+                                              'description' => "C(255) NOTNULL DEFAULT ''");
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_cat_column'], 'pn_');
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['IWforms_cat_column_def'], 'iw_');
@@ -124,20 +112,20 @@ function IWforms_tables() {
                                       'closed' => 'iw_closed',
                                       'publicResponse' => 'iw_publicResponse');
 
-    $tables['IWforms_column_def'] = array('fmid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                          'user' => "VARCHAR(20) NOTNULL DEFAULT ''",
-                                          'observations' => "TEXT NOTNULL",
-                                          'renote' => "TEXT NOTNULL",
-                                          'state' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                          'time' => "VARCHAR(20) NOTNULL DEFAULT ''",
-                                          'validate' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                          'fid' => "INT(10) NOTNULL DEFAULT '0'",
-                                          'annonimous' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                          'mark' => "TEXT NOTNULL",
-                                          'deluser' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                          'viewed' => "TEXT NOTNULL",
-                                          'closed' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                          'publicResponse' => "TINYINT(1) NOTNULL DEFAULT '0'");
+    $tables['IWforms_column_def'] = array('fmid' => "I NOTNULL AUTO PRIMARY",
+                                          'user' => "C(20) NOTNULL DEFAULT ''",
+                                          'observations' => "X NOTNULL",
+                                          'renote' => "X NOTNULL",
+                                          'state' => "I(1) NOTNULL DEFAULT '0'",
+                                          'time' => "C(20) NOTNULL DEFAULT ''",
+                                          'validate' => "I(1) NOTNULL DEFAULT '0'",
+                                          'fid' => "I NOTNULL DEFAULT '0'",
+                                          'annonimous' => "I(1) NOTNULL DEFAULT '0'",
+                                          'mark' => "X NOTNULL",
+                                          'deluser' => "I(1) NOTNULL DEFAULT '0'",
+                                          'viewed' => "X NOTNULL",
+                                          'closed' => "I(1) NOTNULL DEFAULT '0'",
+                                          'publicResponse' => "I(1) NOTNULL DEFAULT '0'");
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_column'], 'pn_');
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['IWforms_column_def'], 'iw_');
@@ -150,11 +138,11 @@ function IWforms_tables() {
                                            'content' => 'iw_content',
                                            'validate' => 'iw_validate');
 
-    $tables['IWforms_note_column_def'] = array('fnid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                               'fmid' => "INT(10) NOTNULL DEFAULT '0'",
-                                               'fndid' => "INT(10) NOTNULL DEFAULT '0'",
-                                               'content' => "TEXT NOTNULL",
-                                               'validate' => "TINYINT(1) NOTNULL DEFAULT '0'");
+    $tables['IWforms_note_column_def'] = array('fnid' => "I NOTNULL AUTO PRIMARY",
+                                               'fmid' => "I NOTNULL DEFAULT '0'",
+                                               'fndid' => "I NOTNULL DEFAULT '0'",
+                                               'content' => "X NOTNULL",
+                                               'validate' => "I(1) NOTNULL DEFAULT '0'");
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_note_column'], 'pn_');
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['IWforms_note_column_def'], 'iw_');
@@ -195,39 +183,39 @@ function IWforms_tables() {
                                                       'imgWidth' => 'iw_imgWidth',
                                                       'imgHeight' => 'iw_imgHeight');
 
-    $tables['IWforms_note_definition_column_def'] = array('fndid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                                          'fid' => "INT(10) NOTNULL DEFAULT '0'",
-                                                          'fieldType' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'required' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'description' => "VARCHAR(255) NOTNULL DEFAULT ''",
-                                                          'fieldName' => "TEXT NOTNULL",
-                                                          'feedback' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'order' => "INT(10) NOTNULL DEFAULT '1000'",
-                                                          'active' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'dependance' => "VARCHAR(50) NOTNULL DEFAULT '$'",
-                                                          'rfid' => "VARCHAR(50) NOTNULL DEFAULT '$'",
-                                                          'validationNeeded' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'notify' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'size' => "VARCHAR(3) NOTNULL DEFAULT '25'",
-                                                          'cols' => "VARCHAR(3) NOTNULL DEFAULT '30'",
-                                                          'rows' => "VARCHAR(3) NOTNULL DEFAULT '5'",
-                                                          'editor' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'checked' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'options' => "TEXT NOTNULL",
-                                                          'calendar' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'height' => "VARCHAR(2) NOTNULL DEFAULT '1'",
-                                                          'color' => "VARCHAR(7) NOTNULL DEFAULT '#DDDDDD'",
-                                                          'colorf' => "VARCHAR(7) NOTNULL DEFAULT '#FFFFFF'",
-                                                          'accessType' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'editable' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'collapse' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'publicFile' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'help' => "TEXT NOTNULL",
-                                                          'gid' => "INT(10) NOTNULL DEFAULT '0'",
-                                                          'searchable' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                          'extensions' => "VARCHAR(30) NOTNULL DEFAULT ''",
-                                                          'imgWidth' => "SMALLINT(4) NOTNULL DEFAULT '0'",
-                                                          'imgHeight' => "SMALLINT(4) NOTNULL DEFAULT '0'");
+    $tables['IWforms_note_definition_column_def'] = array('fndid' => "I NOTNULL AUTO PRIMARY",
+                                                          'fid' => "I NOTNULL DEFAULT '0'",
+                                                          'fieldType' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'required' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'description' => "C(255) NOTNULL DEFAULT ''",
+                                                          'fieldName' => "X NOTNULL",
+                                                          'feedback' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'order' => "I NOTNULL DEFAULT '1000'",
+                                                          'active' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'dependance' => "C(50) NOTNULL DEFAULT '$'",
+                                                          'rfid' => "C(50) NOTNULL DEFAULT '$'",
+                                                          'validationNeeded' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'notify' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'size' => "C(3) NOTNULL DEFAULT '25'",
+                                                          'cols' => "C(3) NOTNULL DEFAULT '30'",
+                                                          'rows' => "C(3) NOTNULL DEFAULT '5'",
+                                                          'editor' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'checked' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'options' => "X NOTNULL",
+                                                          'calendar' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'height' => "C(2) NOTNULL DEFAULT '1'",
+                                                          'color' => "C(7) NOTNULL DEFAULT '#DDDDDD'",
+                                                          'colorf' => "C(7) NOTNULL DEFAULT '#FFFFFF'",
+                                                          'accessType' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'editable' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'collapse' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'publicFile' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'help' => "X NOTNULL",
+                                                          'gid' => "I NOTNULL DEFAULT '0'",
+                                                          'searchable' => "I(1) NOTNULL DEFAULT '0'",
+                                                          'extensions' => "C(30) NOTNULL DEFAULT ''",
+                                                          'imgWidth' => "I(4) NOTNULL DEFAULT '0'",
+                                                          'imgHeight' => "I(4) NOTNULL DEFAULT '0'");
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_note_definition_column'], 'pn_');
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['IWforms_note_definition_column_def'], 'iw_');
@@ -239,10 +227,10 @@ function IWforms_tables() {
                                                 'validator' => 'iw_validator',
                                                 'validatorType' => 'iw_validatorType'); //0 global - 1 note only
 
-    $tables['IWforms_validator_column_def'] = array('rfid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                                    'fid' => "INT(10) NOTNULL DEFAULT '0'",
-                                                    'validator' => "INT(10) NOTNULL DEFAULT '0'",
-                                                    'validatorType' => "TINYINT(1) NOTNULL DEFAULT '0'");
+    $tables['IWforms_validator_column_def'] = array('rfid' => "I NOTNULL AUTO PRIMARY",
+                                                    'fid' => "I NOTNULL DEFAULT '0'",
+                                                    'validator' => "I NOTNULL DEFAULT '0'",
+                                                    'validatorType' => "I(1) NOTNULL DEFAULT '0'");
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_resp_column'], 'pn_');
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['IWforms_resp_column_def'], 'iw_');
@@ -255,11 +243,11 @@ function IWforms_tables() {
                                             'accessType' => 'iw_accessType',
                                             'validationNeeded' => 'iw_validationNeeded');
 
-    $tables['IWforms_group_column_def'] = array('gfid' => "INT(10) NOTNULL AUTOINCREMENT KEY",
-                                                'fid' => "INT(10) NOTNULL DEFAULT '0' KEY",
-                                                'group' => "INT(10) NOTNULL DEFAULT '0'",
-                                                'accessType' => "TINYINT(1) NOTNULL DEFAULT '0'",
-                                                'validationNeeded' => "TINYINT(1) NOTNULL DEFAULT '0'");
+    $tables['IWforms_group_column_def'] = array('gfid' => "I NOTNULL AUTO PRIMARY",
+                                                'fid' => "I NOTNULL DEFAULT '0'",
+                                                'group' => "I NOTNULL DEFAULT '0'",
+                                                'accessType' => "I(1) NOTNULL DEFAULT '0'",
+                                                'validationNeeded' => "I(1) NOTNULL DEFAULT '0'");
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_group_column'], 'pn_');
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['IWforms_group_column_def'], 'iw_');

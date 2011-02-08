@@ -1,16 +1,16 @@
-<!--[include file="IWforms_admin_menu.htm"]-->
+{include file="IWforms_admin_menu.htm"}
 <div class="pn-admincontainer">
-	<div class="pn-adminpageicon"><!--[pnimg modname='core' src='editdelete.gif' set='icons/medium']--></div>
-	<h2><!--[gt text="Delete category"]--></h2>
+	<div class="pn-adminpageicon">{img modname='core' src='editdelete.gif' set='icons/medium'}</div>
+	<h2>{gt text="Delete category"}</h2>
 
-	<form class="pn-adminform" action="<!--[pnmodurl modname="IWforms" type="admin" func="deleteCat"]-->" method="post" enctype="application/x-www-form-urlencoded">
-		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="IWforms"]-->" />
+	<form class="pn-adminform" action="{modurl modname="IWforms" type="admin" func="deleteCat"}" method="post" enctype="application/x-www-form-urlencoded">
+		<input type="hidden" name="authid" value="{secgenauthkey module="IWforms"}" />
 		<input type="hidden" name="confirm" value="1" />
-		<input type="hidden" name="cid" value="<!--[$item.cid]-->" />
-		<!--[gt text="Confirms delete the category"]--> <strong><!--[$item.catName]--></strong>
+		<input type="hidden" name="cid" value="{$item.cid}" />
+		{gt text="Confirms delete the category"} <strong>{$item.catName}</strong>
 		<div class="formOptions">
-			<!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Delete" __title="Delete"]-->
-			<a href="<!--[pnmodurl modname="IWforms" type="admin" func="conf"]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+			{button src='button_ok.gif' set='icons/small' __alt="Delete" __title="Delete"}
+			<a href="{modurl modname="IWforms" type="admin" func="conf"}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
 		</div>
 	</form>
 </div>

@@ -11,18 +11,18 @@ function IWforms_admin_main()
 	if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
-	$categories = pnModApiFunc('IWforms', 'user', 'getAllCategories');
+	$categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
 	foreach ($categories as $category) {
 		$catName[$category['cid']] = $category['catName'];
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
+	$view = Zikula_View::getInstance('IWforms',false);
 	//main
-	pnModApiFunc('IWforms', 'user', 'desactivateForm');
-	$forms = pnModAPIFunc('IWforms','user','getAllForms');
+	ModUtil::apiFunc('IWforms', 'user', 'desactivateForm');
+	$forms = ModUtil::apiFunc('IWforms','user','getAllForms');
 	foreach ($forms as $form) {
-		$new = pnModFunc('IWforms', 'user', 'makeTimeForm', $form['new']);
-		$caducity = pnModFunc('IWforms', 'user', 'makeTimeForm', $form['caducity']);
+		$new = ModUtil::func('IWforms', 'user', 'makeTimeForm', $form['new']);
+		$caducity = ModUtil::func('IWforms', 'user', 'makeTimeForm', $form['caducity']);
 		$formsArray[] = array('formName' => $form['formName'],
 								'title' => $form['title'],
 								'catName' => $catName[$form['cid']],
@@ -42,8 +42,8 @@ function IWforms_admin_main()
 								'caducity' => $caducity,
 								'new' => $new);
 	}
-	$pnRender->assign('forms',$formsArray);
-	return $pnRender->fetch('IWforms_admin_main.htm');
+	$view->assign('forms',$formsArray);
+	return $view->fetch('IWforms_admin_main.htm');
 }
 
 /**
@@ -59,12 +59,12 @@ function IWforms_admin_create()
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//get all categories
-	$categories = pnModApiFunc('IWforms', 'user', 'getAllCategories');
+	$categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
+	$view = Zikula_View::getInstance('IWforms',false);
 	//outputs assignaments
-	$pnRender->assign('cats', $categories);
-	return $pnRender->fetch('IWforms_admin_create.htm');
+	$view->assign('cats', $categories);
+	return $view->fetch('IWforms_admin_create.htm');
 }
 
 /**
@@ -106,11 +106,11 @@ function IWforms_admin_submit($args)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'main'));
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$new = pnModFunc('IWforms', 'user', 'makeTime', $new.'23:59:00');
-	$caducity = pnModFunc('IWforms', 'user', 'makeTime', $caducity.'23:59:00');
-	$create = pnModAPIFunc('IWforms', 'admin', 'createNewForm',
+	$new = ModUtil::func('IWforms', 'user', 'makeTime', $new.'23:59:00');
+	$caducity = ModUtil::func('IWforms', 'user', 'makeTime', $caducity.'23:59:00');
+	$create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm',
                             array('formName' => $formName,
 								  'description' => $description,
 								  'title' => $title,
@@ -140,7 +140,7 @@ function IWforms_admin_submit($args)
 		LogUtil::registerStatus (__('The form was created successfully', $dom));		
 	}
 	// Redirect to the main site for the admin
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $create)));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $create)));
 }
 
 /**
@@ -170,95 +170,95 @@ function IWforms_admin_form($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$pnRender ->assign('item',$item);
+	$view = Zikula_View::getInstance('IWforms',false);
+	$view ->assign('item',$item);
 	//main
 	switch ($action) {
 		case 'field':
 			switch ($do) {
 				case 'edit':
-					$content = pnModFunc('IWforms', 'admin', 'editField', array('fid' => $fid,
+					$content = ModUtil::func('IWforms', 'admin', 'editField', array('fid' => $fid,
 																					'fndid' => $fndid));
 					break;
 				case 'add':
-					$content = pnModFunc('IWforms','admin','createField',array('fid' => $fid));
+					$content = ModUtil::func('IWforms','admin','createField',array('fid' => $fid));
 					break;
 				case 'delete':
-					$content = pnModFunc('IWforms', 'admin', 'deleteField', array('fid' => $fid,
+					$content = ModUtil::func('IWforms', 'admin', 'deleteField', array('fid' => $fid,
 																					'fndid' => $fndid));
 					break;
 				case 'modifyFieldDependances':
-					$content = pnModFunc('IWforms', 'admin', 'modifyFieldDependances', array('fid' => $fid,
+					$content = ModUtil::func('IWforms', 'admin', 'modifyFieldDependances', array('fid' => $fid,
 																								'fndid' => $fndid));
 					break;
 				case 'addFieldValidator':
-					$content = pnModFunc('IWforms','admin','addFieldValidator',array('fid' => $fid,
+					$content = ModUtil::func('IWforms','admin','addFieldValidator',array('fid' => $fid,
 																						'fndid' => $fndid));
 					break;
 				default:
-					$content = pnModFunc('IWforms','admin','field',array('fid' => $fid));
+					$content = ModUtil::func('IWforms','admin','field',array('fid' => $fid));
 			}
 			$tab = 2;
 			break;
 		case 'group':
 			switch ($do) {
 				case 'add':
-					$content = pnModFunc('IWforms','admin','addGroup', array('fid' => $fid));
+					$content = ModUtil::func('IWforms','admin','addGroup', array('fid' => $fid));
 					break;
 				case 'delete':
-					$content = pnModFunc('IWforms','admin','deleteGroup', array('fid' => $fid,
+					$content = ModUtil::func('IWforms','admin','deleteGroup', array('fid' => $fid,
 																					'gfid' => $gfid,
 																					'aio' => $aio));
 					break;
 				default:
-					$content = pnModFunc('IWforms','admin','groups',array('fid' => $fid));
+					$content = ModUtil::func('IWforms','admin','groups',array('fid' => $fid));
 			}
 			$tab = 3;
 			break;
 		case 'validators':
 			switch($do) {
 				case 'add':
-					$content = pnModFunc('IWforms','admin','addValidator', array('fid' => $fid,
+					$content = ModUtil::func('IWforms','admin','addValidator', array('fid' => $fid,
 																					'group' => $group,
 																					'validator' => $validator,
 																					'validatorType' => $validatorType));
 					break;
 				case 'delete':
-					$content = pnModFunc('IWforms','admin','deleteValidator', array('fid' => $fid,
+					$content = ModUtil::func('IWforms','admin','deleteValidator', array('fid' => $fid,
 																						'rfid' => $rfid,
 																						'aio' => $aio));
 					break;
 				default:
-					$content = pnModFunc('IWforms', 'admin', 'validators', array('fid' => $fid));
+					$content = ModUtil::func('IWforms', 'admin', 'validators', array('fid' => $fid));
 			}
 			$tab = 4;
 			break;
 		default:
 			switch ($do) {
 				case 'edit':
-					$content = pnModFunc('IWforms','admin','edit', array('fid' => $fid,
+					$content = ModUtil::func('IWforms','admin','edit', array('fid' => $fid,
 																			'aio' => $aio));
 					break;
 				case 'delete':
-					$content = pnModFunc('IWforms','admin','delete', array('fid' => $fid));
+					$content = ModUtil::func('IWforms','admin','delete', array('fid' => $fid));
 					break;
 				default:
-					$content = pnModFunc('IWforms','admin','definition', array('fid' => $fid));
+					$content = ModUtil::func('IWforms','admin','definition', array('fid' => $fid));
 			}
 			$tab = 1;
 	}
 	//outputs assignments
-	$pnRender ->assign('content', $content);
-	$pnRender ->assign('tab',$tab);
-	return $pnRender->fetch('IWforms_admin_form.htm');
+	$view ->assign('content', $content);
+	$view ->assign('tab',$tab);
+	return $view->fetch('IWforms_admin_form.htm');
 }
 
 /**
@@ -279,25 +279,25 @@ function IWforms_admin_definition($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$category = ($item['cid'] != 0) ? pnModApiFunc('IWforms', 'user', 'getCategory', array('cid' => $item['cid'])) : "---";
+	$category = ($item['cid'] != 0) ? ModUtil::apiFunc('IWforms', 'user', 'getCategory', array('cid' => $item['cid'])) : "---";
 	if ($item['skincss'] != '') {
-		$url = pnGetBaseURL() . 'index.php?module=IWforms&func=getFile&fileName=' . pnModGetVar('IWforms','attached') . '/' . $item['skincss'];
+		$url = System::getBaseUrl() . 'index.php?module=IWforms&func=getFile&fileName=' . ModUtil::getVar('IWforms','attached') . '/' . $item['skincss'];
 		$item['skincssurl'] = '<link rel="stylesheet" href="' . $url . '" type="text/css" />';
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$pnRender->assign('catName', $category['catName']);
-	$pnRender->assign('item', $item);
-	$pnRender->assign('new', pnModFunc('IWforms', 'user', 'makeTimeForm', $item['new']));
-	$pnRender->assign('caducity', pnModFunc('IWforms', 'user', 'makeTimeForm', $item['caducity']));
-	return $pnRender->fetch('IWforms_admin_form_definition.htm');
+	$view = Zikula_View::getInstance('IWforms',false);
+	$view->assign('catName', $category['catName']);
+	$view->assign('item', $item);
+	$view->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']));
+	$view->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']));
+	return $view->fetch('IWforms_admin_form_definition.htm');
 }
 
 /**
@@ -317,16 +317,16 @@ function IWforms_admin_validators($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$validators = pnModAPIFunc('IWforms', 'user', 'getAllValidators', array('fid' => $fid));
+	$view = Zikula_View::getInstance('IWforms',false);
+	$validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators', array('fid' => $fid));
 	foreach ($validators as $validator) {
 		$usersList .= $validator['validator'].'$$';
 		$validatorTypeText = ($validator['validatorType'] == 1) ? _IWFORMSVALIDATEFIELDS : __('Global validator', $dom);
@@ -334,14 +334,14 @@ function IWforms_admin_validators($args)
 									'validatorTypeText' => $validatorTypeText,
 									'rfid' => $validator['rfid']);
 	}
-	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-	$users = pnModFunc('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
+	$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+	$users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
 																	'sv' => $sv,
 																	'list' => $usersList));
-	$pnRender->assign('validators', $validators_array);
-	$pnRender->assign('users', $users);
-	$pnRender->assign('item', $item);
-	return $pnRender->fetch('IWforms_admin_form_validators.htm');
+	$view->assign('validators', $validators_array);
+	$view->assign('users', $users);
+	$view->assign('item', $item);
+	return $view->fetch('IWforms_admin_form_validators.htm');
 }
 
 /**
@@ -359,9 +359,9 @@ function IWforms_admin_minitab($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$pnRender->assign('tab', $tab);
-	return $pnRender->fetch('IWforms_admin_form_minitab.htm');
+	$view = Zikula_View::getInstance('IWforms',false);
+	$view->assign('tab', $tab);
+	return $view->fetch('IWforms_admin_form_minitab.htm');
 }
 
 /**
@@ -382,18 +382,18 @@ function IWforms_admin_groups($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$groups = pnModAPIFunc('IWforms', 'user', 'getAllGroups', array('fid' => $fid));
-	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-	$groupsInfo = pnModFunc('IWmain', 'user', 'getAllGroupsInfo', array('sv' => $sv));
+	$view = Zikula_View::getInstance('IWforms',false);
+	$groups = ModUtil::apiFunc('IWforms', 'user', 'getAllGroups', array('fid' => $fid));
+	$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+	$groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo', array('sv' => $sv));
 	foreach ($groups as $group) {
 		$accessText = array('1' => __('Only writing', $dom), '2' => __('Only reading', $dom), '3' =>__('Reading and writing', $dom));
 		$validation = ($group['validationNeeded']) ? __('Yes', $dom): __('No', $dom);
@@ -403,10 +403,10 @@ function IWforms_admin_groups($args)
 					'validationNeeded' => $validation,
 					'gfid' => $group['gfid']);
 	}
-	$pnRender->assign('groups', $groups_array);
-	$pnRender->assign('adminView', $adminView);
-	$pnRender->assign('item', $item);
-	return $pnRender->fetch('IWforms_admin_form_groups.htm');
+	$view->assign('groups', $groups_array);
+	$view->assign('adminView', $adminView);
+	$view->assign('item', $item);
+	return $view->fetch('IWforms_admin_form_groups.htm');
 }
 
 /**
@@ -426,16 +426,16 @@ function IWforms_admin_field($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$fields = pnModAPIFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
+	$fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
+	$view = Zikula_View::getInstance('IWforms',false);
 	foreach ($fields as $field) {
 		// get validators names and prepare them to show
 		$usersList .= $field['rfid'].'$$';
@@ -447,10 +447,10 @@ function IWforms_admin_field($args)
 			}
 		}
 		if ($field['gid'] > 0) {
-			$group = pnModAPIFunc('Groups','user','get',array('gid' => $field['gid']));
+			$group = ModUtil::apiFunc('Groups','user','get',array('gid' => $field['gid']));
 			$groupName = $group['name'];
 		}
-		$fieldTypeTextArray = pnModFunc('IWforms', 'admin', 'getFileTypeText');
+		$fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
 		$fieldTypeText = $fieldTypeTextArray[$field['fieldType']];
 		$fields_array[] = array('fndid' => $field['fndid'],
 								'fieldName' => $field['fieldName'],
@@ -487,17 +487,17 @@ function IWforms_admin_field($args)
 								'imgHeight' => $field['imgHeight']);
 	}
 	
-	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-	$users = pnModFunc('IWmain', 'user', 'getAllUsersInfo',
+	$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+	$users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo',
 						array('info' => 'ccn',
 							  'sv' => $sv,
 						      'list' => $usersList));
-	$pnRender->assign('fields', $fields_array);
-	$pnRender->assign('fid', $fid);
-	$pnRender->assign('users', $users);
-	$pnRender->assign('number', count($fields_array));
-	$pnRender->assign('item', $item);
-	return $pnRender->fetch('IWforms_admin_form_fields.htm');
+	$view->assign('fields', $fields_array);
+	$view->assign('fid', $fid);
+	$view->assign('users', $users);
+	$view->assign('number', count($fields_array));
+	$view->assign('item', $item);
+	return $view->fetch('IWforms_admin_form_fields.htm');
 }
 
 
@@ -515,10 +515,10 @@ function IWforms_admin_collexpand($args)
 	if (!SecurityUtil::checkPermission( 'IWforms::', '::', ACCESS_ADMIN)) {
 		return LogUtil::registerPermissionError();
 	}
-	pnModAPIFunc('IWforms', 'admin', 'collexpand', array('fid' => $fid,
+	ModUtil::apiFunc('IWforms', 'admin', 'collexpand', array('fid' => $fid,
 															'value' => $value));
 
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'field')));
 }
 
@@ -538,29 +538,29 @@ function IWforms_admin_order($args)
 		return LogUtil::registerPermissionError();
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
+	$view = Zikula_View::getInstance('IWforms',false);
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	$order = ($puts == '-1') ? $itemField['order'] + 15 : $itemField['order'] - 15;
 	$items = array('order' => $order);
-	if (pnModApiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
+	if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
 																'items' => $items))) {
 		// Success
 		LogUtil::registerStatus (__('Has changed the order of the fields', $dom));
 	}
 	// Reorder the items
-	pnModAPIFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'field')));
 }
 
@@ -603,9 +603,9 @@ function IWforms_admin_createField($args)
 	if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$pnRender->assign ('item',array('fid' => $fid));
-	return $pnRender->fetch('IWforms_admin_form_fieldAdd.htm');
+	$view = Zikula_View::getInstance('IWforms',false);
+	$view->assign ('item',array('fid' => $fid));
+	return $view->fetch('IWforms_admin_form_fieldAdd.htm');
 }
 
 /**
@@ -625,32 +625,32 @@ function IWforms_admin_submitField($args)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 												'action' => 'field')));
 	}
 	if ($fieldType == 0) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																		'action' => 'field')));
 	}
-	$createField = pnModAPIFunc('IWforms', 'admin', 'createFormField', array('fid' => $fid,
+	$createField = ModUtil::apiFunc('IWforms', 'admin', 'createFormField', array('fid' => $fid,
 																				'fieldType' => $fieldType,
 																				'fieldName' => __('Field name', $dom)));
-	pnModAPIFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+	ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
 	if ($createField != false) {
 		// Success
 		LogUtil::registerStatus (__('We have created a new field. Edit the characteristics of the field', $dom));
 
 		//If field type is fileset create a fieldset end field </fieldset> and edit it
 		if ($fieldType == 53) {
-			$createFieldSetEnd = pnModAPIFunc('IWforms', 'admin', 'createFormFieldSetEnd', array('fid' => $fid,
+			$createFieldSetEnd = ModUtil::apiFunc('IWforms', 'admin', 'createFormFieldSetEnd', array('fid' => $fid,
 																									'dependance' => $createField,
 																									'fieldName' => __('Final box', $dom)));
 		}
 	}
 	// Reorder the items
-	pnModAPIFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+	ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
 	//Redirect user to edit field form
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('action' => 'field',
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('action' => 'field',
 																	'do' => 'edit',
 																	'fid' => $fid,
 																	'fndid' => $createField)));
@@ -673,30 +673,30 @@ function IWforms_admin_deleteFieldValidator($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Delete validator on validators string
 	$validatorsString = str_replace('$'.$id.'$','',$itemField['rfid']);
 	$items = array('rfid' => $validatorsString);
-	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-	$userFullname = pnModFunc('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
+	$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+	$userFullname = ModUtil::func('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
 																		'uid' => $id,
 																		'sv' => $sv));
-	if (pnModApiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
+	if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
 									'items' => $items))) {
 		// Success
 		LogUtil::registerStatus (__('Deleted validator', $dom).' '.$userFullname);
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 									'action' => 'field')));
 }
 
@@ -718,48 +718,48 @@ function IWforms_admin_addFieldValidator($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$validators = pnModAPIFunc('IWforms', 'user', 'getAllValidators', array('fid' => $fid));
+		$view = Zikula_View::getInstance('IWforms',false);
+		$validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators', array('fid' => $fid));
 		foreach ($validators as $validator) {
 			$usersList .= $validator['validator'].'$$';
 			$validators_array[] = array('validatorUserId' => $validator['validator']);
 		}
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$users = pnModFunc('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
 																		'sv' => $sv,
 																		'list' => $usersList));
-		$pnRender->assign('validators', $validators_array);
-		$pnRender->assign ('users',$users);
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('itemField',$itemField);
-		return $pnRender->fetch('IWforms_admin_form_addFieldValidator.htm');
+		$view->assign('validators', $validators_array);
+		$view->assign ('users',$users);
+		$view->assign ('item',$item);
+		$view->assign ('itemField',$itemField);
+		return $view->fetch('IWforms_admin_form_addFieldValidator.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 												'action' => 'field')));
 	}
 	//Add validator into validators string
 	$validatorsString = $itemField['rfid'].'$'.$validator.'$';
 	$items = array('rfid' => $validatorsString);
-	if (pnModApiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid, 'items' => $items))) {
+	if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid, 'items' => $items))) {
 		// Success
 		LogUtil::registerStatus (__('Added validator', $dom).' '.$usersFullname[$validator]);
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'field')));
 }
 
@@ -783,30 +783,30 @@ function IWforms_admin_addGroup($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$groups = pnModFunc('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
+		$view = Zikula_View::getInstance('IWforms',false);
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$groups = ModUtil::func('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
 																		'plus' => __('Unregistered', $dom),
-																		'less' => pnModGetVar('iw_myrole', 'rolegroup')));
-		$pnRender->assign ('groups',$groups);
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('aio',$aio);
-		return $pnRender->fetch('IWforms_admin_form_addGroup.htm');
+																		'less' => ModUtil::getVar('iw_myrole', 'rolegroup')));
+		$view->assign ('groups',$groups);
+		$view->assign ('item',$item);
+		$view->assign ('aio',$aio);
+		return $view->fetch('IWforms_admin_form_addGroup.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																							'action' => 'group')));
 	}
 	//Save the group in database
-	if (pnModApiFunc('IWforms', 'admin', 'addGroup', array('fid' => $fid,
+	if (ModUtil::apiFunc('IWforms', 'admin', 'addGroup', array('fid' => $fid,
 															'group' => $group,
 															'accessType' => $accessType,
 															'validationNeeded' => $validationNeeded))) {
@@ -814,9 +814,9 @@ function IWforms_admin_addGroup($args)
 		LogUtil::registerStatus (__('Added a group of access to the form', $dom));
 	} 
 	if (isset($aio)  && $aio == 1) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'group')));
 }
 
@@ -839,44 +839,44 @@ function IWforms_admin_addValidator($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	$confirm = (!isset($validator) || $validator == 0) ? 0 : 1;
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$groups = pnModFunc('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
-																		'less' => pnModGetVar('iw_myrole', 'rolegroup')));
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$groupMembers = pnModFunc('IWmain', 'user', 'getMembersGroup', array('sv' => $sv,
+		$view = Zikula_View::getInstance('IWforms',false);
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$groups = ModUtil::func('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
+																		'less' => ModUtil::getVar('iw_myrole', 'rolegroup')));
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$groupMembers = ModUtil::func('IWmain', 'user', 'getMembersGroup', array('sv' => $sv,
 																				'gid' => $group));
-		$pnRender->assign ('groupselect',$group);
-		$pnRender->assign ('groups',$groups);
-		$pnRender->assign ('groupMembers',$groupMembers);
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('aio',$aio);
-		return $pnRender->fetch('IWforms_admin_form_addValidator.htm');
+		$view->assign ('groupselect',$group);
+		$view->assign ('groups',$groups);
+		$view->assign ('groupMembers',$groupMembers);
+		$view->assign ('item',$item);
+		$view->assign ('aio',$aio);
+		return $view->fetch('IWforms_admin_form_addValidator.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																							'action' => 'validators')));
 	}
 	//Save the group in database
-	if (pnModApiFunc('IWforms', 'admin', 'addValidator', array('fid' => $fid,
+	if (ModUtil::apiFunc('IWforms', 'admin', 'addValidator', array('fid' => $fid,
 																'validator' => $validator,
 																'validatorType' => $validatorType))) {
 		// Success
 		LogUtil::registerStatus (__('Has added a new validator', $dom));
 	}
 	if (isset($aio) && $aio == 1) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'validators')));
 }
 
@@ -896,27 +896,27 @@ function IWforms_admin_deleteNotes($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$pnRender->assign ('item',$item);
-		return $pnRender->fetch('IWforms_admin_form_deleteNotes.htm');
+		$view = Zikula_View::getInstance('IWforms',false);
+		$view->assign ('item',$item);
+		return $view->fetch('IWforms_admin_form_deleteNotes.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																							'action' => 'field')));
 	}
 	//delete the form notes
-	if (pnModAPIFunc('IWforms', 'admin', 'deleteFormNotes', array('fid' => $fid))) {
+	if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormNotes', array('fid' => $fid))) {
 		LogUtil::registerStatus (__('Dropped the annotations of the form', $dom));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 }
 
 /**
@@ -937,43 +937,43 @@ function IWforms_admin_deleteValidator($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get validator information
-	$itemValidator = pnModAPIFunc('IWforms', 'user', 'getValidator', array('rfid' => $rfid));
+	$itemValidator = ModUtil::apiFunc('IWforms', 'user', 'getValidator', array('rfid' => $rfid));
 	if ($itemValidator == false) {
 		LogUtil::registerError (__('Not Found validator', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																		'action' => 'validators')));
 	}
 	if (!$confirm) {
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$userName = pnModFunc('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$userName = ModUtil::func('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
 																		'uid' => $itemValidator['validator'],
 																		'sv' => $sv));
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('validatorId',$rfid);
-		$pnRender->assign ('userName',$userName);
-		$pnRender->assign ('aio',$aio);
-		return $pnRender->fetch('IWforms_admin_form_validatorDelete.htm');
+		$view = Zikula_View::getInstance('IWforms',false);
+		$view->assign ('item',$item);
+		$view->assign ('validatorId',$rfid);
+		$view->assign ('userName',$userName);
+		$view->assign ('aio',$aio);
+		return $view->fetch('IWforms_admin_form_validatorDelete.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																							'action' => 'validators')));
 	}
-	if (pnModAPIFunc('IWforms', 'admin', 'deleteValidator', array('rfid' => $rfid))) {
+	if (ModUtil::apiFunc('IWforms', 'admin', 'deleteValidator', array('rfid' => $rfid))) {
 		LogUtil::registerStatus (__('Has deleted a validator', $dom));
 	}
 	if (isset($aio) && $aio == 1) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'infoForm', array('fid' => $fid)));	
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));	
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'validators')));
 }
 
@@ -995,43 +995,43 @@ function IWforms_admin_deleteGroup($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemGroup = pnModAPIFunc('IWforms', 'user', 'getGroup', array('gfid' => $gfid));
+	$itemGroup = ModUtil::apiFunc('IWforms', 'user', 'getGroup', array('gfid' => $gfid));
 	if ($itemGroup == false) {
 		LogUtil::registerError (__('Can not find the group', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 										'action' => 'group')));
 	}
 	if (!$confirm) {
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$groupsInfo = pnModFunc('IWmain', 'user', 'getAllGroupsInfo', array('sv' => $sv));
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo', array('sv' => $sv));
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
+		$view = Zikula_View::getInstance('IWforms',false);
 		$groupName = ($itemGroup['group'] == 0) ? __('Unregistered users', $dom) : $groupsInfo[$itemGroup['group']];
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('itemGroup',$itemGroup);
-		$pnRender->assign ('groupId',$itemGroup['gfid']);
-		$pnRender->assign ('groupName',$groupName);
-		$pnRender->assign ('aio',$aio);			
-		return $pnRender->fetch('IWforms_admin_form_groupDelete.htm');
+		$view->assign ('item',$item);
+		$view->assign ('itemGroup',$itemGroup);
+		$view->assign ('groupId',$itemGroup['gfid']);
+		$view->assign ('groupName',$groupName);
+		$view->assign ('aio',$aio);			
+		return $view->fetch('IWforms_admin_form_groupDelete.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 												'action' => 'group')));
 	}
-	if (pnModAPIFunc('IWforms', 'admin', 'deleteGroup', array('gfid' => $gfid))) {
+	if (ModUtil::apiFunc('IWforms', 'admin', 'deleteGroup', array('gfid' => $gfid))) {
 		LogUtil::registerStatus (__('Has been cleared access to the group', $dom));
 	}
 	if (isset($aio)  && $aio == 1) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'infoForm', array('fid' => $fid)));	
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));	
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'group')));
 }
 
@@ -1052,51 +1052,51 @@ function IWforms_admin_deleteField($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Check if there are other fields that depens on it. In this case the field can't be deleted
-	$dependancesTo = pnModAPIFunc('IWforms', 'user', 'getFormFieldDependancesTo', array('fndid' => $fndid));
+	$dependancesTo = ModUtil::apiFunc('IWforms', 'user', 'getFormFieldDependancesTo', array('fndid' => $fndid));
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('itemField',$itemField);
-		$pnRender->assign ('dependancesTo',$dependancesTo);
-		$fieldTypeTextArray = pnModFunc('IWforms', 'admin', 'getFileTypeText');
+		$view = Zikula_View::getInstance('IWforms',false);
+		$view->assign ('item',$item);
+		$view->assign ('itemField',$itemField);
+		$view->assign ('dependancesTo',$dependancesTo);
+		$fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
 		$fieldTypeText = $fieldTypeTextArray[$itemField['fieldType']];
-		$pnRender->assign('fieldTypeText', $fieldTypeText);
-		return $pnRender->fetch('IWforms_admin_form_fieldDelete.htm');
+		$view->assign('fieldTypeText', $fieldTypeText);
+		return $view->fetch('IWforms_admin_form_fieldDelete.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																							'action' => 'field')));
 	}
-	if (pnModAPIFunc('IWforms', 'admin', 'deleteFormField', array('itemField' => $fndid))) {
+	if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormField', array('itemField' => $fndid))) {
 		LogUtil::registerStatus (__('Has been deleted the field', $dom));
 	}
 /*
 	//if field is a fieldset delete too the fieldset end
 	if ($itemField['fieldType'] == 53) {
-		$dependances = pnModAPIFunc('IWforms', 'user', 'getFormFieldDependancesTo', array('fndid' => $fndid));
+		$dependances = ModUtil::apiFunc('IWforms', 'user', 'getFormFieldDependancesTo', array('fndid' => $fndid));
 		foreach ($dependances as $dependance) {
 			$d = (int)$dependance['fndid'];
 		}
-		pnModAPIFunc('IWforms', 'admin', 'deleteFormField', array('itemField' => $d));
+		ModUtil::apiFunc('IWforms', 'admin', 'deleteFormField', array('itemField' => $d));
 	}
 */
 	// Reorder the items
-	pnModAPIFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'field')));
 }
 
@@ -1118,28 +1118,28 @@ function IWforms_admin_modifyFieldDependances($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get all field information
-	$fields = pnModAPIFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
+	$fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
 	if ($fields == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$pnRender->assign ('item',$item);
-		$pnRender->assign ('itemField',$itemField);
+		$view = Zikula_View::getInstance('IWforms',false);
+		$view->assign ('item',$item);
+		$view->assign ('itemField',$itemField);
 		//put the field dependances into an array
 		$dependances = explode('$$',substr($itemField['dependance'],2,-1));
 		foreach ($fields as $field) {
@@ -1151,12 +1151,12 @@ function IWforms_admin_modifyFieldDependances($args)
 								'checked' => $checked);
 			}
 		}
-		$pnRender->assign ('fields',$fields_array);
-		return $pnRender->fetch('IWforms_admin_form_fieldModifyDependances.htm');
+		$view->assign ('fields',$fields_array);
+		return $view->fetch('IWforms_admin_form_fieldModifyDependances.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																							'action' => 'field')));
 	}
 	$dependances = '$';
@@ -1164,11 +1164,11 @@ function IWforms_admin_modifyFieldDependances($args)
 		$dependances .= '$'.$d.'$';
 	}
 	$items = array('dependance' => $dependances);
-	if (pnModApiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid, 'items' => $items))) {
+	if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid, 'items' => $items))) {
 		// Success
 		LogUtil::registerStatus (__('Have changed the dependencies', $dom));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form', array('fid' => $fid,
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
 																	'action' => 'field')));
 }
 
@@ -1188,24 +1188,24 @@ function IWforms_admin_edit($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//get all categories
-	$categories = pnModApiFunc('IWforms', 'user', 'getAllCategories');
+	$categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
 	global $Intraweb;
 	$multizk = (isset($GLOBALS['PNConfig']['Multisites']['multi']) && $GLOBALS['PNConfig']['Multisites']['multi'] == 1) ? 1 : 0;
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$pnRender->assign('cats', $categories);
-	$pnRender->assign('aio', $aio);
-	$pnRender->assign('item', $item);
-	$pnRender->assign('multizk', $multizk);
-	$pnRender->assign('new', pnModFunc('IWforms', 'user', 'makeTimeForm', $item['new']));
-	$pnRender->assign('caducity', pnModFunc('IWforms', 'user', 'makeTimeForm', $item['caducity']));
-	return $pnRender->fetch('IWforms_admin_form_definitionEdit.htm');
+	$view = Zikula_View::getInstance('IWforms',false);
+	$view->assign('cats', $categories);
+	$view->assign('aio', $aio);
+	$view->assign('item', $item);
+	$view->assign('multizk', $multizk);
+	$view->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']));
+	$view->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']));
+	return $view->fetch('IWforms_admin_form_definitionEdit.htm');
 }
 
 /**
@@ -1254,23 +1254,23 @@ function IWforms_admin_update($fid)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form',
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form',
 													   array('fid' => $fid)));
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
 						  array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	if ($new != "00/00/00" || $new == '') {
-		$new = pnModFunc('IWforms', 'user', 'makeTime', $new.'23:59:00');
+		$new = ModUtil::func('IWforms', 'user', 'makeTime', $new.'23:59:00');
 	} else {
 		$new = 0;
 	}
 	if ($caducity != "00/00/00" || $caducity == '') {
-		$caducity = pnModFunc('IWforms', 'user', 'makeTime', $caducity.'23:59:00');
+		$caducity = ModUtil::func('IWforms', 'user', 'makeTime', $caducity.'23:59:00');
 	} else {
 		$caducity = 0;
 	}
@@ -1329,17 +1329,17 @@ function IWforms_admin_update($fid)
 				   'allowCommentsModerated' => $allowCommentsModerated,
 	               'returnURL' => $returnURL,
 	               );
-	if (pnModApiFunc('IWforms', 'admin', 'editForm',
+	if (ModUtil::apiFunc('IWforms', 'admin', 'editForm',
                       array('fid' => $fid,
 							'items' => $items))) {
 		// Success
 		LogUtil::registerStatus (__('The main points of the form have been published successfully', $dom));
 	}
 	if ($aio != null) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'infoForm',
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm',
                                     array('fid' => $fid)));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form',
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
                                 array('fid' => $fid)));
 }
 
@@ -1359,38 +1359,38 @@ function IWforms_admin_editField($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                           array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField',
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
                                array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$fieldTypeTextArray = pnModFunc('IWforms', 'admin', 'getFileTypeText');
+	$fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
 	$fieldTypeText = $fieldTypeTextArray[$itemField['fieldType']];
-	$publicFileURL = '<strong>' . pngetbaseurl() . 'file.php?<br />file=' . pnModGetVar('IWforms','publicFolder') . '/<br />' . __('Name_field', $dom) . '</strong>';
-	$pnRender = pnRender::getInstance('IWforms',false);
+	$publicFileURL = '<strong>' . System::getBaseUrl() . 'file.php?<br />file=' . ModUtil::getVar('IWforms','publicFolder') . '/<br />' . __('Name_field', $dom) . '</strong>';
+	$view = Zikula_View::getInstance('IWforms',false);
 	if ($itemField['fieldType'] == 6) {
 		//get all groups
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$groups = pnModFunc('IWmain', 'user', 'getAllGroups',
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
                              array('sv' => $sv,
 								   'plus' => __('Choose a group...', $dom)));
-		$pnRender->assign('groups', $groups);
+		$view->assign('groups', $groups);
 	}
 	// Create output object
-	$pnRender->assign('item', $item);
-	$pnRender->assign('itemField', $itemField);
-	$pnRender->assign('fieldTypePlus', '-'.$itemField['fieldType'].'-');
-	$pnRender->assign('fieldTypeText', $fieldTypeText);
-	$pnRender->assign('publicFileURL', $publicFileURL);
-	return $pnRender->fetch('IWforms_admin_form_fieldEdit.htm');
+	$view->assign('item', $item);
+	$view->assign('itemField', $itemField);
+	$view->assign('fieldTypePlus', '-'.$itemField['fieldType'].'-');
+	$view->assign('fieldTypeText', $fieldTypeText);
+	$view->assign('publicFileURL', $publicFileURL);
+	return $view->fetch('IWforms_admin_form_fieldEdit.htm');
 }
 
 /**
@@ -1435,22 +1435,22 @@ function IWforms_admin_updateField($fid)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                           array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Get field information
-	$itemField = pnModAPIFunc('IWforms', 'user', 'getFormField',
+	$itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
                                array('fndid' => $fndid));
 	if ($itemField == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'form',
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'form',
                                                        array('fid' => $fid,
 															 'action' => 'field')));
 	}
@@ -1482,13 +1482,13 @@ function IWforms_admin_updateField($fid)
 				   'extensions' => $extensions,
 				   'imgWidth' => $imgWidth,
 				   'imgHeight' => $imgHeight);
-	if (pnModApiFunc('IWforms', 'admin', 'editFormField',
+	if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField',
                       array('fndid' => $fndid,
 							'items' => $items))) {
 		// Success
 		LogUtil::registerStatus (__('The field of the form has been published successfully', $dom));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form',
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
                                 array('fid' => $fid,
 									  'action' => 'field')));
 }
@@ -1506,51 +1506,51 @@ function IWforms_admin_conf()
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$attached = pnModGetVar('IWforms','attached');
-	$directoriroot = pnModGetVar('IWmain','documentRoot');
-	$newsColor = pnModGetVar('IWforms','newsColor');
-	$viewedColor = pnModGetVar('IWforms','viewedColor');
-	$completedColor = pnModGetVar('IWforms','completedColor');
-	$validatedColor = pnModGetVar('IWforms','validatedColor');
-	$fieldsColor = pnModGetVar('IWforms','fieldsColor');
-	$contentColor = pnModGetVar('IWforms','contentColor');
-	$publicFolder = pnModGetVar('IWforms','publicFolder');
-	if (!file_exists(pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWforms', 'attached')) ||
-        pnModGetVar('IWforms', 'attached') == '') {
-		$pnRender->assign('noFolder', true);
+	$view = Zikula_View::getInstance('IWforms',false);
+	$attached = ModUtil::getVar('IWforms','attached');
+	$directoriroot = ModUtil::getVar('IWmain','documentRoot');
+	$newsColor = ModUtil::getVar('IWforms','newsColor');
+	$viewedColor = ModUtil::getVar('IWforms','viewedColor');
+	$completedColor = ModUtil::getVar('IWforms','completedColor');
+	$validatedColor = ModUtil::getVar('IWforms','validatedColor');
+	$fieldsColor = ModUtil::getVar('IWforms','fieldsColor');
+	$contentColor = ModUtil::getVar('IWforms','contentColor');
+	$publicFolder = ModUtil::getVar('IWforms','publicFolder');
+	if (!file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached')) ||
+        ModUtil::getVar('IWforms', 'attached') == '') {
+		$view->assign('noFolder', true);
 	} else {
-		if (!is_writeable(pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWforms','attached'))) $pnRender->assign('noWriteable', true);
+		if (!is_writeable(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms','attached'))) $view->assign('noWriteable', true);
 	}
-	if (!file_exists(pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWforms', 'publicFolder')) ||
-        pnModGetVar('IWforms', 'publicFolder') == '') {
-		$pnRender->assign('noPublicFolder', true);
+	if (!file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'publicFolder')) ||
+        ModUtil::getVar('IWforms', 'publicFolder') == '') {
+		$view->assign('noPublicFolder', true);
 	} else {
-		if (!is_writeable(pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWforms', 'publicFolder')) ||
-            file_exists(pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWforms', 'publicFolder') . '/.locked')) $pnRender->assign('noPublicFolderWriteable', true);
+		if (!is_writeable(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'publicFolder')) ||
+            file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'publicFolder') . '/.locked')) $view->assign('noPublicFolderWriteable', true);
 	}
 	//check if module dpCaptcha is installed
-	if (!pnModAvailable('dpCaptcha')) {
-		$pnRender->assign('nodpCaptchaAvailable', true);
+	if (!ModUtil::available('dpCaptcha')) {
+		$view->assign('nodpCaptchaAvailable', true);
 	} else {
 		//check if IWforms is hooked with dpCaptcha
-		if (!pnModIsHooked('dpCaptcha', 'IWforms')) $pnRender->assign('nodpCaptchaHooked', true);
+		if (!ModUtil::isHooked('dpCaptcha', 'IWforms')) $view->assign('nodpCaptchaHooked', true);
 	}
 	//get all categories
-	$categories = pnModApiFunc('IWforms', 'user', 'getAllCategories');
+	$categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
     $multizk = (isset($GLOBALS['PNConfig']['Multisites']['multi']) && $GLOBALS['PNConfig']['Multisites']['multi'] == 1) ? 1 : 0;
-	$pnRender->assign('multizk', $multizk);
-	$pnRender->assign('cats', $categories);
-	$pnRender->assign('attached', $attached);
-	$pnRender->assign('directoriroot', $directoriroot);
-	$pnRender->assign('newsColor', $newsColor);
-	$pnRender->assign('viewedColor', $viewedColor);
-	$pnRender->assign('completedColor', $completedColor);
-	$pnRender->assign('validatedColor', $validatedColor);
-	$pnRender->assign('fieldsColor', $fieldsColor);
-	$pnRender->assign('contentColor', $contentColor);
-	$pnRender->assign('publicFolder', $publicFolder);
-	return $pnRender->fetch('IWforms_admin_conf.htm');
+	$view->assign('multizk', $multizk);
+	$view->assign('cats', $categories);
+	$view->assign('attached', $attached);
+	$view->assign('directoriroot', $directoriroot);
+	$view->assign('newsColor', $newsColor);
+	$view->assign('viewedColor', $viewedColor);
+	$view->assign('completedColor', $completedColor);
+	$view->assign('validatedColor', $validatedColor);
+	$view->assign('fieldsColor', $fieldsColor);
+	$view->assign('contentColor', $contentColor);
+	$view->assign('publicFolder', $publicFolder);
+	return $view->fetch('IWforms_admin_conf.htm');
 }
 
 /**
@@ -1576,22 +1576,22 @@ function IWforms_admin_updateConf($args)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError(pnModURL('IWforms', 'admin', 'main'));
+		return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	if (substr(pnModGetVar('IWmain', 'documentRoot'), strrpos(pnModGetVar('IWmain', 'documentRoot'), '/') + 1, strlen(pnModGetVar('IWmain', 'documentRoot'))) == $publicFolder) {
+	if (substr(ModUtil::getVar('IWmain', 'documentRoot'), strrpos(ModUtil::getVar('IWmain', 'documentRoot'), '/') + 1, strlen(ModUtil::getVar('IWmain', 'documentRoot'))) == $publicFolder) {
 		LogUtil::registerError (__('The name of the directory of the files public is not valid because it matches the name of the home directory of files on the site.', $dom));
 		$publicFolder = '';
 	}
-	pnModSetVar('IWforms', 'attached', $attached);
-	pnModSetVar('IWforms','newsColor', $newsColor);
-	pnModSetVar('IWforms','viewedColor', $viewedColor);
-	pnModSetVar('IWforms','completedColor', $completedColor);
-	pnModSetVar('IWforms','validatedColor', $validatedColor);
-	pnModSetVar('IWforms','fieldsColor', $fieldsColor);
-	pnModSetVar('IWforms','contentColor', $contentColor);
-	pnModSetVar('IWforms','publicFolder', $publicFolder);
+	ModUtil::setVar('IWforms', 'attached', $attached);
+	ModUtil::setVar('IWforms','newsColor', $newsColor);
+	ModUtil::setVar('IWforms','viewedColor', $viewedColor);
+	ModUtil::setVar('IWforms','completedColor', $completedColor);
+	ModUtil::setVar('IWforms','validatedColor', $validatedColor);
+	ModUtil::setVar('IWforms','fieldsColor', $fieldsColor);
+	ModUtil::setVar('IWforms','contentColor', $contentColor);
+	ModUtil::setVar('IWforms','publicFolder', $publicFolder);
 	LogUtil::registerStatus (__('Has changed the configuration of the module', $dom));
-	return pnRedirect(pnModURL('IWforms', 'admin', 'conf'));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
 }
 
 /**
@@ -1606,12 +1606,12 @@ function IWforms_admin_module() {
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$module = pnModFunc('IWmain', 'user', 'module_info',
+	$view = Zikula_View::getInstance('IWforms',false);
+	$module = ModUtil::func('IWmain', 'user', 'module_info',
                          array('module_name' => 'IWforms',
 							   'type' => 'admin'));
-	$pnRender->assign('module', $module);
-	return $pnRender->fetch('IWforms_admin_module.htm');
+	$view->assign('module', $module);
+	return $view->fetch('IWforms_admin_module.htm');
 }
 
 /**
@@ -1631,38 +1631,38 @@ function IWforms_admin_infoForm($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                           array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//get the form view
-	$formView = pnModFunc('IWforms', 'user', 'new',
+	$formView = ModUtil::func('IWforms', 'user', 'new',
                            array('fid' => $fid,
 								 'adminView' => 1));
 	//get the form features
-	$formDefinition = pnModFunc('IWforms', 'admin', 'definition',
+	$formDefinition = ModUtil::func('IWforms', 'admin', 'definition',
                                  array('fid' => $fid,
 									   'adminView' => 1));
 	//get the form groups
-	$formGroups = pnModFunc('IWforms', 'admin', 'groups',
+	$formGroups = ModUtil::func('IWforms', 'admin', 'groups',
                              array('fid' => $fid,
 								   'adminView' => 1));
 	//get the form validators
-	$formValidators = pnModFunc('IWforms', 'admin', 'validators',
+	$formValidators = ModUtil::func('IWforms', 'admin', 'validators',
                                  array('fid' => $fid,
 									   'adminView' => 1));
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	$pnRender ->assign('item',$item);
-	$pnRender ->assign('formView',$formView);
-	$pnRender ->assign('formDefinition',$formDefinition);
-	$pnRender ->assign('formGroups',$formGroups);
-	$pnRender ->assign('formValidators',$formValidators);
-	return $pnRender->fetch('IWforms_admin_infoForm.htm');
+	$view = Zikula_View::getInstance('IWforms',false);
+	$view ->assign('item',$item);
+	$view ->assign('formView',$formView);
+	$view ->assign('formDefinition',$formDefinition);
+	$view ->assign('formGroups',$formGroups);
+	$view ->assign('formValidators',$formValidators);
+	return $view->fetch('IWforms_admin_infoForm.htm');
 }
 
 /**
@@ -1677,8 +1677,8 @@ function IWforms_admin_addCat() {
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms',false);
-	return $pnRender->fetch('IWforms_admin_addCat.htm');
+	$view = Zikula_View::getInstance('IWforms',false);
+	return $view->fetch('IWforms_admin_addCat.htm');
 }
 
 /**
@@ -1699,10 +1699,10 @@ function IWforms_admin_submitCat($args)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'conf'));
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'conf'));
 	}
 	// create the new category
-	$cid = pnModAPIFunc('IWforms','admin','createCat',
+	$cid = ModUtil::apiFunc('IWforms','admin','createCat',
                          array('catName' => $catName,
 							   'description' => $description));
 	if ($cid != false) {
@@ -1710,7 +1710,7 @@ function IWforms_admin_submitCat($args)
 		LogUtil::registerStatus (__('New category created', $dom));
 	}
 	// Redirect to the main site for the admin
-	return pnRedirect(pnModURL('IWforms', 'admin', 'conf'));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
 }
 
 /**
@@ -1729,27 +1729,27 @@ function IWforms_admin_deleteCat($args)
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
 	//Get item
-	$item = pnModAPIFunc('IWforms', 'user', 'getCategory',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getCategory',
                           array('cid' => $cid));
 	if ($item == false) {
 		LogUtil::registerError (__('No such category found', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'conf'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
 	}
 	if (!$confirm) {
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms',false);
-		$pnRender->assign ('item',$item);
-		return $pnRender->fetch('IWforms_admin_form_catDelete.htm');
+		$view = Zikula_View::getInstance('IWforms',false);
+		$view->assign ('item',$item);
+		return $view->fetch('IWforms_admin_form_catDelete.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'conf'));
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'conf'));
 	}
-	if (pnModAPIFunc('IWforms', 'admin', 'deleteCat',
+	if (ModUtil::apiFunc('IWforms', 'admin', 'deleteCat',
                       array('cid' => $cid))) {
 		LogUtil::registerStatus (__('Has deleted the category', $dom));
 	}
-	return pnRedirect(pnModURL('IWforms', 'admin', 'conf'));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
 }
 
 /**
@@ -1768,16 +1768,16 @@ function IWforms_admin_editCat($args) {
 	if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
 		return LogUtil::registerError(__('Sorry! No authorization to access this module.', $dom), 403);
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getCategory',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getCategory',
                           array('cid' => $cid));
 	if ($item == false) {
 		LogUtil::registerError (__('No such category found', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'conf'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
 	}
 	// Create output object
-	$pnRender = pnRender::getInstance('IWforms', false);
-	$pnRender->assign('item', $item);
-	return $pnRender->fetch('IWforms_admin_editCat.htm');
+	$view = Zikula_View::getInstance('IWforms', false);
+	$view->assign('item', $item);
+	return $view->fetch('IWforms_admin_editCat.htm');
 }
 
 /**
@@ -1799,9 +1799,9 @@ function IWforms_admin_updateCat($args)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'conf'));
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'conf'));
 	}
-	$updated = pnModAPIFunc('IWforms', 'admin', 'modifyCat',
+	$updated = ModUtil::apiFunc('IWforms', 'admin', 'modifyCat',
                              array('cid' => $cid,
 								   'catName' => $catName,
 								   'description' => $description));
@@ -1810,7 +1810,7 @@ function IWforms_admin_updateCat($args)
 		LogUtil::registerStatus (__('Has changed the category', $dom));
 	}
 	// Return to admin pannel
-	return pnRedirect(pnModURL('IWforms', 'admin', 'conf'));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
 }
 
 /**
@@ -1830,25 +1830,25 @@ function IWforms_admin_changeOrder($args)
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return pnRedirect(pnModURL('IWforms', 'admin', 'form',
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
                                     array('fid' => $fid,
 										  'action' => 'field')));
 	}
-	$item = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
+	$item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                           array('fid' => $fid));
 	if ($item == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	foreach ($f as $key => $value) {
 		$items = array('order' => $value);
-		pnModApiFunc('IWforms', 'admin', 'changeOrder',
+		ModUtil::apiFunc('IWforms', 'admin', 'changeOrder',
                       array('fndid' => $key,
 							'order' => $value));
 	}
 	// Reorder the items
-	pnModAPIFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
-	return pnRedirect(pnModURL('IWforms', 'admin', 'form',
+	ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
                                 array('fid' => $fid,
 									  'action' => 'field')));
 }
@@ -1870,18 +1870,18 @@ function IWforms_admin_copy($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$newFormId = pnModAPIFunc('IWforms', 'admin', 'copy',
+	$newFormId = ModUtil::apiFunc('IWforms', 'admin', 'copy',
                                array('fid' => $fid));
 	if ($newFormId) {
 		LogUtil::registerStatus (__('Has made a copy of the form. Edit the characteristics that create appropriate', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'form',
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
                                     array('do' => 'edit',
 										  'fid' => $newFormId)));		
 	} else {
 		LogUtil::registerError (__('There was an error in the copy of the forum', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));		
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));		
 	}
 }
 
@@ -1902,26 +1902,26 @@ function IWforms_admin_export($args)
 	// Needed argument
 	if (!isset($fid) || !is_numeric($fid)) {
 		LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	// Gets module information
-	$modid = pnModGetIDFromName('IWforms');
-	$moduleInfo = pnModGetInfo($modid);
+	$modid = ModUtil::getIdFromName('IWforms');
+	$moduleInfo = ModUtil::getInfo($modid);
 	$version = $moduleInfo['version'];
 	// Get user
-	$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-	$userFullname = pnModFunc('IWmain', 'user', 'getUserInfo',
+	$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+	$userFullname = ModUtil::func('IWmain', 'user', 'getUserInfo',
                                array('info' => 'ccn',
-									 'uid' => pnUserGetVar('uid'),
+									 'uid' => UserUtil::getVar('uid'),
 									 'sv' => $sv));
 	//get form information
-	$form = pnModAPIFunc('IWforms', 'user', 'getFormDefinition',
+	$form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                           array('fid' => $fid));
 	if ($form == false) {
 		LogUtil::registerError (__('Could not find form', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
-	$fields = pnModAPIFunc('IWforms', 'user', 'getAllFormFields',
+	$fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
                             array('fid' => $fid));
 	// create doctype
 	//$dom = new DOMDocument("1.0", "ISO-8859-1");
@@ -1952,11 +1952,11 @@ function IWforms_admin_export($args)
 	$item->appendChild($data);
 	$item = $dom->createElement("source");
 	$package->appendChild($item);
-	$data = $dom->createCDATASection(pnConfigGetVar('sitename'));
+	$data = $dom->createCDATASection(System::getVar('sitename'));
 	$item->appendChild($data);
 	$item = $dom->createElement("sourceURL");
 	$package->appendChild($item);
-	$data = $dom->createTextNode(pngetbaseurl());
+	$data = $dom->createTextNode(System::getBaseUrl());
 	$item->appendChild($data);
 	$item = $dom->createElement("creationDate");
 	$package->appendChild($item);
@@ -2025,12 +2025,12 @@ function IWforms_admin_export($args)
 			}
 		}
 	}
-	$file = pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWmain', 'tempFolder') . '/exportForm' . date('dmY') . '.xml';	
+	$file = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWmain', 'tempFolder') . '/exportForm' . date('dmY') . '.xml';	
 	$save = $dom->save($file);
 	//Check that file has been created correctly
 	if (!is_file($file)) {
 		LogUtil::registerError (__('Error exporting file', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//Gather relevent info about file
 	$len = filesize($file);
@@ -2071,26 +2071,26 @@ function IWforms_admin_import($args)
 	if (!$confirm) {
 		//Load the form to update the file
 		// Create output object
-		$pnRender = pnRender::getInstance('IWforms', false);
-		return $pnRender->fetch('IWforms_admin_import.htm');
+		$view = Zikula_View::getInstance('IWforms', false);
+		return $view->fetch('IWforms_admin_import.htm');
 	}
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
-		return LogUtil::registerAuthidError (pnModURL('IWforms', 'admin', 'main'));
+		return LogUtil::registerAuthidError (ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//gets the attached file array
 	$fileName = $_FILES['import']['name'];
 	$file_extension = strtolower(substr(strrchr($fileName,"."),1));
 	if ($file_extension != 'xml') {
 		LogUtil::registerError (__('The import file is not correct. It need the xml extension', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	//update file to the server
 	// update the attached file to the server
 	if ($fileName != '') {
-		$folder = pnModGetVar('IWmain', 'tempFolder');
-		$sv = pnModFunc('IWmain', 'user', 'genSecurityValue');
-		$update = pnModFunc('IWmain', 'user', 'updateFile',
+		$folder = ModUtil::getVar('IWmain', 'tempFolder');
+		$sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+		$update = ModUtil::func('IWmain', 'user', 'updateFile',
                              array('sv' => $sv,
 								   'folder' => $folder,
 								   'allow' => '|xml',
@@ -2099,17 +2099,17 @@ function IWforms_admin_import($args)
 		//the function returns the error string if the update fails and and empty string if success
 		if ($update['msg'] != '') {
 			LogUtil::registerError (__('Error updating the import file to the server', $dom));
-			return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+			return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 		} else {
 			$nom_fitxer = $update['fileName'];
 		}
   	}
-	$xmlFile = pnModGetVar('IWmain', 'documentRoot') . '/' . pnModGetVar('IWmain', 'tempFolder') . '/' . $nom_fitxer;
+	$xmlFile = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWmain', 'tempFolder') . '/' . $nom_fitxer;
 	//Create a dom instance
 	$doc = new DOMDocument();
 	if (!$doc->load($xmlFile)) {
 		LogUtil::registerError (__('Error loading xml document.', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	$items = $doc->getElementsByTagName("formDefinition");
 	foreach ($items as $item) {
@@ -2137,7 +2137,7 @@ function IWforms_admin_import($args)
 		$allowComments = $item->getElementsByTagName('allowComments')->item(0)->nodeValue;
 		$allowCommentsModerated = $item->getElementsByTagName('allowCommentsModerated')->item(0)->nodeValue;
 	}
-	$create = pnModAPIFunc('IWforms', 'admin', 'createNewForm',
+	$create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm',
                             array('formName' => $formName,
 								  'description' => $description,
 								  'title' => $title,
@@ -2165,7 +2165,7 @@ function IWforms_admin_import($args)
 	                              'allowCommentsModerated' => $allowCommentsModerated));
 	if (!$create) {
 		LogUtil::registerError (__('The form creation has failt', $dom));
-		return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+		return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 	}
 	$items = $doc->getElementsByTagName("field");
 	foreach ($items as $item) {
@@ -2197,7 +2197,7 @@ function IWforms_admin_import($args)
 		$help = $item->getElementsByTagName('help')->item(0)->nodeValue;
 		$gid = $item->getElementsByTagName('gid')->item(0)->nodeValue;
 		$searchable = $item->getElementsByTagName('searchable')->item(0)->nodeValue;
-		$createField = pnModAPIFunc('IWforms', 'admin', 'createFormFieldExport',
+		$createField = ModUtil::apiFunc('IWforms', 'admin', 'createFormFieldExport',
                                      array('fid' => $create,
 										   'fieldType' => $fieldType,
 										   'fieldName' => $fieldName,
@@ -2227,9 +2227,9 @@ function IWforms_admin_import($args)
 										   'searchable' => $searchable));
 		if (!$createField) {
 			LogUtil::registerError (__('The form creation has failt', $dom));
-			return pnRedirect(pnModURL('IWforms', 'admin', 'main'));
+			return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
 		}
 	}
 	LogUtil::registerStatus (__('The form has been imported correcty', $dom));
-	return pnRedirect(pnModURL('IWforms', 'admin', 'main'));		
+	return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));		
 }
