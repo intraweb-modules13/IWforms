@@ -1,35 +1,34 @@
 <div class="formContent">
-	<div id="newFormField">
-		<div class="pn-adminpageicon">{img modname='core' src='filenew.gif' set='icons/medium'}</div>
-		<h2>{gt text="Create a new form field"}</h2>
-		<form class="pn-adminform" name="newField" action="{modurl modname="IWforms" type="admin" func="submitField"}" method="post" enctype="application/x-www-form-urlencoded">
-			<input type="hidden" name="fid" value="{$item.fid}" />
-			<input type="hidden" name="authid" value="{secgenauthkey module="IWforms"}" />
-			<div class="pn-adminformrow">
-				<label for="fieldType">{gt text="Type field"}</label>
-				<select id="fieldType" name="fieldType">
-					<option value="0">{gt text="Choose a type of field"}</option>
-					<option value="1">{gt text="Text"}</option>
-					<option value="2">{gt text="Text area"}</option>
-					<option value="3">{gt text="URL"}</option>
-					<option value="4">{gt text="Date"}</option>
-					<option value="5">{gt text="Time"}</option>
-					<option value="6">{gt text="List of options"}</option>
-					<option value="7">{gt text="File"}</option>
-					<option value="8">{gt text="Yes/No"}</option>
-					<option value="51">{gt text="Information"}</option>
-					<option value="52">{gt text="Dividing line"}</option>
-					<option value="53">{gt text="Box"}</option>
-				</select>
-			</div>
-			<div class="formOptions">
-				{*}{button src='button_ok.gif' set='icons/small' __alt="Create" __title="Create"}{*}
-				<a href="javascript:createField(document.newField.fieldType.value,{$item.fid})">{img modname='core' src='button_ok.gif' set='icons/small'   __alt="Create" __title="Create"}</a>			
-				<a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
-			</div>
-		</form>
-	</div>
+    <div id="newFormField">
+        <div class="z-adminpageicon">{img modname='core' src='filenew.gif' set='icons/medium'}</div>
+        <h2>{gt text="Create a new form field"}</h2>
+        <form class="z-form" name="newField" action="{modurl modname="IWforms" type="admin" func="submitField"}" method="post" enctype="application/x-www-form-urlencoded">
+              <input type="hidden" name="fid" value="{$item.fid}" />
+            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+                   <div class="z-formrow">
+                <label for="fieldType">{gt text="Type field"}</label>
+                <select id="fieldType" name="fieldType">
+                    <option value="0">{gt text="Choose a type of field"}</option>
+                    <option value="1">{gt text="Text"}</option>
+                    <option value="2">{gt text="Text area"}</option>
+                    <option value="3">{gt text="URL"}</option>
+                    <option value="4">{gt text="Date"}</option>
+                    <option value="5">{gt text="Time"}</option>
+                    <option value="6">{gt text="List of options"}</option>
+                    <option value="7">{gt text="File"}</option>
+                    <option value="8">{gt text="Yes/No"}</option>
+                    <option value="51">{gt text="Information"}</option>
+                    <option value="52">{gt text="Dividing line"}</option>
+                    <option value="53">{gt text="Box"}</option>
+                </select>
+            </div>
+            <div class="formOptions">
+                <a href="javascript:createField(document.newField.fieldType.value,{$item.fid})">{img modname='core' src='button_ok.gif' set='icons/small'   __alt="Create" __title="Create"}</a>
+                <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            </div>
+        </form>
+    </div>
 </div>
 <script>
-	var chooseFiledType = '{{gt text="Choose a field type"}}';
+    var chooseFiledType = '{{gt text="Choose a field type"}}';
 </script>

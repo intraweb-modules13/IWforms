@@ -1,18 +1,17 @@
 {include file="IWforms_admin_menu.htm"}
-<div class="pn-admincontainer">
-	<div class="pn-adminpageicon">{img modname='core' src='kcmdf.gif' set='icons/large' __alt=$templatetitle}</div>
-	<div style="height:10px;">&nbsp;</div>
-	<h2>{gt text="Import a form"}</h2>
-	<div style="height:15px;">&nbsp;</div>
-
-	<form  class="pn-adminform" enctype="multipart/form-data" method="post" name="import" id="import" action="{modurl modname="IWforms" type="admin" func="import"}">
-		<input type="hidden" name="authid" value="{secgenauthkey module="IWforms"}" />
-		<input type="hidden" name="confirm" value="1" />
-		<div>
-			<input type="file" name="import" size="50">
-		</div>	
-		<div style="margin-top:10px; text-align: center;">
-			{button src='button_ok.gif' set='icons/small' __alt="OK" __title="OK"} {gt text="OK"}
-		</div>
-	</form>
+<div class="z-admincontainer">
+    <div class="z-adminpageicon">{img modname='core' src='kcmdf.gif' set='icons/large' __alt=''}</div>
+    <div style="height:10px;">&nbsp;</div>
+    <h2>{gt text="Import a form"}</h2>
+    <div style="height:15px;">&nbsp;</div>
+    <form  class="z-form" enctype="multipart/form-data" method="post" name="import" id="import" action="{modurl modname="IWforms" type="admin" func="import"}">
+        <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+        <input type="hidden" name="confirm" value="1" />
+        <div>
+            <input type="file" name="import" size="50">
+        </div>
+        <div class="formOptions">
+            {button src='button_ok.gif' set='icons/small' __alt="OK" __title="OK"} {gt text="OK"}
+        </div>
+    </form>
 </div>

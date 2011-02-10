@@ -491,6 +491,7 @@ class IWforms_Api_Admin extends Zikula_Api {
         }
         $pntable = DBUtil::getTables();
         $c = $pntable['IWforms_note_definition_column'];
+        $i = 0;
         // Reorder all the items with the values 0 20 40 60 80...
         foreach ($fields as $field) {
             $i = $i + 10;

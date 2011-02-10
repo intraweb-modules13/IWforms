@@ -1,5 +1,7 @@
 <?php
+
 class IWforms_Api_User extends Zikula_Api {
+
     public function getFormDefinition($args) {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
         $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
@@ -34,7 +36,7 @@ class IWforms_Api_User extends Zikula_Api {
         $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
 
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                            array('sv' => $sv))) {
+                        array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
                 return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
@@ -43,8 +45,10 @@ class IWforms_Api_User extends Zikula_Api {
         $pntable = DBUtil::getTables();
         $c = $pntable['IWforms_definition_column'];
         $where = '';
-        if ($user != null) $where .= "$c[active]=1";
-        if ($fid != null) $where .= " AND $c[fid]=$fid";
+        if ($user != null)
+            $where .= "$c[active]=1";
+        if ($fid != null)
+            $where .= " AND $c[fid]=$fid";
         $orderby = "$c[formName]";
         $items = DBUtil::selectObjectArray('IWforms_definition', $where, $orderby, '-1', '-1', 'fid');
         // Check for an error with the database code, and if so set an appropriate
@@ -70,7 +74,8 @@ class IWforms_Api_User extends Zikula_Api {
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid));
+                        array('fid' => $fid));
+        $where = '';
         if ($item == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -108,7 +113,7 @@ class IWforms_Api_User extends Zikula_Api {
         $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
 
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                            array('sv' => $sv))) {
+                        array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
                 return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
@@ -123,8 +128,8 @@ class IWforms_Api_User extends Zikula_Api {
         //Get item
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid,
-                                        'sv' => $sv));
+                        array('fid' => $fid,
+                            'sv' => $sv));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
@@ -160,7 +165,7 @@ class IWforms_Api_User extends Zikula_Api {
         $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
 
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                            array('sv' => $sv))) {
+                        array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
                 return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
@@ -179,8 +184,8 @@ class IWforms_Api_User extends Zikula_Api {
         //Get item
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid,
-                                        'sv' => $sv));
+                        array('fid' => $fid,
+                            'sv' => $sv));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
@@ -208,9 +213,12 @@ class IWforms_Api_User extends Zikula_Api {
         }
 
         foreach ($items as $item) {
-            if ($item['accessType'] == 1) $canWrite = 1;
-            if ($item['accessType'] == 2) $canRead = 2;
-            if ($item['accessType'] == 3) $canReadAndWrite = 3;
+            if ($item['accessType'] == 1)
+                $canWrite = 1;
+            if ($item['accessType'] == 2)
+                $canRead = 2;
+            if ($item['accessType'] == 3)
+                $canReadAndWrite = 3;
         }
 
         $accessType = $canWrite + $canRead + $canReadAndWrite;
@@ -234,7 +242,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         // Return the items
         return array('validationNeeded' => $validationNeeded,
-                     'accessType' => $accessType);
+            'accessType' => $accessType);
     }
 
     public function getAllValidators($args) {
@@ -250,7 +258,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid));
+                        array('fid' => $fid));
         if ($item == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -292,15 +300,18 @@ class IWforms_Api_User extends Zikula_Api {
             if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
                 return LogUtil::registerPermissionError();
             }
-        } else $requestByCron = true;
+        } else
+            $requestByCron = true;
 
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
-        if (!UserUtil::isLoggedIn()) return 0;
+        if (!UserUtil::isLoggedIn())
+            return 0;
 
-        if ($uid != UserUtil::getVar('uid') && !$requestByCron) return 0;
+        if ($uid != UserUtil::getVar('uid') && !$requestByCron)
+            return 0;
 
         //get the fields where there are dependances on this field
         $pntable = DBUtil::getTables();
@@ -423,7 +434,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                                  array('fndid' => $fndid));
+                        array('fndid' => $fndid));
         if ($item == false) {
             return LogUtil::registerError($this->__('Can not find the form field'));
         }
@@ -524,7 +535,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if (!$userNotes == 1 && $access['level'] != 2 && $access['level'] < 3 && !SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('You can not access this form to view the annotations'));
         }
@@ -578,7 +589,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if (!$userNotes == 1 && $access['level'] != 2 && $access['level'] < 3 && !SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('You can not access this form to view the annotations'));
         }
@@ -587,7 +598,7 @@ class IWforms_Api_User extends Zikula_Api {
         if (!isset($fid) || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
-
+        $where = '';
         $pntables = DBUtil::getTables();
 
         $c = $pntables['IWforms_column'];
@@ -659,7 +670,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 1) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
@@ -668,20 +679,20 @@ class IWforms_Api_User extends Zikula_Api {
         $myJoin = array();
 
         $myJoin[] = array('join_table' => 'IWforms_note',
-                          'join_field' => array(),
-                          'object_field_name' => array(),
-                          'compare_field_table' => 'fnid',
-                          'compare_field_join' => 'fnid');
+            'join_field' => array(),
+            'object_field_name' => array(),
+            'compare_field_table' => 'fnid',
+            'compare_field_join' => 'fnid');
 
         $myJoin[] = array('join_table' => 'IWforms_note_definition',
-                          'join_field' => array('fieldName',
-                                                'fieldType',
-                                                'editable'),
-                          'object_field_name' => array('fieldName',
-                                                       'fieldType',
-                                                       'editable'),
-                          'compare_field_table' => 'fndid',
-                          'compare_field_join' => 'fndid');
+            'join_field' => array('fieldName',
+                'fieldType',
+                'editable'),
+            'object_field_name' => array('fieldName',
+                'fieldType',
+                'editable'),
+            'compare_field_table' => 'fndid',
+            'compare_field_join' => 'fndid');
 
         $pntables = DBUtil::getTables();
 
@@ -717,20 +728,20 @@ class IWforms_Api_User extends Zikula_Api {
         $myJoin = array();
 
         $myJoin[] = array('join_table' => 'IWforms_note',
-                          'join_field' => array(),
-                          'object_field_name' => array(),
-                          'compare_field_table' => 'fnid',
-                          'compare_field_join' => 'fnid');
+            'join_field' => array(),
+            'object_field_name' => array(),
+            'compare_field_table' => 'fnid',
+            'compare_field_join' => 'fnid');
 
         $myJoin[] = array('join_table' => 'IWforms_note_definition',
-                          'join_field' => array('fieldName',
-                                                'fieldType',
-                                                'editable'),
-                          'object_field_name' => array('fieldName',
-                                                       'fieldType',
-                                                       'editable'),
-                          'compare_field_table' => 'fndid',
-                          'compare_field_join' => 'fndid');
+            'join_field' => array('fieldName',
+                'fieldType',
+                'editable'),
+            'object_field_name' => array('fieldName',
+                'fieldType',
+                'editable'),
+            'compare_field_table' => 'fndid',
+            'compare_field_join' => 'fndid');
 
         $pntables = DBUtil::getTables();
 
@@ -756,19 +767,19 @@ class IWforms_Api_User extends Zikula_Api {
         // check if user can access the form is validator
         // get note
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $items[$fnid]['fmid']));
+                        array('fmid' => $items[$fnid]['fmid']));
         // check if user can access the form is validator and the note is editable
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         // Return the items
         return array('content' => $items[$fnid]['content'],
-                     'fmid' => $items[$fnid]['fmid'],
-                     'fnid' => $items[$fnid]['fnid'],
-                     'editable' => $items[$fnid]['editable']);
+            'fmid' => $items[$fnid]['fmid'],
+            'fnid' => $items[$fnid]['fnid'],
+            'editable' => $items[$fnid]['editable']);
     }
 
     /**
@@ -788,7 +799,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 7) {
             LogUtil::registerError($this->__('You can not access this form to view the annotations'));
             // Redirect to the main site for the user
@@ -894,19 +905,19 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         $item = array('fid' => $fid,
-                      'user' => UserUtil::getVar('uid'),
-                      'validate' => $validate,
-                      'time' => time(),
-                      'mark' => '$',
-                      'viewed' => '$',
-                      'publicResponse' => $item['publicResponse'],
-                      'annonimous' => $item['annonimous']);
+            'user' => UserUtil::getVar('uid'),
+            'validate' => $validate,
+            'time' => time(),
+            'mark' => '$',
+            'viewed' => '$',
+            'publicResponse' => $item['publicResponse'],
+            'annonimous' => $item['annonimous']);
 
         if (!DBUtil::insertObject($item, 'IWforms', 'fmid')) {
             return LogUtil::registerError($this->__('Error! Creation attempt failed.'));
@@ -988,14 +999,14 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid));
+                        array('fid' => $fid));
         if ($form == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -1006,9 +1017,9 @@ class IWforms_Api_User extends Zikula_Api {
         }
 
         $item = array('fmid' => $fmid,
-                      'fndid' => $fndid,
-                      'content' => $content,
-                      'validate' => $validate);
+            'fndid' => $fndid,
+            'content' => $content,
+            'validate' => $validate);
 
         if (!DBUtil::insertObject($item, 'IWforms_note', 'fnid')) {
             return LogUtil::registerError($this->__('Error! Creation attempt failed.'));
@@ -1043,14 +1054,14 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid));
+                        array('fid' => $fid));
         if ($form == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
@@ -1094,14 +1105,14 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $fid));
+                        array('fid' => $fid));
         if ($form == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -1133,11 +1144,11 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1167,11 +1178,11 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1212,11 +1223,11 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1249,11 +1260,11 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1278,11 +1289,11 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1309,18 +1320,18 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+                        array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
 
         // get notecontents
         $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getNoteContent',
-                                         array('fnid' => $fnid));
+                        array('fnid' => $fnid));
         if ($noteContent['editable'] != 1) {
             return LogUtil::registerError($this->__('You can not edit this note.'));
         }
@@ -1417,7 +1428,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1454,12 +1465,13 @@ class IWforms_Api_User extends Zikula_Api {
         $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
 
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                            array('sv' => $sv))) {
+                        array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
                 return LogUtil::registerPermissionError();
             }
-        } else $requestByCron = true;
+        } else
+            $requestByCron = true;
 
         $items = array();
 
@@ -1470,9 +1482,9 @@ class IWforms_Api_User extends Zikula_Api {
         //check user access to this form
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid,
-                                       'uid' => $uid,
-                                       'sv' => $sv));
+                        array('fid' => $fid,
+                            'uid' => $uid,
+                            'sv' => $sv));
 
         if ($access['level'] < 2) {
             return LogUtil::registerError($this->__('You can not access this form to view the annotations'));
@@ -1553,7 +1565,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 2) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1584,7 +1596,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         //get the note information
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $fmid));
+                        array('fmid' => $fmid));
 
         if ($note['user'] != UserUtil::getVar('uid')) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
@@ -1617,7 +1629,9 @@ class IWforms_Api_User extends Zikula_Api {
         //$validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
         $filter = FormUtil::getPassedValue('filter', isset($args['filter']) ? $args['filter'] : null, 'POST');
         $filterValue = FormUtil::getPassedValue('filterValue', isset($args['filterValue']) ? $args['filterValue'] : null, 'POST');
-
+        $userNotes = FormUtil::getPassedValue('userNotes', isset($args['userNotes']) ? $args['userNotes'] : null, 'POST');
+        $validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
+        $where = '';
         if ($filter == 0) {
             $pntable = DBUtil::getTables();
             $c = $pntable['IWforms_column'];
@@ -1646,9 +1660,9 @@ class IWforms_Api_User extends Zikula_Api {
             return count($items);
         } else {
             $fmidNotes = ModUtil::apiFunc('IWforms', 'user', 'getAllNotesFilter',
-                                           array('fid' => $fid,
-                                                 'filter' => $filter,
-                                                 'filterValue' => $filterValue));
+                            array('fid' => $fid,
+                                'filter' => $filter,
+                                'filterValue' => $filterValue));
 
             return count($fmidNotes);
         }
@@ -1670,24 +1684,24 @@ class IWforms_Api_User extends Zikula_Api {
         }
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 7) {
             LogUtil::registerError($this->__('You can not access this form to view the annotations'));
             // Redirect to the main site for the user
             return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
         }
         $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
-                                         array('fid' => $fid,
-                                               'fmid' => $fmid));
+                        array('fid' => $fid,
+                            'fmid' => $fmid));
         if (!$noteContent) {
             LogUtil::registerError($this->__('Note content not found'));
             return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                                                  array('fid' => $fid,
-                                                        'order' => $order,
-                                                        'ipp' => $ipp,
-                                                        'init' => $init,
-                                                        'filterValue' => $filterValue,
-                                                        'filter' => $filter)));
+                            array('fid' => $fid,
+                                'order' => $order,
+                                'ipp' => $ipp,
+                                'init' => $init,
+                                'filterValue' => $filterValue,
+                                'filter' => $filter)));
         }
         $fieldsIdsNoteArray = array();
         foreach ($noteContent as $noteContentId) {
@@ -1695,17 +1709,17 @@ class IWforms_Api_User extends Zikula_Api {
         }
         //get form fields
         $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                                    array('fid' => $fid,
-                                          'whereArray' => 'active|1'));
+                        array('fid' => $fid,
+                            'whereArray' => 'active|1'));
         if (!$fields) {
             LogUtil::registerError($this->__('Note fields not found'));
             return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                                                  array('fid' => $fid,
-                                                        'order' => $order,
-                                                        'ipp' => $ipp,
-                                                        'init' => $init,
-                                                        'filterValue' => $filterValue,
-                                                        'filter' => $filter)));
+                            array('fid' => $fid,
+                                'order' => $order,
+                                'ipp' => $ipp,
+                                'init' => $init,
+                                'filterValue' => $filterValue,
+                                'filter' => $filter)));
         }
         foreach ($fields as $field) {
             if ($field['fieldType'] < 10) {
@@ -1717,9 +1731,9 @@ class IWforms_Api_User extends Zikula_Api {
         foreach ($toCreate as $create) {
             $item = array();
             $item = array('fmid' => $fmid,
-                          'fndid' => $create,
-                          'content' => '',
-                          'validate' => 1);
+                'fndid' => $create,
+                'content' => '',
+                'validate' => 1);
             if (!DBUtil::insertObject($item, 'IWforms_note', 'fnid')) {
                 return LogUtil::registerError($this->__('Error! Creation attempt failed during field synchronization.'));
             }
@@ -1744,24 +1758,24 @@ class IWforms_Api_User extends Zikula_Api {
         }
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $fid));
+                        array('fid' => $fid));
         if ($access['level'] < 7) {
             LogUtil::registerError($this->__('You can not access this form to view the annotations'));
             // Redirect to the main site for the user
             return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
         }
         $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
-                                         array('fid' => $fid,
-                                               'fmid' => $fmid));
+                        array('fid' => $fid,
+                            'fmid' => $fmid));
         if (!$noteContent) {
             LogUtil::registerError($this->__('Note content not found'));
             return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                                                  array('fid' => $fid,
-                                                        'order' => $order,
-                                                        'ipp' => $ipp,
-                                                        'init' => $init,
-                                                        'filterValue' => $filterValue,
-                                                        'filter' => $filter)));
+                            array('fid' => $fid,
+                                'order' => $order,
+                                'ipp' => $ipp,
+                                'init' => $init,
+                                'filterValue' => $filterValue,
+                                'filter' => $filter)));
         }
         $fieldsIdsNoteArray = array();
         foreach ($noteContent as $noteContentId) {
@@ -1769,17 +1783,17 @@ class IWforms_Api_User extends Zikula_Api {
         }
         //get form fields
         $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                                    array('fid' => $fid,
-                                          'whereArray' => 'active|1'));
+                        array('fid' => $fid,
+                            'whereArray' => 'active|1'));
         if (!$fields) {
             LogUtil::registerError($this->__('Note fields not found'));
             return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                                                  array('fid' => $fid,
-                                                        'order' => $order,
-                                                        'ipp' => $ipp,
-                                                        'init' => $init,
-                                                        'filterValue' => $filterValue,
-                                                        'filter' => $filter)));
+                            array('fid' => $fid,
+                                'order' => $order,
+                                'ipp' => $ipp,
+                                'init' => $init,
+                                'filterValue' => $filterValue,
+                                'filter' => $filter)));
         }
         foreach ($fields as $field) {
             if ($field['fieldType'] < 10) {
@@ -1798,4 +1812,5 @@ class IWforms_Api_User extends Zikula_Api {
         }
         return false;
     }
+
 }

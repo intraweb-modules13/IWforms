@@ -191,7 +191,7 @@ function markNote_response(req){
 	if(json.mark == 'marked'){
 		$(json.fmid).src="images/icons/small/flag.gif";
 	}else{
-		$(json.fmid).src="modules/IWforms/pnimages/none.gif";
+		$(json.fmid).src="modules/IWforms/images/none.gif";
 	}
 	Element.update('note_options_'+json.fmid, json.contentOptions).innerHTML;
 	reloadFlaggedBlock();
