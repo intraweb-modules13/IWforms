@@ -15,7 +15,7 @@
     <div class="z-admincontainer">
         <div style="padding: 10px;">
             <form id="formDefinition" class="z-form" action="{modurl modname="IWforms" type="admin" func="submit"}" method="post" enctype="application/x-www-form-urlencoded" onSubmit="return send()">
-                  <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
                 <div class="z-formrow">
                     <label for="formName">{gt text="Form name"}</label>
                     <input id="formName" name="formName" type="text" size="50" maxlength="70" />

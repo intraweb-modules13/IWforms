@@ -25,11 +25,11 @@
             </td>
             <td bgcolor="{$contentColor}" width="60%">
                 {if $content.fieldType eq 7 && $content.content neq ''}
-                <img src="modules/IWmain/images/fileIcons/{iwformsfileicon fileName=$content.content}" />
-                <a href="{modurl modname=IWforms type=user func=download fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|varcensor|safehtml}</a>
+                <img src="modules/IWmain/images/fileIcons/{IWformsfileicon fileName=$content.content}" />
+                <a href="{modurl modname=IWforms type=user func=download fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|safehtml}</a>
                 {else}
                 <div class="messageBody">
-                    {$content.content|nl2br|varcensor|safehtml}
+                    {$content.content|nl2br|safehtml}
                 </div>
                 {/if}
             </td>
@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td width="40%">{gt text="Answer"}</td>
-            <td width="60%">{$note.renote|nl2br|varcensor|safehtml}</td>
+            <td width="60%">{$note.renote|nl2br|safehtml}</td>
         </tr>
         <tr>
             <td colspan="2" align="right">

@@ -52,10 +52,10 @@
             <div id="note_content_{$content.fnid}">
                 <div style="float:left;" class="messageBody">
                     {if $content.fieldType eq 7 && $content.content neq ''}
-                    <img src="modules/IWmain/images/fileIcons/{iwformsfileicon fileName=$content.content}"/>
-                    <a href="{modurl modname=IWforms type=user func=download fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|varcensor|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}</a>
+                    <img src="modules/IWmain/images/fileIcons/{IWformsfileicon fileName=$content.content}"/>
+                    <a href="{modurl modname=IWforms type=user func=download fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}</a>
                     {else}
-                    {$content.content|nl2br|varcensor|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+                    {$content.content|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
                     {/if}
                 </div>
                 {if $content.editable eq 1}

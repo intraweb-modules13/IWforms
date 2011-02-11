@@ -36,7 +36,7 @@
         <div>&nbsp;</div>
     {else}
         {add_additional_header header=$form.skincssurl}
-        {$note.contentBySkin|varcensor|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+        {$note.contentBySkin|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
     {/if}
     {foreachelse}
     <div>{gt text="Not annotations found"}</div>

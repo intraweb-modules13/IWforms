@@ -1,7 +1,7 @@
 <div id="option_{$form.fid}">
     {if ($form.accessLevel eq 1 || $form.accessLevel >= 3) AND $form.closeInsert eq 0}
     <div>
-        <a href="{modurl modname=IWforms type=user func=newItem fid=$form.fid}">
+        <a href="{modurl modname=IWforms type=user func=newitem fid=$form.fid}">
             {img modname='core' src='lists.gif' set='icons/extrasmall'   __alt="Send an annotation" __title="Send an annotation"}
         </a>
     </div>

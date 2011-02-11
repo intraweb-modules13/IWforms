@@ -15,7 +15,6 @@
         <legend></legend>
         <form name="order" id="order" action="{modurl modname="IWforms" type="user" func="manage"}" method="post" enctype="application/x-www-form-urlencoded">
             <input type="hidden" name="fidReload" value="{$fid}" />
-            <input type="hidden" name="user" value="{$user}" />
             <div style="float: left; margin: 5px 30px 0px 0px;">
                 {gt text="State of the annotations"}:
                 <select name="order" {if $notes|@count > 1}onchange="javascript:sendChange(0)"{/if}>

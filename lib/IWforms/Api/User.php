@@ -703,7 +703,7 @@ class IWforms_Api_User extends Zikula_Api {
 
         $orderby = "b.$lcolumn[order]";
 
-        $items = DBUtil::selectExpandedObjectArray('IWforms_note', $myJoin, $where, $orderby, $init, $rpp, 'fndid');
+        $items = DBUtil::selectExpandedObjectArray('IWforms_note', $myJoin, $where, $orderby, -1, -1, 'fndid');
 
         // Check for an error with the database code, and if so set an appropriate
         // error message and return

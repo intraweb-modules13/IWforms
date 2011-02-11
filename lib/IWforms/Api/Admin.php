@@ -444,6 +444,7 @@ class IWforms_Api_Admin extends Zikula_Api {
         }
         $pntable = DBUtil::getTables();
         $c = $pntable['IWforms_note_definition_column'];
+        $whereDep = '';
         if ($itemField['fieldType'] == 53) {
             $dependancesTo = ModUtil::apiFunc('IWforms', 'user', 'getFormFieldDependancesTo',
                                                array('fndid' => $fndid));

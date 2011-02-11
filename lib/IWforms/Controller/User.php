@@ -689,7 +689,7 @@ class IWforms_Controller_User extends Zikula_Controller {
                             array('fid' => $fid)));
         }
         if ($access['level'] == 1 || $access['level'] > 2) {
-            return System::redirect(ModUtil::url('IWforms', 'user', 'new',
+            return System::redirect(ModUtil::url('IWforms', 'user', 'newitem',
                             array('fid' => $fid)));
         }
         LogUtil::registerError($this->__('You can not access this form to view the annotations'));
@@ -702,13 +702,13 @@ class IWforms_Controller_User extends Zikula_Controller {
      * @return:	The list of notes of the form with the managment options
      */
     public function sended($args) {
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'REQUEST');
-        $fid = FormUtil::getPassedValue('form_id', isset($args['form_id']) ? $args['form_id'] : null, 'REQUEST');
+        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : 0, 'GETPOST');
+        $fid = FormUtil::getPassedValue('form_id', isset($args['form_id']) ? $args['form_id'] : 0, 'GETPOST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ) || !UserUtil::isLoggedIn()) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-        if ($fmid != null) {
+        if ($fmid != 0) {
             $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
                             array('fmid' => $fmid));
             $fid = $note['fid'];
@@ -716,7 +716,7 @@ class IWforms_Controller_User extends Zikula_Controller {
         $content = '';
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
-        if ($fid == null) {
+        if ($fid == 0) {
             //get all the active forms
             $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
                             array('user' => 1));
@@ -731,6 +731,7 @@ class IWforms_Controller_User extends Zikula_Controller {
                 }
             }
             $view->assign('formsArray', $formsArray);
+            $view->assign('fid', '');
             return $view->fetch('IWforms_user_sendedWhatForm.htm');
         }
         //Get item
@@ -801,7 +802,7 @@ class IWforms_Controller_User extends Zikula_Controller {
         // File name with the path
         $fileName = FormUtil::getPassedValue('fileName', isset($args['fileName']) ? $args['fileName'] : 0, 'GET');
         // Security check
-        if (!SecurityUtil::checkPermission('iw_noteboard::', "::", ACCESS_READ)) {
+        if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
@@ -821,7 +822,7 @@ class IWforms_Controller_User extends Zikula_Controller {
         $state = FormUtil::getPassedValue('state', isset($args['state']) ? $args['state'] : null, 'POST');
         $viewed = FormUtil::getPassedValue('viewed', isset($args['viewed']) ? $args['viewed'] : null, 'POST');
         // Security check
-        if (!SecurityUtil::checkPermission('iw_noteboard::', "::", ACCESS_READ)) {
+        if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         $color = ModUtil::getVar('IWforms', 'viewedColor');
@@ -843,7 +844,7 @@ class IWforms_Controller_User extends Zikula_Controller {
      * @param:	id of the form where to add a new note
      * @return:	The fields of the form
      */
-    public function newItem($args) {
+    public function newitem($args) {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
         $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
         $adminView = FormUtil::getPassedValue('adminView', isset($args['adminView']) ? $args['adminView'] : null, 'GET');
@@ -851,7 +852,7 @@ class IWforms_Controller_User extends Zikula_Controller {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-        ModUtil::callHooks('item', 'display');
+//        ModUtil::callHooks('item', 'display');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             $adminView = null;
@@ -860,6 +861,9 @@ class IWforms_Controller_User extends Zikula_Controller {
         if ($uid == '') {
             $uid = -1;
         }
+        $content = '';
+        $requiredJS = '';
+        $checkJS = '';
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                         array('fid' => $fid));
@@ -956,8 +960,9 @@ class IWforms_Controller_User extends Zikula_Controller {
                 $checkJS .= $contentArray['checkJS'];
             }
         }
+        $captcha = false;
         if ($uid == '-1') {
-            $view->assign('captcha', true);
+            $captcha = true;
         }
         if ($form['skincss'] != '' && $form['skinForm'] != '' && $form['expertMode'] == 1 && $form['skinByTemplate'] == 0) {
             $form['skincssurl'] = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
@@ -968,7 +973,9 @@ class IWforms_Controller_User extends Zikula_Controller {
         $view->assign('checkJS', $checkJS);
         $view->assign('requiredJS', $requiredJS);
         $view->assign('content', $content);
+        $view->assign('func', '');
         $view->assign('fid', $fid);
+        $view->assign('captcha', $captcha);
         return $view->fetch($template);
     }
 
@@ -990,6 +997,12 @@ class IWforms_Controller_User extends Zikula_Controller {
         if ($uid == '') {
             $uid = -1;
         }
+        $noteContentIdArray = array();
+        $fieldArray = array();
+        $requiredText = false;
+        $fieldContent = '';
+        $checkJS = '';
+        $requiredJS = '';
         // get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                         array('fid' => $fid));
@@ -1008,8 +1021,6 @@ class IWforms_Controller_User extends Zikula_Controller {
         // get form field
         $field = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
                         array('fndid' => $fndid));
-        $fieldArray = array();
-        $requiredText = false;
         // create output object
         $view = Zikula_View::getInstance('IWforms', false);
         if ($field['fieldType'] == 1) {
@@ -1291,7 +1302,7 @@ class IWforms_Controller_User extends Zikula_Controller {
                 ModUtil::available('dpCaptcha')) {
             if (!ModUtil::callHooks('item', 'transform')) {
                 LogUtil::registerError($this->__('Error with the capcha protect system'));
-                return System::redirect(ModUtil::url('IWforms', 'user', 'new',
+                return System::redirect(ModUtil::url('IWforms', 'user', 'newitem',
                                 array('fid' => $fid)));
             }
         }

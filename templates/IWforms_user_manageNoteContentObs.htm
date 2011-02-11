@@ -1,6 +1,6 @@
 {if $do eq 'print'}
 <div id="note_observations_{$note.fmid}">
-    {$note.observations|nl2br|varcensor|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+    {$note.observations|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
     <div style="text-align: right;">
         <a href="javascript:editNoteManageContent({$note.fmid},'observations')">
         {img modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Create private notes" __title="Create private notes"}

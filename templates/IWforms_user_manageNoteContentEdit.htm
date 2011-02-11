@@ -1,6 +1,6 @@
 {if $do eq 'print'}
 <div id="note_content_{$fnid}">
-    {$value|nl2br|varcensor|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+    {$value|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
     <div style="float:right;">
         <a href="javascript:editNoteManageContent({$fnid},'content')">
             {img modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Edit" __title="Edit "}
