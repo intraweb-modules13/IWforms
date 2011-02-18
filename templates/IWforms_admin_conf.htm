@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             {foreach item=cat from=$cats}
-            <tr class="{cycle values="pn-odd,pn-even"}" {if isset($topic.tid)}id="topic_{$topic.tid}"{/if}>
+            <tr class="{cycle values="z-odd,z-even"}" {if isset($topic.tid)}id="topic_{$topic.tid}"{/if}>
                 <td align="left">
                     {$cat.cid}
                 </td>

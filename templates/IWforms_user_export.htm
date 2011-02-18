@@ -110,7 +110,7 @@
             </thead>
             {foreach name=i item=field from=$fields}
                 {if $field.fieldType neq 7 && $field.fieldType neq 51 && $field.fieldType neq 52 &&  $field.fieldType neq 53 && $field.fieldType neq 100}
-                <tr class="{cycle values="pn-odd,pn-even"}" >
+                <tr class="{cycle values="z-odd,z-even"}" >
                     <td align="center">
                         {$smarty.foreach.i.iteration}
                      </td>

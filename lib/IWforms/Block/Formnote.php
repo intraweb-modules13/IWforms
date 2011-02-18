@@ -187,7 +187,7 @@ class IWforms_Block_formnote extends Zikula_Block
         $sortida = '<tr><td valign="top">' . $this->__('Identity of the note that must be schown') . '</td><td>' . "<input type=\"text\" name=\"fmid\" size=\"5\" maxlength=\"5\" value=\"$fmid\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Hide block title') . '</td><td>' . "<input type=\"checkbox\" name=\"blockHideTitle\"" . $checked . " value=\"1\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Block content') . '</td><td>' . "<textarea name=\"blockContent\" rows=\"5\" cols=\"70\">" . $blockContent . "</textarea>" . "</td></tr>\n";
-        $sortida .= '<tr><td colspan=\"2\" valign="top"><div class="pn-informationmsg">' . $this->__("[\$formId\$] =>Identity of the form, [\$noteId\$] =>Identity of the note, [%id%] => Title of the field, [\$id\$] => Content of the field, [\$user\$] => Username, [\$date\$] => Note creation date, [\$time\$] => Note creation time, [\$avatar\$] => User avatar, [\$reply\$] => Reply to the user if the reply is public") . "</div></td><tr>\n";
+        $sortida .= '<tr><td colspan=\"2\" valign="top"><div class="z-informationmsg">' . $this->__("[\$formId\$] =>Identity of the form, [\$noteId\$] =>Identity of the note, [%id%] => Title of the field, [\$id\$] => Content of the field, [\$user\$] => Username, [\$date\$] => Note creation date, [\$time\$] => Note creation time, [\$avatar\$] => User avatar, [\$reply\$] => Reply to the user if the reply is public") . "</div></td><tr>\n";
         return $sortida;
     }
 }

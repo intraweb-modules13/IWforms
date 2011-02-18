@@ -18,7 +18,7 @@
 </div>
 {/if}
 {if $do eq 'edit'}
-<form name="submitValueFormR_{$note.fmid}" id="submitValueFormR_{$note.fmid}" class="pn-adminform" method="post" enctype="multipart/form-data">
+<form name="submitValueFormR_{$note.fmid}" id="submitValueFormR_{$note.fmid}" class="z-form" method="post" enctype="multipart/form-data">
     <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
     <textarea name="renote" style="width: 90%; margin: 10px;" rows="10">{$note.renote|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
     <div style="float:left;">

@@ -36,12 +36,12 @@ function chgUsers_response(req){
  */
 function showinfo(info)
 {
-	if(!Element.hasClassName(info, 'pn-hide')) {
+	if(!Element.hasClassName(info, 'z-hide')) {
 		Element.update(info, '&nbsp;');
-		Element.addClassName(info, 'pn-hide');
+		Element.addClassName(info, 'z-hide');
 	} else {
 		Element.update(info, '<img src="images/ajax/circle-ball-dark-antialiased.gif">');
-		Element.removeClassName(info, 'pn-hide');
+		Element.removeClassName(info, 'z-hide');
 	}
 }  
 
@@ -101,17 +101,17 @@ function changeContent_failure(){
 function showfieldinfo(fndid, infotext){
     if(fndid) {
         var info = 'fieldinfo_' + fndid;
-        if(!Element.hasClassName(info, 'pn-hide')) {
+        if(!Element.hasClassName(info, 'z-hide')) {
             Element.update(info, '&nbsp;');
-            Element.addClassName(info, 'pn-hide');
+            Element.addClassName(info, 'z-hide');
         } else {
             Element.update(info, infotext);
-            Element.removeClassName(info, 'pn-hide');
+            Element.removeClassName(info, 'z-hide');
         }
     } else {
         $A(document.getElementsByClassName('fieldinfo')).each(function(info){
             Element.update(info, '&nbsp;');
-            Element.addClassName(info, 'pn-hide');
+            Element.addClassName(info, 'z-hide');
         });
     }
 }
@@ -384,17 +384,17 @@ function changeFormContent_failure(){
 function showFormInfo(fid, infotext){
     if(fid) {
         var info = 'forminfo_' + fid;
-        if(!Element.hasClassName(info, 'pn-hide')) {
+        if(!Element.hasClassName(info, 'z-hide')) {
             Element.update(info, '&nbsp;');
-            Element.addClassName(info, 'pn-hide');
+            Element.addClassName(info, 'z-hide');
         } else {
             Element.update(info, infotext);
-            Element.removeClassName(info, 'pn-hide');
+            Element.removeClassName(info, 'z-hide');
         }
     } else {
         $A(document.getElementsByClassName('forminfo')).each(function(info){
             Element.update(info, '&nbsp;');
-            Element.addClassName(info, 'pn-hide');
+            Element.addClassName(info, 'z-hide');
         });
     }
 }
