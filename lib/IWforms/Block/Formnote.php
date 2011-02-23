@@ -1,5 +1,5 @@
 <?php
-class IWforms_Block_formnote extends Zikula_Block
+class IWforms_Block_formnote extends Zikula_Controller_Block
 {
     public function init() {
         SecurityUtil::registerPermissionSchema("IWforms:formnoteblock:", "Note identity::");

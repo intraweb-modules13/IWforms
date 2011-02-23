@@ -1,6 +1,6 @@
 <?php
 
-class IWforms_Block_formslist extends Zikula_Block {
+class IWforms_Block_formslist extends Zikula_Controller_Block {
     public function init() {
         SecurityUtil::registerPermissionSchema("IWforms:formslistblock:", "Block title::");
     }
