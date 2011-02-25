@@ -1578,7 +1578,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
         $noWriteable = false;
         if (!file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached')) ||
                 ModUtil::getVar('IWforms', 'attached') == '') {
-            $noFolfer = true;
+            $noFolder = true;
         } else {
             $noWriteable = (!is_writeable(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached'))) ? true : false;
         }

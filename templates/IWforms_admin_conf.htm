@@ -3,7 +3,7 @@
 <script type="text/javascript" src="modules/IWmain/js/PopupWindow.js"></script>
 {include file="IWforms_admin_menu.htm"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='package_settings.gif' set='icons/large' __alt=''}</div>
+    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt=''}</div>
     <h2>{gt text="Configure the module"}</h2>
     <table class="z-datatable">
         <thead>
@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             {foreach item=cat from=$cats}
-            <tr class="{cycle values="z-odd,z-even"}" {if isset($topic.tid)}id="topic_{$topic.tid}"{/if}>
+            <tr class="{cycle values='z-odd,z-even'}" {if isset($topic.tid)}id="topic_{$topic.tid}"{/if}>
                 <td align="left">
                     {$cat.cid}
                 </td>
@@ -31,10 +31,10 @@
                 </td>
                 <td align="center">
                     <a href="{modurl modname="IWforms" type="admin" func="editCat" cid=$cat.cid}">
-                        {img modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Edit" __title="Edit"}
+                       {img modname='core' src='xedit.png' set='icons/extrasmall'   __alt="Edit" __title="Edit"}
                     </a>
                     <a href="{modurl modname="IWforms" type="admin" func="deleteCat" cid=$cat.cid}">
-                        {img modname='core' src='14_layer_deletelayer.gif' set='icons/extrasmall'   __alt="Delete" __title="Delete"}
+                       {img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall'   __alt="Delete" __title="Delete"}
                     </a>
                 </td>
             </tr>
@@ -50,23 +50,23 @@
     <a href="index.php?module=IWforms&type=admin&func=addCat">{gt text="Creates a new category"}</a>
     <form  class="z-form" enctype="application/x-www-form-urlencoded" method="post" name="conf" id="conf" action="{modurl modname="IWforms" type="admin" func="updateConf"}">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
-	{if not $multizk}
+        {if not $multizk}
         <div class="z-formrow">
             <label for="directoriroot">{gt text="Home directory of files"}</label>
             <input type="text" name="directoriroot" size="50" maxlength="50" value="{$directoriroot}" onFocus='blur()' />
         </div>
-	{/if}
+        {/if}
         <div class="z-formrow">
             <label for="attached">{gt text="Folder on the server where the files are stored in the notes attached"}</label>
             <input type="text" name="attached" size="30" maxlength="30" value="{$attached}" />
         </div>
-	{if $noFolder}
-        <div class="z-errormsg">
+        {if $noFolder}
+        <div class="z-formnote z-errormsg">
             {gt text="Can not find the directory for attachments"}
         </div>
         {/if}
         {if $noWriteable}
-        <div class="z-errormsg">
+        <div class="z-formnote z-errormsg">
             {gt text="You should give write permissions in this folder"}
         </div>
         {/if}
@@ -75,28 +75,28 @@
             <input type="text" name="publicFolder" size="30" maxlength="30" value="{$publicFolder}" />
         </div>
         {if $noPublicFolder}
-        <div class="z-errormsg">
+        <div class="z-formnote z-errormsg">
             {gt text="Can not find the directory for the files public."}
         </div>
         {/if}
         {if $noPublicFolderWriteable}
-        <div class="z-errormsg">
+        <div class="z-formnote z-errormsg">
             {gt text="You should give write permissions in this folder or set it as public"}
         </div>
         {/if}
         {if $nodpCaptchaAvailable}
-        <div class="z-errormsg">
+        <div class="z-formnote z-errormsg">
             {gt text="DpCaptcha module is not available. If you are planning to open the forms to unregistered users you may want to install them this module."}
         </div>
-        <div class="z-informationmsg">
+        <div class="z-formnote z-informationmsg">
             {gt text="The module dpCaptcha prevents robots can send notes to forms automatically. With this module successfully activated and you get linked to when a user sends an unregistered entry, is obliged to recognize and write a set of characters that can not recognize an automated system."}
         </div>
         {/if}
         {if $nodpCaptchaHooked}
-        <div class="z-errormsg">
+        <div class="z-formnote z-errormsg">
             {gt text="The module is not bound dpCaptcha (hook). If you are planning to open the forms to unregistered users recommend linking this module. You can do this from the administration of the modules."}
         </div>
-        <div class="z-informationmsg">
+        <div class="z-formnote z-informationmsg">
             {gt text="The module dpCaptcha prevents robots can send notes to forms automatically. With this module successfully activated and you get linked to when a user sends an unregistered entry, is obliged to recognize and write a set of characters that can not recognize an automated system."}
         </div>
         {/if}
@@ -136,8 +136,8 @@
                 <input type="text" name="contentColor" id="contentColor" size="7" maxlength="7" style="background-color:{$contentColor};" value="{$contentColor}" /> <a href="#" onClick="pick('pick','contentColor');return false;" name="pick" id="pick">{gt text="Change the color"}</a>
             </div>
         </div>
-        <div style="text-align: center;">
-            <a title="Change the state" onClick="javascript:send()">{img modname='core' src='button_ok.gif' set='icons/small'}</a> {gt text="Change the configuration"}
+        <div class="z-formbuttons">
+            <a title="Change the state" onClick="javascript:send()">{img modname='core' src='button_ok.png' set='icons/small'}</a> {gt text="Change the configuration"}
         </div>
     </form>
 </div>

@@ -1,6 +1,6 @@
 {include file="IWforms_admin_menu.htm"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='package_settings.gif' set='icons/large' __alt=''}</div>
+    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt=''}</div>
     <h2>{gt text="Change to the category"}</h2>
     <form class="z-form" action="{modurl modname="IWforms" type="admin" func="updateCat"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
@@ -13,10 +13,9 @@
             <label for="description">{gt text="Description"}</label>
             <input type="text" name="description" size="50" maxlength="200" value="{$item.description}" />
         </div>
-
-        <div class="formOptions">
-            {button src='button_ok.gif' set='icons/small' __alt="Edit" __title="Edit"}
-            <a href="{modurl modname="IWforms" type="admin" func="conf"}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+        <div class="z-formbuttons">
+            {button src='button_ok.png' set='icons/small' __alt="Edit" __title="Edit"}
+            <a href="{modurl modname="IWforms" type="admin" func="conf"}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
         </div>
     </form>
 </div>

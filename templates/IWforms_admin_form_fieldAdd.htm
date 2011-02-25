@@ -1,6 +1,6 @@
 <div class="formContent">
     <div id="newFormField">
-        <div class="z-adminpageicon">{img modname='core' src='filenew.gif' set='icons/medium'}</div>
+        <div class="z-adminpageicon">{img modname='core' src='filenew.png' set='icons/medium'}</div>
         <h2>{gt text="Create a new form field"}</h2>
         <form class="z-form" name="newField" action="{modurl modname="IWforms" type="admin" func="submitField"}" method="post" enctype="application/x-www-form-urlencoded">
               <input type="hidden" name="fid" value="{$item.fid}" />
@@ -22,9 +22,9 @@
                     <option value="53">{gt text="Box"}</option>
                 </select>
             </div>
-            <div class="formOptions">
-                <a href="javascript:createField(document.newField.fieldType.value,{$item.fid})">{img modname='core' src='button_ok.gif' set='icons/small'   __alt="Create" __title="Create"}</a>
-                <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            <div class="z-formbuttons">
+                <a href="javascript:createField(document.newField.fieldType.value,{$item.fid})">{img modname='core' src='button_ok.png' set='icons/small'   __alt="Create" __title="Create"}</a>
+                <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
             </div>
         </form>
     </div>

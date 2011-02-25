@@ -841,7 +841,6 @@ class IWforms_Controller_Ajax extends Zikula_Controller {
     }
 
     public function actionToDo($args) {
-
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
             AjaxUtil::error(DataUtil::formatForDisplayHTML($this->__('Sorry! No authorization to access this module.')));
         }

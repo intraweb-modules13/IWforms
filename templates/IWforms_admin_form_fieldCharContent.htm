@@ -1,13 +1,13 @@
 {if $field.collapse}
     {if not "-100-"|strstr:$field.fieldTypePlus}
     <a href="javascript:modifyField({$field.fndid},'collapse')" title="{gt text="Change the state"}" style="font-weight: 400;">
-        {gt text="Expand"} {img modname='core' src='db_update.gif' set='icons/extrasmall'   __alt="Expand" __title="Expand"}
+        {gt text="Expand"} {img modname='core' src='db_update.png' set='icons/extrasmall'   __alt="Expand" __title="Expand"}
     </a>
     {/if}
 {else}
     {if not "-100-"|strstr:$field.fieldTypePlus}
     <a href="javascript:modifyField({$field.fndid},'collapse')" title="{gt text="Change the state"}" style="font-weight: 400;">
-        {gt text="Collapse"} {img modname='core' src='db_comit.gif' set='icons/extrasmall'   __alt="Collapse" __title="Collapse"}
+        {gt text="Collapse"} {img modname='core' src='db_comit.png' set='icons/extrasmall'   __alt="Collapse" __title="Collapse"}
     </a>
     <br />
     {/if}

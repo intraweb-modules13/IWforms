@@ -1,5 +1,5 @@
 <div class="formContent">
-    <div class="z-adminpageicon">{img modname='IWforms' src='add_group_medium.gif' set='images'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='group.png' set='icons/large'}</div>
     <h2>{gt text="Add a new group"}</h2>
     <form class="z-form" action="{modurl modname="IWforms" type="admin" func="addGroup"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
@@ -26,12 +26,12 @@
             <label for="validationNeeded">{gt text="Validation is required"}</label>
             <input id="validationNeeded" name="validationNeeded" type="checkbox" value="1" />
         </div>
-        <div class="formOptions">
-            {button src='button_ok.gif' set='icons/small' __alt="Add" __title="Add"}
+        <div class="z-formbuttons">
+            {button src='button_ok.png' set='icons/small' __alt="Add" __title="Add"}
             {if not isset($aio)}
-            <a href="{modurl modname="IWforms" type="admin" func="form" action="group" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            <a href="{modurl modname="IWforms" type="admin" func="form" action="group" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
             {else}
-            <a href="{modurl modname="IWforms" type="admin" func="infoForm" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            <a href="{modurl modname="IWforms" type="admin" func="infoForm" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
             {/if}
         </div>
     </form>

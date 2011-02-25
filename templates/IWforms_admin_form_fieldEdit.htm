@@ -1,13 +1,13 @@
 <div class="formContent">
-    <div class="z-adminpageicon">{img modname='core' src='edit.gif' set='icons/medium'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='edit.png' set='icons/large'}</div>
     <h2>{gt text="Edit the field"} {if $itemField.fieldType neq 51}{$itemField.fieldName}{/if}</h2>
     <form class="z-form" id="edit" name="edit" action="{modurl modname="IWforms" type="admin" func="updateField"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="fid" value="{$item.fid}" />
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
         <input type="hidden" name="fndid" value="{$itemField.fndid}" />
         <div class="z-formrow">
-            <label for="fieldType">{gt text="Type field"}</label>
-            <span><strong>{$fieldTypeText}</strong></span>
+        <label for="fieldType">{gt text="Type field"}</label>
+        <span><strong>{$fieldTypeText}</strong></span>
         </div>
         {if $itemField.fieldType eq 51}
         <div class="z-formrow">
@@ -30,7 +30,7 @@
         {if not "-51-52-53-100-"|strstr:$fieldTypePlus}
         <div class="z-formrow">
             <label for="help">{gt text="Text of the help icon"}</label>
-            <textarea id="help" name="help" rows="10" cols="50" style="width: 300px" id="intrawebFormsAdmin">{$itemField.help}</textarea>
+            <textarea id="help" name="help" rows="10" cols="50" id="intrawebFormsAdmin">{$itemField.help}</textarea>
         </div>
         {/if}
         {if "-7-"|strstr:$fieldTypePlus}
@@ -189,9 +189,9 @@
             <input id="active" name="active" type="checkbox" {if $itemField.active}checked{/if} value="1" />
         </div>
         {/if}
-        <div class="formOptions">
-            {button src='button_ok.gif' set='icons/small' __alt="Edit" __title="Edit"}
-            <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+        <div class="z-formbuttons">
+            {button src='button_ok.png' set='icons/small' __alt="Edit" __title="Edit"}
+            <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
         </div>
     </form>
 </div>

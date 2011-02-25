@@ -780,4 +780,16 @@ class IWforms_Api_Admin extends Zikula_Api {
         // Return the id of the newly created item to the calling process
         return $item['fndid'];
     }
+
+    public function getlinks($args)
+    {
+        $links = array();
+        if (SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
+            $links[] = array('url' => ModUtil::url('IWforms', 'admin', 'create'), 'text' => $this->__('Create a new form'), 'id' => 'iwforms_create', 'class' => 'z-icon-es-new');
+            $links[] = array('url' => ModUtil::url('IWforms', 'admin', 'main'), 'text' => $this->__('Show the forms'), 'id' => 'iwforms_view', 'class' => 'z-icon-es-view');
+            $links[] = array('url' => ModUtil::url('IWforms', 'admin', 'import'), 'text' => $this->__('Import a form'), 'id' => 'iwforms_import', 'class' => 'z-icon-es-import');
+            $links[] = array('url' => ModUtil::url('IWforms', 'admin', 'conf'), 'text' => $this->__('Configure the module'), 'id' => 'iwforms_conf', 'class' => 'z-icon-es-config');
+        }
+        return $links;
+    }
 }

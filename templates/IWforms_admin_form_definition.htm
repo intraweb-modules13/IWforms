@@ -5,7 +5,7 @@
 {*}
 <div class="formContent">
     {if not isset($adminView)}
-    <div class="z-adminpageicon">{img modname='core' src='windows_list.gif' set='icons/medium'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='windowlist.png' set='icons/large'}</div>
     <h2>{gt text="Form definition"}</h2>
     {/if}
     <div style="height: 15px;">&nbsp;</div>
@@ -198,8 +198,8 @@
         {/if}
     </div>
     {if not isset($adminView)}
-    <div class="formOptions">
-        <a href="{modurl modname="IWforms" type="admin" func="form" do="edit" fid=$item.fid}">{img modname='core' src='edit.gif' set='icons/small'   __alt="Edit the main form" __title="Edit the main form"}</a>{gt text="Edit the main form"}
+    <div class="z-formbuttons">
+        <a href="{modurl modname="IWforms" type="admin" func="form" do="edit" fid=$item.fid}">{img modname='core' src='edit.png' set='icons/small' __alt="Edit the main form" __title="Edit the main form"}</a>{gt text="Edit the main form"}
     </div>
     {/if}
 </div>

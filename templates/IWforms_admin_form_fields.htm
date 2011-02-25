@@ -1,12 +1,12 @@
 <div class="formAdd">
     {*}<a href="{modurl modname="IWforms" type="admin" func="form" action="field" do="add" fid=$item.fid}">{*}
     <a href="javascript:newField({$item.fid})">
-        {img modname='core' src='insert_table_row.gif' set='icons/extrasmall'   __alt="Create a new form field" __title="Create a new form field"}
+        {img modname='core' src='insert_table_row.png' set='icons/extrasmall' __alt="Create a new form field" __title="Create a new form field"}
         {gt text="Create a new form field"}
     </a>
 </div>
 <div class="formContent" id="fieldsList">
-    <div class="z-adminpageicon">{img modname='core' src='lists.gif' set='icons/medium'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='lists.png' set='icons/large'}</div>
     <h2>{gt text="List of form fields"}</h2>
     <form name="fields" id="fields" class="z-form" action="{modurl modname="IWforms" type="admin" func="changeOrder"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
@@ -37,19 +37,18 @@
                 {/foreach}
             </tbody>
         </table>
-        <div class="formOptions" style="text-align:left;">
-            <div style="width: 300px; float:left;">
-                {img modname='IWforms' src='orderLine.gif' set='images'   __alt="Change order" __title="Change order"}{button src='button_ok.gif' set='icons/small' __alt="Change order" __title="Change order"}{gt text="Change order"}
-            </div>
+        <div style="width: 300px; float:left;">
+            {img modname='IWforms' src='orderLine.gif' set='images'   __alt="Change order" __title="Change order"}{button src='button_ok.png' set='icons/small' __alt="Change order" __title="Change order"}{gt text="Change order"}
+        </div>
+        <div class="z-formbuttons">
             <div style="float:left;">
                 <a href="{modurl modname="IWforms" type="admin" func="collexpand" value=0 fid=$item.fid}" title="{gt text="Expand all"}">
-                    {img modname='core' src='db_update.gif' set='icons/extrasmall'   __alt="Expand all" __title="Expand all"} {gt text="Expand all"}
+                    {img modname='core' src='db_update.png' set='icons/extrasmall'   __alt="Expand all" __title="Expand all"} {gt text="Expand all"}
                 </a>
                 <a href="{modurl modname="IWforms" type="admin" func="collexpand" value=1 fid=$item.fid}" title="{gt text="Collapse all"}">
-                    {img modname='core' src='db_comit.gif' set='icons/extrasmall'   __alt="Collapse all" __title="Collapse all"} {gt text="Collapse all"}
+                    {img modname='core' src='db_comit.png' set='icons/extrasmall' __alt="Collapse all" __title="Collapse all"} {gt text="Collapse all"}
                 </a>
             </div>
         </div>
-        <div>&nbsp;</div>
     </form>
 </div>

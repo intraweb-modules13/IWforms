@@ -1,5 +1,5 @@
 <div class="formContent">
-    <div class="z-adminpageicon">{img modname='core' src='editdelete.gif' set='icons/medium'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='editdelete.png' set='icons/medium'}</div>
     <h2>{gt text="Add a validator"}</h2>
     <form class="z-form" action="{modurl modname="IWforms" type="admin" func="addFieldValidator"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
@@ -12,16 +12,16 @@
             {if @count|$validators gt 0}
             <select name="validator">
                 {foreach item=validator from=$validators}
-                    <option value="{$validator.validatorUserId}">{$users[$validator.validatorUserId]}</option>
+                <option value="{$validator.validatorUserId}">{$users[$validator.validatorUserId]}</option>
                 {/foreach}
             </select>
             {else}
             <strong>{gt text="There is no validators available for this form"}</strong>
             {/if}
         </div>
-        <div class="formOptions">
-            {button src='button_ok.gif' set='icons/small' __alt="Add" __title="Add"}
-            <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+        <div class="z-formbuttons">
+            {button src='button_ok.png' set='icons/small' __alt="Add" __title="Add"}
+            <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
         </div>
     </form>
 </div>

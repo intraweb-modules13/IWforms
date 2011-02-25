@@ -1,5 +1,5 @@
 <div class="formContent">
-    <div class="z-adminpageicon">{img modname='core' src='edit.gif' set='icons/medium'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='edit.png' set='icons/large'}</div>
     <h2>{gt text="Edit the main form"}</h2>
     <form id="formDefinition" class="z-form" action="{modurl modname="IWforms" type="admin" func="update"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
@@ -34,14 +34,14 @@
             <label for="new">{gt text="As a new until a..."}</label>
             <div class="z-formnote">
                 <input id="new" name="new" type="text" size="8" maxlength="8" value="{$new}"/>
-                <a><img id="trigBegin1" name="trigBegin1" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;"/></a>
+                <a><img id="trigBegin1" name="trigBegin1" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" alt=""/></a>
             </div>
         </div>
         <div class="z-formrow">
             <label for="caducity">{gt text="Make it expires automatically a..."}</label>
             <div class="z-formnote">
                 <input id="caducity" name="caducity" type="text" size="8" maxlength="8" value="{$caducity}" />
-                <a><img id="trigBegin2" name="trigBegin2" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;"/></a>
+                <a><img id="trigBegin2" name="trigBegin2" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" alt=""/></a>
             </div>
         </div>
         <div class="z-formrow">
@@ -103,12 +103,12 @@
             <label for="active">{gt text="Active / non-active"}</label>
             <input id="active" name="active" type="checkbox" {if $item.active}checked{/if} value="1" />
         </div>
-        <div class="formOptions">
-            {button src='button_ok.gif' set='icons/small' __alt="Edit" __title="Edit"}{gt text="Edit"}
+        <div class="z-formbuttons">
+            {button src='button_ok.png' set='icons/small' __alt="Edit" __title="Edit"}{gt text="Edit"}
             {if not isset($aio)}
-            <a href="{modurl modname="IWforms" type="admin" func="form" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            <a href="{modurl modname="IWforms" type="admin" func="form" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
             {else}
-            <a href="{modurl modname="IWforms" type="admin" func="infoForm" fid=$item.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            <a href="{modurl modname="IWforms" type="admin" func="infoForm" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
             {/if}
         </div>
     </form>
