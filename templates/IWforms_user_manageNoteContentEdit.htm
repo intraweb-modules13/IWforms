@@ -3,7 +3,7 @@
     {$value|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
     <div style="float:right;">
         <a href="javascript:editNoteManageContent({$fnid},'content')">
-            {img modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Edit" __title="Edit "}
+            {img modname='core' src='xedit.png' set='icons/extrasmall' __alt="Edit" __title="Edit "}
         </a>
     </div>
 </div>
@@ -16,7 +16,7 @@
     <input type="hidden" name="toDo" value="content" />
     <textarea name="content" style="width: 90%; margin: 10px;">{$noteContent.content|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
     <div style="text-align: right; cursor:pointer;">
-        <a onClick="javascript:submitValue('content',{$noteContent.fnid});" title="{gt text="Send"}">{img modname='core' src='button_ok.gif' set='icons/small'}</a>{gt text="Send"}
+        <a onClick="javascript:submitValue('content',{$noteContent.fnid});" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'}</a>{gt text="Send"}
     </div>
 </form>
 {/if}

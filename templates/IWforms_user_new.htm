@@ -74,9 +74,9 @@
         {modcallhooks hookobject=item hookaction=display}
         {/if}
 	{if not isset($adminView)}
-        <div style="text-align:center; margin-top:20px;">
-            <a style="cursor:pointer;" onClick="javascript:sendNote()" title="{gt text="Send"}">{img modname='core' src='button_ok.gif' set='icons/small'}</a>{gt text="Send"}
-            <a href="{modurl modname="IWforms" type="user" func="main"}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+        <div class="z-formbuttons">
+            <a style="cursor:pointer;" onClick="javascript:sendNote()" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'}</a>{gt text="Send"}
+            <a href="{modurl modname="IWforms" type="user" func="main"}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
         </div>
         {/if}
     </form>

@@ -1813,4 +1813,39 @@ class IWforms_Api_User extends Zikula_Api {
         return false;
     }
 
+    public function getlinks($args)
+    {
+        $func = FormUtil::getPassedValue('func', isset($args['func']) ? $args['func'] : null, 'POST');
+        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        if (!UserUtil::isLoggedIn() && is_numeric($fid)) {
+            $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
+                    array('fid' => $fid));
+            $notexport = $form['unregisterednotexport'];
+        } else {
+            $notexport = 0;
+        }
+ 	//get user permissions for this form
+	if(isset($fid) && is_numeric($fid)){
+            $access = pnModFunc('IWforms', 'user', 'access', array('fid' => $fid));
+	} else {
+            $access['level'] = 0;
+        }
+
+        $links = array();
+
+        if (SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
+            $links[] = array('url' => ModUtil::url('IWforms', 'user', 'main'), 'text' => $this->__('Show the forms'), 'class' => 'z-icon-es-view');
+        }
+        if (SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ) && $access['level'] > 2) {
+            $links[] = array('url' => ModUtil::url('IWforms', 'user', 'newItem', array('fid' => $fid)), 'text' => $this->__('Send an annotation'), 'class' => 'z-icon-es-new');
+        }
+        if (SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ) && UserUtil::isLoggedIn()) {
+            $links[] = array('url' => ModUtil::url('IWforms', 'user', 'sended', array('fid' => $fid)), 'text' => $this->__('Show the notes I sent'), 'class' => 'z-icon-es-preview');
+        }
+        if (SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ) && $fid != null && $notexport == 0 && $func != 'sended') {
+            $links[] = array('url' => ModUtil::url('IWforms', 'user', 'exportForm', array('fid' => $fid)), 'text' => $this->__('Export to CSV'), 'class' => 'z-icon-es-import');
+        }
+
+        return $links;
+    }
 }

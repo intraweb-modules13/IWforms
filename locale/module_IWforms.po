@@ -3,24 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: templates/IWforms_admin_main.htm:3 templates/IWforms_admin_conf.htm:6
-#: templates/IWforms_admin_form_fieldChar.htm:26
-#: templates/IWforms_admin_form.htm:12 templates/IWforms_admin_addCat.htm:3
-#: templates/IWforms_admin_create.htm:8 templates/IWforms_admin_infoForm.htm:3
-#: templates/IWforms_admin_import.htm:3 templates/IWforms_admin_editCat.htm:3
-#: templates/IWforms_user_fieldContentHelp.htm:4
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Zikula component\n"
+"Project-Id-Version: IWforms 3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-03-01 10:41+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2011-03-01 11:20+0100\n"
+"Last-Translator: \n"
+"Language-Team: Intraweb <intraweb@xtec.cat>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: templates/plugins/function.IWformsusermenulinks.php:40
 #: lib/IWforms/Api/Admin.php:789
@@ -43,138 +40,258 @@ msgstr ""
 msgid "Export to CSV"
 msgstr ""
 
-#: lib/IWforms/Api/User.php:12 lib/IWforms/Api/User.php:42
-#: lib/IWforms/Api/User.php:69 lib/IWforms/Api/User.php:119
-#: lib/IWforms/Api/User.php:171 lib/IWforms/Api/User.php:252
-#: lib/IWforms/Api/User.php:896 lib/IWforms/Api/User.php:1683
-#: lib/IWforms/Api/User.php:1757 lib/IWforms/Api/Admin.php:29
-#: lib/IWforms/Api/Admin.php:65 lib/IWforms/Api/Admin.php:72
-#: lib/IWforms/Api/Admin.php:91 lib/IWforms/Api/Admin.php:98
-#: lib/IWforms/Api/Admin.php:118 lib/IWforms/Api/Admin.php:150
-#: lib/IWforms/Api/Admin.php:178 lib/IWforms/Api/Admin.php:204
-#: lib/IWforms/Api/Admin.php:230 lib/IWforms/Api/Admin.php:256
-#: lib/IWforms/Api/Admin.php:282 lib/IWforms/Api/Admin.php:320
-#: lib/IWforms/Api/Admin.php:346 lib/IWforms/Api/Admin.php:373
-#: lib/IWforms/Api/Admin.php:407 lib/IWforms/Api/Admin.php:433
-#: lib/IWforms/Api/Admin.php:614 lib/IWforms/Api/Admin.php:744
-#: lib/IWforms/Controller/User.php:13 lib/IWforms/Controller/User.php:83
-#: lib/IWforms/Controller/User.php:181 lib/IWforms/Controller/User.php:361
-#: lib/IWforms/Controller/User.php:637 lib/IWforms/Controller/User.php:682
-#: lib/IWforms/Controller/User.php:709 lib/IWforms/Controller/User.php:806
-#: lib/IWforms/Controller/User.php:826 lib/IWforms/Controller/User.php:853
-#: lib/IWforms/Controller/User.php:994 lib/IWforms/Controller/User.php:1294
-#: lib/IWforms/Controller/User.php:1506 lib/IWforms/Controller/User.php:1545
-#: lib/IWforms/Controller/User.php:1764 lib/IWforms/Controller/Admin.php:11
-#: lib/IWforms/Controller/Admin.php:59 lib/IWforms/Controller/Admin.php:104
-#: lib/IWforms/Controller/Admin.php:166 lib/IWforms/Controller/Admin.php:289
-#: lib/IWforms/Controller/Admin.php:327 lib/IWforms/Controller/Admin.php:374
-#: lib/IWforms/Controller/Admin.php:393 lib/IWforms/Controller/Admin.php:439
-#: lib/IWforms/Controller/Admin.php:624 lib/IWforms/Controller/Admin.php:642
-#: lib/IWforms/Controller/Admin.php:696 lib/IWforms/Controller/Admin.php:744
-#: lib/IWforms/Controller/Admin.php:815 lib/IWforms/Controller/Admin.php:875
-#: lib/IWforms/Controller/Admin.php:937 lib/IWforms/Controller/Admin.php:979
-#: lib/IWforms/Controller/Admin.php:1043 lib/IWforms/Controller/Admin.php:1106
-#: lib/IWforms/Controller/Admin.php:1179 lib/IWforms/Controller/Admin.php:1253
-#: lib/IWforms/Controller/Admin.php:1317 lib/IWforms/Controller/Admin.php:1421
-#: lib/IWforms/Controller/Admin.php:1495 lib/IWforms/Controller/Admin.php:1564
-#: lib/IWforms/Controller/Admin.php:1644 lib/IWforms/Controller/Admin.php:1676
-#: lib/IWforms/Controller/Admin.php:1723 lib/IWforms/Controller/Admin.php:1742
-#: lib/IWforms/Controller/Admin.php:1771 lib/IWforms/Controller/Admin.php:1811
-#: lib/IWforms/Controller/Admin.php:1838 lib/IWforms/Controller/Admin.php:1867
-#: lib/IWforms/Controller/Admin.php:1905 lib/IWforms/Controller/Admin.php:1935
-#: lib/IWforms/Controller/Admin.php:2103 lib/IWforms/Controller/Ajax.php:14
-#: lib/IWforms/Controller/Ajax.php:45 lib/IWforms/Controller/Ajax.php:88
-#: lib/IWforms/Controller/Ajax.php:152 lib/IWforms/Controller/Ajax.php:202
-#: lib/IWforms/Controller/Ajax.php:249 lib/IWforms/Controller/Ajax.php:300
-#: lib/IWforms/Controller/Ajax.php:350 lib/IWforms/Controller/Ajax.php:398
-#: lib/IWforms/Controller/Ajax.php:468 lib/IWforms/Controller/Ajax.php:571
-#: lib/IWforms/Controller/Ajax.php:607 lib/IWforms/Controller/Ajax.php:637
-#: lib/IWforms/Controller/Ajax.php:662 lib/IWforms/Controller/Ajax.php:732
-#: lib/IWforms/Controller/Ajax.php:768 lib/IWforms/Controller/Ajax.php:797
-#: lib/IWforms/Controller/Ajax.php:832 lib/IWforms/Controller/Ajax.php:845
+#: lib/IWforms/Api/User.php:12
+#: lib/IWforms/Api/User.php:42
+#: lib/IWforms/Api/User.php:69
+#: lib/IWforms/Api/User.php:119
+#: lib/IWforms/Api/User.php:171
+#: lib/IWforms/Api/User.php:252
+#: lib/IWforms/Api/User.php:896
+#: lib/IWforms/Api/User.php:1683
+#: lib/IWforms/Api/User.php:1757
+#: lib/IWforms/Api/Admin.php:29
+#: lib/IWforms/Api/Admin.php:65
+#: lib/IWforms/Api/Admin.php:72
+#: lib/IWforms/Api/Admin.php:91
+#: lib/IWforms/Api/Admin.php:98
+#: lib/IWforms/Api/Admin.php:118
+#: lib/IWforms/Api/Admin.php:150
+#: lib/IWforms/Api/Admin.php:178
+#: lib/IWforms/Api/Admin.php:204
+#: lib/IWforms/Api/Admin.php:230
+#: lib/IWforms/Api/Admin.php:256
+#: lib/IWforms/Api/Admin.php:282
+#: lib/IWforms/Api/Admin.php:320
+#: lib/IWforms/Api/Admin.php:346
+#: lib/IWforms/Api/Admin.php:373
+#: lib/IWforms/Api/Admin.php:407
+#: lib/IWforms/Api/Admin.php:433
+#: lib/IWforms/Api/Admin.php:614
+#: lib/IWforms/Api/Admin.php:744
+#: lib/IWforms/Controller/User.php:13
+#: lib/IWforms/Controller/User.php:83
+#: lib/IWforms/Controller/User.php:181
+#: lib/IWforms/Controller/User.php:361
+#: lib/IWforms/Controller/User.php:637
+#: lib/IWforms/Controller/User.php:682
+#: lib/IWforms/Controller/User.php:709
+#: lib/IWforms/Controller/User.php:806
+#: lib/IWforms/Controller/User.php:826
+#: lib/IWforms/Controller/User.php:853
+#: lib/IWforms/Controller/User.php:994
+#: lib/IWforms/Controller/User.php:1294
+#: lib/IWforms/Controller/User.php:1506
+#: lib/IWforms/Controller/User.php:1545
+#: lib/IWforms/Controller/User.php:1764
+#: lib/IWforms/Controller/Admin.php:11
+#: lib/IWforms/Controller/Admin.php:59
+#: lib/IWforms/Controller/Admin.php:104
+#: lib/IWforms/Controller/Admin.php:166
+#: lib/IWforms/Controller/Admin.php:289
+#: lib/IWforms/Controller/Admin.php:327
+#: lib/IWforms/Controller/Admin.php:374
+#: lib/IWforms/Controller/Admin.php:393
+#: lib/IWforms/Controller/Admin.php:439
+#: lib/IWforms/Controller/Admin.php:624
+#: lib/IWforms/Controller/Admin.php:642
+#: lib/IWforms/Controller/Admin.php:696
+#: lib/IWforms/Controller/Admin.php:744
+#: lib/IWforms/Controller/Admin.php:815
+#: lib/IWforms/Controller/Admin.php:875
+#: lib/IWforms/Controller/Admin.php:937
+#: lib/IWforms/Controller/Admin.php:979
+#: lib/IWforms/Controller/Admin.php:1043
+#: lib/IWforms/Controller/Admin.php:1106
+#: lib/IWforms/Controller/Admin.php:1179
+#: lib/IWforms/Controller/Admin.php:1253
+#: lib/IWforms/Controller/Admin.php:1317
+#: lib/IWforms/Controller/Admin.php:1421
+#: lib/IWforms/Controller/Admin.php:1495
+#: lib/IWforms/Controller/Admin.php:1564
+#: lib/IWforms/Controller/Admin.php:1644
+#: lib/IWforms/Controller/Admin.php:1676
+#: lib/IWforms/Controller/Admin.php:1723
+#: lib/IWforms/Controller/Admin.php:1742
+#: lib/IWforms/Controller/Admin.php:1771
+#: lib/IWforms/Controller/Admin.php:1811
+#: lib/IWforms/Controller/Admin.php:1838
+#: lib/IWforms/Controller/Admin.php:1867
+#: lib/IWforms/Controller/Admin.php:1905
+#: lib/IWforms/Controller/Admin.php:1935
+#: lib/IWforms/Controller/Admin.php:2103
+#: lib/IWforms/Controller/Ajax.php:14
+#: lib/IWforms/Controller/Ajax.php:45
+#: lib/IWforms/Controller/Ajax.php:88
+#: lib/IWforms/Controller/Ajax.php:152
+#: lib/IWforms/Controller/Ajax.php:202
+#: lib/IWforms/Controller/Ajax.php:249
+#: lib/IWforms/Controller/Ajax.php:300
+#: lib/IWforms/Controller/Ajax.php:350
+#: lib/IWforms/Controller/Ajax.php:398
+#: lib/IWforms/Controller/Ajax.php:468
+#: lib/IWforms/Controller/Ajax.php:571
+#: lib/IWforms/Controller/Ajax.php:607
+#: lib/IWforms/Controller/Ajax.php:637
+#: lib/IWforms/Controller/Ajax.php:662
+#: lib/IWforms/Controller/Ajax.php:732
+#: lib/IWforms/Controller/Ajax.php:768
+#: lib/IWforms/Controller/Ajax.php:797
+#: lib/IWforms/Controller/Ajax.php:832
+#: lib/IWforms/Controller/Ajax.php:845
 #: lib/IWforms/Controller/Ajax.php:892
 msgid "Sorry! No authorization to access this module."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:18 lib/IWforms/Api/User.php:73
-#: lib/IWforms/Api/User.php:125 lib/IWforms/Api/User.php:177
-#: lib/IWforms/Api/User.php:256 lib/IWforms/Api/User.php:308
-#: lib/IWforms/Api/User.php:349 lib/IWforms/Api/User.php:375
-#: lib/IWforms/Api/User.php:401 lib/IWforms/Api/User.php:432
-#: lib/IWforms/Api/User.php:502 lib/IWforms/Api/User.php:545
-#: lib/IWforms/Api/User.php:599 lib/IWforms/Api/User.php:668
-#: lib/IWforms/Api/User.php:843 lib/IWforms/Api/User.php:948
-#: lib/IWforms/Api/User.php:997 lib/IWforms/Api/User.php:1052
-#: lib/IWforms/Api/User.php:1103 lib/IWforms/Api/User.php:1529
-#: lib/IWforms/Api/User.php:1563 lib/IWforms/Api/Admin.php:33
-#: lib/IWforms/Api/Admin.php:76 lib/IWforms/Api/Admin.php:129
-#: lib/IWforms/Api/Admin.php:161 lib/IWforms/Api/Admin.php:182
-#: lib/IWforms/Api/Admin.php:208 lib/IWforms/Api/Admin.php:234
-#: lib/IWforms/Api/Admin.php:260 lib/IWforms/Api/Admin.php:286
-#: lib/IWforms/Api/Admin.php:324 lib/IWforms/Api/Admin.php:350
-#: lib/IWforms/Api/Admin.php:377 lib/IWforms/Api/Admin.php:411
-#: lib/IWforms/Api/Admin.php:437 lib/IWforms/Api/Admin.php:523
-#: lib/IWforms/Api/Admin.php:551 lib/IWforms/Api/Admin.php:584
-#: lib/IWforms/Api/Admin.php:618 lib/IWforms/Api/Admin.php:748
-#: lib/IWforms/Controller/User.php:1510 lib/IWforms/Controller/Admin.php:170
-#: lib/IWforms/Controller/Admin.php:293 lib/IWforms/Controller/Admin.php:331
-#: lib/IWforms/Controller/Admin.php:397 lib/IWforms/Controller/Admin.php:443
-#: lib/IWforms/Controller/Admin.php:1680 lib/IWforms/Controller/Admin.php:1909
+#: lib/IWforms/Api/User.php:18
+#: lib/IWforms/Api/User.php:73
+#: lib/IWforms/Api/User.php:125
+#: lib/IWforms/Api/User.php:177
+#: lib/IWforms/Api/User.php:256
+#: lib/IWforms/Api/User.php:308
+#: lib/IWforms/Api/User.php:349
+#: lib/IWforms/Api/User.php:375
+#: lib/IWforms/Api/User.php:401
+#: lib/IWforms/Api/User.php:432
+#: lib/IWforms/Api/User.php:502
+#: lib/IWforms/Api/User.php:545
+#: lib/IWforms/Api/User.php:599
+#: lib/IWforms/Api/User.php:668
+#: lib/IWforms/Api/User.php:843
+#: lib/IWforms/Api/User.php:948
+#: lib/IWforms/Api/User.php:997
+#: lib/IWforms/Api/User.php:1052
+#: lib/IWforms/Api/User.php:1103
+#: lib/IWforms/Api/User.php:1529
+#: lib/IWforms/Api/User.php:1563
+#: lib/IWforms/Api/Admin.php:33
+#: lib/IWforms/Api/Admin.php:76
+#: lib/IWforms/Api/Admin.php:129
+#: lib/IWforms/Api/Admin.php:161
+#: lib/IWforms/Api/Admin.php:182
+#: lib/IWforms/Api/Admin.php:208
+#: lib/IWforms/Api/Admin.php:234
+#: lib/IWforms/Api/Admin.php:260
+#: lib/IWforms/Api/Admin.php:286
+#: lib/IWforms/Api/Admin.php:324
+#: lib/IWforms/Api/Admin.php:350
+#: lib/IWforms/Api/Admin.php:377
+#: lib/IWforms/Api/Admin.php:411
+#: lib/IWforms/Api/Admin.php:437
+#: lib/IWforms/Api/Admin.php:523
+#: lib/IWforms/Api/Admin.php:551
+#: lib/IWforms/Api/Admin.php:584
+#: lib/IWforms/Api/Admin.php:618
+#: lib/IWforms/Api/Admin.php:748
+#: lib/IWforms/Controller/User.php:1510
+#: lib/IWforms/Controller/Admin.php:170
+#: lib/IWforms/Controller/Admin.php:293
+#: lib/IWforms/Controller/Admin.php:331
+#: lib/IWforms/Controller/Admin.php:397
+#: lib/IWforms/Controller/Admin.php:443
+#: lib/IWforms/Controller/Admin.php:1680
+#: lib/IWforms/Controller/Admin.php:1909
 #: lib/IWforms/Controller/Admin.php:1939
 msgid "Error! Could not do what you wanted. Please check your input."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:26 lib/IWforms/Api/User.php:57
-#: lib/IWforms/Api/User.php:99 lib/IWforms/Api/User.php:149
-#: lib/IWforms/Api/User.php:212 lib/IWforms/Api/User.php:236
-#: lib/IWforms/Api/User.php:277 lib/IWforms/Api/User.php:328
-#: lib/IWforms/Api/User.php:357 lib/IWforms/Api/User.php:383
-#: lib/IWforms/Api/User.php:409 lib/IWforms/Api/User.php:454
-#: lib/IWforms/Api/User.php:484 lib/IWforms/Api/User.php:510
-#: lib/IWforms/Api/User.php:561 lib/IWforms/Api/User.php:644
-#: lib/IWforms/Api/User.php:711 lib/IWforms/Api/User.php:758
-#: lib/IWforms/Api/User.php:819 lib/IWforms/Api/User.php:851
-#: lib/IWforms/Api/User.php:965 lib/IWforms/Api/User.php:1376
-#: lib/IWforms/Api/User.php:1407 lib/IWforms/Api/User.php:1448
-#: lib/IWforms/Api/User.php:1505 lib/IWforms/Api/User.php:1542
+#: lib/IWforms/Api/User.php:26
+#: lib/IWforms/Api/User.php:57
+#: lib/IWforms/Api/User.php:99
+#: lib/IWforms/Api/User.php:149
+#: lib/IWforms/Api/User.php:212
+#: lib/IWforms/Api/User.php:236
+#: lib/IWforms/Api/User.php:277
+#: lib/IWforms/Api/User.php:328
+#: lib/IWforms/Api/User.php:357
+#: lib/IWforms/Api/User.php:383
+#: lib/IWforms/Api/User.php:409
+#: lib/IWforms/Api/User.php:454
+#: lib/IWforms/Api/User.php:484
+#: lib/IWforms/Api/User.php:510
+#: lib/IWforms/Api/User.php:561
+#: lib/IWforms/Api/User.php:644
+#: lib/IWforms/Api/User.php:711
+#: lib/IWforms/Api/User.php:758
+#: lib/IWforms/Api/User.php:819
+#: lib/IWforms/Api/User.php:851
+#: lib/IWforms/Api/User.php:965
+#: lib/IWforms/Api/User.php:1376
+#: lib/IWforms/Api/User.php:1407
+#: lib/IWforms/Api/User.php:1448
+#: lib/IWforms/Api/User.php:1505
+#: lib/IWforms/Api/User.php:1542
 #: lib/IWforms/Api/User.php:1656
 msgid "Error! Could not load items."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:80 lib/IWforms/Api/User.php:134
-#: lib/IWforms/Api/User.php:190 lib/IWforms/Api/User.php:263
-#: lib/IWforms/Api/User.php:902 lib/IWforms/Api/User.php:1011
-#: lib/IWforms/Api/User.php:1066 lib/IWforms/Api/User.php:1117
-#: lib/IWforms/Api/Admin.php:124 lib/IWforms/Api/Admin.php:156
-#: lib/IWforms/Api/Admin.php:188 lib/IWforms/Api/Admin.php:214
-#: lib/IWforms/Api/Admin.php:240 lib/IWforms/Api/Admin.php:266
-#: lib/IWforms/Api/Admin.php:292 lib/IWforms/Api/Admin.php:330
-#: lib/IWforms/Api/Admin.php:417 lib/IWforms/Api/Admin.php:443
-#: lib/IWforms/Api/Admin.php:483 lib/IWforms/Api/Admin.php:624
-#: lib/IWforms/Api/Admin.php:660 lib/IWforms/Api/Admin.php:689
-#: lib/IWforms/Api/Admin.php:700 lib/IWforms/Controller/User.php:95
-#: lib/IWforms/Controller/User.php:195 lib/IWforms/Controller/User.php:383
-#: lib/IWforms/Controller/User.php:741 lib/IWforms/Controller/User.php:871
-#: lib/IWforms/Controller/User.php:1010 lib/IWforms/Controller/User.php:1551
-#: lib/IWforms/Controller/User.php:1637 lib/IWforms/Controller/Admin.php:176
-#: lib/IWforms/Controller/Admin.php:299 lib/IWforms/Controller/Admin.php:337
-#: lib/IWforms/Controller/Admin.php:404 lib/IWforms/Controller/Admin.php:450
-#: lib/IWforms/Controller/Admin.php:564 lib/IWforms/Controller/Admin.php:571
-#: lib/IWforms/Controller/Admin.php:702 lib/IWforms/Controller/Admin.php:709
-#: lib/IWforms/Controller/Admin.php:750 lib/IWforms/Controller/Admin.php:757
-#: lib/IWforms/Controller/Admin.php:821 lib/IWforms/Controller/Admin.php:881
-#: lib/IWforms/Controller/Admin.php:943 lib/IWforms/Controller/Admin.php:985
-#: lib/IWforms/Controller/Admin.php:1049 lib/IWforms/Controller/Admin.php:1112
-#: lib/IWforms/Controller/Admin.php:1119 lib/IWforms/Controller/Admin.php:1185
-#: lib/IWforms/Controller/Admin.php:1192 lib/IWforms/Controller/Admin.php:1199
-#: lib/IWforms/Controller/Admin.php:1259 lib/IWforms/Controller/Admin.php:1328
-#: lib/IWforms/Controller/Admin.php:1427 lib/IWforms/Controller/Admin.php:1434
-#: lib/IWforms/Controller/Admin.php:1501 lib/IWforms/Controller/Admin.php:1508
-#: lib/IWforms/Controller/Admin.php:1686 lib/IWforms/Controller/Admin.php:1878
-#: lib/IWforms/Controller/Admin.php:1956 lib/IWforms/Controller/Ajax.php:59
-#: lib/IWforms/Controller/Ajax.php:99 lib/IWforms/Controller/Ajax.php:162
-#: lib/IWforms/Controller/Ajax.php:443 lib/IWforms/Controller/Ajax.php:585
-#: lib/IWforms/Controller/Ajax.php:617 lib/IWforms/Controller/Ajax.php:904
+#: lib/IWforms/Api/User.php:80
+#: lib/IWforms/Api/User.php:134
+#: lib/IWforms/Api/User.php:190
+#: lib/IWforms/Api/User.php:263
+#: lib/IWforms/Api/User.php:902
+#: lib/IWforms/Api/User.php:1011
+#: lib/IWforms/Api/User.php:1066
+#: lib/IWforms/Api/User.php:1117
+#: lib/IWforms/Api/Admin.php:124
+#: lib/IWforms/Api/Admin.php:156
+#: lib/IWforms/Api/Admin.php:188
+#: lib/IWforms/Api/Admin.php:214
+#: lib/IWforms/Api/Admin.php:240
+#: lib/IWforms/Api/Admin.php:266
+#: lib/IWforms/Api/Admin.php:292
+#: lib/IWforms/Api/Admin.php:330
+#: lib/IWforms/Api/Admin.php:417
+#: lib/IWforms/Api/Admin.php:443
+#: lib/IWforms/Api/Admin.php:483
+#: lib/IWforms/Api/Admin.php:624
+#: lib/IWforms/Api/Admin.php:660
+#: lib/IWforms/Api/Admin.php:689
+#: lib/IWforms/Api/Admin.php:700
+#: lib/IWforms/Controller/User.php:95
+#: lib/IWforms/Controller/User.php:195
+#: lib/IWforms/Controller/User.php:383
+#: lib/IWforms/Controller/User.php:741
+#: lib/IWforms/Controller/User.php:871
+#: lib/IWforms/Controller/User.php:1010
+#: lib/IWforms/Controller/User.php:1551
+#: lib/IWforms/Controller/User.php:1637
+#: lib/IWforms/Controller/Admin.php:176
+#: lib/IWforms/Controller/Admin.php:299
+#: lib/IWforms/Controller/Admin.php:337
+#: lib/IWforms/Controller/Admin.php:404
+#: lib/IWforms/Controller/Admin.php:450
+#: lib/IWforms/Controller/Admin.php:564
+#: lib/IWforms/Controller/Admin.php:571
+#: lib/IWforms/Controller/Admin.php:702
+#: lib/IWforms/Controller/Admin.php:709
+#: lib/IWforms/Controller/Admin.php:750
+#: lib/IWforms/Controller/Admin.php:757
+#: lib/IWforms/Controller/Admin.php:821
+#: lib/IWforms/Controller/Admin.php:881
+#: lib/IWforms/Controller/Admin.php:943
+#: lib/IWforms/Controller/Admin.php:985
+#: lib/IWforms/Controller/Admin.php:1049
+#: lib/IWforms/Controller/Admin.php:1112
+#: lib/IWforms/Controller/Admin.php:1119
+#: lib/IWforms/Controller/Admin.php:1185
+#: lib/IWforms/Controller/Admin.php:1192
+#: lib/IWforms/Controller/Admin.php:1199
+#: lib/IWforms/Controller/Admin.php:1259
+#: lib/IWforms/Controller/Admin.php:1328
+#: lib/IWforms/Controller/Admin.php:1427
+#: lib/IWforms/Controller/Admin.php:1434
+#: lib/IWforms/Controller/Admin.php:1501
+#: lib/IWforms/Controller/Admin.php:1508
+#: lib/IWforms/Controller/Admin.php:1686
+#: lib/IWforms/Controller/Admin.php:1878
+#: lib/IWforms/Controller/Admin.php:1956
+#: lib/IWforms/Controller/Ajax.php:59
+#: lib/IWforms/Controller/Ajax.php:99
+#: lib/IWforms/Controller/Ajax.php:162
+#: lib/IWforms/Controller/Ajax.php:443
+#: lib/IWforms/Controller/Ajax.php:585
+#: lib/IWforms/Controller/Ajax.php:617
+#: lib/IWforms/Controller/Ajax.php:904
 msgid "Could not find form"
 msgstr ""
 
@@ -182,74 +299,115 @@ msgstr ""
 msgid "Can not find the form field"
 msgstr ""
 
-#: lib/IWforms/Api/User.php:540 lib/IWforms/Api/User.php:594
-#: lib/IWforms/Api/User.php:804 lib/IWforms/Api/User.php:1490
-#: lib/IWforms/Api/User.php:1689 lib/IWforms/Api/User.php:1763
-#: lib/IWforms/Controller/User.php:187 lib/IWforms/Controller/User.php:367
-#: lib/IWforms/Controller/User.php:643 lib/IWforms/Controller/User.php:695
+#: lib/IWforms/Api/User.php:540
+#: lib/IWforms/Api/User.php:594
+#: lib/IWforms/Api/User.php:804
+#: lib/IWforms/Api/User.php:1490
+#: lib/IWforms/Api/User.php:1689
+#: lib/IWforms/Api/User.php:1763
+#: lib/IWforms/Controller/User.php:187
+#: lib/IWforms/Controller/User.php:367
+#: lib/IWforms/Controller/User.php:643
+#: lib/IWforms/Controller/User.php:695
 #: lib/IWforms/Controller/User.php:1516
 msgid "You can not access this form to view the annotations"
 msgstr ""
 
-#: lib/IWforms/Api/User.php:675 lib/IWforms/Api/User.php:764
-#: lib/IWforms/Api/User.php:775 lib/IWforms/Api/User.php:910
-#: lib/IWforms/Api/User.php:1004 lib/IWforms/Api/User.php:1016
-#: lib/IWforms/Api/User.php:1059 lib/IWforms/Api/User.php:1072
-#: lib/IWforms/Api/User.php:1110 lib/IWforms/Controller/User.php:881
-#: lib/IWforms/Controller/User.php:888 lib/IWforms/Controller/User.php:1017
-#: lib/IWforms/Controller/User.php:1314 lib/IWforms/Controller/User.php:1629
+#: lib/IWforms/Api/User.php:675
+#: lib/IWforms/Api/User.php:764
+#: lib/IWforms/Api/User.php:775
+#: lib/IWforms/Api/User.php:910
+#: lib/IWforms/Api/User.php:1004
+#: lib/IWforms/Api/User.php:1016
+#: lib/IWforms/Api/User.php:1059
+#: lib/IWforms/Api/User.php:1072
+#: lib/IWforms/Api/User.php:1110
+#: lib/IWforms/Controller/User.php:881
+#: lib/IWforms/Controller/User.php:888
+#: lib/IWforms/Controller/User.php:1017
+#: lib/IWforms/Controller/User.php:1314
+#: lib/IWforms/Controller/User.php:1629
 msgid "You can not access this form to send annotations"
 msgstr ""
 
-#: lib/IWforms/Api/User.php:877 lib/IWforms/Api/User.php:1080
-#: lib/IWforms/Api/User.php:1129 lib/IWforms/Api/User.php:1208
-#: lib/IWforms/Api/User.php:1245 lib/IWforms/Api/User.php:1278
-#: lib/IWforms/Api/User.php:1308 lib/IWforms/Api/User.php:1346
-#: lib/IWforms/Api/User.php:1582 lib/IWforms/Api/User.php:1612
-#: lib/IWforms/Api/Admin.php:423 lib/IWforms/Api/Admin.php:457
-#: lib/IWforms/Api/Admin.php:502 lib/IWforms/Api/Admin.php:598
-#: lib/IWforms/Api/Admin.php:638 lib/IWforms/Api/Admin.php:668
+#: lib/IWforms/Api/User.php:877
+#: lib/IWforms/Api/User.php:1080
+#: lib/IWforms/Api/User.php:1129
+#: lib/IWforms/Api/User.php:1208
+#: lib/IWforms/Api/User.php:1245
+#: lib/IWforms/Api/User.php:1278
+#: lib/IWforms/Api/User.php:1308
+#: lib/IWforms/Api/User.php:1346
+#: lib/IWforms/Api/User.php:1582
+#: lib/IWforms/Api/User.php:1612
+#: lib/IWforms/Api/Admin.php:423
+#: lib/IWforms/Api/Admin.php:457
+#: lib/IWforms/Api/Admin.php:502
+#: lib/IWforms/Api/Admin.php:598
+#: lib/IWforms/Api/Admin.php:638
+#: lib/IWforms/Api/Admin.php:668
 msgid "Error! Update attempt failed."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:923 lib/IWforms/Api/User.php:1025
-#: lib/IWforms/Api/Admin.php:56 lib/IWforms/Api/Admin.php:82
-#: lib/IWforms/Api/Admin.php:105 lib/IWforms/Api/Admin.php:137
-#: lib/IWforms/Api/Admin.php:167 lib/IWforms/Api/Admin.php:531
+#: lib/IWforms/Api/User.php:923
+#: lib/IWforms/Api/User.php:1025
+#: lib/IWforms/Api/Admin.php:56
+#: lib/IWforms/Api/Admin.php:82
+#: lib/IWforms/Api/Admin.php:105
+#: lib/IWforms/Api/Admin.php:137
+#: lib/IWforms/Api/Admin.php:167
+#: lib/IWforms/Api/Admin.php:531
 #: lib/IWforms/Api/Admin.php:778
 msgid "Error! Creation attempt failed."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:1153 lib/IWforms/Api/User.php:1187
-#: lib/IWforms/Api/User.php:1232 lib/IWforms/Api/User.php:1269
-#: lib/IWforms/Api/User.php:1298 lib/IWforms/Api/User.php:1329
-#: lib/IWforms/Api/User.php:1433 lib/IWforms/Api/User.php:1570
-#: lib/IWforms/Api/User.php:1602 lib/IWforms/Controller/Ajax.php:168
-#: lib/IWforms/Controller/Ajax.php:218 lib/IWforms/Controller/Ajax.php:262
-#: lib/IWforms/Controller/Ajax.php:313 lib/IWforms/Controller/Ajax.php:363
-#: lib/IWforms/Controller/Ajax.php:429 lib/IWforms/Controller/Ajax.php:499
+#: lib/IWforms/Api/User.php:1153
+#: lib/IWforms/Api/User.php:1187
+#: lib/IWforms/Api/User.php:1232
+#: lib/IWforms/Api/User.php:1269
+#: lib/IWforms/Api/User.php:1298
+#: lib/IWforms/Api/User.php:1329
+#: lib/IWforms/Api/User.php:1433
+#: lib/IWforms/Api/User.php:1570
+#: lib/IWforms/Api/User.php:1602
+#: lib/IWforms/Controller/Ajax.php:168
+#: lib/IWforms/Controller/Ajax.php:218
+#: lib/IWforms/Controller/Ajax.php:262
+#: lib/IWforms/Controller/Ajax.php:313
+#: lib/IWforms/Controller/Ajax.php:363
+#: lib/IWforms/Controller/Ajax.php:429
+#: lib/IWforms/Controller/Ajax.php:499
 #: lib/IWforms/Controller/Ajax.php:648
 msgid "You do not have access to manage form"
 msgstr ""
 
-#: lib/IWforms/Api/User.php:1158 lib/IWforms/Api/User.php:1163
-#: lib/IWforms/Api/Admin.php:192 lib/IWforms/Api/Admin.php:221
-#: lib/IWforms/Api/Admin.php:247 lib/IWforms/Api/Admin.php:273
-#: lib/IWforms/Api/Admin.php:303 lib/IWforms/Api/Admin.php:311
-#: lib/IWforms/Api/Admin.php:334 lib/IWforms/Api/Admin.php:361
-#: lib/IWforms/Api/Admin.php:388 lib/IWforms/Api/Admin.php:560
+#: lib/IWforms/Api/User.php:1158
+#: lib/IWforms/Api/User.php:1163
+#: lib/IWforms/Api/Admin.php:192
+#: lib/IWforms/Api/Admin.php:221
+#: lib/IWforms/Api/Admin.php:247
+#: lib/IWforms/Api/Admin.php:273
+#: lib/IWforms/Api/Admin.php:303
+#: lib/IWforms/Api/Admin.php:311
+#: lib/IWforms/Api/Admin.php:334
+#: lib/IWforms/Api/Admin.php:361
+#: lib/IWforms/Api/Admin.php:388
+#: lib/IWforms/Api/Admin.php:560
 msgid "Error! Sorry! Deletion attempt failed."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:1336 lib/IWforms/Controller/Ajax.php:417
+#: lib/IWforms/Api/User.php:1336
+#: lib/IWforms/Controller/Ajax.php:417
 msgid "You can not edit this note."
 msgstr ""
 
-#: lib/IWforms/Api/User.php:1697 lib/IWforms/Api/User.php:1771
+#: lib/IWforms/Api/User.php:1697
+#: lib/IWforms/Api/User.php:1771
 msgid "Note content not found"
 msgstr ""
 
-#: lib/IWforms/Api/User.php:1715 lib/IWforms/Api/User.php:1789
+#: lib/IWforms/Api/User.php:1715
+#: lib/IWforms/Api/User.php:1789
 msgid "Note fields not found"
 msgstr ""
 
@@ -261,32 +419,39 @@ msgstr ""
 msgid "Error! delete attempt failed during field synchronization."
 msgstr ""
 
-#: lib/IWforms/Api/Admin.php:355 lib/IWforms/Api/Admin.php:382
+#: lib/IWforms/Api/Admin.php:355
+#: lib/IWforms/Api/Admin.php:382
 #: lib/IWforms/Controller/Admin.php:1056
 msgid "Can not find the group"
 msgstr ""
 
-#: lib/IWforms/Api/Admin.php:557 lib/IWforms/Api/Admin.php:590
+#: lib/IWforms/Api/Admin.php:557
+#: lib/IWforms/Api/Admin.php:590
 msgid "No such item found."
 msgstr ""
 
-#: lib/IWforms/Api/Admin.php:788 templates/IWforms_admin_create.htm:9
+#: lib/IWforms/Api/Admin.php:788
+#: templates/IWforms_admin_create.htm:9
 msgid "Create a new form"
 msgstr ""
 
-#: lib/IWforms/Api/Admin.php:790 templates/IWforms_admin_import.htm:5
+#: lib/IWforms/Api/Admin.php:790
+#: templates/IWforms_admin_import.htm:5
 msgid "Import a form"
 msgstr ""
 
-#: lib/IWforms/Api/Admin.php:791 templates/IWforms_admin_conf.htm:7
+#: lib/IWforms/Api/Admin.php:791
+#: templates/IWforms_admin_conf.htm:7
 msgid "Configure the module"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:501 lib/IWforms/Controller/User.php:1665
+#: lib/IWforms/Controller/User.php:501
+#: lib/IWforms/Controller/User.php:1665
 msgid "user"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:551 lib/IWforms/Controller/Admin.php:416
+#: lib/IWforms/Controller/User.php:551
+#: lib/IWforms/Controller/Admin.php:416
 #: lib/IWforms/Controller/Ajax.php:709
 #: templates/IWforms_user_fieldContent.htm:320
 #: templates/IWforms_admin_form_definition.htm:33
@@ -325,7 +490,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:552 lib/IWforms/Controller/Admin.php:416
+#: lib/IWforms/Controller/User.php:552
+#: lib/IWforms/Controller/Admin.php:416
 #: lib/IWforms/Controller/Ajax.php:710
 #: templates/IWforms_user_fieldContent.htm:318
 #: templates/IWforms_admin_form_definition.htm:31
@@ -369,15 +535,15 @@ msgid "Field synchronized successfully."
 msgstr ""
 
 #: lib/IWforms/Controller/User.php:897
-msgid ""
-"The form is only one answer and know that you've already sent an annotation."
+msgid "The form is only one answer and know that you've already sent an annotation."
 msgstr ""
 
 #: lib/IWforms/Controller/User.php:907
 msgid "Has not been found fields in the form"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1273 lib/IWforms/Controller/Admin.php:1439
+#: lib/IWforms/Controller/User.php:1273
+#: lib/IWforms/Controller/Admin.php:1439
 msgid "Name_field"
 msgstr ""
 
@@ -385,26 +551,29 @@ msgstr ""
 msgid "Error with the capcha protect system"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1393 lib/IWforms/Controller/User.php:1458
+#: lib/IWforms/Controller/User.php:1393
+#: lib/IWforms/Controller/User.php:1458
 msgid "The entry has been edited"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1395 lib/IWforms/Controller/User.php:1460
+#: lib/IWforms/Controller/User.php:1395
+#: lib/IWforms/Controller/User.php:1460
 msgid "There was an error in the edition of the annotation"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1409 lib/IWforms/Controller/User.php:1474
+#: lib/IWforms/Controller/User.php:1409
+#: lib/IWforms/Controller/User.php:1474
 msgid "The entry has been created"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1411 lib/IWforms/Controller/User.php:1476
+#: lib/IWforms/Controller/User.php:1411
+#: lib/IWforms/Controller/User.php:1476
 msgid "There was an error in the creation of the annotation"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1426 lib/IWforms/Controller/User.php:1442
-msgid ""
-"There was a problem in the attachment file. Probably the annotation was sent "
-"without the file or attachment."
+#: lib/IWforms/Controller/User.php:1426
+#: lib/IWforms/Controller/User.php:1442
+msgid "There was a problem in the attachment file. Probably the annotation was sent without the file or attachment."
 msgstr ""
 
 #: lib/IWforms/Controller/User.php:1558
@@ -412,10 +581,7 @@ msgid "You do not have access to this form"
 msgstr ""
 
 #: lib/IWforms/Controller/User.php:1564
-msgid ""
-"The export is not possible because the directory for temporary files don't "
-"exist on the server. If the problem persists it communicates to the "
-"administrator at the portal."
+msgid "The export is not possible because the directory for temporary files don't exist on the server. If the problem persists it communicates to the administrator at the portal."
 msgstr ""
 
 #: lib/IWforms/Controller/User.php:1573
@@ -423,8 +589,10 @@ msgstr ""
 msgid "State of the note"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1575 lib/IWforms/Controller/User.php:1581
-#: lib/IWforms/Controller/User.php:1667 lib/IWforms/Controller/Admin.php:602
+#: lib/IWforms/Controller/User.php:1575
+#: lib/IWforms/Controller/User.php:1581
+#: lib/IWforms/Controller/User.php:1667
+#: lib/IWforms/Controller/Admin.php:602
 #: templates/IWforms_admin_form_fieldAdd.htm:15
 msgid "Date"
 msgstr ""
@@ -433,38 +601,45 @@ msgstr ""
 msgid "Referring"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1578 lib/IWforms/Controller/Admin.php:599
+#: lib/IWforms/Controller/User.php:1578
+#: lib/IWforms/Controller/Admin.php:599
 #: templates/IWforms_admin_form_fieldAdd.htm:12
 msgid "Text"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1579 lib/IWforms/Controller/Admin.php:600
+#: lib/IWforms/Controller/User.php:1579
+#: lib/IWforms/Controller/Admin.php:600
 #: templates/IWforms_admin_form_fieldAdd.htm:13
 msgid "Text area"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1580 lib/IWforms/Controller/User.php:1675
+#: lib/IWforms/Controller/User.php:1580
+#: lib/IWforms/Controller/User.php:1675
 #: lib/IWforms/Controller/Admin.php:601
 #: templates/IWforms_admin_form_fieldAdd.htm:14
 msgid "URL"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1582 lib/IWforms/Controller/Admin.php:603
+#: lib/IWforms/Controller/User.php:1582
+#: lib/IWforms/Controller/Admin.php:603
 #: templates/IWforms_admin_form_fieldAdd.htm:16
 msgid "Time"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1583 lib/IWforms/Controller/Admin.php:604
+#: lib/IWforms/Controller/User.php:1583
+#: lib/IWforms/Controller/Admin.php:604
 #: templates/IWforms_admin_form_fieldAdd.htm:17
 msgid "List of options"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1584 lib/IWforms/Controller/Admin.php:606
+#: lib/IWforms/Controller/User.php:1584
+#: lib/IWforms/Controller/Admin.php:606
 #: templates/IWforms_admin_form_fieldAdd.htm:19
 msgid "Yes/No"
 msgstr ""
 
-#: lib/IWforms/Controller/User.php:1590 templates/IWforms_user_export.htm:106
+#: lib/IWforms/Controller/User.php:1590
+#: templates/IWforms_user_export.htm:106
 #: templates/IWforms_admin_form_minitab.htm:5
 msgid "Field"
 msgstr ""
@@ -482,9 +657,7 @@ msgid "State"
 msgstr ""
 
 #: lib/IWforms/Controller/User.php:1728
-msgid ""
-"There was an error in the creation of information. The export was not "
-"possible"
+msgid "There was an error in the creation of information. The export was not possible"
 msgstr ""
 
 #: lib/IWforms/Controller/Admin.php:139
@@ -515,7 +688,8 @@ msgstr ""
 msgid "Reading and writing"
 msgstr ""
 
-#: lib/IWforms/Controller/Admin.php:417 lib/IWforms/Controller/Admin.php:1067
+#: lib/IWforms/Controller/Admin.php:417
+#: lib/IWforms/Controller/Admin.php:1067
 msgid "Unregistered users"
 msgstr ""
 
@@ -548,12 +722,14 @@ msgstr ""
 msgid "Box"
 msgstr ""
 
-#: lib/IWforms/Controller/Admin.php:610 lib/IWforms/Controller/Admin.php:670
+#: lib/IWforms/Controller/Admin.php:610
+#: lib/IWforms/Controller/Admin.php:670
 #: lib/IWforms/Controller/Ajax.php:820
 msgid "Final box"
 msgstr ""
 
-#: lib/IWforms/Controller/Admin.php:658 lib/IWforms/Controller/Ajax.php:810
+#: lib/IWforms/Controller/Admin.php:658
+#: lib/IWforms/Controller/Ajax.php:810
 msgid "Field name"
 msgstr ""
 
@@ -581,7 +757,8 @@ msgstr ""
 msgid "Has added a new validator"
 msgstr ""
 
-#: lib/IWforms/Controller/Admin.php:961 lib/IWforms/Controller/Ajax.php:755
+#: lib/IWforms/Controller/Admin.php:961
+#: lib/IWforms/Controller/Ajax.php:755
 msgid "Dropped the annotations of the form"
 msgstr ""
 
@@ -618,9 +795,7 @@ msgid "The field of the form has been published successfully"
 msgstr ""
 
 #: lib/IWforms/Controller/Admin.php:1651
-msgid ""
-"The name of the directory of the files public is not valid because it "
-"matches the name of the home directory of files on the site."
+msgid "The name of the directory of the files public is not valid because it matches the name of the home directory of files on the site."
 msgstr ""
 
 #: lib/IWforms/Controller/Admin.php:1662
@@ -631,7 +806,8 @@ msgstr ""
 msgid "New category created"
 msgstr ""
 
-#: lib/IWforms/Controller/Admin.php:1777 lib/IWforms/Controller/Admin.php:1816
+#: lib/IWforms/Controller/Admin.php:1777
+#: lib/IWforms/Controller/Admin.php:1816
 msgid "No such category found"
 msgstr ""
 
@@ -644,8 +820,7 @@ msgid "Has changed the category"
 msgstr ""
 
 #: lib/IWforms/Controller/Admin.php:1915
-msgid ""
-"Has made a copy of the form. Edit the characteristics that create appropriate"
+msgid "Has made a copy of the form. Edit the characteristics that create appropriate"
 msgstr ""
 
 #: lib/IWforms/Controller/Admin.php:1920
@@ -668,7 +843,8 @@ msgstr ""
 msgid "Error loading xml document."
 msgstr ""
 
-#: lib/IWforms/Controller/Admin.php:2201 lib/IWforms/Controller/Admin.php:2263
+#: lib/IWforms/Controller/Admin.php:2201
+#: lib/IWforms/Controller/Admin.php:2263
 msgid "The form creation has failt"
 msgstr ""
 
@@ -676,9 +852,12 @@ msgstr ""
 msgid "The form has been imported correcty"
 msgstr ""
 
-#: lib/IWforms/Controller/Ajax.php:174 lib/IWforms/Controller/Ajax.php:269
-#: lib/IWforms/Controller/Ajax.php:320 lib/IWforms/Controller/Ajax.php:369
-#: lib/IWforms/Controller/Ajax.php:515 lib/IWforms/Controller/Ajax.php:654
+#: lib/IWforms/Controller/Ajax.php:174
+#: lib/IWforms/Controller/Ajax.php:269
+#: lib/IWforms/Controller/Ajax.php:320
+#: lib/IWforms/Controller/Ajax.php:369
+#: lib/IWforms/Controller/Ajax.php:515
+#: lib/IWforms/Controller/Ajax.php:654
 msgid "There was an error in the modified form"
 msgstr ""
 
@@ -694,7 +873,8 @@ msgstr ""
 msgid "There was an error to remove the annotation"
 msgstr ""
 
-#: lib/IWforms/Controller/Ajax.php:414 lib/IWforms/Controller/Ajax.php:488
+#: lib/IWforms/Controller/Ajax.php:414
+#: lib/IWforms/Controller/Ajax.php:488
 msgid "For some reason it is not possible to edit the field's content."
 msgstr ""
 
@@ -718,7 +898,8 @@ msgstr ""
 msgid "Has been removed form"
 msgstr ""
 
-#: lib/IWforms/Version.php:6 lib/IWforms/Version.php:8
+#: lib/IWforms/Version.php:6
+#: lib/IWforms/Version.php:8
 msgid "IWforms"
 msgstr ""
 
@@ -727,9 +908,7 @@ msgid "Creation, managment and use of forms."
 msgstr ""
 
 #: lib/IWforms/Installer.php:14
-msgid ""
-"Module IWmain is needed. You have to install the IWmain module before "
-"installing it."
+msgid "Module IWmain is needed. You have to install the IWmain module before installing it."
 msgstr ""
 
 #: lib/IWforms/Block/Formslist.php:13
@@ -763,11 +942,7 @@ msgstr ""
 #: lib/IWforms/Block/Formnote.php:190
 #: templates/IWforms_admin_form_definition.htm:183
 #: templates/IWforms_admin_form_definitionExpertMode.htm:61
-msgid ""
-"[$formId$] =>Identity of the form, [$noteId$] =>Identity of the note, [%id%] "
-"=> Title of the field, [$id$] => Content of the field, [$user$] => Username, "
-"[$date$] => Note creation date, [$time$] => Note creation time, [$avatar$] "
-"=> User avatar, [$reply$] => Reply to the user if the reply is public"
+msgid "[$formId$] =>Identity of the form, [$noteId$] =>Identity of the note, [%id%] => Title of the field, [$id$] => Content of the field, [$user$] => Username, [$date$] => Note creation date, [$time$] => Note creation time, [$avatar$] => User avatar, [$reply$] => Reply to the user if the reply is public"
 msgstr ""
 
 #: templates/IWforms_user_manageNoteContent.htm:12
@@ -835,7 +1010,8 @@ msgid "Type of validator"
 msgstr ""
 
 #: templates/IWforms_admin_form_validators.htm:25
-#: templates/IWforms_admin_main.htm:15 templates/IWforms_admin_conf.htm:17
+#: templates/IWforms_admin_main.htm:15
+#: templates/IWforms_admin_conf.htm:17
 #: templates/IWforms_admin_form_fields.htm:25
 #: templates/IWforms_admin_form_fieldCharContent.htm:63
 #: templates/IWforms_admin_form_groups.htm:27
@@ -937,9 +1113,7 @@ msgid "List options"
 msgstr ""
 
 #: templates/IWforms_admin_form_fieldEdit.htm:92
-msgid ""
-"The options must be separated by the hyphen (-). To leave empty the first "
-"option, you must write a hyphen before the first one."
+msgid "The options must be separated by the hyphen (-). To leave empty the first option, you must write a hyphen before the first one."
 msgstr ""
 
 #: templates/IWforms_admin_form_fieldEdit.htm:93
@@ -1029,7 +1203,8 @@ msgid "Active/no active"
 msgstr ""
 
 #: templates/IWforms_admin_form_fieldEdit.htm:193
-#: templates/IWforms_admin_main.htm:49 templates/IWforms_admin_conf.htm:34
+#: templates/IWforms_admin_main.htm:49
+#: templates/IWforms_admin_conf.htm:34
 #: templates/IWforms_admin_form_definitionEdit.htm:107
 #: templates/IWforms_admin_infoForm.htm:7
 #: templates/IWforms_admin_infoForm.htm:13
@@ -1177,14 +1352,12 @@ msgid "type"
 msgstr ""
 
 #: templates/IWforms_admin_form_fieldDelete.htm:13
-msgid ""
-"Unable to delete the field as there are other areas that are depending on. "
-"Clear dependencies before deleting the field. Here is the list of areas "
-"affected:"
+msgid "Unable to delete the field as there are other areas that are depending on. Clear dependencies before deleting the field. Here is the list of areas affected:"
 msgstr ""
 
 #: templates/IWforms_admin_form_fieldDelete.htm:22
-#: templates/IWforms_admin_main.htm:69 templates/IWforms_admin_conf.htm:37
+#: templates/IWforms_admin_main.htm:69
+#: templates/IWforms_admin_conf.htm:37
 #: templates/IWforms_admin_form_validatorDelete.htm:12
 #: templates/IWforms_admin_form_deleteNotes.htm:11
 #: templates/IWforms_admin_form_fieldModifyDependances.htm:19
@@ -1199,16 +1372,19 @@ msgstr ""
 msgid "Managing annotations"
 msgstr ""
 
-#: templates/IWforms_user_manage.htm:11 templates/IWforms_admin_main.htm:11
+#: templates/IWforms_user_manage.htm:11
+#: templates/IWforms_admin_main.htm:11
 #: templates/IWforms_admin_form_definitionEdit.htm:13
-#: templates/IWforms_user_export.htm:6 templates/IWforms_admin_create.htm:24
+#: templates/IWforms_user_export.htm:6
+#: templates/IWforms_admin_create.htm:24
 #: templates/IWforms_user_read.htm:12
 #: templates/IWforms_admin_form_definition.htm:17
 #: templates/IWforms_user_sendedView.htm:6
 msgid "Title of the annotations "
 msgstr ""
 
-#: templates/IWforms_user_manage.htm:17 templates/IWforms_user_manage.htm:19
+#: templates/IWforms_user_manage.htm:17
+#: templates/IWforms_user_manage.htm:19
 msgid "State of the annotations"
 msgstr ""
 
@@ -1216,7 +1392,8 @@ msgstr ""
 msgid "Date Posted"
 msgstr ""
 
-#: templates/IWforms_user_manage.htm:25 templates/IWforms_user_read.htm:18
+#: templates/IWforms_user_manage.htm:25
+#: templates/IWforms_user_read.htm:18
 msgid "N. Entries"
 msgstr ""
 
@@ -1270,18 +1447,21 @@ msgstr ""
 msgid "Return to init"
 msgstr ""
 
-#: templates/IWforms_user_main.htm:4 templates/IWforms_admin_main.htm:5
+#: templates/IWforms_user_main.htm:4
+#: templates/IWforms_admin_main.htm:5
 msgid "Forms list"
 msgstr ""
 
-#: templates/IWforms_user_main.htm:14 templates/IWforms_user_main.htm:19
+#: templates/IWforms_user_main.htm:14
+#: templates/IWforms_user_main.htm:19
 #: templates/IWforms_block_formsList.htm:7
 #: templates/IWforms_block_formsList.htm:12
 #: templates/IWforms_user_mainOptions.htm:34
 msgid "Open the entry of annotations and editing"
 msgstr ""
 
-#: templates/IWforms_user_main.htm:24 templates/IWforms_block_formsList.htm:18
+#: templates/IWforms_user_main.htm:24
+#: templates/IWforms_block_formsList.htm:18
 msgid "New"
 msgstr ""
 
@@ -1301,7 +1481,8 @@ msgstr ""
 
 #: templates/IWforms_admin_main.htm:10
 #: templates/IWforms_admin_form_definitionEdit.htm:9
-#: templates/IWforms_user_export.htm:5 templates/IWforms_admin_create.htm:20
+#: templates/IWforms_user_export.htm:5
+#: templates/IWforms_admin_create.htm:20
 #: templates/IWforms_user_read.htm:9
 #: templates/IWforms_admin_form_definition.htm:13
 #: templates/IWforms_user_sendedView.htm:5
@@ -1335,8 +1516,10 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: templates/IWforms_admin_main.htm:59 templates/IWforms_user_export.htm:38
-#: templates/IWforms_user_export.htm:109 templates/IWforms_user_export.htm:132
+#: templates/IWforms_admin_main.htm:59
+#: templates/IWforms_user_export.htm:38
+#: templates/IWforms_user_export.htm:109
+#: templates/IWforms_user_export.htm:132
 msgid "Export"
 msgstr ""
 
@@ -1356,7 +1539,8 @@ msgstr ""
 msgid "No forms have been found"
 msgstr ""
 
-#: templates/IWforms_admin_main.htm:85 templates/IWforms_admin_form.htm:25
+#: templates/IWforms_admin_main.htm:85
+#: templates/IWforms_admin_form.htm:25
 msgid "...changing the information..."
 msgstr ""
 
@@ -1376,12 +1560,14 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: templates/IWforms_admin_conf.htm:15 templates/IWforms_admin_addCat.htm:8
+#: templates/IWforms_admin_conf.htm:15
+#: templates/IWforms_admin_addCat.htm:8
 #: templates/IWforms_admin_editCat.htm:9
 msgid "Name"
 msgstr ""
 
-#: templates/IWforms_admin_conf.htm:16 templates/IWforms_admin_addCat.htm:12
+#: templates/IWforms_admin_conf.htm:16
+#: templates/IWforms_admin_addCat.htm:12
 #: templates/IWforms_admin_form_fields.htm:20
 #: templates/IWforms_admin_editCat.htm:13
 msgid "Description"
@@ -1393,7 +1579,8 @@ msgstr ""
 msgid "There is no defined categories"
 msgstr ""
 
-#: templates/IWforms_admin_conf.htm:50 templates/IWforms_admin_addCat.htm:4
+#: templates/IWforms_admin_conf.htm:50
+#: templates/IWforms_admin_addCat.htm:4
 msgid "Creates a new category"
 msgstr ""
 
@@ -1426,33 +1613,28 @@ msgid "You should give write permissions in this folder or set it as public"
 msgstr ""
 
 #: templates/IWforms_admin_conf.htm:89
-msgid ""
-"DpCaptcha module is not available. If you are planning to open the forms to "
-"unregistered users you may want to install them this module."
+msgid "DpCaptcha module is not available. If you are planning to open the forms to unregistered users you may want to install them this module."
 msgstr ""
 
-#: templates/IWforms_admin_conf.htm:92 templates/IWforms_admin_conf.htm:100
-msgid ""
-"The module dpCaptcha prevents robots can send notes to forms automatically. "
-"With this module successfully activated and you get linked to when a user "
-"sends an unregistered entry, is obliged to recognize and write a set of "
-"characters that can not recognize an automated system."
+#: templates/IWforms_admin_conf.htm:92
+#: templates/IWforms_admin_conf.htm:100
+msgid "The module dpCaptcha prevents robots can send notes to forms automatically. With this module successfully activated and you get linked to when a user sends an unregistered entry, is obliged to recognize and write a set of characters that can not recognize an automated system."
 msgstr ""
 
 #: templates/IWforms_admin_conf.htm:97
-msgid ""
-"The module is not bound dpCaptcha (hook). If you are planning to open the "
-"forms to unregistered users recommend linking this module. You can do this "
-"from the administration of the modules."
+msgid "The module is not bound dpCaptcha (hook). If you are planning to open the forms to unregistered users recommend linking this module. You can do this from the administration of the modules."
 msgstr ""
 
 #: templates/IWforms_admin_conf.htm:104
 msgid "Color for the new notes"
 msgstr ""
 
-#: templates/IWforms_admin_conf.htm:106 templates/IWforms_admin_conf.htm:112
-#: templates/IWforms_admin_conf.htm:118 templates/IWforms_admin_conf.htm:124
-#: templates/IWforms_admin_conf.htm:130 templates/IWforms_admin_conf.htm:136
+#: templates/IWforms_admin_conf.htm:106
+#: templates/IWforms_admin_conf.htm:112
+#: templates/IWforms_admin_conf.htm:118
+#: templates/IWforms_admin_conf.htm:124
+#: templates/IWforms_admin_conf.htm:130
+#: templates/IWforms_admin_conf.htm:136
 msgid "Change the color"
 msgstr ""
 
@@ -1492,7 +1674,8 @@ msgstr ""
 msgid "Up one place"
 msgstr ""
 
-#: templates/IWforms_admin_form.htm:13 templates/IWforms_user_export.htm:36
+#: templates/IWforms_admin_form.htm:13
+#: templates/IWforms_user_export.htm:36
 msgid "Managing a form"
 msgstr ""
 
@@ -1651,7 +1834,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: templates/IWforms_admin_menu.htm:4 templates/IWforms_user_menu.htm:3
+#: templates/IWforms_admin_menu.htm:4
+#: templates/IWforms_user_menu.htm:3
 msgid "Forms"
 msgstr ""
 
@@ -2095,3 +2279,4 @@ msgstr ""
 #: templates/IWforms_user_new.htm:53
 msgid "are required"
 msgstr ""
+

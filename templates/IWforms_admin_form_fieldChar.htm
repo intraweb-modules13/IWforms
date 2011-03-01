@@ -44,10 +44,10 @@
         {*}<a href="{modurl modname="IWforms" type="admin" func="form" action="field" do="delete" fndid=$field.fndid fid=$item.fid}">{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall'   __alt="Delete the field" __title="Delete the field"}</a>{*}
         <a href="javascript:deleteFormField({$field.fndid},{$item.fid});">{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall'   __alt="Delete the field" __title="Delete the field"}</a>
         {if $field.order neq $number*10}
-            <a href="{modurl modname="IWforms" type="admin" func="order" puts="-1" fndid=$field.fndid fid=$item.fid}">{img modname='IWforms' src='down.png' set='images'   __alt="A low" __title="A low"}</a>
+            <a href="{modurl modname="IWforms" type="admin" func="order" puts="-1" fndid=$field.fndid fid=$item.fid}">{img modname='IWforms' src='down.gif' set='images' __alt="A low" __title="A low"}</a>
         {/if}
         {if $field.order neq 10}
-            <a href="{modurl modname="IWforms" type="admin" func="order" puts="1" fndid=$field.fndid fid=$item.fid}">{img modname='IWforms' src='up.png' set='images'   __alt="Up one place" __title="Up one place"}</a>
+            <a href="{modurl modname="IWforms" type="admin" func="order" puts="1" fndid=$field.fndid fid=$item.fid}">{img modname='IWforms' src='up.gif' set='images' __alt="Up one place" __title="Up one place"}</a>
         {/if}
     </td>
 </tr>

@@ -5,6 +5,11 @@ class IWforms_Controller_Admin extends Zikula_Controller {
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
      * @return:	A list with the forms that had been created with some options
      */
+    public function postInitialize()
+    {
+        $this->view->setCaching(false);
+    }
+
     public function main() {
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
@@ -1928,7 +1933,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
      * @param:		form identity
      * @return:		Create a file XML with the form characteristics
      */
-    public function export($args) {
+    public function exportForm($args) {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
@@ -1937,6 +1942,16 @@ class IWforms_Controller_Admin extends Zikula_Controller {
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
             LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
+        }
+        // checks if the form have a folder directori and it is writeeable
+        $filesFolder = ModUtil::getVar('IWmain', 'documentRoot') . "/" . ModUtil::getVar('IWforms', 'attached');
+        if (!file_exists($filesFolder)) {
+            LogUtil::registerError($this->__('Error! It is not possible to create the export file because the form folder defined in the module settings does not exist.'));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
+        }
+        if (!is_writable($filesFolder)) {
+            LogUtil::registerError($this->__('Error! It is not possible to create the export file because the form folder defined in the module settings is not writable.'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         // Gets module information
@@ -2061,8 +2076,9 @@ class IWforms_Controller_Admin extends Zikula_Controller {
                 }
             }
         }
-        $file = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWmain', 'tempFolder') . '/exportForm' . date('dmY') . '.xml';
+        $file = $filesFolder . '/exportForm' . date('dmY') . '.xml';
         $save = $dom->save($file);
+
         //Check that file has been created correctly
         if (!is_file($file)) {
             LogUtil::registerError($this->__('Error exporting file'));

@@ -1,6 +1,4 @@
 {ajaxheader modname=IWforms filename=IWforms.js}
 {getstatusmsg}
 <h1>{gt text="Forms"}</h1>
-<div class="z-menu">
-    {IWformsusermenulinks fid=$fid func=$func}
-</div>
+{modulelinks modname='IWforms' type='user' fid=$fid func=$func}

@@ -14,6 +14,9 @@
 </select>
 {else}
 {gt text="It have got the words"}
-<input type="text" name="filterValue" size="15" value="{$filterValue}"><a href="#" onClick="javascript:sendChange(0)">{img modname='core' src='ok.gif' set='icons/extrasmall'}</a>
+<input type="text" name="filterValue" size="15" value="{$filterValue}">
+<a href="#" onClick="javascript:sendChange(0)">
+    {img modname='core' src='button_ok.png' set='icons/extrasmall'}
+</a>
 {/if}
 <a href="{modurl modname="IWforms" type="user" func="manage" fid=$fid}">{gt text="Return to init"}</a>
