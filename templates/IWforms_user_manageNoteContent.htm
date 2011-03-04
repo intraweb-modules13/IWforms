@@ -20,7 +20,7 @@
             </div>
             <div>
             {if $note.marked eq 1}
-                {img modname='core' src='flag.gif' set='icons/small' id=$note.fmid}
+                {img modname='core' src='flag.png' set='icons/small' id=$note.fmid}
             {else}
                 {img modname='IWforms' src='none.gif' set='images' id=$note.fmid}
             {/if}
@@ -61,7 +61,7 @@
                 {if $content.editable eq 1}
                 <div style="float:right;">
                     <a href="javascript:editNoteManageContent({$content.fnid},'content')">
-                        {img modname='core' src='xedit.gif' set='icons/extrasmall' __alt="Edit content" __title="Edit content"}
+                        {img modname='core' src='xedit.png' set='icons/extrasmall' __alt="Edit content" __title="Edit content"}
                     </a>
                 </div>
                 {/if}
@@ -86,7 +86,7 @@
             {if $note.synchronize}
             <div style="float: right; margin-left: 5px;">
                 | <a href="{modurl modname="IWforms" func="synchro" fid=$fid init=$init filterValue=$filterValue filter=$filter fmid=$note.fmid order=$order ipp=$ipp}">
-                    {img modname='core' src='recur.gif' set='icons/extrasmall' __alt="Synchronize fields" __title="Synchronize fields"}
+                    {img modname='core' src='quick_restart.png' set='icons/extrasmall' __alt="Synchronize fields" __title="Synchronize fields"}
                 </a>
             </div>
             {/if}

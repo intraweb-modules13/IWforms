@@ -1,6 +1,6 @@
 {include file="IWforms_user_menu.htm" fid=$form.fid}
 <div class="usercontainer">
-    <div class="userpageicon">{img modname='core' src='windowlist.gif' set='icons/large'}</div>
+    <div class="userpageicon">{img modname='core' src='windowlist.png' set='icons/large'}</div>
     <h2>{gt text="Export to CSV"}</h2>
     <div>{gt text="Form name"}: {$form.formName}</div>
     <div>{gt text="Title of the annotations "}: {$form.title}</div>
@@ -128,9 +128,13 @@
             {/foreach}
         </table>
         <div style="height:15px;">&nbsp;</div>
-        <div class="formOptions">
-            {button src='button_ok.gif' set='icons/small' __alt="Export" __title="Export"}{gt text="Export"}
-            <a href="{modurl modname="IWforms" type="user" func="manage" fid=$form.fid}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+        <div class="z-center">
+            <div class="z-button">
+                {button src='button_ok.png' set='icons/small' __alt="Export" __title="Export"}{gt text="Export"}
+            </div>
+            <div class="z-button">
+                <a href="{modurl modname="IWforms" type="user" func="manage" fid=$form.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+            </div>
         </div>
     </form>
 </div>

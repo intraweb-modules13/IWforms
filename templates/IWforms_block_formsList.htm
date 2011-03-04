@@ -4,12 +4,12 @@
         {if $form.accessLevel eq 7}
             {if $form.isFlagged eq 1}
                 <span>
-                    {img modname='core' src='flag.gif' set='icons/extrasmall'   __alt="Open the entry of annotations and editing" __title="Open the entry of annotations and editing"}
+                    {img modname='core' src='flag.png' set='icons/extrasmall'   __alt="Open the entry of annotations and editing" __title="Open the entry of annotations and editing"}
                 </span>
             {/if}
             {if $form.needValidation eq 1}
                 <span>
-                    {img modname='core' src='14_layer_visible.gif' set='icons/extrasmall'   __alt="Open the entry of annotations and editing" __title="Open the entry of annotations and editing"}
+                    {img modname='core' src='14_layer_visible.png' set='icons/extrasmall'   __alt="Open the entry of annotations and editing" __title="Open the entry of annotations and editing"}
                 </span>
             {/if}
         {/if}
@@ -22,21 +22,21 @@
         {if ($form.accessLevel eq 1 || $form.accessLevel >= 3) AND $form.closeInsert eq 0}
         <span>
             <a href="{modurl modname=IWforms type=user func=new fid=$form.fid}">
-                {img modname='core' src='lists.gif' set='icons/extrasmall'   __alt="Send an annotation" __title="Send an annotation"}
+                {img modname='core' src='lists.png' set='icons/extrasmall'   __alt="Send an annotation" __title="Send an annotation"}
             </a>
         </span>
 	{/if}
 	{if ($form.accessLevel eq 2 || $form.accessLevel >= 3) && $form.accessLevel != 7}
         <span>
             <a href="{modurl modname=IWforms type=user func=read fid=$form.fid}">
-                {img modname='core' src='reminders.gif' set='icons/extrasmall'   __alt="Show annotations" __title="Show annotations"}
+                {img modname='core' src='reminders.png' set='icons/extrasmall'   __alt="Show annotations" __title="Show annotations"}
             </a>
         </span>
 	{/if}
         {if $form.accessLevel eq 7}
         <span>
             <a href="{modurl modname=IWforms type=user func=manage fid=$form.fid}">
-                {img modname='core' src='package_settings.gif' set='icons/extrasmall'   __alt="Managing annotations" __title="Managing annotations"}
+                {img modname='core' src='package_settings.png' set='icons/extrasmall'   __alt="Managing annotations" __title="Managing annotations"}
             </a>
         </span>
 	{/if}

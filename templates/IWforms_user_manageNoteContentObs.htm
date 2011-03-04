@@ -3,7 +3,7 @@
     {$note.observations|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
     <div style="text-align: right;">
         <a href="javascript:editNoteManageContent({$note.fmid},'observations')">
-        {img modname='core' src='xedit.gif' set='icons/extrasmall'   __alt="Create private notes" __title="Create private notes"}
+        {img modname='core' src='xedit.png' set='icons/extrasmall'   __alt="Create private notes" __title="Create private notes"}
         </a>
     </div>
 </div>
@@ -16,7 +16,7 @@
     <input type="hidden" name="toDo" value="observations" />
     <textarea name="observations" style="width: 90%; margin: 10px;">{$note.observations|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
     <div style="text-align: right; cursor:pointer;">
-        <a onClick="javascript:submitValue('observations',{$note.fmid});" title="{gt text="Send"}">{img modname='core' src='button_ok.gif' set='icons/small'}</a>{gt text="Send"}
+        <a onClick="javascript:submitValue('observations',{$note.fmid});" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'}</a>{gt text="Send"}
     </div>
 </form>
 {/if}

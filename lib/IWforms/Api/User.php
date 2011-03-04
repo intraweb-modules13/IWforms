@@ -527,12 +527,13 @@ class IWforms_Api_User extends Zikula_Api {
         $filter = FormUtil::getPassedValue('filter', isset($args['filter']) ? $args['filter'] : null, 'POST');
         $order = FormUtil::getPassedValue('order', isset($args['order']) ? $args['order'] : null, 'POST');
         $fieldType = FormUtil::getPassedValue('fieldType', isset($args['fieldType']) ? $args['fieldType'] : null, 'POST');
+        $userNotes = FormUtil::getPassedValue('userNotes', isset($args['userNotes']) ? $args['userNotes'] : null, 'POST');
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
             return LogUtil::registerPermissionError();
         }
-
+        $where = '';
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
                         array('fid' => $fid));
@@ -555,7 +556,7 @@ class IWforms_Api_User extends Zikula_Api {
             $where .= "$c[content] LIKE '%$filterValue%' AND $c[fndid] = $filter";
         }
 
-        $items = DBUtil::selectObjectArray('IWforms_note', $where, $orderby, -1, -1, 'fmid');
+        $items = DBUtil::selectObjectArray('IWforms_note', $where, '', -1, -1, 'fmid');
 
         if ($items === false) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
@@ -1826,7 +1827,7 @@ class IWforms_Api_User extends Zikula_Api {
         }
  	//get user permissions for this form
 	if(isset($fid) && is_numeric($fid)){
-            $access = pnModFunc('IWforms', 'user', 'access', array('fid' => $fid));
+            $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
 	} else {
             $access['level'] = 0;
         }

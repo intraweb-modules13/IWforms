@@ -1,5 +1,4 @@
 <?php
-
 class IWforms_Controller_User extends Zikula_Controller {
 
     /**
@@ -398,6 +397,7 @@ class IWforms_Controller_User extends Zikula_Controller {
         $filters = array();
         $notesArray = array();
         $items = array();
+        $notes = array();
         if ($fmid != null) {
             $fmidArray[] = $fmid;
             $records = 1;
@@ -1335,9 +1335,9 @@ class IWforms_Controller_User extends Zikula_Controller {
         $noteContents = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
                         array('fid' => $fid,
                             'fmid' => $fmid));
+        $noteContentIdArray = array();
         /*
           //Create an array with the note contents
-          $noteContentIdArray = array();
           foreach ($noteContents as $noteContent) {
           array_push($noteContentIdArray, $noteContent['fndid']);
           }
