@@ -7,8 +7,6 @@ class IWforms_Block_formnote extends Zikula_Controller_Block
 
     public function info() {
         return array('text_type' => 'FormNote',
-                     'func_edit' => 'formnote_edit',
-                     'func_update' => 'formnote_update',
                      'module' => 'IWforms',
                      'text_type_long' => $this->__('Display the content of a note in a block'),
                      'allow_multiple' => true,
@@ -42,6 +40,7 @@ class IWforms_Block_formnote extends Zikula_Controller_Block
                                           'module' => 'IWforms',
                                           'uid' => $uid,
                                           'sv' => $sv));
+
         if ($exists) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $s = ModUtil::func('IWmain', 'user', 'userGetVar',
@@ -162,7 +161,7 @@ class IWforms_Block_formnote extends Zikula_Controller_Block
         return BlockUtil::themesideblock($blockinfo);
     }
 
-    function formnote_update($blockinfo) {
+    function update($blockinfo) {
         // Security check
         if (!SecurityUtil::checkPermission("IWforms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) {
             return;
@@ -175,7 +174,7 @@ class IWforms_Block_formnote extends Zikula_Controller_Block
         return $blockinfo;
     }
 
-    function formnote_edit($blockinfo) {
+    function modify($blockinfo) {
         // Security check
         if (!SecurityUtil::checkPermission("IWforms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) {
             return;

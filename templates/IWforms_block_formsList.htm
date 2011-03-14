@@ -21,7 +21,7 @@
     <div style="float: right;">
         {if ($form.accessLevel eq 1 || $form.accessLevel >= 3) AND $form.closeInsert eq 0}
         <span>
-            <a href="{modurl modname=IWforms type=user func=new fid=$form.fid}">
+            <a href="{modurl modname=IWforms type=user func=newItem fid=$form.fid}">
                 {img modname='core' src='lists.png' set='icons/extrasmall'   __alt="Send an annotation" __title="Send an annotation"}
             </a>
         </span>
@@ -36,7 +36,7 @@
         {if $form.accessLevel eq 7}
         <span>
             <a href="{modurl modname=IWforms type=user func=manage fid=$form.fid}">
-                {img modname='core' src='package_settings.png' set='icons/extrasmall'   __alt="Managing annotations" __title="Managing annotations"}
+                {img modname='core' src='configure.png' set='icons/extrasmall'   __alt="Managing annotations" __title="Managing annotations"}
             </a>
         </span>
 	{/if}
@@ -47,7 +47,7 @@
             {/foreach}
 {else}
     <form name="loadForm" id="loadForm" action="{modurl modname="IWforms" type="user" func="load" fid=$form.fid}" method="post">
-          <select name="fid" onchange="if(this.value > 0){submit();}">
+          <select name="fid" onchange="if(this.value > 0) submit();">
             <option>{gt text="Choose a form..." domain="module_IWforms"}</option>
             {foreach from=$forms item=form}
             <option value="{$form.fid}">{$form.formName}</option>

@@ -1,20 +1,19 @@
 <?php
 
 class IWforms_Block_formslist extends Zikula_Controller_Block {
+
     public function init() {
         SecurityUtil::registerPermissionSchema("IWforms:formslistblock:", "Block title::");
     }
 
     public function info() {
         return array('text_type' => 'FormsList',
-                     'func_edit' => 'formslist_edit',
-                     'func_update' => 'formslist_update',
-                     'module' => 'IWforms',
-                     'text_type_long' => $this->__('Display the list of forms where you can access the user'),
-                     'allow_multiple' => true,
-                     'form_content' => false,
-                     'form_refresh' => false,
-                     'show_preview' => true);
+            'module' => 'IWforms',
+            'text_type_long' => $this->__('Display the list of forms where you can access the user'),
+            'allow_multiple' => true,
+            'form_content' => false,
+            'form_refresh' => false,
+            'show_preview' => true);
     }
 
     /**
@@ -24,7 +23,7 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
      */
     public function display($blockinfo) {
         // Security check
-        if (!SecurityUtil::checkPermission("IWforms:formslistblock:", $blockinfo['title']."::", ACCESS_READ)) {
+        if (!SecurityUtil::checkPermission("IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_READ)) {
             return;
         }
         // Check if the module is available
@@ -35,35 +34,36 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
         //get the headlines saved in the user vars. It is renovate every 10 minutes
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists',
-                                    array('name' => 'formsListBlock' . $blockinfo['bid'],
-                                          'module' => 'IWforms',
-                                          'uid' => $uid,
-                                          'sv' => $sv));
+                        array('name' => 'formsListBlock' . $blockinfo['bid'],
+                            'module' => 'IWforms',
+                            'uid' => $uid,
+                            'sv' => $sv));
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $have_flags = ModUtil::func('IWmain', 'user', 'userGetVar',
-                                     array('uid' => $uid,
-                                           'name' => 'have_flags',
-                                           'module' => 'IWmain_block_flagged',
-                                           'sv' => $sv));
+                        array('uid' => $uid,
+                            'name' => 'have_flags',
+                            'module' => 'IWmain_block_flagged',
+                            'sv' => $sv));
+
         if ($exists && $have_flags != 'fr') {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $s = ModUtil::func('IWmain', 'user', 'userGetVar',
-                                array('uid' => $uid,
-                                      'name' => 'formsListBlock' . $blockinfo['bid'],
-                                      'module' => 'IWforms',
-                                      'sv' => $sv,
-                                      'nult' => true));
+                            array('uid' => $uid,
+                                'name' => 'formsListBlock' . $blockinfo['bid'],
+                                'module' => 'IWforms',
+                                'sv' => $sv,
+                                'nult' => true));
             $blockinfo['content'] = $s;
             return BlockUtil::themesideblock($blockinfo);
         }
         //get all the active forms
         $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
-                                   array('user' => 1));
+                        array('user' => 1));
         //get all the groups of the user
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $userGroups = ModUtil::func('IWmain', 'user', 'getAllUserGroups',
-                                     array('uid' => $uid,
-                                           'sv' => $sv));
+                        array('uid' => $uid,
+                            'sv' => $sv));
         foreach ($userGroups as $group) {
             $userGroupsArray[] = $group['id'];
         }
@@ -82,8 +82,8 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
         foreach ($forms as $form) {
             if ($catsString == '$' || strpos($catsString, '$' . $form['cid'] . '$') != false) {
                 $access = ModUtil::func('IWforms', 'user', 'access',
-                                         array('fid' => $form['fid'],
-                                               'userGroups' => $userGroupsArray));
+                                array('fid' => $form['fid'],
+                                    'userGroups' => $userGroupsArray));
                 if ($access['level'] != 0) {
                     $isFlagged = (array_key_exists($form['fid'], $flagged)) ? 1 : 0;
                     $needValidation = (array_key_exists($form['fid'], $validation)) ? 1 : 0;
@@ -94,15 +94,15 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
                     $formName = ($values[1] == 1) ? $formShortName : $form['formName'];
                     //Whit all the information create the array to output
                     $forms_array[] = array('formName' => $formName,
-                                           'title' => $form['title'],
-                                           'accessLevel' => $access['level'],
-                                           'closeableInsert' => $form['closeableInsert'],
-                                           'isFlagged' => $isFlagged,
-                                           'needValidation' => $needValidation,
-                                           'closeInsert' => $form['closeInsert'],
-                                           'newLabel' => $newLabel,
-                                           'defaultValidation' => $access['defaultValidation'],
-                                           'fid' => $form['fid']);
+                        'title' => $form['title'],
+                        'accessLevel' => $access['level'],
+                        'closeableInsert' => $form['closeableInsert'],
+                        'isFlagged' => $isFlagged,
+                        'needValidation' => $needValidation,
+                        'closeInsert' => $form['closeInsert'],
+                        'newLabel' => $newLabel,
+                        'defaultValidation' => $access['defaultValidation'],
+                        'fid' => $form['fid']);
                 }
             }
         }
@@ -114,19 +114,19 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
         //Copy the block information into user vars
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         ModUtil::func('IWmain', 'user', 'userSetVar',
-                       array('uid' => $uid,
-                             'name' => 'formsListBlock' . $blockinfo['bid'],
-                             'module' => 'IWforms',
-                             'sv' => $sv,
-                             'value' => $s,
-                             'lifetime' => '750'));
+                        array('uid' => $uid,
+                            'name' => 'formsListBlock' . $blockinfo['bid'],
+                            'module' => 'IWforms',
+                            'sv' => $sv,
+                            'value' => $s,
+                            'lifetime' => '750'));
 
         // Populate block info and pass to theme
         $blockinfo['content'] = $s;
         return BlockUtil::themesideblock($blockinfo);
     }
 
-    function formslist_update($blockinfo) {
+    function update($blockinfo) {
         // Security check
         if (!SecurityUtil::checkPermission("IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) {
             return;
@@ -136,7 +136,7 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
         return $blockinfo;
     }
 
-    function formslist_edit($blockinfo) {
+    function modify($blockinfo) {
         // Security check
         if (!SecurityUtil::checkPermission("IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) {
             return;
