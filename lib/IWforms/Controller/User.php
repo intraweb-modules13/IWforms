@@ -11,6 +11,8 @@ class IWforms_Controller_User extends Zikula_Controller {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
+        $userGroupsArray = array();
+        $forms_array = array();
         //get all the active forms
         $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
                         array('user' => 1));
@@ -20,8 +22,10 @@ class IWforms_Controller_User extends Zikula_Controller {
         $userGroups = ModUtil::func('IWmain', 'user', 'getAllUserGroups',
                         array('uid' => $uid,
                             'sv' => $sv));
-        foreach ($userGroups as $group) {
-            $userGroupsArray[] = $group['id'];
+        if (!empty($userGroups)) {
+            foreach ($userGroups as $group) {
+                $userGroupsArray[] = $group['id'];
+            }
         }
         $flagged = ModUtil::apiFunc('IWforms', 'user', 'getWhereFlagged');
         $validation = ModUtil::apiFunc('IWforms', 'user', 'getWhereNeedValidation');
@@ -75,6 +79,7 @@ class IWforms_Controller_User extends Zikula_Controller {
         $userGroups = FormUtil::getPassedValue('userGroups', isset($args['userGroups']) ? $args['userGroups'] : null, 'POST');
         $uid = FormUtil::getPassedValue('uid', isset($args['uid']) ? $args['uid'] : UserUtil::getVar('uid'), 'POST');
         $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $requestByCron = false;
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
                         array('sv' => $sv))) {
             // Security check
@@ -113,8 +118,10 @@ class IWforms_Controller_User extends Zikula_Controller {
             $userGroups = ModUtil::func('IWmain', 'user', 'getAllUserGroups',
                             array('uid' => $uid,
                                 'sv' => $sv));
-            foreach ($userGroups as $group) {
-                $userGroups[] = $group['id'];
+            if (!empty($userGroups)) {
+                foreach ($userGroups as $group) {
+                    $userGroups[] = $group['id'];
+                }
             }
         }
         if ($uid > 0) {
@@ -1538,7 +1545,7 @@ class IWforms_Controller_User extends Zikula_Controller {
      * @param:	form identity
      * @return	The module information
      */
-    public function export($args) {
+    public function exportForm($args) {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'REQUEST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
@@ -1559,8 +1566,9 @@ class IWforms_Controller_User extends Zikula_Controller {
             // Redirect to the main site for the user
             return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
         }
+
         //Checks if the exportatin is possible
-        if (!file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWmain', 'tempFolder')) || ModUtil::getVar('IWmain', 'tempFolder') == '') {
+        if (!file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached'))) {
             LogUtil::registerError($this->__('The export is not possible because the directory for temporary files don\'t exist on the server. If the problem persists it communicates to the administrator at the portal.'));
             return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
                             array('fid' => $fid)));
@@ -1655,10 +1663,11 @@ class IWforms_Controller_User extends Zikula_Controller {
                 $i++;
             }
         }
+
         //get all form notes
         $notes = ModUtil::apiFunc('IWforms', 'user', 'getAllNotes',
                         array('fid' => $fid));
-        $file = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWmain', 'tempFolder') . '/export' . date('dmY') . '.csv';
+        $file = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached') . '/export' . date('dmY') . '.csv';
         $f = fopen($file, 'w');
         $row1 = '';
         if ($user == 'on')
