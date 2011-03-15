@@ -76,10 +76,10 @@
 	{if not isset($adminView)}
         <div class="z-center">
             <div class="z-button">
-                <a style="cursor:pointer;" onClick="javascript:sendNote()" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'}</a>{gt text="Send"}
+                <a style="cursor:pointer;" onClick="javascript:sendNote()" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>
             </div>
             <div class="z-button">
-                <a href="{modurl modname="IWforms" type="user" func="main"}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+                <a href="{modurl modname="IWforms" type="user" func="main"}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
             </div>
         </div>
         {/if}

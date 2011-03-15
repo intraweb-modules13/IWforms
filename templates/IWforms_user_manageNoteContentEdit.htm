@@ -12,11 +12,15 @@
 {if $do eq 'edit'}
 <form name="submitValueFormC_{$noteContent.fnid}" id="submitValueFormC_{$noteContent.fnid}" class="z-form" method="post" enctype="multipart/form-data">
     <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
-    <input type="hidden" name="fnid" value="{$noteContent.fnid}" />
+           <input type="hidden" name="fnid" value="{$noteContent.fnid}" />
     <input type="hidden" name="toDo" value="content" />
     <textarea name="content" style="width: 90%; margin: 10px;">{$noteContent.content|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
-    <div style="text-align: right; cursor:pointer;">
-        <a onClick="javascript:submitValue('content',{$noteContent.fnid});" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'}</a>{gt text="Send"}
+
+    <div class="z-right">
+        <span class="z-button">
+            <a onClick="javascript:submitValue('content',{$noteContent.fnid});" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>
+        </span>
     </div>
+
 </form>
 {/if}

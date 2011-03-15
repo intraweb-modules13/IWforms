@@ -5,7 +5,7 @@
     <div>{gt text="Form name"}: {$form.formName}</div>
     <div>{gt text="Title of the annotations "}: {$form.title}</div>
     <div style="height:15px;">&nbsp;</div>
-    <form class="z-form" action="{modurl modname="IWforms" type="user" func="generateCSV"}" method="post" enctype="application/x-www-form-urlencoded">
+    <form id="export" class="z-form" action="{modurl modname="IWforms" type="user" func="generateCSV"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="fid" value="{$form.fid}" />
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
                <table class="z-datatable" width="100%">
@@ -130,10 +130,10 @@
             <div style="height:15px;">&nbsp;</div>
             <div class="z-center">
                 <div class="z-button">
-                    {button src='button_ok.png' set='icons/small' __alt="Export" __title="Export"}{gt text="Export"}
+                    <a onClick="javascript:forms['export'].submit()">{img modname='core' src='button_ok.png' set='icons/small' __alt="Export" __title="Export"} {gt text="Export"}</a>
                 </div>
                 <div class="z-button">
-                    <a href="{modurl modname="IWforms" type="user" func="manage" fid=$form.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
+                    <a href="{modurl modname="IWforms" type="user" func="manage" fid=$form.fid}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
                 </div>
             </div>
         </form>

@@ -1685,20 +1685,24 @@ class IWforms_Controller_Admin extends Zikula_Controller {
             LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
+
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                         array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
+
         //get the form view
-        $formView = ModUtil::func('IWforms', 'user', 'new',
+        $formView = ModUtil::func('IWforms', 'user', 'newItem',
                         array('fid' => $fid,
                             'adminView' => 1));
+
         //get the form features
         $formDefinition = ModUtil::func('IWforms', 'admin', 'definition',
                         array('fid' => $fid,
                             'adminView' => 1));
+
         //get the form groups
         $formGroups = ModUtil::func('IWforms', 'admin', 'groups',
                         array('fid' => $fid,
@@ -1707,6 +1711,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
         $formValidators = ModUtil::func('IWforms', 'admin', 'validators',
                         array('fid' => $fid,
                             'adminView' => 1));
+
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('item', $item);

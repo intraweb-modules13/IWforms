@@ -8,7 +8,7 @@
 <div class="formContent" id="fieldsList">
     <div class="z-adminpageicon">{img modname='core' src='lists.png' set='icons/large'}</div>
     <h2>{gt text="List of form fields"}</h2>
-    <form name="fields" id="fields" class="z-form" action="{modurl modname="IWforms" type="admin" func="changeOrder"}" method="post" enctype="application/x-www-form-urlencoded">
+    <form id="fields" class="z-form" action="{modurl modname="IWforms" type="admin" func="changeOrder"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
         <input type="hidden" name="fid" value="{$fid}" />
         <table class="z-datatable">
@@ -39,8 +39,11 @@
         </table>
         <div>
             {img modname='IWforms' src='orderLine.gif' set='images'   __alt="Change order" __title="Change order"}
-            <span class="orderButton">{button src='button_ok.png' set='icons/small' __alt="Change order" __title="Change order"}</span>
-            {gt text="Change order"}
+            <span class="orderButton z-button">
+                <a onClick="javascript:forms['fields'].submit()">
+                    {img modname='core' src='button_ok.png' set='icons/small' __alt="Change order" __title="Change order"} {gt text="Change order"}
+                </a>
+            </span>
         </div>
         <div class="z-formbuttons">
             <div style="float:left;">
@@ -53,4 +56,3 @@
             </div>
         </div>
     </form>
-</div>

@@ -198,8 +198,10 @@
         {/if}
     </div>
     {if not isset($adminView)}
-    <div class="z-formbuttons">
-        <a href="{modurl modname="IWforms" type="admin" func="form" do="edit" fid=$item.fid}">{img modname='core' src='edit.png' set='icons/small' __alt="Edit the main form" __title="Edit the main form"}</a>{gt text="Edit the main form"}
+    <div class="z-center">
+        <div class="z-button">
+            <a href="{modurl modname="IWforms" type="admin" func="form" do="edit" fid=$item.fid}">{img modname='core' src='edit.png' set='icons/small' __alt="Edit the main form" __title="Edit the main form"} {gt text="Edit the main form"}</a>
+        </div>
     </div>
     {/if}
 </div>

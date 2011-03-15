@@ -28,8 +28,10 @@
         <span style="color: red;">{gt text="The answer only sees the user sender"}</span>
         {/if}
     </div>
-    <div style="text-align: right; cursor:pointer;">
-        <a onClick="javascript:submitValue('renote',{$note.fmid},document.submitValueFormR_{$note.fmid}.copy.checked)" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'}</a>{gt text="Send"}
+    <div class="z-right">
+        <span class="z-button">
+            <a onClick="javascript:submitValue('renote',{$note.fmid},document.submitValueFormR_{$note.fmid}.copy.checked)" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>
+        </span>
     </div>
     <div>
         {if $note.annonimous neq 1}
