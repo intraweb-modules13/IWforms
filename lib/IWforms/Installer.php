@@ -103,30 +103,7 @@ class IWforms_Installer extends Zikula_Installer {
      * @return bool true if successful, false otherwise
      */
     public function upgrade($oldversion) {
-        if (!DBUtil::changeTable('IWforms_definition')) return false;
-        if (!DBUtil::changeTable('IWforms_cat')) return false;
-        if (!DBUtil::changeTable('IWforms')) return false;
-        if (!DBUtil::changeTable('IWforms_note')) return false;
-        if (!DBUtil::changeTable('IWforms_note_definition')) return false;
-        if (!DBUtil::changeTable('IWforms_validator')) return false;
-        if (!DBUtil::changeTable('IWforms_group')) return false;
-        if ($oldversion < '1.2') {
-            //Create indexes
-            $pntable = DBUtil::getTables();
-            $c = $pntable['IWforms_definition_column'];
-            !DBUtil::createIndex($c['active'], 'IWforms_definition', 'active');
-            $c = $pntable['IWforms_column'];
-            !DBUtil::createIndex($c['fid'], 'IWforms', 'fid');
-            $c = $pntable['IWforms_group_column'];
-            !DBUtil::createIndex($c['fid'], 'IWforms_group', 'fid');
-            $c = $pntable['IWforms_note_column'];
-            !DBUtil::createIndex($c['fmid'], 'IWforms_note', 'fmid');
-            !DBUtil::createIndex($c['fndid'], 'IWforms_note', 'fndid');
-            $c = $pntable['IWforms_note_definition_column'];
-            !DBUtil::createIndex($c['fid'], 'IWforms_note_definition', 'fid');
-            $c = $pntable['IWforms_validator_column'];
-            !DBUtil::createIndex($c['fid'], 'IWforms_validator', 'fid');
-        }
+
         return true;
     }
 }
