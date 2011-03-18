@@ -8,12 +8,12 @@
         <input type="hidden" name="confirm" value="1" />
         {gt text="Confirm the deletion of the form notes for the form"}: <strong>{$item.formName}</strong>
         <div class="z-center">
-            <div class="z-button">
+            <span class="z-buttons">
                 <a onClick="javascript:forms['deleteNotes'].submit()">{img modname='core' src='button_ok.png' set='icons/small' __alt="Delete" __title="Delete"} {gt text="Delete"}</a>
-            </div>
-            <div class="z-button">
+            </span>
+            <span class="z-buttons">
                 <a href="{modurl modname="IWforms" type="admin" func="main"}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
-            </div>
+            </span>
         </div>
     </form>
 </div>

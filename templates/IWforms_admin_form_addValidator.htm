@@ -31,16 +31,16 @@
         </div>
         {*}
         <div class="z-center">
-            <div class="z-button">
+            <span class="z-buttons">
                 <a onClick="javascript:forms['addValidator'].submit()">{img modname='core' src='button_ok.png' set='icons/small' __alt="Add" __title="Add"} {gt text="Add"}</a>
-            </div>
-            <div class="z-button">
+            </span>
+            <span class="z-buttons">
                 {if not isset($aio)}
                 <a href="{modurl modname="IWforms" type="admin" func="form" action="validators" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
                 {else}
                 <a href="{modurl modname="IWforms" type="admin" func="infoForm" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
                 {/if}
-            </div>
+            </span>
         </div>
     </form>
 </div>

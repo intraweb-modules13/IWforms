@@ -15,10 +15,9 @@
     <input type="hidden" name="fmid" value="{$note.fmid}" />
     <input type="hidden" name="toDo" value="observations" />
     <textarea name="observations" style="width: 90%; margin: 10px;">{$note.observations|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
-    <div class="z-right">
-        <span class="z-button">
-            <a onClick="javascript:submitValue('observations',{$note.fmid});" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>
-        </span>
+    <div class="z-right z-buttons">
+        <a onClick="javascript:submitValue('observations',{$note.fmid});" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>
     </div>
+
 </form>
 {/if}

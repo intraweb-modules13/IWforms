@@ -190,12 +190,12 @@
         </div>
         {/if}
         <div class="z-center">
-            <div class="z-button">
+            <span class="z-buttons">
                 <a onClick="javascript:forms['edit'].submit()">{img modname='core' src='button_ok.png' set='icons/small' __alt="Edit" __title="Edit"} {gt text="Edit"}</a>
-            </div>
-            <div class="z-button">
+            </span>
+            <span class="z-buttons">
                 <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
-            </div>
+            </span>
         </div>
     </form>
 </div>

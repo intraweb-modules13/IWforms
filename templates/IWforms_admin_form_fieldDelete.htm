@@ -19,13 +19,13 @@
         {/if}
         <div class="z-center">
             {if $dependancesTo|@count eq 0}
-            <div class="z-button">
+            <span class="z-buttons">
                 {button src='button_ok.png' set='icons/small' __alt="Delete" __title="Delete"}
-            </div>
+            </span>
             {/if}
-            <div class="z-button">
+            <span class="z-buttons">
                 <a href="{modurl modname="IWforms" type="admin" func="form" action="field" fid=$item.fid}">{img modname='core' src='button_cancel.png' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
-            </div>
+            </span>
         </div>
     </form>
 </div>
