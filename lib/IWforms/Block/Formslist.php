@@ -44,7 +44,7 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
                             'name' => 'have_flags',
                             'module' => 'IWmain_block_flagged',
                             'sv' => $sv));
-
+/*
         if ($exists && $have_flags != 'fr') {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $s = ModUtil::func('IWmain', 'user', 'userGetVar',
@@ -56,6 +56,9 @@ class IWforms_Block_formslist extends Zikula_Controller_Block {
             $blockinfo['content'] = $s;
             return BlockUtil::themesideblock($blockinfo);
         }
+ * 
+ */
+        $userGroupsArray = array();
         //get all the active forms
         $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
                         array('user' => 1));

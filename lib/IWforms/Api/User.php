@@ -176,6 +176,10 @@ class IWforms_Api_User extends Zikula_Api {
         if (!isset($fid) || !is_numeric($fid) || !isset($accessGroupsString)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
+        $whereGroup = array();
+        $canWrite = 0;
+        $canRead = 0;
+        $canReadAndWrite = 0;
 
         $accessGroupsString = substr($accessGroupsString, 2, -1);
 
@@ -197,7 +201,7 @@ class IWforms_Api_User extends Zikula_Api {
         //get the access of the user as a group
         //create a where string to select the groups
         foreach ($groups as $group) {
-            $whereGroup .= "$c[group]=" . $group . ' OR ';
+            $whereGroup = "$c[group]=" . $group . ' OR ';
         }
         $whereGroup = substr($whereGroup, 0, '-3');
 
