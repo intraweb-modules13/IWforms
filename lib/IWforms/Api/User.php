@@ -176,7 +176,7 @@ class IWforms_Api_User extends Zikula_Api {
         if (!isset($fid) || !is_numeric($fid) || !isset($accessGroupsString)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
-        $whereGroup = array();
+        $whereGroup = '';
         $canWrite = 0;
         $canRead = 0;
         $canReadAndWrite = 0;
