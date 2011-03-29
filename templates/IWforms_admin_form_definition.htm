@@ -125,6 +125,21 @@
         <span class="formRowDefinitionDBField">{gt text="Return URL after sending a new note"}</span>: 
         <a href="{$item.returnURL}">{$item.returnURL}</a>
     </div>
+    <div class="formRowDefinition">
+        <span class="formRowDefinitionDBField">{gt text="Form files folder"}</span>:
+        {$item.filesFolder}
+    </div>
+    {if not $folderExists}
+        <div class="z-errormsg">
+            {gt text="Files folder not found."}
+        </div>
+    {else}
+        {if not $folderIsWriteable}
+            <div class="z-errormsg">
+                {gt text="The files folder is not writeable."}
+            </div>
+        {/if}
+    {/if}
     {if $item.expertMode}
     <fieldset style="margin: 15px 0px 15px 0px;">
         <legend>{gt text="Templates for the notes (expert mode)"}</legend>
@@ -198,7 +213,7 @@
         {/if}
     </div>
     {if not isset($adminView)}
-    <div class="z-button z-center">
+    <div class="z-buttons z-center">
         <a href="{modurl modname="IWforms" type="admin" func="form" do="edit" fid=$item.fid}">{img modname='core' src='edit.png' set='icons/small' __alt="Edit the main form" __title="Edit the main form"} {gt text="Edit the main form"}</a>
     </div>
     {/if}

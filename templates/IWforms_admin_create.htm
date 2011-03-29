@@ -104,6 +104,12 @@
                     <input id="returnURL" name="returnURL" type="text" size="50" maxlength="150" />
                 </div>
                 <div class="z-formrow">
+                    <label for="filesFolder">{gt text="Form files folder"}</label>
+                    <div class="z-formnote">
+                        <strong>{$filesFolder}/</strong> <input id="filesFolder" name="filesFolder" type="text" size="50" maxlength="30" value="{$item.filesFolder}"/>
+                    </div>
+                </div>
+                <div class="z-formrow">
                     <label for="expertMode">{gt text="Use expert mode (options available after creation during edition)"}</label>
                     <input id="expertMode" name="expertMode" type="checkbox" value="1" />
                 </div>
