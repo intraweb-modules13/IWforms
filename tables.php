@@ -42,6 +42,7 @@ function IWforms_tables() {
                                                  'allowComments' => 'iw_allowComments',
                                                  'allowCommentsModerated' => 'iw_allowCommentsModerated',
                                                  'returnURL' => 'iw_returnURL',
+                                                 'filesFolder' => 'filesFolder',
                                                   );
 
     $tables['IWforms_definition_column_def'] = array('fid' => "I NOTNULL AUTO PRIMARY",
@@ -76,6 +77,7 @@ function IWforms_tables() {
                                                      'allowComments' => "I(1) NOTNULL DEFAULT '0'",
                                                      'allowCommentsModerated' => "I(1) NOTNULL DEFAULT '0'",
                                                      'returnURL' => "C(150) NOTNULL DEFAULT ''",
+                                                     'filesFolder' => "C(25) NOTNULL DEFAULT ''",
                                                     );
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_definition_column'], 'pn_');
