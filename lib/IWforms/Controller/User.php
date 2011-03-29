@@ -1,4 +1,5 @@
 <?php
+
 class IWforms_Controller_User extends Zikula_Controller {
 
     /**
@@ -395,7 +396,7 @@ class IWforms_Controller_User extends Zikula_Controller {
                             'ipp' => 1000000,
                             'init' => 0));
         $usersList = '';
-        $users= array();
+        $users = array();
         foreach ($AllNotes as $note) {
             $usersList .= $note['user'] . '$$';
         }
@@ -1421,6 +1422,9 @@ class IWforms_Controller_User extends Zikula_Controller {
                 }
             }
         }
+        // get item
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
+                        array('fid' => $fid));
         //The fields with attached files are processed in a different way
         foreach ($_FILES as $key => $element) {
             $fieldId = str_replace('field', '', $key);
@@ -1428,7 +1432,11 @@ class IWforms_Controller_User extends Zikula_Controller {
             $fieldContent = $element['name'];
             //Update the files to the server
             if ($fieldContent != '') {
-                $folder = ($allFields[$fieldId]['publicFile'] != 1) ? ModUtil::getVar('IWforms', 'attached') : ModUtil::getVar('IWforms', 'publicFolder');
+                if ($form['filesFolder'] == '') {
+                    $folder = ($allFields[$fieldId]['publicFile'] != 1) ? ModUtil::getVar('IWforms', 'attached') : ModUtil::getVar('IWforms', 'publicFolder');
+                } else {
+                    $folder = ModUtil::getVar('IWforms', 'attached') . '/' . $form['filesFolder'];
+                }
                 if ($folder == '') {
                     LogUtil::registerError($update['msg'] . ' ' . $this->__('There was a problem in the attachment file. Probably the annotation was sent without the file or attachment.'));
                     return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
@@ -1524,14 +1532,22 @@ class IWforms_Controller_User extends Zikula_Controller {
             // Redirect to the main site for the user
             return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
         }
+        // get form
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
+                        array('fid' => $fid));
+
+
         $field = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
                         array('fndid' => $fndid));
-        // user can download the file
-        if ($field['publicFile'] != 1) {
-            $fileNameInServer = ModUtil::getVar('IWforms', 'attached') . '/' . $fileName;
-        } else {
-            $fileNameInServer = ModUtil::getVar('IWforms', 'publicFolder') . '/' . $fileName;
-        }
+
+        if ($form['filesFolder'] == '') {
+            if ($field['publicFile'] != 1) {
+                $fileNameInServer = ModUtil::getVar('IWforms', 'attached') . '/' . $fileName;
+            } else {
+                $fileNameInServer = ModUtil::getVar('IWforms', 'publicFolder') . '/' . $fileName;
+            }
+        } else $fileNameInServer = ModUtil::getVar('IWforms', 'attached') . '/' . $form['filesFolder'] . '/' . $fileName;
+
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         return ModUtil::func('IWmain', 'user', 'downloadFile',
                 array('fileName' => $fileName,
@@ -1877,4 +1893,5 @@ class IWforms_Controller_User extends Zikula_Controller {
         $view->assign('items', $items);
         return $view->fetch('IWforms_user_pager.htm');
     }
+
 }

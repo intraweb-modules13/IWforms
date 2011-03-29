@@ -23,6 +23,7 @@ class IWforms_Api_Admin extends Zikula_Api {
         $allowComments = FormUtil::getPassedValue('allowComments', isset($args['allowComments']) ? $args['allowComments'] : 0, 'POST');
         $allowCommentsModerated = FormUtil::getPassedValue('allowCommentsModerated', isset($args['allowCommentsModerated']) ? $args['allowCommentsModerated'] : 0, 'POST');
         $returnURL = FormUtil::getPassedValue('returnURL', isset($args['returnURL']) ? $args['returnURL'] : '', 'POST');
+        $filesFolder = FormUtil::getPassedValue('filesFolder', isset($args['filesFolder']) ? $args['filesFolder'] : '', 'POST');
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
@@ -51,7 +52,9 @@ class IWforms_Api_Admin extends Zikula_Api {
                       'expertMode' => $expertMode,
                       'allowComments' => $allowComments,
                       'allowCommentsModerated' => $allowCommentsModerated,
-                      'returnURL' => $returnURL);
+                      'returnURL' => $returnURL,
+                      'filesFolder' => $filesFolder,
+            );
         if (!DBUtil::insertObject($item, 'IWforms_definition', 'fid')) {
             return LogUtil::registerError($this->__('Error! Creation attempt failed.'));
         }

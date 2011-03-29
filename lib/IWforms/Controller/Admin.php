@@ -67,9 +67,11 @@ class IWforms_Controller_Admin extends Zikula_Controller {
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
+        $filesFolder =  ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
         //outputs assignaments
         $view->assign('cats', $categories);
         $view->assign('item', array('expertMode' => ''));
+        $view->assign('filesFolder', $filesFolder);
         return $view->fetch('IWforms_admin_create.htm');
     }
 
@@ -103,6 +105,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
         $skinTemplate = FormUtil::getPassedValue('skinTemplate', isset($args['skinTemplate']) ? $args['skinTemplate'] : null, 'POST');
         $skinNoteTemplate = FormUtil::getPassedValue('skinNoteTemplate', isset($args['skinNoteTemplate']) ? $args['skinNoteTemplate'] : null, 'POST');
         $returnURL = FormUtil::getPassedValue('returnURL', isset($args['returnURL']) ? $args['returnURL'] : '', 'POST');
+        $filesFolder = FormUtil::getPassedValue('filesFolder', isset($args['filesFolder']) ? $args['filesFolder'] : '', 'POST');
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
@@ -138,6 +141,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
                             'skinTemplate' => $skinTemplate,
                             'skinNoteTemplate' => $skinNoteTemplate,
                             'returnURL' => $returnURL,
+                            'filesFolder' => $filesFolder,
                 ));
         if ($create != false) {
             // Success
@@ -310,10 +314,24 @@ class IWforms_Controller_Admin extends Zikula_Controller {
             $url = System::getBaseUrl() . 'index.php?module=IWforms&func=getFile&fileName=' . ModUtil::getVar('IWforms', 'attached') . '/' . $item['skincss'];
             $item['skincssurl'] = '<link rel="stylesheet" href="' . $url . '" type="text/css" />';
         }
+        $folderExists = true;
+        $folderIsWriteable = true;
+        if ($item['filesFolder'] != '') {
+            $path =  ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached') . '/' . $item['filesFolder'];
+            $item['filesFolder'] = $path;
+            if (!file_exists($path)) {
+                $folderExists = false;
+            } else {
+                if (!is_writeable($path)) $folderIsWriteable = false;
+            }
+
+        }
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('catName', $category['catName']);
         $view->assign('item', $item);
+        $view->assign('folderExists', $folderExists);
+        $view->assign('folderIsWriteable', $folderIsWriteable);
         $view->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']));
         $view->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']));
         return $view->fetch('IWforms_admin_form_definition.htm');
@@ -1317,6 +1335,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
         $allowComments = FormUtil::getPassedValue('allowComments', isset($args['allowComments']) ? $args['allowComments'] : 0, 'POST');
         $allowCommentsModerated = FormUtil::getPassedValue('allowCommentsModerated', isset($args['allowCommentsModerated']) ? $args['allowCommentsModerated'] : 0, 'POST');
         $returnURL = FormUtil::getPassedValue('returnURL', isset($args['returnURL']) ? $args['returnURL'] : '', 'POST');
+        $filesFolder = FormUtil::getPassedValue('filesFolder', isset($args['filesFolder']) ? $args['filesFolder'] : '', 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
@@ -1397,6 +1416,7 @@ class IWforms_Controller_Admin extends Zikula_Controller {
             'allowComments' => $allowComments,
             'allowCommentsModerated' => $allowCommentsModerated,
             'returnURL' => $returnURL,
+            'filesFolder' => $filesFolder,
         );
         if (ModUtil::apiFunc('IWforms', 'admin', 'editForm',
                         array('fid' => $fid,
