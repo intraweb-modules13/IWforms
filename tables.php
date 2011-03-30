@@ -42,7 +42,7 @@ function IWforms_tables() {
                                                  'allowComments' => 'iw_allowComments',
                                                  'allowCommentsModerated' => 'iw_allowCommentsModerated',
                                                  'returnURL' => 'iw_returnURL',
-                                                 'filesFolder' => 'filesFolder',
+                                                 'filesFolder' => 'iw_filesFolder',
                                                   );
 
     $tables['IWforms_definition_column_def'] = array('fid' => "I NOTNULL AUTO PRIMARY",

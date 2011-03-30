@@ -1779,25 +1779,6 @@ class IWforms_Controller_User extends Zikula_Controller {
     }
 
     /**
-     * Show the module information
-     * @author	Albert Pérez Monfort (aperezm@xtec.cat)
-     * @return	The module information
-     */
-    public function module() {
-        // Security check
-        if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
-        }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $module = ModUtil::func('IWmain', 'user', 'module_info',
-                        array('module_name' => 'IWforms',
-                            'type' => 'user'));
-        $view->assign('module', $module);
-        return $view->fetch('IWforms_user_module.htm');
-    }
-
-    /**
      * Prepare time to save it in database
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
      * @param:	time in format dd/mm/yy hh:ii::ss

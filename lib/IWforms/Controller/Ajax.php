@@ -217,22 +217,31 @@ class IWforms_Controller_Ajax extends Zikula_Controller {
         if ($access['level'] < 7) {
             AjaxUtil::error(DataUtil::formatForDisplayHTML($this->__('You do not have access to manage form')));
         }
-        if (!ModUtil::apiFunc('IWforms', 'user', 'deleteNote',
-                        array('fmid' => $fmid))) {
-            AjaxUtil::error(DataUtil::formatForDisplayHTML($this->__('There was an error to remove the annotation')));
-        }
+        // get form
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
+                        array('fid' => $note['fid']));
+
         foreach ($fields as $field) {
             if ($field['fieldType'] == '7') {
                 $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
                                 array('fid' => $note['fid'],
                                     'fmid' => $note['fmid']));
                 if ($noteContent[$field['fndid']]['content'] != '') {
-                    $file = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached') . '/' . $noteContent[$field['fndid']]['content'];
+                    if ($form['filesFolder'] == '') {
+                        $folder = ($field['publicFile'] != 1) ? ModUtil::getVar('IWforms', 'attached') : ModUtil::getVar('IWforms', 'publicFolder');
+                    } else {
+                        $folder = ModUtil::getVar('IWforms', 'attached') . '/' . $form['filesFolder'];
+                    }
+                    $file = ModUtil::getVar('IWmain', 'documentRoot') . '/' . $folder . '/' . $noteContent[$field['fndid']]['content'];
                     if (file_exists($file)) {
                         unlink($file);
                     }
                 }
             }
+        }
+        if (!ModUtil::apiFunc('IWforms', 'user', 'deleteNote',
+                        array('fmid' => $fmid))) {
+            AjaxUtil::error(DataUtil::formatForDisplayHTML($this->__('There was an error to remove the annotation')));
         }
         AjaxUtil::output(array('fmid' => $fmid));
     }
