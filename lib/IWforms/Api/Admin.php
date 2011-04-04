@@ -1,5 +1,5 @@
 <?php
-class IWforms_Api_Admin extends Zikula_Api {
+class IWforms_Api_Admin extends Zikula_AbstractApi {
     public function createNewForm($args) {
         $formName = FormUtil::getPassedValue('formName', isset($args['formName']) ? $args['formName'] : null, 'POST');
         $description = FormUtil::getPassedValue('description', isset($args['description']) ? $args['description'] : null, 'POST');

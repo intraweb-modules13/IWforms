@@ -1,5 +1,5 @@
 <?php
-class IWforms_Version extends Zikula_Version
+class IWforms_Version extends Zikula_AbstractVersion
 {
     public function getMetaData() {
         $meta = array();

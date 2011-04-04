@@ -1,6 +1,6 @@
 <?php
 
-class IWforms_Controller_Ajax extends Zikula_Controller {
+class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
 
     /**
      * Change the users in select list

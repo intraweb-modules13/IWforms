@@ -1,5 +1,5 @@
 <?php
-class IWforms_Installer extends Zikula_Installer {
+class IWforms_Installer extends Zikula_AbstractInstaller {
     /**
      * Initialise the IWforms module creating module tables and module vars
      * @author Albert Pérez Monfort (aperezm@xtec.cat)

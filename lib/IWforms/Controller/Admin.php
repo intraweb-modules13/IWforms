@@ -1,5 +1,5 @@
 <?php
-class IWforms_Controller_Admin extends Zikula_Controller {
+class IWforms_Controller_Admin extends Zikula_AbstractController {
     /**
      * Show the forms created
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)

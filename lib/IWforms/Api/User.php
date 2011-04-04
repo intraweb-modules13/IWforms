@@ -1,6 +1,6 @@
 <?php
 
-class IWforms_Api_User extends Zikula_Api {
+class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function getFormDefinition($args) {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');

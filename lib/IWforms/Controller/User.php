@@ -1,6 +1,6 @@
 <?php
 
-class IWforms_Controller_User extends Zikula_Controller {
+class IWforms_Controller_User extends Zikula_AbstractController {
 
     /**
      * show the forms where the user can access
