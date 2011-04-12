@@ -14,7 +14,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
     public function main() {
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         $catName = array();
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
@@ -61,7 +61,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
     public function create() {
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //get all categories
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
@@ -108,7 +108,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -170,7 +170,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         //--- End
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -291,7 +291,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $adminView = FormUtil::getPassedValue('adminView', isset($args['adminView']) ? $args['adminView'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -342,7 +342,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -388,7 +388,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $tab = FormUtil::getPassedValue('tab', isset($args['tab']) ? $args['tab'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         return $this->view->assign('tab', $tab)
@@ -406,7 +406,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $adminView = FormUtil::getPassedValue('adminView', isset($args['adminView']) ? $args['adminView'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -451,7 +451,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -635,7 +635,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         return $this->view->assign('item', array('fid' => $fid))
                 ->fetch('IWforms_admin_form_fieldAdd.htm');
@@ -652,7 +652,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fieldType = FormUtil::getPassedValue('fieldType', isset($args['fieldType']) ? $args['fieldType'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -702,7 +702,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $id = FormUtil::getPassedValue('id', isset($args['id']) ? $args['id'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -750,7 +750,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $validator = FormUtil::getPassedValue('validator', isset($args['validator']) ? $args['validator'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -815,7 +815,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $aio = FormUtil::getPassedValue('aio', isset($args['aio']) ? $args['aio'] : null, 'REQUEST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -869,7 +869,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $aio = FormUtil::getPassedValue('aio', isset($args['aio']) ? $args['aio'] : null, 'REQUEST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -925,7 +925,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $confirm = FormUtil::getPassedValue('confirm', isset($args['confirm']) ? $args['confirm'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -961,7 +961,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $aio = FormUtil::getPassedValue('aio', isset($args['aio']) ? $args['aio'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1020,7 +1020,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $aio = FormUtil::getPassedValue('aio', isset($args['aio']) ? $args['aio'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1077,7 +1077,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $confirm = FormUtil::getPassedValue('confirm', isset($args['confirm']) ? $args['confirm'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1144,7 +1144,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $dep = FormUtil::getPassedValue('dep', isset($args['dep']) ? $args['dep'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1212,7 +1212,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $aio = FormUtil::getPassedValue('aio', isset($args['aio']) ? $args['aio'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1279,7 +1279,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $filesFolder = FormUtil::getPassedValue('filesFolder', isset($args['filesFolder']) ? $args['filesFolder'] : '', 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1381,7 +1381,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fndid = FormUtil::getPassedValue('fndid', isset($args['fndid']) ? $args['fndid'] : null, 'REQUEST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1454,7 +1454,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $imgHeight = FormUtil::getPassedValue('imgHeight', isset($args['imgHeight']) ? $args['imgHeight'] : 0, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -1519,7 +1519,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
     public function conf() {
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         $attached = ModUtil::getVar('IWforms', 'attached');
         $directoriroot = ModUtil::getVar('IWmain', 'documentRoot');
@@ -1597,7 +1597,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $publicFolder = FormUtil::getPassedValue('publicFolder', isset($args['publicFolder']) ? $args['publicFolder'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1627,7 +1627,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -1677,7 +1677,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
     public function addCat() {
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         $this->view->fetch('IWforms_admin_addCat.htm');
@@ -1695,7 +1695,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $description = FormUtil::getPassedValue('description', isset($args['description']) ? $args['description'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1722,7 +1722,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $confirm = FormUtil::getPassedValue('confirm', isset($args['confirm']) ? $args['confirm'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getCategory',
@@ -1758,7 +1758,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $cid = $objectid;
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         $item = ModUtil::apiFunc('IWforms', 'user', 'getCategory',
                         array('cid' => $cid));
@@ -1783,7 +1783,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $description = FormUtil::getPassedValue('description', isset($args['description']) ? $args['description'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1810,7 +1810,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1844,7 +1844,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -1874,7 +1874,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
         if (!isset($fid) || !is_numeric($fid)) {
@@ -2053,7 +2053,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $confirm = FormUtil::getPassedValue('confirm', isset($args['confirm']) ? $args['confirm'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         if (!$confirm) {
             //Load the form to update the file
