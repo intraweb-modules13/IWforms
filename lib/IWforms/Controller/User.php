@@ -1302,9 +1302,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'user', 'main'));
-        }
+        $this->checkCsrfToken();
         if (!UserUtil::isLoggedIn() &&
                 ModUtil::isHooked('dpCaptcha', 'IWforms') &&
                 ModUtil::available('dpCaptcha')) {
@@ -1546,7 +1544,8 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             } else {
                 $fileNameInServer = ModUtil::getVar('IWforms', 'publicFolder') . '/' . $fileName;
             }
-        } else $fileNameInServer = ModUtil::getVar('IWforms', 'attached') . '/' . $form['filesFolder'] . '/' . $fileName;
+        } else
+            $fileNameInServer = ModUtil::getVar('IWforms', 'attached') . '/' . $form['filesFolder'] . '/' . $fileName;
 
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         return ModUtil::func('IWmain', 'user', 'downloadFile',
@@ -1643,9 +1642,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         $fields = FormUtil::getPassedValue('fields', isset($args['fields']) ? $args['fields'] : null, 'POST');
         $url = FormUtil::getPassedValue('url', isset($args['url']) ? $args['url'] : null, 'POST');
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'user', 'main'));
-        }
+        $this->checkCsrfToken();
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access',
                         array('fid' => $fid));

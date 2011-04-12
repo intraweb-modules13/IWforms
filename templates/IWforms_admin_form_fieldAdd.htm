@@ -4,8 +4,8 @@
         <h2>{gt text="Create a new form field"}</h2>
         <form class="z-form" name="newField" action="{modurl modname="IWforms" type="admin" func="submitField"}" method="post" enctype="application/x-www-form-urlencoded">
               <input type="hidden" name="fid" value="{$item.fid}" />
-            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
-                   <div class="z-formrow">
+            <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
+            <div class="z-formrow">
                 <label for="fieldType">{gt text="Type field"}</label>
                 <select id="fieldType" name="fieldType">
                     <option value="0">{gt text="Choose a type of field"}</option>

@@ -3,7 +3,7 @@
     <h2>{gt text="Edit the field"} {if $itemField.fieldType neq 51}{$itemField.fieldName}{/if}</h2>
     <form class="z-form" id="edit" name="edit" action="{modurl modname="IWforms" type="admin" func="updateField"}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="fid" value="{$item.fid}" />
-        <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+        <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="fndid" value="{$itemField.fndid}" />
         <div class="z-formrow">
         <label for="fieldType">{gt text="Type field"}</label>

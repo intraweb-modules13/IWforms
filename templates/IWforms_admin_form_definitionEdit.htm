@@ -2,7 +2,7 @@
     <div class="z-adminpageicon">{img modname='core' src='edit.png' set='icons/large'}</div>
     <h2>{gt text="Edit the main form"}</h2>
     <form id="formDefinition" class="z-form" action="{modurl modname="IWforms" type="admin" func="update"}" method="post" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+        <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="fid" value="{$item.fid}" />
         <input type="hidden" name="aio" value="{$aio}" />
         <div class="z-formrow">

@@ -9,7 +9,7 @@
     <div class="z-adminpageicon">{img modname='core' src='lists.png' set='icons/large'}</div>
     <h2>{gt text="List of form fields"}</h2>
     <form id="fields" class="z-form" action="{modurl modname="IWforms" type="admin" func="changeOrder"}" method="post" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+        <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="fid" value="{$fid}" />
         <table class="z-datatable">
             <thead>

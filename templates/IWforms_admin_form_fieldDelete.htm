@@ -3,7 +3,7 @@
     <h2>{gt text="Delete the field"}</h2>
 
     <form class="z-form" action="{modurl modname="IWforms" type="admin" func="deleteField"}" method="post" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
+        <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="fid" value="{$item.fid}" />
         <input type="hidden" name="confirm" value="1" />
         <input type="hidden" name="fndid" value="{$itemField.fndid}" />

@@ -61,8 +61,8 @@
 <div class="userForm">
     <div class="formTitle">{$form.title}</div>
     <form name="newNote" id="newNote" class="z-form" {if not isset($adminView)}action="{modurl modname="IWforms" type="user" func="submitNote"}"{/if} method="post" enctype="multipart/form-data">
-          <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWforms"}" />
-           <input type="hidden" name="fid" value="{$fid}" />
+          <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
+        <input type="hidden" name="fid" value="{$fid}" />
         {$content}
         {if $requiredText}
         <div class="fieldContent">

@@ -1,12 +1,13 @@
 <?php
+
 class IWforms_Controller_Admin extends Zikula_AbstractController {
+
     /**
      * Show the forms created
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
      * @return:	A list with the forms that had been created with some options
      */
-    public function postInitialize()
-    {
+    public function postInitialize() {
         $this->view->setCaching(false);
     }
 
@@ -67,7 +68,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
-        $filesFolder =  ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
+        $filesFolder = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
         //outputs assignaments
         $view->assign('cats', $categories);
         $view->assign('item', array('expertMode' => ''));
@@ -112,9 +113,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'main'));
-        }
+        $this->checkCsrfToken();
+
         $new = ModUtil::func('IWforms', 'user', 'makeTime', $new . '23:59:00');
         $caducity = ModUtil::func('IWforms', 'user', 'makeTime', $caducity . '23:59:00');
         $create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm',
@@ -317,14 +317,14 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $folderExists = true;
         $folderIsWriteable = true;
         if ($item['filesFolder'] != '') {
-            $path =  ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached') . '/' . $item['filesFolder'];
+            $path = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached') . '/' . $item['filesFolder'];
             $item['filesFolder'] = $path;
             if (!file_exists($path)) {
                 $folderExists = false;
             } else {
-                if (!is_writeable($path)) $folderIsWriteable = false;
+                if (!is_writeable($path))
+                    $folderIsWriteable = false;
             }
-
         }
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
@@ -665,11 +665,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         if ($fieldType == 0) {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
                             array('fid' => $fid,
@@ -801,11 +797,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_addFieldValidator.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         //Add validator into validators string
         $validatorsString = $itemField['rfid'] . '$' . $validator . '$';
         $items = array('rfid' => $validatorsString);
@@ -858,11 +850,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_addGroup.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'group')));
-        }
+        $this->checkCsrfToken();
         //Save the group in database
         if (ModUtil::apiFunc('IWforms', 'admin', 'addGroup',
                         array('fid' => $fid,
@@ -924,11 +912,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_addValidator.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'validators')));
-        }
+        $this->checkCsrfToken();
         //Save the group in database
         if (ModUtil::apiFunc('IWforms', 'admin', 'addValidator',
                         array('fid' => $fid,
@@ -973,11 +957,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_deleteNotes.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         //delete the form notes
         if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormNotes',
                         array('fid' => $fid))) {
@@ -1032,11 +1012,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_validatorDelete.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'validators')));
-        }
+        $this->checkCsrfToken();
         if (ModUtil::apiFunc('IWforms', 'admin', 'deleteValidator',
                         array('rfid' => $rfid))) {
             LogUtil::registerStatus($this->__('Has deleted a validator'));
@@ -1096,11 +1072,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_groupDelete.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'group')));
-        }
+        $this->checkCsrfToken();
         if (ModUtil::apiFunc('IWforms', 'admin', 'deleteGroup',
                         array('gfid' => $gfid))) {
             LogUtil::registerStatus($this->__('Has been cleared access to the group'));
@@ -1157,11 +1129,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_fieldDelete.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormField',
                         array('itemField' => $fndid))) {
             LogUtil::registerStatus($this->__('Has been deleted the field'));
@@ -1242,11 +1210,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_fieldModifyDependances.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         $dependances = '$';
         foreach ($dep as $d) {
             $dependances .= '$' . $d . '$';
@@ -1341,10 +1305,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid)));
-        }
+        $this->checkCsrfToken();
         //Get item
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                         array('fid' => $fid));
@@ -1534,11 +1495,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         $rfid = ($validationNeeded) ? $itemField['rfid'] : '$';
         $items = array('fieldName' => $fieldName,
             'description' => $description,
@@ -1614,7 +1571,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $noPublicFolder = true;
         } else {
             $noPublicFolderWriteable = (!is_writeable(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'publicFolder')) ||
-            file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'publicFolder') . '/.locked')) ? true : false;
+                    file_exists(ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'publicFolder') . '/.locked')) ? true : false;
         }
         $nodpCaptchaAvailable = false;
         $nodpCaptchaHooked = false;
@@ -1669,9 +1626,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'main'));
-        }
+        $this->checkCsrfToken();
         if (substr(ModUtil::getVar('IWmain', 'documentRoot'), strrpos(ModUtil::getVar('IWmain', 'documentRoot'), '/') + 1, strlen(ModUtil::getVar('IWmain', 'documentRoot'))) == $publicFolder) {
             LogUtil::registerError($this->__('The name of the directory of the files public is not valid because it matches the name of the home directory of files on the site.'));
             $publicFolder = '';
@@ -1772,9 +1727,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'conf'));
-        }
+        $this->checkCsrfToken();
         // create the new category
         $cid = ModUtil::apiFunc('IWforms', 'admin', 'createCat',
                         array('catName' => $catName,
@@ -1814,9 +1767,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_form_catDelete.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'conf'));
-        }
+        $this->checkCsrfToken();
         if (ModUtil::apiFunc('IWforms', 'admin', 'deleteCat',
                         array('cid' => $cid))) {
             LogUtil::registerStatus($this->__('Has deleted the category'));
@@ -1868,9 +1819,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'conf'));
-        }
+        $this->checkCsrfToken();
         $updated = ModUtil::apiFunc('IWforms', 'admin', 'modifyCat',
                         array('cid' => $cid,
                             'catName' => $catName,
@@ -1897,11 +1846,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
-                                'action' => 'field')));
-        }
+        $this->checkCsrfToken();
         $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
                         array('fid' => $fid));
         if ($item == false) {
@@ -2150,9 +2095,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return $view->fetch('IWforms_admin_import.htm');
         }
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWforms', 'admin', 'main'));
-        }
+        $this->checkCsrfToken();
         //gets the attached file array
         $fileName = $_FILES['import']['name'];
         $file_extension = strtolower(substr(strrchr($fileName, "."), 1));
