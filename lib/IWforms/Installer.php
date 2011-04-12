@@ -1,5 +1,7 @@
 <?php
+
 class IWforms_Installer extends Zikula_AbstractInstaller {
+
     /**
      * Initialise the IWforms module creating module tables and module vars
      * @author Albert Pérez Monfort (aperezm@xtec.cat)
@@ -21,46 +23,60 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
         }
 
         // Create module tables
-        if (!DBUtil::createTable('IWforms_definition')) return false;
-        if (!DBUtil::createTable('IWforms_cat')) return false;
-        if (!DBUtil::createTable('IWforms')) return false;
-        if (!DBUtil::createTable('IWforms_note')) return false;
-        if (!DBUtil::createTable('IWforms_note_definition')) return false;
-        if (!DBUtil::createTable('IWforms_validator')) return false;
-        if (!DBUtil::createTable('IWforms_group')) return false;
+        if (!DBUtil::createTable('IWforms_definition'))
+            return false;
+        if (!DBUtil::createTable('IWforms_cat'))
+            return false;
+        if (!DBUtil::createTable('IWforms'))
+            return false;
+        if (!DBUtil::createTable('IWforms_note'))
+            return false;
+        if (!DBUtil::createTable('IWforms_note_definition'))
+            return false;
+        if (!DBUtil::createTable('IWforms_validator'))
+            return false;
+        if (!DBUtil::createTable('IWforms_group'))
+            return false;
 
         //Create indexes
         $pntable = DBUtil::getTables();
         $c = $pntable['IWforms_definition_column'];
-        if (!DBUtil::createIndex($c['active'], 'IWforms_definition', 'active')) return false;
+        if (!DBUtil::createIndex($c['active'], 'IWforms_definition', 'active'))
+            return false;
 
         $c = $pntable['IWforms_column'];
-        if (!DBUtil::createIndex($c['fid'], 'IWforms', 'fid')) return false;
+        if (!DBUtil::createIndex($c['fid'], 'IWforms', 'fid'))
+            return false;
 
         $c = $pntable['IWforms_group_column'];
-        if (!DBUtil::createIndex($c['fid'], 'IWforms_group', 'fid')) return false;
+        if (!DBUtil::createIndex($c['fid'], 'IWforms_group', 'fid'))
+            return false;
 
         $c = $pntable['IWforms_note_column'];
-        if (!DBUtil::createIndex($c['fmid'], 'IWforms_note', 'fmid')) return false;
-        if (!DBUtil::createIndex($c['fndid'], 'IWforms_note', 'fndid')) return false;
+        if (!DBUtil::createIndex($c['fmid'], 'IWforms_note', 'fmid'))
+            return false;
+        if (!DBUtil::createIndex($c['fndid'], 'IWforms_note', 'fndid'))
+            return false;
 
         $c = $pntable['IWforms_note_definition_column'];
-        if (!DBUtil::createIndex($c['fid'], 'IWforms_note_definition', 'fid')) return false;
+        if (!DBUtil::createIndex($c['fid'], 'IWforms_note_definition', 'fid'))
+            return false;
 
         $c = $pntable['IWforms_validator_column'];
-        if (!DBUtil::createIndex($c['fid'], 'IWforms_validator', 'fid')) return false;
+        if (!DBUtil::createIndex($c['fid'], 'IWforms_validator', 'fid'))
+            return false;
 
         //Set module vars
-        ModUtil::setVar('IWforms', 'characters', '15');
-        ModUtil::setVar('IWforms', 'resumeview', '0');
-        ModUtil::setVar('IWforms', 'newsColor', '#90EE90');
-        ModUtil::setVar('IWforms', 'viewedColor', '#FFFFFF');
-        ModUtil::setVar('IWforms', 'completedColor', '#D3D3D3');
-        ModUtil::setVar('IWforms', 'validatedColor', '#CC9999');
-        ModUtil::setVar('IWforms', 'fieldsColor', '#ADD8E6');
-        ModUtil::setVar('IWforms', 'contentColor', '#FFFFE0');
-        ModUtil::setVar('IWforms', 'attached', 'forms');
-        ModUtil::setVar('IWforms', 'publicFolder', 'documents');
+        $this->setVar('characters', '15')
+                ->setVar('resumeview', '0')
+                ->setVar('newsColor', '#90EE90')
+                ->setVar('viewedColor', '#FFFFFF')
+                ->setVar('completedColor', '#D3D3D3')
+                ->setVar('validatedColor', '#CC9999')
+                ->setVar('fieldsColor', '#ADD8E6')
+                ->setVar('contentColor', '#FFFFE0')
+                ->setVar('attached', 'forms')
+                ->setVar('publicFolder', 'forms/public');
 
         //Successfull
         return true;
@@ -82,16 +98,16 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
         DBUtil::dropTable('IWforms_group');
 
         //Delete module vars
-        ModUtil::delVar('IWforms', 'characters');
-        ModUtil::delVar('IWforms', 'resumeview');
-        ModUtil::delVar('IWforms', 'colornoves');
-        ModUtil::delVar('IWforms', 'colorvistes');
-        ModUtil::delVar('IWforms', 'colorcompletades');
-        ModUtil::delVar('IWforms', 'colornovalidades');
-        ModUtil::delVar('IWforms', 'colorfonscamps');
-        ModUtil::delVar('IWforms', 'colorfonscontingut');
-        ModUtil::delVar('IWforms', 'attached');
-        ModUtil::delVar('IWforms', 'publicFolder', 'documents');
+        $this->delVar('characters')
+                ->delVar('resumeview')
+                ->delVar('colornoves')
+                ->delVar('colorvistes')
+                ->delVar('colorcompletades')
+                ->delVar('colornovalidades')
+                ->delVar('colorfonscamps')
+                ->delVar('colorfonscontingut')
+                ->delVar('attached')
+                ->delVar('publicFolder');
 
         //Deletion successfull
         return true;
@@ -106,4 +122,5 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
 
         return true;
     }
+
 }
