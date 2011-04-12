@@ -2,6 +2,10 @@
 
 class IWforms_Controller_User extends Zikula_AbstractController {
 
+    public function postInitialize() {
+        $this->view->setCaching(false);
+    }
+
     /**
      * show the forms where the user can access
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
@@ -54,12 +58,10 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                     'fid' => $form['fid']);
             }
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('forms', $forms_array);
-        $view->assign('func', '');
-        $view->assign('fid', '');
-        return $view->fetch('IWforms_user_main.htm');
+        return $this->view->assign('forms', $forms_array)
+                ->assign('func', '')
+                ->assign('fid', '')
+                ->fetch('IWforms_user_main.htm');
     }
 
     /**
@@ -325,23 +327,22 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                 $form['skinByTemplate'] == 0) {
             $form['skincssurl'] = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('notes', $notesArray);
-        $view->assign('pager', $pager);
-        $view->assign('ipp', $ipp);
-        $view->assign('order', $order);
-        $view->assign('users', $users);
-        $view->assign('form', $form);
-        $view->assign('oneRecord', $oneRecord);
-        $view->assign('fid', $fid);
-        $view->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'));
-        $view->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'));
-        $view->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'));
-        $view->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'));
-        $view->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'));
-        $view->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'));
-        return $view->fetch($template);
+
+        return $this->view->assign('notes', $notesArray)
+                ->assign('pager', $pager)
+                ->assign('ipp', $ipp)
+                ->assign('order', $order)
+                ->assign('users', $users)
+                ->assign('form', $form)
+                ->assign('oneRecord', $oneRecord)
+                ->assign('fid', $fid)
+                ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
+                ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
+                ->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'))
+                ->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'))
+                ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
+                ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
+                ->fetch($template);
     }
 
     /**
@@ -597,32 +598,31 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                             'ipp' => $ipp,
                             'total' => $total,
                             'urltemplate' => 'index.php?module=IWforms&func=manage&init=%%&ipp=' . $ipp . '&fid=' . $fid . '&order=' . $order . '&filterValue=' . $filterValue . '&filter=' . $filter));
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('filters', $filters);
-        $view->assign('pager', $pager);
-        $view->assign('notes', $notesArray);
-        $view->assign('ipp', $ipp);
-        $view->assign('init', $init);
-        $view->assign('ippArray', $ippArray);
-        $view->assign('order', $order);
-        $view->assign('filterType', $filterType);
-        $view->assign('items', $items);
-        $view->assign('users', $users);
-        $view->assign('filterValue', $filterValue);
-        $view->assign('filter', $filter);
-        $view->assign('form', $form);
-        $view->assign('records', $records);
-        $view->assign('func', '');
-        $view->assign('fid', $fid);
-        $view->assign('total', $total);
-        $view->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'));
-        $view->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'));
-        $view->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'));
-        $view->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'));
-        $view->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'));
-        $view->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'));
-        return $view->fetch('IWforms_user_manage.htm');
+
+        return $this->view->assign('filters', $filters)
+                ->assign('pager', $pager)
+                ->assign('notes', $notesArray)
+                ->assign('ipp', $ipp)
+                ->assign('init', $init)
+                ->assign('ippArray', $ippArray)
+                ->assign('order', $order)
+                ->assign('filterType', $filterType)
+                ->assign('items', $items)
+                ->assign('users', $users)
+                ->assign('filterValue', $filterValue)
+                ->assign('filter', $filter)
+                ->assign('form', $form)
+                ->assign('records', $records)
+                ->assign('func', '')
+                ->assign('fid', $fid)
+                ->assign('total', $total)
+                ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
+                ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
+                ->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'))
+                ->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'))
+                ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
+                ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
+                ->fetch('IWforms_user_manage.htm');
     }
 
     /**
@@ -722,8 +722,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             $fid = $note['fid'];
         }
         $content = '';
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         if ($fid == 0) {
             //get all the active forms
             $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
@@ -738,9 +737,9 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                         'fid' => $form['fid']);
                 }
             }
-            $view->assign('formsArray', $formsArray);
-            $view->assign('fid', '');
-            return $view->fetch('IWforms_user_sendedWhatForm.htm');
+            return $this->view->assign('formsArray', $formsArray)
+                    ->assign('fid', '')
+                    ->fetch('IWforms_user_sendedWhatForm.htm');
         }
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
@@ -787,17 +786,31 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                             array('info' => 'ccn',
                                 'sv' => $sv,
                                 'list' => $usersList));
-            $view->assign('users', $users);
-            $view->assign('fid', $fid);
-            $view->assign('notes', $notesArray);
-            $view->assign('form', $form);
-            $view->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'));
-            $view->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'));
-            $view->assign('color', ModUtil::getVar('IWforms', 'viewedColor'));
-            $content .= $view->fetch('IWforms_user_sended.htm');
+            $content .= $this->view->assign('users', $users)
+                            ->assign('fid', $fid)
+                            ->assign('notes', $notesArray)
+                            ->assign('form', $form)
+                            ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
+                            ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
+                            ->assign('color', ModUtil::getVar('IWforms', 'viewedColor'))
+                            ->fetch('IWforms_user_sended.htm');
+
+            /*
+             * si el de sobre funciona, ho puc esborrar
+              $view->assign('users', $users);
+              $view->assign('fid', $fid);
+              $view->assign('notes', $notesArray);
+              $view->assign('form', $form);
+              $view->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'));
+              $view->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'));
+              $view->assign('color', ModUtil::getVar('IWforms', 'viewedColor'));
+              $content .= $view->fetch('IWforms_user_sended.htm');
+             *
+             */
         }
-        $view->assign('content', $content);
-        return $view->fetch('IWforms_user_sendedView.htm');
+
+        $this->view->assign('content', $content)
+                ->fetch('IWforms_user_sendedView.htm');
     }
 
     /**
@@ -860,7 +873,6 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-//        ModUtil::callHooks('item', 'display');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             $adminView = null;
@@ -940,8 +952,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         if ($form['skinForm'] != '' && $form['skinByTemplate'] == 0 && $form['expertMode'] == 1) {
             $content = DataUtil::formatForDisplayHTML($form['skinForm']);
         }
-        // create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         $requiredText = false;
         foreach ($fields as $field) {
             if (($form['skinForm'] == '' && $form['skinByTemplate'] == 0) ||
@@ -975,16 +986,17 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         if ($form['skincss'] != '' && $form['skinForm'] != '' && $form['expertMode'] == 1 && $form['skinByTemplate'] == 0) {
             $form['skincssurl'] = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
         }
-        $view->assign('requiredText', $requiredText);
-        $view->assign('adminView', $adminView);
-        $view->assign('form', $form);
-        $view->assign('checkJS', $checkJS);
-        $view->assign('requiredJS', $requiredJS);
-        $view->assign('content', $content);
-        $view->assign('func', '');
-        $view->assign('fid', $fid);
-        $view->assign('captcha', $captcha);
-        return $view->fetch($template);
+
+        return $this->view->assign('requiredText', $requiredText)
+                ->assign('adminView', $adminView)
+                ->assign('form', $form)
+                ->assign('checkJS', $checkJS)
+                ->assign('requiredJS', $requiredJS)
+                ->assign('content', $content)
+                ->assign('func', '')
+                ->assign('fid', $fid)
+                ->assign('captcha', $captcha)
+                ->fetch($template);
     }
 
     /**
@@ -1617,13 +1629,12 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                     'fndid' => $field['fndid']);
             }
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('form', $form);
-        $view->assign('fieldsTypes', $fieldsTypes);
-        $view->assign('fieldsOrder', $fieldsOrder);
-        $view->assign('fields', $fieldsArray);
-        return $view->fetch('IWforms_user_export.htm');
+
+        return $this->view->assign('form', $form)
+                ->assign('fieldsTypes', $fieldsTypes)
+                ->assign('fieldsOrder', $fieldsOrder)
+                ->assign('fields', $fieldsArray)
+                ->fetch('IWforms_user_export.htm');
     }
 
     /**
@@ -1820,7 +1831,6 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         $init = FormUtil::getPassedValue('init', isset($args['init']) ? $args['init'] : null, 'POST');
         $total = FormUtil::getPassedValue('total', isset($args['total']) ? $args['total'] : null, 'POST');
         $urltemplate = FormUtil::getPassedValue('urltemplate', isset($args['urltemplate']) ? $args['urltemplate'] : null, 'POST');
-        $view = Zikula_View::getInstance('IWforms', false);
         //Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ))
             return LogUtil::registerPermissionError();
@@ -1868,8 +1878,8 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             $text = '>>';
         }
         $items[] = array('text' => $text);
-        $view->assign('items', $items);
-        return $view->fetch('IWforms_user_pager.htm');
+        return $this->view->assign('items', $items)
+                ->fetch('IWforms_user_pager.htm');
     }
 
 }

@@ -21,8 +21,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         foreach ($categories as $category) {
             $catName[$category['cid']] = $category['catName'];
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         //main
         ModUtil::apiFunc('IWforms', 'user', 'desactivateForm');
         $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms');
@@ -50,8 +49,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 'caducity' => $caducity,
                 'new' => $new);
         }
-        $view->assign('forms', $formsArray);
-        return $view->fetch('IWforms_admin_main.htm');
+        return $this->view->assign('forms', $formsArray)
+                ->fetch('IWforms_admin_main.htm');
     }
 
     /**
@@ -66,14 +65,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
         //get all categories
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         $filesFolder = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
         //outputs assignaments
-        $view->assign('cats', $categories);
-        $view->assign('item', array('expertMode' => ''));
-        $view->assign('filesFolder', $filesFolder);
-        return $view->fetch('IWforms_admin_create.htm');
+        return $this->view->assign('cats', $categories)
+                ->assign('item', array('expertMode' => ''))
+                ->assign('filesFolder', $filesFolder)
+                ->fetch('IWforms_admin_create.htm');
     }
 
     /**
@@ -185,9 +183,6 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('item', $item);
         //main
         switch ($action) {
             case 'field':
@@ -278,10 +273,11 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 }
                 $tab = 1;
         }
-        //outputs assignments
-        $view->assign('content', $content);
-        $view->assign('tab', $tab);
-        return $view->fetch('IWforms_admin_form.htm');
+
+        return $this->view->assign('item', $item)
+                ->assign('content', $content)
+                ->assign('tab', $tab)
+                ->fetch('IWforms_admin_form.htm');
     }
 
     /**
@@ -326,15 +322,14 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                     $folderIsWriteable = false;
             }
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('catName', $category['catName']);
-        $view->assign('item', $item);
-        $view->assign('folderExists', $folderExists);
-        $view->assign('folderIsWriteable', $folderIsWriteable);
-        $view->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']));
-        $view->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']));
-        return $view->fetch('IWforms_admin_form_definition.htm');
+
+        return $this->view->assign('catName', $category['catName'])
+                ->assign('item', $item)
+                ->assign('folderExists', $folderExists)
+                ->assign('folderIsWriteable', $folderIsWriteable)
+                ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
+                ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
+                ->fetch('IWforms_admin_form_definition.htm');
     }
 
     /**
@@ -360,8 +355,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         $validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators',
                         array('fid' => $fid));
         $usersList = '';
@@ -378,10 +372,10 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                         array('info' => 'ccn',
                             'sv' => $sv,
                             'list' => $usersList));
-        $view->assign('validators', $validators_array);
-        $view->assign('users', $users);
-        $view->assign('item', $item);
-        return $view->fetch('IWforms_admin_form_validators.htm');
+        return $this->view->assign('validators', $validators_array)
+                ->assign('users', $users)
+                ->assign('item', $item)
+                ->fetch('IWforms_admin_form_validators.htm');
     }
 
     /**
@@ -396,10 +390,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('tab', $tab);
-        return $view->fetch('IWforms_admin_form_minitab.htm');
+
+        return $this->view->assign('tab', $tab)
+                ->fetch('IWforms_admin_form_minitab.htm');
     }
 
     /**
@@ -427,8 +420,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         $groups = ModUtil::apiFunc('IWforms', 'user', 'getAllGroups',
                         array('fid' => $fid));
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
@@ -443,10 +435,10 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 'validationNeeded' => $validation,
                 'gfid' => $group['gfid']);
         }
-        $view->assign('groups', $groups_array);
-        $view->assign('adminView', $adminView);
-        $view->assign('item', $item);
-        return $view->fetch('IWforms_admin_form_groups.htm');
+        return $this->view->assign('groups', $groups_array)
+                ->assign('adminView', $adminView)
+                ->assign('item', $item)
+                ->fetch('IWforms_admin_form_groups.htm');
     }
 
     /**
@@ -475,8 +467,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
         $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
                         array('fid' => $fid));
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
+
         $usersList = '';
         $groupName = '';
         foreach ($fields as $field) {
@@ -536,12 +527,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                         array('info' => 'ccn',
                             'sv' => $sv,
                             'list' => $usersList));
-        $view->assign('fields', $fields_array);
-        $view->assign('fid', $fid);
-        $view->assign('users', $users);
-        $view->assign('number', count($fields_array));
-        $view->assign('item', $item);
-        return $view->fetch('IWforms_admin_form_fields.htm');
+        return $this->view->assign('fields', $fields_array)
+                ->assign('fid', $fid)
+                ->assign('users', $users)
+                ->assign('number', count($fields_array))
+                ->assign('item', $item)
+                ->fetch('IWforms_admin_form_fields.htm');
     }
 
     /**
@@ -646,9 +637,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('item', array('fid' => $fid));
-        return $view->fetch('IWforms_admin_form_fieldAdd.htm');
+        return $this->view->assign('item', array('fid' => $fid))
+                ->fetch('IWforms_admin_form_fieldAdd.htm');
     }
 
     /**
@@ -777,8 +767,6 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
             $validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators',
                             array('fid' => $fid));
             foreach ($validators as $validator) {
@@ -790,11 +778,11 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                             array('info' => 'ccn',
                                 'sv' => $sv,
                                 'list' => $usersList));
-            $view->assign('validators', $validators_array);
-            $view->assign('users', $users);
-            $view->assign('item', $item);
-            $view->assign('itemField', $itemField);
-            return $view->fetch('IWforms_admin_form_addFieldValidator.htm');
+            return $this->view->assign('validators', $validators_array)
+                    ->assign('users', $users)
+                    ->assign('item', $item)
+                    ->assign('itemField', $itemField)
+                    ->fetch('IWforms_admin_form_addFieldValidator.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -837,17 +825,15 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
                             array('sv' => $sv,
                                 'plus' => $this->__('Unregistered'),
                                 'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
-            $view->assign('groups', $groups);
-            $view->assign('item', $item);
-            $view->assign('aio', $aio);
-            return $view->fetch('IWforms_admin_form_addGroup.htm');
+            return $this->view->assign('groups', $groups)
+                    ->assign('item', $item)
+                    ->assign('aio', $aio)
+                    ->fetch('IWforms_admin_form_addGroup.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -894,8 +880,6 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
         $confirm = (!isset($validator) || $validator == 0) ? 0 : 1;
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
                             array('sv' => $sv,
@@ -904,12 +888,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $groupMembers = ModUtil::func('IWmain', 'user', 'getMembersGroup',
                             array('sv' => $sv,
                                 'gid' => $group));
-            $view->assign('groupselect', $group);
-            $view->assign('groups', $groups);
-            $view->assign('groupMembers', $groupMembers);
-            $view->assign('item', $item);
-            $view->assign('aio', $aio);
-            return $view->fetch('IWforms_admin_form_addValidator.htm');
+            return $this->view->assign('groupselect', $group)
+                    ->assign('groups', $groups)
+                    ->assign('groupMembers', $groupMembers)
+                    ->assign('item', $item)
+                    ->assign('aio', $aio)
+                    ->fetch('IWforms_admin_form_addValidator.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -951,10 +935,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
-            $view->assign('item', $item);
-            return $view->fetch('IWforms_admin_form_deleteNotes.htm');
+            return $this->view->assign('item', $item)
+                    ->fetch('IWforms_admin_form_deleteNotes.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1003,13 +985,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                             array('info' => 'ccn',
                                 'uid' => $itemValidator['validator'],
                                 'sv' => $sv));
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
-            $view->assign('item', $item);
-            $view->assign('validatorId', $rfid);
-            $view->assign('userName', $userName);
-            $view->assign('aio', $aio);
-            return $view->fetch('IWforms_admin_form_validatorDelete.htm');
+
+            return $this->view->assign('item', $item)
+                    ->assign('validatorId', $rfid)
+                    ->assign('userName', $userName)
+                    ->assign('aio', $aio)
+                    ->fetch('IWforms_admin_form_validatorDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1061,15 +1042,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo',
                             array('sv' => $sv));
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
             $groupName = ($itemGroup['group'] == 0) ? $this->__('Unregistered users') : $groupsInfo[$itemGroup['group']];
-            $view->assign('item', $item);
-            $view->assign('itemGroup', $itemGroup);
-            $view->assign('groupId', $itemGroup['gfid']);
-            $view->assign('groupName', $groupName);
-            $view->assign('aio', $aio);
-            return $view->fetch('IWforms_admin_form_groupDelete.htm');
+            return $this->view->assign('item', $item)
+                    ->assign('itemGroup', $itemGroup)
+                    ->assign('groupId', $itemGroup['gfid'])
+                    ->assign('groupName', $groupName)
+                    ->assign('aio', $aio)
+                    ->fetch('IWforms_admin_form_groupDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1118,15 +1097,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $dependancesTo = ModUtil::apiFunc('IWforms', 'user', 'getFormFieldDependancesTo',
                         array('fndid' => $fndid));
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
-            $view->assign('item', $item);
-            $view->assign('itemField', $itemField);
-            $view->assign('dependancesTo', $dependancesTo);
             $fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
             $fieldTypeText = $fieldTypeTextArray[$itemField['fieldType']];
-            $view->assign('fieldTypeText', $fieldTypeText);
-            return $view->fetch('IWforms_admin_form_fieldDelete.htm');
+            return $this->view->assign('item', $item)
+                    ->assign('itemField', $itemField)
+                    ->assign('dependancesTo', $dependancesTo)
+                    ->assign('fieldTypeText', $fieldTypeText)
+                    ->fetch('IWforms_admin_form_fieldDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1191,10 +1168,6 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
-            $view->assign('item', $item);
-            $view->assign('itemField', $itemField);
             //put the field dependances into an array
             $dependances = explode('$$', substr($itemField['dependance'], 2, -1));
             foreach ($fields as $field) {
@@ -1206,8 +1179,10 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                         'checked' => $checked);
                 }
             }
-            $view->assign('fields', $fields_array);
-            return $view->fetch('IWforms_admin_form_fieldModifyDependances.htm');
+            return $this->view->assign('item', $item)
+                    ->assign('itemField', $itemField)
+                    ->assign('fields', $fields_array)
+                    ->fetch('IWforms_admin_form_fieldModifyDependances.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1250,15 +1225,17 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
         global $Intraweb;
         $multizk = (isset($GLOBALS['PNConfig']['Multisites']['multi']) && $GLOBALS['PNConfig']['Multisites']['multi'] == 1) ? 1 : 0;
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('cats', $categories);
-        $view->assign('aio', $aio);
-        $view->assign('item', $item);
-        $view->assign('multizk', $multizk);
-        $view->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']));
-        $view->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']));
-        return $view->fetch('IWforms_admin_form_definitionEdit.htm');
+
+        $filesFolder = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
+
+        return $this->view->assign('cats', $categories)
+                ->assign('aio', $aio)
+                ->assign('item', $item)
+                ->assign('multizk', $multizk)
+                ->assign('filesFolder', $filesFolder)
+                ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
+                ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
+                ->fetch('IWforms_admin_form_definitionEdit.htm');
     }
 
     /**
@@ -1423,22 +1400,21 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
         $fieldTypeText = $fieldTypeTextArray[$itemField['fieldType']];
         $publicFileURL = '<strong>' . System::getBaseUrl() . 'file.php?<br />file=' . ModUtil::getVar('IWforms', 'publicFolder') . '/<br />' . $this->__('Name_field') . '</strong>';
-        $view = Zikula_View::getInstance('IWforms', false);
+        $groups = array();
         if ($itemField['fieldType'] == 6) {
             //get all groups
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
                             array('sv' => $sv,
                                 'plus' => $this->__('Choose a group...')));
-            $view->assign('groups', $groups);
         }
-        // Create output object
-        $view->assign('item', $item);
-        $view->assign('itemField', $itemField);
-        $view->assign('fieldTypePlus', '-' . $itemField['fieldType'] . '-');
-        $view->assign('fieldTypeText', $fieldTypeText);
-        $view->assign('publicFileURL', $publicFileURL);
-        return $view->fetch('IWforms_admin_form_fieldEdit.htm');
+        return $this->view->assign('groups', $groups)
+                ->assign('item', $item)
+                ->assign('itemField', $itemField)
+                ->assign('fieldTypePlus', '-' . $itemField['fieldType'] . '-')
+                ->assign('fieldTypeText', $fieldTypeText)
+                ->assign('publicFileURL', $publicFileURL)
+                ->fetch('IWforms_admin_form_fieldEdit.htm');
     }
 
     /**
@@ -1545,8 +1521,6 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
         $attached = ModUtil::getVar('IWforms', 'attached');
         $directoriroot = ModUtil::getVar('IWmain', 'documentRoot');
         $newsColor = ModUtil::getVar('IWforms', 'newsColor');
@@ -1586,24 +1560,24 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         //get all categories
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
         $multizk = (isset($GLOBALS['PNConfig']['Multisites']['multi']) && $GLOBALS['PNConfig']['Multisites']['multi'] == 1) ? 1 : 0;
-        $view->assign('multizk', $multizk);
-        $view->assign('noWriteable', $noWriteable);
-        $view->assign('noPublicFolder', $noPublicFolder);
-        $view->assign('noPublicFolderWriteable', $noPublicFolderWriteable);
-        $view->assign('cats', $categories);
-        $view->assign('attached', $attached);
-        $view->assign('directoriroot', $directoriroot);
-        $view->assign('newsColor', $newsColor);
-        $view->assign('viewedColor', $viewedColor);
-        $view->assign('completedColor', $completedColor);
-        $view->assign('validatedColor', $validatedColor);
-        $view->assign('fieldsColor', $fieldsColor);
-        $view->assign('contentColor', $contentColor);
-        $view->assign('publicFolder', $publicFolder);
-        $view->assign('nodpCaptchaAvailable', $nodpCaptchaAvailable);
-        $view->assign('nodpCaptchaHooked', $nodpCaptchaHooked);
-        $view->assign('noFolder', $noFolder);
-        return $view->fetch('IWforms_admin_conf.htm');
+        return $this->view->assign('multizk', $multizk)
+                ->assign('noWriteable', $noWriteable)
+                ->assign('noPublicFolder', $noPublicFolder)
+                ->assign('noPublicFolderWriteable', $noPublicFolderWriteable)
+                ->assign('cats', $categories)
+                ->assign('attached', $attached)
+                ->assign('directoriroot', $directoriroot)
+                ->assign('newsColor', $newsColor)
+                ->assign('viewedColor', $viewedColor)
+                ->assign('completedColor', $completedColor)
+                ->assign('validatedColor', $validatedColor)
+                ->assign('fieldsColor', $fieldsColor)
+                ->assign('contentColor', $contentColor)
+                ->assign('publicFolder', $publicFolder)
+                ->assign('nodpCaptchaAvailable', $nodpCaptchaAvailable)
+                ->assign('nodpCaptchaHooked', $nodpCaptchaHooked)
+                ->assign('noFolder', $noFolder)
+                ->fetch('IWforms_admin_conf.htm');
     }
 
     /**
@@ -1631,14 +1605,14 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('The name of the directory of the files public is not valid because it matches the name of the home directory of files on the site.'));
             $publicFolder = '';
         }
-        ModUtil::setVar('IWforms', 'attached', $attached);
-        ModUtil::setVar('IWforms', 'newsColor', $newsColor);
-        ModUtil::setVar('IWforms', 'viewedColor', $viewedColor);
-        ModUtil::setVar('IWforms', 'completedColor', $completedColor);
-        ModUtil::setVar('IWforms', 'validatedColor', $validatedColor);
-        ModUtil::setVar('IWforms', 'fieldsColor', $fieldsColor);
-        ModUtil::setVar('IWforms', 'contentColor', $contentColor);
-        ModUtil::setVar('IWforms', 'publicFolder', $publicFolder);
+        $this->setVar('attached', $attached)
+                ->setVar('newsColor', $newsColor)
+                ->setVar('viewedColor', $viewedColor)
+                ->setVar('completedColor', $completedColor)
+                ->setVar('validatedColor', $validatedColor)
+                ->setVar('fieldsColor', $fieldsColor)
+                ->setVar('contentColor', $contentColor)
+                ->setVar('publicFolder', $publicFolder);
         LogUtil::registerStatus($this->__('Has changed the configuration of the module'));
         return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
     }
@@ -1687,14 +1661,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                         array('fid' => $fid,
                             'adminView' => 1));
 
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('item', $item);
-        $view->assign('formView', $formView);
-        $view->assign('formDefinition', $formDefinition);
-        $view->assign('formGroups', $formGroups);
-        $view->assign('formValidators', $formValidators);
-        return $view->fetch('IWforms_admin_infoForm.htm');
+        return $this->view->assign('item', $item)
+                ->assign('formView', $formView)
+                ->assign('formDefinition', $formDefinition)
+                ->assign('formGroups', $formGroups)
+                ->assign('formValidators', $formValidators)
+                ->fetch('IWforms_admin_infoForm.htm');
     }
 
     /**
@@ -1707,9 +1679,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        return $view->fetch('IWforms_admin_addCat.htm');
+
+        $this->view->fetch('IWforms_admin_addCat.htm');
     }
 
     /**
@@ -1761,10 +1732,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
         }
         if (!$confirm) {
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
-            $view->assign('item', $item);
-            return $view->fetch('IWforms_admin_form_catDelete.htm');
+            return $this->view->assign('item', $item)
+                    ->fetch('IWforms_admin_form_catDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1797,10 +1766,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('No such category found'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
         }
-        // Create output object
-        $view = Zikula_View::getInstance('IWforms', false);
-        $view->assign('item', $item);
-        return $view->fetch('IWforms_admin_editCat.htm');
+        $this->view->assign('item', $item)
+                ->fetch('IWforms_admin_editCat.htm');
     }
 
     /**
