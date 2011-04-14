@@ -30,11 +30,11 @@
     </a>
     {/if}
     {if $note.userName neq ''}
-    | <a href="{modurl modname="IWmessages" func="compose" uname=$note.userName}">
+    | <a href="{modurl modname="IWmessages" type="user" func="compose" uname=$note.userName}">
         {img modname='core' src='mail_send.png' set='icons/extrasmall' __alt="Respond with a private message" __title="Respond with a private message"}
     </a>
     {/if}
-    | <a href="{modurl modname="IWforms" func="read" fmid=$note.fmid}" target="_blank">
+    | <a href="{modurl modname="IWforms" type="user" func="read" fmid=$note.fmid}" target="_blank">
         {img modname='core' src='14_layer_visible.png' set='icons/extrasmall' __alt="View note" __title="View note"}
     </a>
 </div>

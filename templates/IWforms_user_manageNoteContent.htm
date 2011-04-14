@@ -85,7 +85,7 @@
         <td colspan="3" width="100%">
             {if $note.synchronize}
             <div style="float: right; margin-left: 5px;">
-                | <a href="{modurl modname="IWforms" func="synchro" fid=$fid init=$init filterValue=$filterValue filter=$filter fmid=$note.fmid order=$order ipp=$ipp}">
+                | <a href="{modurl modname="IWforms" type="user" func="synchro" fid=$fid init=$init filterValue=$filterValue filter=$filter fmid=$note.fmid order=$order ipp=$ipp}">
                     {img modname='core' src='quick_restart.png' set='icons/extrasmall' __alt="Synchronize fields" __title="Synchronize fields"}
                 </a>
             </div>
