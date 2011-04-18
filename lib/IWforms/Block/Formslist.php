@@ -82,6 +82,7 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
             }
         }
         //Filter the forms where the user can access
+        $forms_array = array();
         foreach ($forms as $form) {
             if ($catsString == '$' || strpos($catsString, '$' . $form['cid'] . '$') != false) {
                 $access = ModUtil::func('IWforms', 'user', 'access',
