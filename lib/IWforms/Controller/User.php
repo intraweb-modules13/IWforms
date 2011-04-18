@@ -727,6 +727,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             //get all the active forms
             $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
                             array('user' => 1));
+            $formsArray = array();
             foreach ($forms as $form) {
                 $notesArray = array();
                 //check user access to this form
