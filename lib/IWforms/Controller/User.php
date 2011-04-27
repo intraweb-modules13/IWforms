@@ -209,6 +209,8 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         if ($uid == '') {
             $uid = '-1';
         }
+        $contentBySkin = '';
+        $oneRecord = false;
         $usersList = '$$'; //I have written it in case the form is annonimous. In this case the var would be empty and I want to avoid it
         $validate = ($access['level'] == 7) ? 0 : 1;
         if ($fmid != null) {
@@ -331,7 +333,6 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         return $this->view->assign('notes', $notesArray)
                 ->assign('pager', $pager)
                 ->assign('ipp', $ipp)
-                ->assign('order', $order)
                 ->assign('users', $users)
                 ->assign('form', $form)
                 ->assign('oneRecord', $oneRecord)
@@ -896,8 +897,10 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         $access = ModUtil::func('IWforms', 'user', 'access',
                         array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3 && $adminView == null) {
-            if (!UserUtil::login()) {
-                return System::redirect('user.php');
+            if (!UserUtil::isLoggedIn()) {
+                return ModUtil::func('users', 'user', 'login',
+                        array('returnurl' => ModUtil::url('IWforms', 'user', 'newitem',
+                                    array('fid' => $fid))));
             } else {
                 LogUtil::registerError($this->__('You can not access this form to send annotations'));
                 // Redirect to the main site for the user

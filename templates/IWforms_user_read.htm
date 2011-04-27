@@ -35,7 +35,7 @@
         {include file="IWforms_user_readNoteContent.htm"}
         <div>&nbsp;</div>
     {else}
-        {add_additional_header header=$form.skincssurl}
+        {$form.skincssurl}
         {$note.contentBySkin|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
     {/if}
     {foreachelse}
