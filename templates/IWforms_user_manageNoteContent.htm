@@ -3,7 +3,10 @@
         <td width="10%">
             {if $note.photo neq ''}
             <div style="height:10px; text-align:center;">&nbsp;</div>
-            <img src="{getbaseurl}{modurl modname=IWforms type=user func=getFile fileName=$note.photo}" />
+            {assign var='user' value=$users[$note.photo].a}
+            {$users[$note.photo].a}
+            {assign var='photoPath' value="$usersPictureFolder/$user"}
+            <img src="{getbaseurl}{modurl modname=IWforms type=user func=getFile fileName=$photoPath}" />
             {/if}
         </td>
         <td width="30%">
@@ -29,7 +32,7 @@
         <td width="60%">
             <div>
                 {if $note.user neq 0 && $note.user neq '-1'}
-                    {$users[$note.user]} ({$note.userName})
+                    {$users[$note.user].ccn} ({$users[$note.userName].l})
                 {/if}
                 {if $note.user eq '-1'}
                     {gt text="User not registered"}
