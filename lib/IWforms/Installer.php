@@ -141,6 +141,20 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
         if (!DBUtil::renameTable('iw_forms_validator', 'IWforms_validator'))
             return false;
 
+
+        //ADD new fields to tables
+
+        $c = "ALTER TABLE `z_IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
+        if (!DBUtil::executeSQL($c)) {
+            return false;
+        }
+
+        $c = "ALTER TABLE `z_IWforms_definition` ADD `iw_filesFolder` VARCHAR (25) NOT NULL";
+        if (!DBUtil::executeSQL($c)) {
+            return false;
+        }
+
+
         // Update z_blocs table
 
         $c = "UPDATE {$prefix}_blocks SET z_bkey = 'Formnote' WHERE z_bkey = 'formnote'";
@@ -163,7 +177,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
         //Array de noms
         $oldVarsNames = DBUtil::selectFieldArray("module_vars", 'name', "`z_modname` = 'IWforms'", '', false, '');
 
-        $newVarsNames = Array('characters', 'resumeview', 'newsColor', 'viewedColor', 'completedColor', 
+        $newVarsNames = Array('characters', 'resumeview', 'newsColor', 'viewedColor', 'completedColor',
             'validatedColor', 'fieldsColor', 'contentColor', 'attached', 'publicFolder');
 
         $newVars = Array('characters' => '15',
