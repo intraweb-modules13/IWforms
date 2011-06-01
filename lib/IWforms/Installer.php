@@ -116,6 +116,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
     /**
      * Update the IWforms module
      * @author Albert Pérez Monfort (aperezm@xtec.cat)
+     * @author Jaume Fernàndez Valiente (jfern343@xtec.cat)
      * @return bool true if successful, false otherwise
      */
     public function upgrade($oldversion) {
@@ -189,7 +190,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
             'fieldsColor' => '#ADD8E6',
             'contentColor' => '#FFFFE0',
             'attached' => 'forms',
-            'publicFolder' => 'forms/public',);
+            'publicFolder' => 'forms/public');
 
         // Delete unneeded vars
         $del = array_diff($oldVarsNames, $newVarsNames);
