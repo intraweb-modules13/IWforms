@@ -144,12 +144,12 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
 
         //ADD new fields to tables
 
-        $c = "ALTER TABLE `z_IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
+        $c = "ALTER TABLE `{$prefix}_IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
         if (!DBUtil::executeSQL($c)) {
             return false;
         }
 
-        $c = "ALTER TABLE `z_IWforms_definition` ADD `iw_filesFolder` VARCHAR (25) NOT NULL";
+        $c = "ALTER TABLE `{$prefix}_IWforms_definition` ADD `iw_filesFolder` VARCHAR (25) NOT NULL";
         if (!DBUtil::executeSQL($c)) {
             return false;
         }
