@@ -185,7 +185,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
             'resumeview' => '0',
             'newsColor' => '#90EE90',
             'viewedColor' => '#FFFFFF',
-            'completedColor', '#D3D3D3',
+            'completedColor' => '#D3D3D3',
             'validatedColor' => '#CC9999',
             'fieldsColor' => '#ADD8E6',
             'contentColor' => '#FFFFE0',
