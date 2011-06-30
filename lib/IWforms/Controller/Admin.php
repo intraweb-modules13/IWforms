@@ -1680,7 +1680,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
 
-        $this->view->fetch('IWforms_admin_addCat.htm');
+        return $this->view->fetch('IWforms_admin_addCat.htm');
     }
 
     /**
@@ -1766,7 +1766,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('No such category found'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
         }
-        $this->view->assign('item', $item)
+        return $this->view->assign('item', $item)
                 ->fetch('IWforms_admin_editCat.htm');
     }
 
