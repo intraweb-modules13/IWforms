@@ -1,6 +1,6 @@
 function chgUsers(gid){
     var pars = "module=IWforms&func=chgUsers&gid=" + gid;
-    showinfo('chgInfo');
+    show_info('chgInfo');
     var myAjax = new Ajax.Request("ajax.php",
     {
         method: 'get',
@@ -11,7 +11,7 @@ function chgUsers(gid){
 }
 
 function chgUsers_failure(){
-    showinfo('chgInfo');
+    show_info('chgInfo');
     Element.update('validator', '').innerHTML;
 }
 
@@ -21,7 +21,7 @@ function chgUsers_response(req){
         return;
     }
     var json = pndejsonize(req.responseText);
-    showinfo('chgInfo');
+    show_info('chgInfo');
     Element.update('validator', json.content).innerHTML;
 }
 
@@ -34,7 +34,7 @@ function chgUsers_response(req){
  *@return none;
  *@author Albert Pérez Monfort
  */
-function showinfo(info)
+function show_info(info)
 {
     if(!Element.hasClassName(info, 'z-hide')) {
         Element.update(info, '&nbsp;');
