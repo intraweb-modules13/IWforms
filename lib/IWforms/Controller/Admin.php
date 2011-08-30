@@ -50,7 +50,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 'new' => $new);
         }
         return $this->view->assign('forms', $formsArray)
-                ->fetch('IWforms_admin_main.htm');
+                        ->fetch('IWforms_admin_main.htm');
     }
 
     /**
@@ -69,9 +69,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $filesFolder = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
         //outputs assignaments
         return $this->view->assign('cats', $categories)
-                ->assign('item', array('expertMode' => ''))
-                ->assign('filesFolder', $filesFolder)
-                ->fetch('IWforms_admin_create.htm');
+                        ->assign('item', array('expertMode' => ''))
+                        ->assign('filesFolder', $filesFolder)
+                        ->fetch('IWforms_admin_create.htm');
     }
 
     /**
@@ -115,39 +115,37 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
 
         $new = ModUtil::func('IWforms', 'user', 'makeTime', $new . '23:59:00');
         $caducity = ModUtil::func('IWforms', 'user', 'makeTime', $caducity . '23:59:00');
-        $create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm',
-                        array('formName' => $formName,
-                            'description' => $description,
-                            'title' => $title,
-                            'new' => $new,
-                            'caducity' => $caducity,
-                            'cid' => $cid,
-                            'annonimous' => $annonimous,
-                            'unique' => $unique,
-                            'closeableNotes' => $closeableNotes,
-                            'closeInsert' => $closeInsert,
-                            'closeableInsert' => $closeableInsert,
-                            'unregisterednotusersview' => $unregisterednotusersview,
-                            'unregisterednotexport' => $unregisterednotexport,
-                            'publicResponse' => $publicResponse,
-                            'active' => $active,
-                            'expertMode' => $expertMode,
-                            'allowComments' => $allowComments,
-                            'allowCommentsModerated' => $allowCommentsModerated,
-                            'skinByTemplate' => $skinByTemplate,
-                            'skinFormTemplate' => $skinFormTemplate,
-                            'skinTemplate' => $skinTemplate,
-                            'skinNoteTemplate' => $skinNoteTemplate,
-                            'returnURL' => $returnURL,
-                            'filesFolder' => $filesFolder,
+        $create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm', array('formName' => $formName,
+                    'description' => $description,
+                    'title' => $title,
+                    'new' => $new,
+                    'caducity' => $caducity,
+                    'cid' => $cid,
+                    'annonimous' => $annonimous,
+                    'unique' => $unique,
+                    'closeableNotes' => $closeableNotes,
+                    'closeInsert' => $closeInsert,
+                    'closeableInsert' => $closeableInsert,
+                    'unregisterednotusersview' => $unregisterednotusersview,
+                    'unregisterednotexport' => $unregisterednotexport,
+                    'publicResponse' => $publicResponse,
+                    'active' => $active,
+                    'expertMode' => $expertMode,
+                    'allowComments' => $allowComments,
+                    'allowCommentsModerated' => $allowCommentsModerated,
+                    'skinByTemplate' => $skinByTemplate,
+                    'skinFormTemplate' => $skinFormTemplate,
+                    'skinTemplate' => $skinTemplate,
+                    'skinNoteTemplate' => $skinNoteTemplate,
+                    'returnURL' => $returnURL,
+                    'filesFolder' => $filesFolder,
                 ));
         if ($create != false) {
             // Success
             LogUtil::registerStatus($this->__('The form was created successfully'));
         }
         // Redirect to the main site for the admin
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $create)));
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $create)));
     }
 
     /**
@@ -177,8 +175,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -188,96 +185,81 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             case 'field':
                 switch ($do) {
                     case 'edit':
-                        $content = ModUtil::func('IWforms', 'admin', 'editField',
-                                        array('fid' => $fid,
-                                            'fndid' => $fndid));
+                        $content = ModUtil::func('IWforms', 'admin', 'editField', array('fid' => $fid,
+                                    'fndid' => $fndid));
                         break;
                     case 'add':
-                        $content = ModUtil::func('IWforms', 'admin', 'createField',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'createField', array('fid' => $fid));
                         break;
                     case 'delete':
-                        $content = ModUtil::func('IWforms', 'admin', 'deleteField',
-                                        array('fid' => $fid,
-                                            'fndid' => $fndid));
+                        $content = ModUtil::func('IWforms', 'admin', 'deleteField', array('fid' => $fid,
+                                    'fndid' => $fndid));
                         break;
                     case 'modifyFieldDependances':
-                        $content = ModUtil::func('IWforms', 'admin', 'modifyFieldDependances',
-                                        array('fid' => $fid,
-                                            'fndid' => $fndid));
+                        $content = ModUtil::func('IWforms', 'admin', 'modifyFieldDependances', array('fid' => $fid,
+                                    'fndid' => $fndid));
                         break;
                     case 'addFieldValidator':
-                        $content = ModUtil::func('IWforms', 'admin', 'addFieldValidator',
-                                        array('fid' => $fid,
-                                            'fndid' => $fndid));
+                        $content = ModUtil::func('IWforms', 'admin', 'addFieldValidator', array('fid' => $fid,
+                                    'fndid' => $fndid));
                         break;
                     default:
-                        $content = ModUtil::func('IWforms', 'admin', 'field',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'field', array('fid' => $fid));
                 }
                 $tab = 2;
                 break;
             case 'group':
                 switch ($do) {
                     case 'add':
-                        $content = ModUtil::func('IWforms', 'admin', 'addGroup',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'addGroup', array('fid' => $fid));
                         break;
                     case 'delete':
-                        $content = ModUtil::func('IWforms', 'admin', 'deleteGroup',
-                                        array('fid' => $fid,
-                                            'gfid' => $gfid,
-                                            'aio' => $aio));
+                        $content = ModUtil::func('IWforms', 'admin', 'deleteGroup', array('fid' => $fid,
+                                    'gfid' => $gfid,
+                                    'aio' => $aio));
                         break;
                     default:
-                        $content = ModUtil::func('IWforms', 'admin', 'groups',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'groups', array('fid' => $fid));
                 }
                 $tab = 3;
                 break;
             case 'validators':
                 switch ($do) {
                     case 'add':
-                        $content = ModUtil::func('IWforms', 'admin', 'addValidator',
-                                        array('fid' => $fid,
-                                            'group' => $group,
-                                            'validator' => $validator,
-                                            'validatorType' => $validatorType));
+                        $content = ModUtil::func('IWforms', 'admin', 'addValidator', array('fid' => $fid,
+                                    'group' => $group,
+                                    'validator' => $validator,
+                                    'validatorType' => $validatorType));
                         break;
                     case 'delete':
-                        $content = ModUtil::func('IWforms', 'admin', 'deleteValidator',
-                                        array('fid' => $fid,
-                                            'rfid' => $rfid,
-                                            'aio' => $aio));
+                        $content = ModUtil::func('IWforms', 'admin', 'deleteValidator', array('fid' => $fid,
+                                    'rfid' => $rfid,
+                                    'aio' => $aio));
                         break;
                     default:
-                        $content = ModUtil::func('IWforms', 'admin', 'validators',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'validators', array('fid' => $fid));
                 }
                 $tab = 4;
                 break;
             default:
                 switch ($do) {
                     case 'edit':
-                        $content = ModUtil::func('IWforms', 'admin', 'edit',
-                                        array('fid' => $fid,
-                                            'aio' => $aio));
+                        $content = ModUtil::func('IWforms', 'admin', 'edit', array('fid' => $fid,
+                                    'aio' => $aio));
                         break;
                     case 'delete':
-                        $content = ModUtil::func('IWforms', 'admin', 'delete',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'delete', array('fid' => $fid));
                         break;
                     default:
-                        $content = ModUtil::func('IWforms', 'admin', 'definition',
-                                        array('fid' => $fid));
+                        $content = ModUtil::func('IWforms', 'admin', 'definition', array('fid' => $fid));
                 }
                 $tab = 1;
         }
 
         return $this->view->assign('item', $item)
-                ->assign('content', $content)
-                ->assign('tab', $tab)
-                ->fetch('IWforms_admin_form.htm');
+                        ->assign('content', $content)
+                        ->assign('tab', $tab)
+                        ->fetch('IWforms_admin_form.htm');
     }
 
     /**
@@ -298,14 +280,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $category = ($item['cid'] != 0) ? ModUtil::apiFunc('IWforms', 'user', 'getCategory',
-                        array('cid' => $item['cid'])) : "---";
+        $category = ($item['cid'] != 0) ? ModUtil::apiFunc('IWforms', 'user', 'getCategory', array('cid' => $item['cid'])) : "---";
         if ($item['skincss'] != '') {
             $url = System::getBaseUrl() . 'index.php?module=IWforms&func=getFile&fileName=' . ModUtil::getVar('IWforms', 'attached') . '/' . $item['skincss'];
             $item['skincssurl'] = '<link rel="stylesheet" href="' . $url . '" type="text/css" />';
@@ -324,12 +304,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
 
         return $this->view->assign('catName', $category['catName'])
-                ->assign('item', $item)
-                ->assign('folderExists', $folderExists)
-                ->assign('folderIsWriteable', $folderIsWriteable)
-                ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
-                ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
-                ->fetch('IWforms_admin_form_definition.htm');
+                        ->assign('item', $item)
+                        ->assign('folderExists', $folderExists)
+                        ->assign('folderIsWriteable', $folderIsWriteable)
+                        ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
+                        ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
+                        ->fetch('IWforms_admin_form_definition.htm');
     }
 
     /**
@@ -349,15 +329,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
 
-        $validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators',
-                        array('fid' => $fid));
+        $validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators', array('fid' => $fid));
         $usersList = '';
         $validators_array = array();
         foreach ($validators as $validator) {
@@ -368,14 +346,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 'rfid' => $validator['rfid']);
         }
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo',
-                        array('info' => 'ccn',
-                            'sv' => $sv,
-                            'list' => $usersList));
+        $users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
+                    'sv' => $sv,
+                    'list' => $usersList));
         return $this->view->assign('validators', $validators_array)
-                ->assign('users', $users)
-                ->assign('item', $item)
-                ->fetch('IWforms_admin_form_validators.htm');
+                        ->assign('users', $users)
+                        ->assign('item', $item)
+                        ->fetch('IWforms_admin_form_validators.htm');
     }
 
     /**
@@ -392,7 +369,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
 
         return $this->view->assign('tab', $tab)
-                ->fetch('IWforms_admin_form_minitab.htm');
+                        ->fetch('IWforms_admin_form_minitab.htm');
     }
 
     /**
@@ -414,18 +391,15 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         $groups_array = array();
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
 
-        $groups = ModUtil::apiFunc('IWforms', 'user', 'getAllGroups',
-                        array('fid' => $fid));
+        $groups = ModUtil::apiFunc('IWforms', 'user', 'getAllGroups', array('fid' => $fid));
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo',
-                        array('sv' => $sv));
+        $groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo', array('sv' => $sv));
         foreach ($groups as $group) {
             $accessText = array('1' => $this->__('Only writing'), '2' => $this->__('Only reading'), '3' => $this->__('Reading and writing'));
             $validation = ($group['validationNeeded']) ? $this->__('Yes') : $this->__('No');
@@ -436,9 +410,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 'gfid' => $group['gfid']);
         }
         return $this->view->assign('groups', $groups_array)
-                ->assign('adminView', $adminView)
-                ->assign('item', $item)
-                ->fetch('IWforms_admin_form_groups.htm');
+                        ->assign('adminView', $adminView)
+                        ->assign('item', $item)
+                        ->fetch('IWforms_admin_form_groups.htm');
     }
 
     /**
@@ -459,14 +433,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         $fields_array = array();
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                        array('fid' => $fid));
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
 
         $usersList = '';
         $groupName = '';
@@ -481,8 +453,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 }
             }
             if ($field['gid'] > 0) {
-                $group = ModUtil::apiFunc('Groups', 'user', 'get',
-                                array('gid' => $field['gid']));
+                $group = ModUtil::apiFunc('Groups', 'user', 'get', array('gid' => $field['gid']));
                 $groupName = $group['name'];
             }
             $fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
@@ -523,16 +494,15 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
 
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo',
-                        array('info' => 'ccn',
-                            'sv' => $sv,
-                            'list' => $usersList));
+        $users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
+                    'sv' => $sv,
+                    'list' => $usersList));
         return $this->view->assign('fields', $fields_array)
-                ->assign('fid', $fid)
-                ->assign('users', $users)
-                ->assign('number', count($fields_array))
-                ->assign('item', $item)
-                ->fetch('IWforms_admin_form_fields.htm');
+                        ->assign('fid', $fid)
+                        ->assign('users', $users)
+                        ->assign('number', count($fields_array))
+                        ->assign('item', $item)
+                        ->fetch('IWforms_admin_form_fields.htm');
     }
 
     /**
@@ -547,12 +517,10 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerPermissionError();
         }
-        ModUtil::apiFunc('IWforms', 'admin', 'collexpand',
-                        array('fid' => $fid,
-                            'value' => $value));
+        ModUtil::apiFunc('IWforms', 'admin', 'collexpand', array('fid' => $fid,
+            'value' => $value));
 
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -572,32 +540,27 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         $order = ($puts == '-1') ? $itemField['order'] + 15 : $itemField['order'] - 15;
         $items = array('order' => $order);
-        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField',
-                        array('fndid' => $fndid,
-                            'items' => $items))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
+                    'items' => $items))) {
             // Success
             LogUtil::registerStatus($this->__('Has changed the order of the fields'));
         }
         // Reorder the items
-        ModUtil::apiFunc('IWforms', 'admin', 'reorder',
-                        array('fid' => $fid));
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -638,7 +601,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         return $this->view->assign('item', array('fid' => $fid))
-                ->fetch('IWforms_admin_form_fieldAdd.htm');
+                        ->fetch('IWforms_admin_form_fieldAdd.htm');
     }
 
     /**
@@ -657,34 +620,28 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         // Confirm authorisation code
         $this->checkCsrfToken();
         if ($fieldType == 0) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                                 'action' => 'field')));
         }
-        $createField = ModUtil::apiFunc('IWforms', 'admin', 'createFormField',
-                        array('fid' => $fid,
-                            'fieldType' => $fieldType,
-                            'fieldName' => $this->__('Field name')));
-        ModUtil::apiFunc('IWforms', 'admin', 'reorder',
-                        array('fid' => $fid));
+        $createField = ModUtil::apiFunc('IWforms', 'admin', 'createFormField', array('fid' => $fid,
+                    'fieldType' => $fieldType,
+                    'fieldName' => $this->__('Field name')));
+        ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
         if ($createField != false) {
             // Success
             LogUtil::registerStatus($this->__('We have created a new field. Edit the characteristics of the field'));
 
             //If field type is fileset create a fieldset end field </fieldset> and edit it
             if ($fieldType == 53) {
-                $createFieldSetEnd = ModUtil::apiFunc('IWforms', 'admin', 'createFormFieldSetEnd',
-                                array('fid' => $fid,
-                                    'dependance' => $createField,
-                                    'fieldName' => $this->__('Final box')));
+                $createFieldSetEnd = ModUtil::apiFunc('IWforms', 'admin', 'createFormFieldSetEnd', array('fid' => $fid,
+                            'dependance' => $createField,
+                            'fieldName' => $this->__('Final box')));
             }
         }
         // Reorder the items
-        ModUtil::apiFunc('IWforms', 'admin', 'reorder',
-                        array('fid' => $fid));
+        ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
         //Redirect user to edit field form
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('action' => 'field',
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('action' => 'field',
                             'do' => 'edit',
                             'fid' => $fid,
                             'fndid' => $createField)));
@@ -705,15 +662,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -722,18 +677,15 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $validatorsString = str_replace('$' . $id . '$', '', $itemField['rfid']);
         $items = array('rfid' => $validatorsString);
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $userFullname = ModUtil::func('IWmain', 'user', 'getUserInfo',
-                        array('info' => 'ccn',
-                            'uid' => $id,
-                            'sv' => $sv));
-        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField',
-                        array('fndid' => $fndid,
-                            'items' => $items))) {
+        $userFullname = ModUtil::func('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
+                    'uid' => $id,
+                    'sv' => $sv));
+        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
+                    'items' => $items))) {
             // Success
             LogUtil::registerStatus($this->__('Deleted validator') . ' ' . $userFullname);
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -753,50 +705,44 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
-            $validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators',
-                            array('fid' => $fid));
+            $validators = ModUtil::apiFunc('IWforms', 'user', 'getAllValidators', array('fid' => $fid));
             foreach ($validators as $validator) {
                 $usersList .= $validator['validator'] . '$$';
                 $validators_array[] = array('validatorUserId' => $validator['validator']);
             }
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo',
-                            array('info' => 'ccn',
-                                'sv' => $sv,
-                                'list' => $usersList));
+            $users = ModUtil::func('IWmain', 'user', 'getAllUsersInfo', array('info' => 'ccn',
+                        'sv' => $sv,
+                        'list' => $usersList));
             return $this->view->assign('validators', $validators_array)
-                    ->assign('users', $users)
-                    ->assign('item', $item)
-                    ->assign('itemField', $itemField)
-                    ->fetch('IWforms_admin_form_addFieldValidator.htm');
+                            ->assign('users', $users)
+                            ->assign('item', $item)
+                            ->assign('itemField', $itemField)
+                            ->fetch('IWforms_admin_form_addFieldValidator.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
         //Add validator into validators string
         $validatorsString = $itemField['rfid'] . '$' . $validator . '$';
         $items = array('rfid' => $validatorsString);
-        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField',
-                        array('fndid' => $fndid,
-                            'items' => $items))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
+                    'items' => $items))) {
             // Success
             LogUtil::registerStatus($this->__('Added validator') . ' ' . $usersFullname[$validator]);
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -818,40 +764,35 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
-                            array('sv' => $sv,
-                                'plus' => $this->__('Unregistered'),
-                                'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
+            $groups = ModUtil::func('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
+                        'plus' => $this->__('Unregistered'),
+                        'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
             return $this->view->assign('groups', $groups)
-                    ->assign('item', $item)
-                    ->assign('aio', $aio)
-                    ->fetch('IWforms_admin_form_addGroup.htm');
+                            ->assign('item', $item)
+                            ->assign('aio', $aio)
+                            ->fetch('IWforms_admin_form_addGroup.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
         //Save the group in database
-        if (ModUtil::apiFunc('IWforms', 'admin', 'addGroup',
-                        array('fid' => $fid,
-                            'group' => $group,
-                            'accessType' => $accessType,
-                            'validationNeeded' => $validationNeeded))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'addGroup', array('fid' => $fid,
+                    'group' => $group,
+                    'accessType' => $accessType,
+                    'validationNeeded' => $validationNeeded))) {
             // Success
             LogUtil::registerStatus($this->__('Added a group of access to the form'));
         }
         if (isset($aio) && $aio == 1) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm',
-                            array('fid' => $fid)));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'group')));
     }
 
@@ -872,8 +813,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -881,36 +821,31 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $confirm = (!isset($validator) || $validator == 0) ? 0 : 1;
         if (!$confirm) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
-                            array('sv' => $sv,
-                                'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
+            $groups = ModUtil::func('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
+                        'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $groupMembers = ModUtil::func('IWmain', 'user', 'getMembersGroup',
-                            array('sv' => $sv,
-                                'gid' => $group));
+            $groupMembers = ModUtil::func('IWmain', 'user', 'getMembersGroup', array('sv' => $sv,
+                        'gid' => $group));
             return $this->view->assign('groupselect', $group)
-                    ->assign('groups', $groups)
-                    ->assign('groupMembers', $groupMembers)
-                    ->assign('item', $item)
-                    ->assign('aio', $aio)
-                    ->fetch('IWforms_admin_form_addValidator.htm');
+                            ->assign('groups', $groups)
+                            ->assign('groupMembers', $groupMembers)
+                            ->assign('item', $item)
+                            ->assign('aio', $aio)
+                            ->fetch('IWforms_admin_form_addValidator.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
         //Save the group in database
-        if (ModUtil::apiFunc('IWforms', 'admin', 'addValidator',
-                        array('fid' => $fid,
-                            'validator' => $validator,
-                            'validatorType' => $validatorType))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'addValidator', array('fid' => $fid,
+                    'validator' => $validator,
+                    'validatorType' => $validatorType))) {
             // Success
             LogUtil::registerStatus($this->__('Has added a new validator'));
         }
         if (isset($aio) && $aio == 1) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm',
-                            array('fid' => $fid)));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'validators')));
     }
 
@@ -928,21 +863,19 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         if (!$confirm) {
             return $this->view->assign('item', $item)
-                    ->fetch('IWforms_admin_form_deleteNotes.htm');
+                            ->fetch('IWforms_admin_form_deleteNotes.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
         //delete the form notes
-        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormNotes',
-                        array('fid' => $fid))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormNotes', array('fid' => $fid))) {
             LogUtil::registerStatus($this->__('Dropped the annotations of the form'));
         }
         return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -964,46 +897,39 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get validator information
-        $itemValidator = ModUtil::apiFunc('IWforms', 'user', 'getValidator',
-                        array('rfid' => $rfid));
+        $itemValidator = ModUtil::apiFunc('IWforms', 'user', 'getValidator', array('rfid' => $rfid));
         if ($itemValidator == false) {
             LogUtil::registerError($this->__('Not Found validator'));
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                                 'action' => 'validators')));
         }
         if (!$confirm) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $userName = ModUtil::func('IWmain', 'user', 'getUserInfo',
-                            array('info' => 'ccn',
-                                'uid' => $itemValidator['validator'],
-                                'sv' => $sv));
+            $userName = ModUtil::func('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
+                        'uid' => $itemValidator['validator'],
+                        'sv' => $sv));
 
             return $this->view->assign('item', $item)
-                    ->assign('validatorId', $rfid)
-                    ->assign('userName', $userName)
-                    ->assign('aio', $aio)
-                    ->fetch('IWforms_admin_form_validatorDelete.htm');
+                            ->assign('validatorId', $rfid)
+                            ->assign('userName', $userName)
+                            ->assign('aio', $aio)
+                            ->fetch('IWforms_admin_form_validatorDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteValidator',
-                        array('rfid' => $rfid))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteValidator', array('rfid' => $rfid))) {
             LogUtil::registerStatus($this->__('Has deleted a validator'));
         }
         if (isset($aio) && $aio == 1) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm',
-                            array('fid' => $fid)));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'validators')));
     }
 
@@ -1023,45 +949,38 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemGroup = ModUtil::apiFunc('IWforms', 'user', 'getGroup',
-                        array('gfid' => $gfid));
+        $itemGroup = ModUtil::apiFunc('IWforms', 'user', 'getGroup', array('gfid' => $gfid));
         if ($itemGroup == false) {
             LogUtil::registerError($this->__('Can not find the group'));
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                                 'action' => 'group')));
         }
         if (!$confirm) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo',
-                            array('sv' => $sv));
+            $groupsInfo = ModUtil::func('IWmain', 'user', 'getAllGroupsInfo', array('sv' => $sv));
             $groupName = ($itemGroup['group'] == 0) ? $this->__('Unregistered users') : $groupsInfo[$itemGroup['group']];
             return $this->view->assign('item', $item)
-                    ->assign('itemGroup', $itemGroup)
-                    ->assign('groupId', $itemGroup['gfid'])
-                    ->assign('groupName', $groupName)
-                    ->assign('aio', $aio)
-                    ->fetch('IWforms_admin_form_groupDelete.htm');
+                            ->assign('itemGroup', $itemGroup)
+                            ->assign('groupId', $itemGroup['gfid'])
+                            ->assign('groupName', $groupName)
+                            ->assign('aio', $aio)
+                            ->fetch('IWforms_admin_form_groupDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteGroup',
-                        array('gfid' => $gfid))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteGroup', array('gfid' => $gfid))) {
             LogUtil::registerStatus($this->__('Has been cleared access to the group'));
         }
         if (isset($aio) && $aio == 1) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm',
-                            array('fid' => $fid)));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'group')));
     }
 
@@ -1080,35 +999,31 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Check if there are other fields that depens on it. In this case the field can't be deleted
-        $dependancesTo = ModUtil::apiFunc('IWforms', 'user', 'getFormFieldDependancesTo',
-                        array('fndid' => $fndid));
+        $dependancesTo = ModUtil::apiFunc('IWforms', 'user', 'getFormFieldDependancesTo', array('fndid' => $fndid));
         if (!$confirm) {
             $fieldTypeTextArray = ModUtil::func('IWforms', 'admin', 'getFileTypeText');
             $fieldTypeText = $fieldTypeTextArray[$itemField['fieldType']];
             return $this->view->assign('item', $item)
-                    ->assign('itemField', $itemField)
-                    ->assign('dependancesTo', $dependancesTo)
-                    ->assign('fieldTypeText', $fieldTypeText)
-                    ->fetch('IWforms_admin_form_fieldDelete.htm');
+                            ->assign('itemField', $itemField)
+                            ->assign('dependancesTo', $dependancesTo)
+                            ->assign('fieldTypeText', $fieldTypeText)
+                            ->fetch('IWforms_admin_form_fieldDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormField',
-                        array('itemField' => $fndid))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteFormField', array('itemField' => $fndid))) {
             LogUtil::registerStatus($this->__('Has been deleted the field'));
         }
         /*
@@ -1124,10 +1039,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
           }
          */
         // Reorder the items
-        ModUtil::apiFunc('IWforms', 'admin', 'reorder',
-                        array('fid' => $fid));
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -1147,22 +1060,19 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get all field information
-        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                        array('fid' => $fid));
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
         if ($fields == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -1180,9 +1090,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 }
             }
             return $this->view->assign('item', $item)
-                    ->assign('itemField', $itemField)
-                    ->assign('fields', $fields_array)
-                    ->fetch('IWforms_admin_form_fieldModifyDependances.htm');
+                            ->assign('itemField', $itemField)
+                            ->assign('fields', $fields_array)
+                            ->fetch('IWforms_admin_form_fieldModifyDependances.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
@@ -1191,13 +1101,11 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $dependances .= '$' . $d . '$';
         }
         $items = array('dependance' => $dependances);
-        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField',
-                        array('fndid' => $fndid, 'items' => $items))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid, 'items' => $items))) {
             // Success
             LogUtil::registerStatus($this->__('Have changed the dependencies'));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -1215,8 +1123,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -1229,13 +1136,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $filesFolder = ModUtil::getVar('IWmain', 'documentRoot') . '/' . ModUtil::getVar('IWforms', 'attached');
 
         return $this->view->assign('cats', $categories)
-                ->assign('aio', $aio)
-                ->assign('item', $item)
-                ->assign('multizk', $multizk)
-                ->assign('filesFolder', $filesFolder)
-                ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
-                ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
-                ->fetch('IWforms_admin_form_definitionEdit.htm');
+                        ->assign('aio', $aio)
+                        ->assign('item', $item)
+                        ->assign('multizk', $multizk)
+                        ->assign('filesFolder', $filesFolder)
+                        ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
+                        ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
+                        ->fetch('IWforms_admin_form_definitionEdit.htm');
     }
 
     /**
@@ -1284,8 +1191,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         // Confirm authorisation code
         $this->checkCsrfToken();
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -1356,18 +1262,15 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             'returnURL' => $returnURL,
             'filesFolder' => $filesFolder,
         );
-        if (ModUtil::apiFunc('IWforms', 'admin', 'editForm',
-                        array('fid' => $fid,
-                            'items' => $items))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'editForm', array('fid' => $fid,
+                    'items' => $items))) {
             // Success
             LogUtil::registerStatus($this->__('The main points of the form have been published successfully'));
         }
         if ($aio != null) {
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm',
-                            array('fid' => $fid)));
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'infoForm', array('fid' => $fid)));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid)));
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid)));
     }
 
     /**
@@ -1384,15 +1287,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -1404,17 +1305,16 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if ($itemField['fieldType'] == 6) {
             //get all groups
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
-                            array('sv' => $sv,
-                                'plus' => $this->__('Choose a group...')));
+            $groups = ModUtil::func('IWmain', 'user', 'getAllGroups', array('sv' => $sv,
+                        'plus' => $this->__('Choose a group...')));
         }
         return $this->view->assign('groups', $groups)
-                ->assign('item', $item)
-                ->assign('itemField', $itemField)
-                ->assign('fieldTypePlus', '-' . $itemField['fieldType'] . '-')
-                ->assign('fieldTypeText', $fieldTypeText)
-                ->assign('publicFileURL', $publicFileURL)
-                ->fetch('IWforms_admin_form_fieldEdit.htm');
+                        ->assign('item', $item)
+                        ->assign('itemField', $itemField)
+                        ->assign('fieldTypePlus', '-' . $itemField['fieldType'] . '-')
+                        ->assign('fieldTypeText', $fieldTypeText)
+                        ->assign('publicFileURL', $publicFileURL)
+                        ->fetch('IWforms_admin_form_fieldEdit.htm');
     }
 
     /**
@@ -1457,15 +1357,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         //Get field information
-        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $itemField = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($itemField == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -1500,14 +1398,12 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             'extensions' => $extensions,
             'imgWidth' => $imgWidth,
             'imgHeight' => $imgHeight);
-        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField',
-                        array('fndid' => $fndid,
-                            'items' => $items))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'editFormField', array('fndid' => $fndid,
+                    'items' => $items))) {
             // Success
             LogUtil::registerStatus($this->__('The field of the form has been published successfully'));
         }
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -1561,23 +1457,23 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $categories = ModUtil::apiFunc('IWforms', 'user', 'getAllCategories');
         $multizk = (isset($GLOBALS['PNConfig']['Multisites']['multi']) && $GLOBALS['PNConfig']['Multisites']['multi'] == 1) ? 1 : 0;
         return $this->view->assign('multizk', $multizk)
-                ->assign('noWriteable', $noWriteable)
-                ->assign('noPublicFolder', $noPublicFolder)
-                ->assign('noPublicFolderWriteable', $noPublicFolderWriteable)
-                ->assign('cats', $categories)
-                ->assign('attached', $attached)
-                ->assign('directoriroot', $directoriroot)
-                ->assign('newsColor', $newsColor)
-                ->assign('viewedColor', $viewedColor)
-                ->assign('completedColor', $completedColor)
-                ->assign('validatedColor', $validatedColor)
-                ->assign('fieldsColor', $fieldsColor)
-                ->assign('contentColor', $contentColor)
-                ->assign('publicFolder', $publicFolder)
-                ->assign('nodpCaptchaAvailable', $nodpCaptchaAvailable)
-                ->assign('nodpCaptchaHooked', $nodpCaptchaHooked)
-                ->assign('noFolder', $noFolder)
-                ->fetch('IWforms_admin_conf.htm');
+                        ->assign('noWriteable', $noWriteable)
+                        ->assign('noPublicFolder', $noPublicFolder)
+                        ->assign('noPublicFolderWriteable', $noPublicFolderWriteable)
+                        ->assign('cats', $categories)
+                        ->assign('attached', $attached)
+                        ->assign('directoriroot', $directoriroot)
+                        ->assign('newsColor', $newsColor)
+                        ->assign('viewedColor', $viewedColor)
+                        ->assign('completedColor', $completedColor)
+                        ->assign('validatedColor', $validatedColor)
+                        ->assign('fieldsColor', $fieldsColor)
+                        ->assign('contentColor', $contentColor)
+                        ->assign('publicFolder', $publicFolder)
+                        ->assign('nodpCaptchaAvailable', $nodpCaptchaAvailable)
+                        ->assign('nodpCaptchaHooked', $nodpCaptchaHooked)
+                        ->assign('noFolder', $noFolder)
+                        ->fetch('IWforms_admin_conf.htm');
     }
 
     /**
@@ -1635,38 +1531,33 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
 
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
 
         //get the form view
-        $formView = ModUtil::func('IWforms', 'user', 'newItem',
-                        array('fid' => $fid,
-                            'adminView' => 1));
+        $formView = ModUtil::func('IWforms', 'user', 'newItem', array('fid' => $fid,
+                    'adminView' => 1));
 
         //get the form features
-        $formDefinition = ModUtil::func('IWforms', 'admin', 'definition',
-                        array('fid' => $fid,
-                            'adminView' => 1));
+        $formDefinition = ModUtil::func('IWforms', 'admin', 'definition', array('fid' => $fid,
+                    'adminView' => 1));
 
         //get the form groups
-        $formGroups = ModUtil::func('IWforms', 'admin', 'groups',
-                        array('fid' => $fid,
-                            'adminView' => 1));
+        $formGroups = ModUtil::func('IWforms', 'admin', 'groups', array('fid' => $fid,
+                    'adminView' => 1));
         //get the form validators
-        $formValidators = ModUtil::func('IWforms', 'admin', 'validators',
-                        array('fid' => $fid,
-                            'adminView' => 1));
+        $formValidators = ModUtil::func('IWforms', 'admin', 'validators', array('fid' => $fid,
+                    'adminView' => 1));
 
         return $this->view->assign('item', $item)
-                ->assign('formView', $formView)
-                ->assign('formDefinition', $formDefinition)
-                ->assign('formGroups', $formGroups)
-                ->assign('formValidators', $formValidators)
-                ->fetch('IWforms_admin_infoForm.htm');
+                        ->assign('formView', $formView)
+                        ->assign('formDefinition', $formDefinition)
+                        ->assign('formGroups', $formGroups)
+                        ->assign('formValidators', $formValidators)
+                        ->fetch('IWforms_admin_infoForm.htm');
     }
 
     /**
@@ -1700,9 +1591,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         // Confirm authorisation code
         $this->checkCsrfToken();
         // create the new category
-        $cid = ModUtil::apiFunc('IWforms', 'admin', 'createCat',
-                        array('catName' => $catName,
-                            'description' => $description));
+        $cid = ModUtil::apiFunc('IWforms', 'admin', 'createCat', array('catName' => $catName,
+                    'description' => $description));
         if ($cid != false) {
             // Success
             LogUtil::registerStatus($this->__('New category created'));
@@ -1725,20 +1615,18 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             throw new Zikula_Exception_Forbidden();
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getCategory',
-                        array('cid' => $cid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getCategory', array('cid' => $cid));
         if ($item == false) {
             LogUtil::registerError($this->__('No such category found'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
         }
         if (!$confirm) {
             return $this->view->assign('item', $item)
-                    ->fetch('IWforms_admin_form_catDelete.htm');
+                            ->fetch('IWforms_admin_form_catDelete.htm');
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteCat',
-                        array('cid' => $cid))) {
+        if (ModUtil::apiFunc('IWforms', 'admin', 'deleteCat', array('cid' => $cid))) {
             LogUtil::registerStatus($this->__('Has deleted the category'));
         }
         return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
@@ -1760,14 +1648,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getCategory',
-                        array('cid' => $cid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getCategory', array('cid' => $cid));
         if ($item == false) {
             LogUtil::registerError($this->__('No such category found'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'conf'));
         }
         return $this->view->assign('item', $item)
-                ->fetch('IWforms_admin_editCat.htm');
+                        ->fetch('IWforms_admin_editCat.htm');
     }
 
     /**
@@ -1787,10 +1674,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        $updated = ModUtil::apiFunc('IWforms', 'admin', 'modifyCat',
-                        array('cid' => $cid,
-                            'catName' => $catName,
-                            'description' => $description));
+        $updated = ModUtil::apiFunc('IWforms', 'admin', 'modifyCat', array('cid' => $cid,
+                    'catName' => $catName,
+                    'description' => $description));
         if ($updated != false) {
             // Success
             LogUtil::registerStatus($this->__('Has changed the category'));
@@ -1814,23 +1700,19 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
         foreach ($f as $key => $value) {
             $items = array('order' => $value);
-            ModUtil::apiFunc('IWforms', 'admin', 'changeOrder',
-                            array('fndid' => $key,
-                                'order' => $value));
+            ModUtil::apiFunc('IWforms', 'admin', 'changeOrder', array('fndid' => $key,
+                'order' => $value));
         }
         // Reorder the items
-        ModUtil::apiFunc('IWforms', 'admin', 'reorder',
-                        array('fid' => $fid));
-        return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                        array('fid' => $fid,
+        ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
+        return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('fid' => $fid,
                             'action' => 'field')));
     }
 
@@ -1851,12 +1733,10 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $newFormId = ModUtil::apiFunc('IWforms', 'admin', 'copy',
-                        array('fid' => $fid));
+        $newFormId = ModUtil::apiFunc('IWforms', 'admin', 'copy', array('fid' => $fid));
         if ($newFormId) {
             LogUtil::registerStatus($this->__('Has made a copy of the form. Edit the characteristics that create appropriate'));
-            return System::redirect(ModUtil::url('IWforms', 'admin', 'form',
-                            array('do' => 'edit',
+            return System::redirect(ModUtil::url('IWforms', 'admin', 'form', array('do' => 'edit',
                                 'fid' => $newFormId)));
         } else {
             LogUtil::registerError($this->__('There was an error in the copy of the forum'));
@@ -1897,19 +1777,16 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $version = $moduleInfo['version'];
         // Get user
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $userFullname = ModUtil::func('IWmain', 'user', 'getUserInfo',
-                        array('info' => 'ccn',
-                            'uid' => UserUtil::getVar('uid'),
-                            'sv' => $sv));
+        $userFullname = ModUtil::func('IWmain', 'user', 'getUserInfo', array('info' => 'ccn',
+                    'uid' => UserUtil::getVar('uid'),
+                    'sv' => $sv));
         //get form information
-        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($form == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                        array('fid' => $fid));
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
         // create doctype
         //$dom = new DOMDocument("1.0", "ISO-8859-1");
         $dom = new DOMDocument();
@@ -2075,12 +1952,11 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         if ($fileName != '') {
             $folder = ModUtil::getVar('IWmain', 'tempFolder');
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $update = ModUtil::func('IWmain', 'user', 'updateFile',
-                            array('sv' => $sv,
-                                'folder' => $folder,
-                                'allow' => '|xml',
-                                'file' => $_FILES['import'],
-                                'fileName' => $fileName));
+            $update = ModUtil::func('IWmain', 'user', 'updateFile', array('sv' => $sv,
+                        'folder' => $folder,
+                        'allow' => '|xml',
+                        'file' => $_FILES['import'],
+                        'fileName' => $fileName));
             //the function returns the error string if the update fails and and empty string if success
             if ($update['msg'] != '') {
                 LogUtil::registerError($this->__('Error updating the import file to the server'));
@@ -2122,32 +1998,31 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $allowComments = $item->getElementsByTagName('allowComments')->item(0)->nodeValue;
             $allowCommentsModerated = $item->getElementsByTagName('allowCommentsModerated')->item(0)->nodeValue;
         }
-        $create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm',
-                        array('formName' => $formName,
-                            'description' => $description,
-                            'title' => $title,
-                            'annonimous' => $annonimous,
-                            'unique' => $unique,
-                            'closeableNotes' => $closeableNotes,
-                            'closeInsert' => $closeInsert,
-                            'closeableInsert' => $closeableInsert,
-                            'unregisterednotusersview' => $unregisterednotusersview,
-                            'unregisterednotexport' => $unregisterednotexport,
-                            'publicResponse' => $publicResponse,
-                            'active' => 0,
-                            'skin' => $skin,
-                            'skincss' => $skincss,
-                            'showFormName' => $showFormName,
-                            'showNotesTitle' => $showNotesTitle,
-                            'skinForm' => $skinForm,
-                            'skinNote' => $skinNote,
-                            'expertMode' => $expertMode,
-                            'skinByTemplate' => $skinByTemplate,
-                            'skinFormTemplate' => $skinFormTemplate,
-                            'skinTemplate' => $skinTemplate,
-                            'skinNoteTemplate' => $skinNoteTemplate,
-                            'allowComments' => $allowComments,
-                            'allowCommentsModerated' => $allowCommentsModerated));
+        $create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm', array('formName' => $formName,
+                    'description' => $description,
+                    'title' => $title,
+                    'annonimous' => $annonimous,
+                    'unique' => $unique,
+                    'closeableNotes' => $closeableNotes,
+                    'closeInsert' => $closeInsert,
+                    'closeableInsert' => $closeableInsert,
+                    'unregisterednotusersview' => $unregisterednotusersview,
+                    'unregisterednotexport' => $unregisterednotexport,
+                    'publicResponse' => $publicResponse,
+                    'active' => 0,
+                    'skin' => $skin,
+                    'skincss' => $skincss,
+                    'showFormName' => $showFormName,
+                    'showNotesTitle' => $showNotesTitle,
+                    'skinForm' => $skinForm,
+                    'skinNote' => $skinNote,
+                    'expertMode' => $expertMode,
+                    'skinByTemplate' => $skinByTemplate,
+                    'skinFormTemplate' => $skinFormTemplate,
+                    'skinTemplate' => $skinTemplate,
+                    'skinNoteTemplate' => $skinNoteTemplate,
+                    'allowComments' => $allowComments,
+                    'allowCommentsModerated' => $allowCommentsModerated));
         if (!$create) {
             LogUtil::registerError($this->__('The form creation has failt'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -2182,34 +2057,33 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $help = $item->getElementsByTagName('help')->item(0)->nodeValue;
             $gid = $item->getElementsByTagName('gid')->item(0)->nodeValue;
             $searchable = $item->getElementsByTagName('searchable')->item(0)->nodeValue;
-            $createField = ModUtil::apiFunc('IWforms', 'admin', 'createFormFieldExport',
-                            array('fid' => $create,
-                                'fieldType' => $fieldType,
-                                'fieldName' => $fieldName,
-                                'description' => $description,
-                                'help' => $help,
-                                'feedback' => $feedback,
-                                'order' => $order,
-                                'required' => $required,
-                                'validationNeeded' => $validationNeeded,
-                                'accessType' => $accessType,
-                                'editable' => $editable,
-                                'rfid' => $rfid,
-                                'active' => $active,
-                                'notify' => $notify,
-                                'size' => $size,
-                                'cols' => $cols,
-                                'rows' => $rows,
-                                'editor' => $editor,
-                                'publicFile' => $publicFile,
-                                'checked' => $checked,
-                                'options' => $options,
-                                'calendar' => $calendar,
-                                'height' => $height,
-                                'color' => $color,
-                                'colorf' => $colorf,
-                                'gid' => 0,
-                                'searchable' => $searchable));
+            $createField = ModUtil::apiFunc('IWforms', 'admin', 'createFormFieldExport', array('fid' => $create,
+                        'fieldType' => $fieldType,
+                        'fieldName' => $fieldName,
+                        'description' => $description,
+                        'help' => $help,
+                        'feedback' => $feedback,
+                        'order' => $order,
+                        'required' => $required,
+                        'validationNeeded' => $validationNeeded,
+                        'accessType' => $accessType,
+                        'editable' => $editable,
+                        'rfid' => $rfid,
+                        'active' => $active,
+                        'notify' => $notify,
+                        'size' => $size,
+                        'cols' => $cols,
+                        'rows' => $rows,
+                        'editor' => $editor,
+                        'publicFile' => $publicFile,
+                        'checked' => $checked,
+                        'options' => $options,
+                        'calendar' => $calendar,
+                        'height' => $height,
+                        'color' => $color,
+                        'colorf' => $colorf,
+                        'gid' => 0,
+                        'searchable' => $searchable));
             if (!$createField) {
                 LogUtil::registerError($this->__('The form creation has failt'));
                 return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
