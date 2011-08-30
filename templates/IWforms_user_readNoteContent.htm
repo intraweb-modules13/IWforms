@@ -2,8 +2,8 @@
     <tr>
         <td width="10%">
             {if $note.photo neq ''}
-            <div style="height:10px; text-align:center;">&nbsp;</div>
-            <img src="{getbaseurl}{modurl modname=IWforms type=user func=getFile fileName=$note.photo}" />
+            <div style="height:10px; text-align:center;"></div>
+            <img src="{$baseurl}{modurl modname='IWforms' type='user' func='getFile' fileName=$note.photo}" />
             {/if}
         </td>
         <td width="30%">
@@ -44,7 +44,9 @@
         <td bgcolor="{$contentColor}" width="60%">
             {if $content.fieldType eq 7 && $content.content neq ''}
             <img src="modules/IWmain/images/fileIcons/{IWformsfileicon fileName=$content.content}" />
-            <a href="{modurl modname=IWforms type=user func=download fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|safehtml}</a>
+            <a href="{modurl modname='IWforms' type='user' func='download' fid=$fid fndid=$content.fndid fileName=$content.content}">
+                {$content.content|nl2br|safehtml}
+            </a>
             {else}
             <div class="messageBody">
                 {$content.content|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}

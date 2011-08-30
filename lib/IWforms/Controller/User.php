@@ -56,9 +56,9 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             }
         }
         return $this->view->assign('forms', $forms_array)
-                ->assign('func', '')
-                ->assign('fid', '')
-                ->fetch('IWforms_user_main.htm');
+                        ->assign('func', '')
+                        ->assign('fid', '')
+                        ->fetch('IWforms_user_main.htm');
     }
 
     /**
@@ -311,19 +311,19 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
 
         return $this->view->assign('notes', $notesArray)
-                ->assign('pager', $pager)
-                ->assign('ipp', $ipp)
-                ->assign('users', $users)
-                ->assign('form', $form)
-                ->assign('oneRecord', $oneRecord)
-                ->assign('fid', $fid)
-                ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
-                ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
-                ->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'))
-                ->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'))
-                ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
-                ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
-                ->fetch($template);
+                        ->assign('pager', $pager)
+                        ->assign('ipp', $ipp)
+                        ->assign('users', $users)
+                        ->assign('form', $form)
+                        ->assign('oneRecord', $oneRecord)
+                        ->assign('fid', $fid)
+                        ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
+                        ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
+                        ->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'))
+                        ->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'))
+                        ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
+                        ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
+                        ->fetch($template);
     }
 
     /**
@@ -562,31 +562,37 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                     'total' => $total,
                     'urltemplate' => 'index.php?module=IWforms&func=manage&init=%%&ipp=' . $ipp . '&fid=' . $fid . '&order=' . $order . '&filterValue=' . $filterValue . '&filter=' . $filter));
 
+        $modid = ModUtil::getIdFromName('IWmessages');
+        $modinfo = ModUtil::getInfo($modid);
+
+        $IWmessages = ($modinfo['state'] != 3) ? false : true;
+
         return $this->view->assign('filters', $filters)
-                ->assign('pager', $pager)
-                ->assign('notes', $notesArray)
-                ->assign('ipp', $ipp)
-                ->assign('init', $init)
-                ->assign('ippArray', $ippArray)
-                ->assign('order', $order)
-                ->assign('filterType', $filterType)
-                ->assign('items', $items)
-                ->assign('users', $users)
-                ->assign('filterValue', $filterValue)
-                ->assign('filter', $filter)
-                ->assign('form', $form)
-                ->assign('records', $records)
-                ->assign('usersPictureFolder', ModUtil::getVar('IWusers', 'usersPictureFolder'))
-                ->assign('func', '')
-                ->assign('fid', $fid)
-                ->assign('total', $total)
-                ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
-                ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
-                ->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'))
-                ->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'))
-                ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
-                ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
-                ->fetch('IWforms_user_manage.htm');
+                        ->assign('pager', $pager)
+                        ->assign('notes', $notesArray)
+                        ->assign('ipp', $ipp)
+                        ->assign('init', $init)
+                        ->assign('ippArray', $ippArray)
+                        ->assign('order', $order)
+                        ->assign('filterType', $filterType)
+                        ->assign('items', $items)
+                        ->assign('users', $users)
+                        ->assign('filterValue', $filterValue)
+                        ->assign('filter', $filter)
+                        ->assign('form', $form)
+                        ->assign('records', $records)
+                        ->assign('usersPictureFolder', ModUtil::getVar('IWusers', 'usersPictureFolder'))
+                        ->assign('func', '')
+                        ->assign('fid', $fid)
+                        ->assign('total', $total)
+                        ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
+                        ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
+                        ->assign('newsColor', ModUtil::getVar('IWforms', 'newsColor'))
+                        ->assign('viewedColor', ModUtil::getVar('IWforms', 'viewedColor'))
+                        ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
+                        ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
+                        ->assign('IWmessages', $IWmessages)
+                        ->fetch('IWforms_user_manage.htm');
     }
 
     /**
@@ -630,11 +636,11 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
         //Successfull
         return System::redirect(ModUtil::url('IWforms', 'user', 'manage', array('fid' => $fid,
-                    'order' => $order,
-                    'ipp' => $ipp,
-                    'init' => $init,
-                    'filterValue' => $filterValue,
-                    'filter' => $filter)));
+                            'order' => $order,
+                            'ipp' => $ipp,
+                            'init' => $init,
+                            'filterValue' => $filterValue,
+                            'filter' => $filter)));
     }
 
     /**
@@ -693,8 +699,8 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                 }
             }
             return $this->view->assign('formsArray', $formsArray)
-                    ->assign('fid', '')
-                    ->fetch('IWforms_user_sendedWhatForm.htm');
+                            ->assign('fid', '')
+                            ->fetch('IWforms_user_sendedWhatForm.htm');
         }
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
@@ -746,7 +752,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
 
         return $this->view->assign('content', $content)
-                ->fetch('IWforms_user_sendedView.htm');
+                        ->fetch('IWforms_user_sendedView.htm');
     }
 
     /**
@@ -764,7 +770,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         return ModUtil::func('IWmain', 'user', 'getFile', array('fileName' => $fileName,
-            'sv' => $sv));
+                    'sv' => $sv));
     }
 
     /**
@@ -915,15 +921,15 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
 
         return $this->view->assign('requiredText', $requiredText)
-                ->assign('adminView', $adminView)
-                ->assign('form', $form)
-                ->assign('checkJS', $checkJS)
-                ->assign('requiredJS', $requiredJS)
-                ->assign('content', $content)
-                ->assign('func', '')
-                ->assign('fid', $fid)
-                ->assign('captcha', $captcha)
-                ->fetch($template);
+                        ->assign('adminView', $adminView)
+                        ->assign('form', $form)
+                        ->assign('checkJS', $checkJS)
+                        ->assign('requiredJS', $requiredJS)
+                        ->assign('content', $content)
+                        ->assign('func', '')
+                        ->assign('fid', $fid)
+                        ->assign('captcha', $captcha)
+                        ->fetch($template);
     }
 
     /**
@@ -1467,8 +1473,8 @@ class IWforms_Controller_User extends Zikula_AbstractController {
 
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         return ModUtil::func('IWmain', 'user', 'downloadFile', array('fileName' => $fileName,
-            'fileNameInServer' => $fileNameInServer,
-            'sv' => $sv));
+                    'fileNameInServer' => $fileNameInServer,
+                    'sv' => $sv));
     }
 
     /**
@@ -1532,10 +1538,10 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
 
         return $this->view->assign('form', $form)
-                ->assign('fieldsTypes', $fieldsTypes)
-                ->assign('fieldsOrder', $fieldsOrder)
-                ->assign('fields', $fieldsArray)
-                ->fetch('IWforms_user_export.htm');
+                        ->assign('fieldsTypes', $fieldsTypes)
+                        ->assign('fieldsOrder', $fieldsOrder)
+                        ->assign('fields', $fieldsArray)
+                        ->fetch('IWforms_user_export.htm');
     }
 
     /**
@@ -1772,7 +1778,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
         $items[] = array('text' => $text);
         return $this->view->assign('items', $items)
-                ->fetch('IWforms_user_pager.htm');
+                        ->fetch('IWforms_user_pager.htm');
     }
 
 }

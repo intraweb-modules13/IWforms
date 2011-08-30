@@ -1,7 +1,7 @@
 <div id="note_options_{$note.fmid}">
     {if $note.validate eq 0}
     <a href="javascript:validateNote({$note.fmid})">
-    {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="Validates the note" __title="Validates the note"}
+        {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="Validates the note" __title="Validates the note"}
     </a> |
     {else}
     <a href="javascript:validateNote({$note.fmid})">
@@ -29,12 +29,12 @@
         {img modname='IWforms' src='mark.gif' __alt="Mark" __title="Mark"}
     </a>
     {/if}
-    {if $note.userName neq ''}
-    | <a href="{modurl modname="IWmessages" type="user" func="compose" uname=$note.userName}">
+    {if $note.userName neq '' && $IWmessages}
+    | <a href="{modurl modname='IWmessages' type='user' func='compose' uname=$note.userName}">
         {img modname='core' src='mail_send.png' set='icons/extrasmall' __alt="Respond with a private message" __title="Respond with a private message"}
     </a>
     {/if}
-    | <a href="{modurl modname="IWforms" type="user" func="read" fmid=$note.fmid}" target="_blank">
+    | <a href="{modurl modname='IWforms' type='user' func='read' fmid=$note.fmid fid=$fid}" target="_blank">
         {img modname='core' src='14_layer_visible.png' set='icons/extrasmall' __alt="View note" __title="View note"}
     </a>
 </div>

@@ -13,7 +13,7 @@
     <div>{gt text="Title of the annotations "}: {$form.title}</div>
     <fieldset>
         <legend></legend>
-        <form name="order" id="order" action="{modurl modname="IWforms" type="user" func="manage"}" method="post" enctype="application/x-www-form-urlencoded">
+        <form name="order" id="order" action="{modurl modname='IWforms' type='user' func='manage'}" method="post" enctype="application/x-www-form-urlencoded">
             <input type="hidden" name="fidReload" value="{$fid}" />
             <div style="float: left; margin: 5px 30px 0px 0px;">
                 {gt text="State of the annotations"}:
@@ -24,7 +24,7 @@
             </div>
             {if $pager neq '' || $total > 10}
             <div id="itemsPerPage" style="float: left; margin: 5px 30px 0px 0px;">
-		{gt text="N. Entries"}:
+                {gt text="N. Entries"}:
                 <select name="ipp" onchange="javascript:sendChange(0)">
                     {foreach item=ippValue from=$ippArray}
                     <option {if $ipp eq $ippValue}selected{/if} value="{$ippValue}">{$ippValue}</option></option>
