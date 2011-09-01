@@ -117,10 +117,10 @@
     <div class="field">
         {if $calendar}
         <input size="10" id="calendarDate{$field.fndid}" name="field{$field.fndid}" onfocus="blur();" />
-        <input type="button" id="calendarDate{$field.fndid}_btn" value="..." />
+        <img id="calendarDate{$field.fndid}_btn" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" />
         <script type="text/javascript">
             var calendar = Calendar.setup({
-                onSelect       :    function(calendar) { calendar.hide() },
+                onSelect       :    function(calendar) { calendar.hide() }
             });
             calendar.manageFields("calendarDate{{$field.fndid}}_btn", "calendarDate{{$field.fndid}}", "%d/%m/%y");
         </script>

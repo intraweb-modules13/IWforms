@@ -48,14 +48,14 @@
                 <label for="new">{gt text="As a new until a..."}</label>
                 <div class="z-formnote">
                     <input size="10" id="newFormDate" name="new"  onfocus="blur();" />
-                    <input type="button" id="newFormDate_btn" value="..." />
+                    <img id="newFormDate_btn" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" />
                 </div>
             </div>
             <div class="z-formrow">
                 <label for="caducity">{gt text="Make it expires automatically a..."}</label>
                 <div class="z-formnote">
                     <input size="10" id="caducityDate" name="caducity"  onfocus="blur();" />
-                    <input type="button" id="caducityDate_btn" value="..." />
+                    <img id="caducityDate_btn" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" />
                 </div>
             </div>
             <div class="z-formrow">
@@ -142,12 +142,12 @@
 
 <script type="text/javascript">
     var newForm = Calendar.setup({
-        onSelect       :    function(newForm) { newForm.hide() },
+        onSelect       :    function(newForm) { newForm.hide() }
     });
     newForm.manageFields("newFormDate_btn", "newFormDate", "%d/%m/%y");
     
     var caducity = Calendar.setup({
-        onSelect       :    function(caducity) { caducity.hide() },
+        onSelect       :    function(caducity) { caducity.hide() }
     });
     caducity.manageFields("caducityDate_btn", "caducityDate", "%d/%m/%y");
 </script>
