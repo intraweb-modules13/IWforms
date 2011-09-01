@@ -1,7 +1,7 @@
 <div class="formContent">
     <div class="z-adminpageicon">{img modname='core' src='edit.png' set='icons/large'}</div>
     <h2>{gt text="Edit the main form"}</h2>
-    <form id="formDefinition" class="z-form" action="{modurl modname="IWforms" type="admin" func="update"}" method="post" enctype="application/x-www-form-urlencoded">
+    <form id="formDefinition" class="z-form" action="{modurl modname='IWforms' type='admin' func='update'}" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="fid" value="{$item.fid}" />
         <input type="hidden" name="aio" value="{$aio}" />
@@ -19,7 +19,7 @@
             <select id="cid" name="cid">
                 <option value="0">{gt text="Chosse one category..."}</option>
                 {foreach item="cat" from=$cats}
-                    <option {if $item.cid eq $cat.cid}selected{/if} value="{$cat.cid}">{$cat.catName}</option>
+                <option {if $item.cid eq $cat.cid}selected{/if} value="{$cat.cid}">{$cat.catName}</option>
                 {/foreach}
             </select>
             {else}
@@ -33,15 +33,15 @@
         <div class="z-formrow">
             <label for="new">{gt text="As a new until a..."}</label>
             <div class="z-formnote">
-                <input id="new" name="new" type="text" size="8" maxlength="8" value="{$new}"/>
-                <a><img id="trigBegin1" name="trigBegin1" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" alt=""/></a>
+                <input size="10" id="newFormDate" name="new" value="{$new}" onfocus="blur();" />
+                <input type="button" id="newFormDate_btn" value="..." />
             </div>
         </div>
         <div class="z-formrow">
             <label for="caducity">{gt text="Make it expires automatically a..."}</label>
             <div class="z-formnote">
-                <input id="caducity" name="caducity" type="text" size="8" maxlength="8" value="{$caducity}" />
-                <a><img id="trigBegin2" name="trigBegin2" src="modules/IWmain/images/calendar.gif" style="cursor:pointer;" alt=""/></a>
+                <input size="10" id="caducityDate" name="caducity"  value="{$caducity}" onfocus="blur();" />
+                <input type="button" id="caducityDate_btn" value="..." />
             </div>
         </div>
         <div class="z-formrow">
@@ -99,7 +99,7 @@
         <div class="z-formrow">
             <label for="filesFolder">{gt text="Form files folder"}</label>
             <div class="z-formnote">
-            <strong>{$filesFolder}/</strong> <input id="filesFolder" name="filesFolder" type="text" size="50" maxlength="30" value="{$item.filesFolder}"/>
+                <strong>{$filesFolder}/</strong> <input id="filesFolder" name="filesFolder" type="text" size="50" maxlength="30" value="{$item.filesFolder}"/>
             </div>
         </div>
         <div id="expertModeContent">
@@ -125,21 +125,13 @@
 </div>
 
 <script type="text/javascript">
-    Calendar.setup({
-        inputField     :    "new",      // id of the input field
-        ifFormat       :    "%d/%m/%y",       // format of the input field
-        showsTime      :    true,            // will display a time selector
-        button         :    "trigBegin1",   // trigger for the calendar (button ID)
-        singleClick    :    true,           // double-click mode
-        step           :    1                // show all years in drop-down boxes (instead of every other year as default)
+    var newForm = Calendar.setup({
+        onSelect       :    function(newForm) { newForm.hide() },
     });
-
-    Calendar.setup({
-        inputField     :    "caducity",      // id of the input field
-        ifFormat       :    "%d/%m/%y",       // format of the input field
-        showsTime      :    true,            // will display a time selector
-        button         :    "trigBegin2",   // trigger for the calendar (button ID)
-        singleClick    :    true,           // double-click mode
-        step           :    1                // show all years in drop-down boxes (instead of every other year as default)
+    newForm.manageFields("newFormDate_btn", "newFormDate", "%d/%m/%y");
+    
+    var caducity = Calendar.setup({
+        onSelect       :    function(caducity) { caducity.hide() },
     });
+    caducity.manageFields("caducityDate_btn", "caducityDate", "%d/%m/%y");
 </script>
