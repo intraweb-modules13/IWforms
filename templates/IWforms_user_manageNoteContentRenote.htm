@@ -29,7 +29,11 @@
         {/if}
     </div>
     <div class="z-right z-buttons">
-        <a onClick="javascript:submitValue('renote',{$note.fmid},document.submitValueFormR_{$note.fmid}.copy.checked)" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>
+        {if $note.annonimous neq 1}
+        <a onClick="javascript:submitValue('renote',{$note.fmid},document.submitValueFormR_{$note.fmid}.copy.checked)" title="{gt text="Send"}">{img modname='core' src='button_ok.gif' set='icons/small'} {gt text="Send"}</a>
+        {else}
+        <a onClick="javascript:submitValue('renote',{$note.fmid},0)" title="{gt text="Send"}">{img modname='core' src='button_ok.gif' set='icons/small'} {gt text="Send"}</a>
+        {/if}
     </div>
     <div>
         {if $note.annonimous neq 1}
