@@ -108,7 +108,7 @@ class IWforms_Api_Search extends Zikula_AbstractApi {
                         'uid' => $uid,
                         'sv' => $sv));
             if ($access['level'] > 1) {
-                $userForms = $form;
+                $userForms[] = $form;
             }
         }
 
@@ -119,32 +119,29 @@ class IWforms_Api_Search extends Zikula_AbstractApi {
             // get searchable fields for each form
             $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $form['fid'],
                         'whereArray' => 'active|1$$searchable|1'));
-            if (is_array($fields)) {
-                $fieldsArray[] = $fields;
-            }
+            $fieldsArray = array_merge($fieldsArray, $fields);
         }
-
-
-        print_r($fieldsArray);
-        die();
-
-
-
 
         // get the db and table info
         $dbtable = DBUtil::getTables();
-        $userscolumn = $dbtable['users_column'];
+        $c = $dbtable['IWforms_note_column'];
 
         $q = DataUtil::formatForStore($args['q']);
         $q = str_replace('%', '\\%', $q);  // Don't allow user input % as wildcard
-        // build the where clause
-        $where = array();
-        $where[] = "({$userscolumn['activated']} != " . Users_Constant::ACTIVATED_PENDING_REG . ')';
-        $where[] = $unameClause;
-        $where = implode(' AND ', $where);
 
-        //$notes = DBUtil::selectObjectArray('users', $where, '', -1, -1, 'uid');
+        $joinArray = array();
+        $where = '';
+        foreach ($fieldsArray as $field) {
+            $where .= "$c[fndid] = $field[fndid] OR ";
+            $joinArray[$field['fndid']] = $field['fid'];
+        }
 
+        $where = substr($where, 0, -4);
+
+        $where = "$c[validate] =1 AND $c[content] LIKE '%$q%' AND (" . $where . ")";
+
+        $notes = DBUtil::selectObjectArray('IWforms_note', $where, '', -1, -1, 'fnid');
+        
         if (!$notes) {
             return true;
         }
@@ -152,27 +149,19 @@ class IWforms_Api_Search extends Zikula_AbstractApi {
         $sessionId = session_id();
 
         foreach ($notes as $note) {
-            /*
-              if ($user['uid'] != 1 && SecurityUtil::checkPermission('Users::', "$user[uname]::$user[uid]", ACCESS_READ)) {
-              if ($useProfileMod) {
-              $qtext = $this->__("Click the user's name to view his/her complete profile.");
-              } else {
-              $qtext = '';
-              }
-              $items = array('title' => $user['uname'],
-              'text' => $qtext,
-              'extra' => $user['uid'],
-              'module' => 'Users',
-              'created' => null,
-              'session' => $sessionId);
-              $insertResult = DBUtil::insertObject($items, 'search_result');
-              if (!$insertResult) {
-              $this->registerError($this->__("Error! Could not load the results of the user's search."));
-              return false;
-              }
-              }
-             */
+            $items = array('title' => $note['content'],
+                'text' => '',
+                'extra' => serialize(array('fmid' => $note['fmid'], 'fid' => $joinArray[$note['fndid']])),
+                'module' => 'IWforms',
+                'created' => null,
+                'session' => $sessionId);
+            $insertResult = DBUtil::insertObject($items, 'search_result');
+            if (!$insertResult) {
+                $this->registerError($this->__("Error! Could not load the results of the user's search."));
+                return false;
+            }
         }
+        
         return true;
     }
 
@@ -191,16 +180,9 @@ class IWforms_Api_Search extends Zikula_AbstractApi {
      * @return bool True.
      */
     public function search_check($args) {
-
-        /*
-          $profileModule = System::getVar('profilemodule', '');
-          if (!empty($profileModule) && ModUtil::available($profileModule)) {
-          $datarow = &$args['datarow'];
-          $userId = $datarow['extra'];
-          $datarow['url'] = ModUtil::url($profileModule, 'user', 'view', array('uid' => $userId));
-          }
-         */
-
+        $datarow = &$args['datarow'];
+        $extra = unserialize($datarow['extra']);
+        $datarow['url'] = ModUtil::url('IWforms', 'user', 'read', array('fid' => $extra['fid'], 'fmid' => $extra['fmid']));
         return true;
     }
 
