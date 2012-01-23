@@ -2322,8 +2322,8 @@ msgid "List of possible dependencies"
 msgstr "Llista de dependencies possibles"
 
 #: pninit.php:26
-msgid "Module iw_main is needed. You have to install the iw_main module before installing it."
-msgstr "El mòdul iw_main ha d'estar instal·lat. Instal·leu-lo per poder instal·lar aquest mòdul."
+msgid "Module IWmain is needed. You have to install the IWmain module before installing it."
+msgstr "El mòdul IWmain ha d'estar instal·lat. Instal·leu-lo per poder instal·lar aquest mòdul."
 
 #: pnversion.php:12
 msgid "IWForms"
