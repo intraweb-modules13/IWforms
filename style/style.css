@@ -181,3 +181,8 @@ div.formSkin{
     display: inline;
     cursor: pointer;
 }
+
+.sendedLink {
+    margin-top: 15px;
+    text-align: right;
+}

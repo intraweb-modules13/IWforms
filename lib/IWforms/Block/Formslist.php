@@ -31,50 +31,52 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
             return;
         }
         $uid = (UserUtil::isLoggedIn()) ? UserUtil::getVar('uid') : '-1';
+
         //get the headlines saved in the user vars. It is renovate every 10 minutes
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists',
-                        array('name' => 'formsListBlock' . $blockinfo['bid'],
-                            'module' => 'IWforms',
-                            'uid' => $uid,
-                            'sv' => $sv));
+        $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists', array('name' => 'formsListBlock' . $blockinfo['bid'],
+                    'module' => 'IWforms',
+                    'uid' => $uid,
+                    'sv' => $sv));
+
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $have_flags = ModUtil::func('IWmain', 'user', 'userGetVar',
-                        array('uid' => $uid,
-                            'name' => 'have_flags',
-                            'module' => 'IWmain_block_flagged',
-                            'sv' => $sv));
-/*
+        $have_flags = ModUtil::func('IWmain', 'user', 'userGetVar', array('uid' => $uid,
+                    'name' => 'have_flags',
+                    'module' => 'IWmain_block_flagged',
+                    'sv' => $sv));
+
+        
+        $exists = false;
+        
+        
         if ($exists && $have_flags != 'fr') {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $s = ModUtil::func('IWmain', 'user', 'userGetVar',
-                            array('uid' => $uid,
-                                'name' => 'formsListBlock' . $blockinfo['bid'],
-                                'module' => 'IWforms',
-                                'sv' => $sv,
-                                'nult' => true));
+            $s = ModUtil::func('IWmain', 'user', 'userGetVar', array('uid' => $uid,
+                        'name' => 'formsListBlock' . $blockinfo['bid'],
+                        'module' => 'IWforms',
+                        'sv' => $sv,
+                        'nult' => true));
             $blockinfo['content'] = $s;
             return BlockUtil::themesideblock($blockinfo);
         }
- * 
- */
+
         $userGroupsArray = array();
         //get all the active forms
-        $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms',
-                        array('user' => 1));
+        $forms = ModUtil::apiFunc('IWforms', 'user', 'getAllForms', array('user' => 1));
         //get all the groups of the user
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $userGroups = ModUtil::func('IWmain', 'user', 'getAllUserGroups',
-                        array('uid' => $uid,
-                            'sv' => $sv));
+        $userGroups = ModUtil::func('IWmain', 'user', 'getAllUserGroups', array('uid' => $uid,
+                    'sv' => $sv));
         foreach ($userGroups as $group) {
             $userGroupsArray[] = $group['id'];
         }
         $flagged = ModUtil::apiFunc('IWforms', 'user', 'getWhereFlagged');
         $validation = ModUtil::apiFunc('IWforms', 'user', 'getWhereNeedValidation');
-        $values = explode('---', $blockinfo['url']);
+
+        $values = unserialize($blockinfo['content']);
+
         //get categories
-        $cats = explode('|', $values[0]);
+        $cats = explode('|', $values['categories']);
         $catsString = '$';
         foreach ($cats as $cat) {
             if ($cat != '') {
@@ -85,9 +87,8 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
         $forms_array = array();
         foreach ($forms as $form) {
             if ($catsString == '$' || strpos($catsString, '$' . $form['cid'] . '$') != false) {
-                $access = ModUtil::func('IWforms', 'user', 'access',
-                                array('fid' => $form['fid'],
-                                    'userGroups' => $userGroupsArray));
+                $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $form['fid'],
+                            'userGroups' => $userGroupsArray));
                 if ($access['level'] != 0) {
                     $isFlagged = (array_key_exists($form['fid'], $flagged)) ? 1 : 0;
                     $needValidation = (array_key_exists($form['fid'], $validation)) ? 1 : 0;
@@ -95,7 +96,7 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
                     $new = mktime(23, 59, 00, substr($new, 3, 2), substr($new, 0, 2), substr($new, 6, 2));
                     $newLabel = ($new > time()) ? true : false;
                     $formShortName = (strlen($form['formName']) > 17) ? $formShortName = mb_strimwidth($form['formName'], 0, 18, '...') : $formShortName = $form['formName'];
-                    $formName = ($values[1] == 1) ? $formShortName : $form['formName'];
+                    $formName = ($values['listBox'] == 1) ? $formShortName : $form['formName'];
                     //Whit all the information create the array to output
                     $forms_array[] = array('formName' => $formName,
                         'title' => $form['title'],
@@ -113,17 +114,16 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
         // Create output object
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('forms', $forms_array);
-        $view->assign('listBox', $values[1]);
+        $view->assign('listBox', $values['listBox']);
         $s = $view->fetch('IWforms_block_formsList.htm');
         //Copy the block information into user vars
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        ModUtil::func('IWmain', 'user', 'userSetVar',
-                        array('uid' => $uid,
-                            'name' => 'formsListBlock' . $blockinfo['bid'],
-                            'module' => 'IWforms',
-                            'sv' => $sv,
-                            'value' => $s,
-                            'lifetime' => '750'));
+        ModUtil::func('IWmain', 'user', 'userSetVar', array('uid' => $uid,
+            'name' => 'formsListBlock' . $blockinfo['bid'],
+            'module' => 'IWforms',
+            'sv' => $sv,
+            'value' => $s,
+            'lifetime' => '750'));
 
         // Populate block info and pass to theme
         $blockinfo['content'] = $s;
@@ -135,8 +135,14 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
         if (!SecurityUtil::checkPermission("IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) {
             return;
         }
-        $url = $blockinfo['categories'] . '---' . $blockinfo['listBox'];
-        $blockinfo['url'] = "$url";
+
+        $categories = FormUtil::getPassedValue('categories', '', 'POST');
+        $listBox = (int) FormUtil::getPassedValue('listBox', 0, 'POST');
+
+        $content = serialize(array('categories' => $categories,
+            'listBox' => $listBox,
+                ));
+        $blockinfo['content'] = $content;
         return $blockinfo;
     }
 
@@ -145,10 +151,10 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
         if (!SecurityUtil::checkPermission("IWforms:formslistblock:", $blockinfo['title'] . "::", ACCESS_ADMIN)) {
             return;
         }
-        $values = explode('---', $blockinfo['url']);
-        $categoriesValue = (!empty($values[0])) ? $values[0] : '';
-        $listBox = $values[1];
-        $checked = ($listBox == 1) ? 'checked' : '';
+
+        $values = unserialize($blockinfo['content']);
+        $categoriesValue = $values['categories'];
+        $checked = ($values['listBox'] == 1) ? 'checked' : '';
         $sortida = '<tr><td valign="top">' . $this->__('Identities of the categories to show (default is all)') . '</td><td>' . "<input type=\"text\" name=\"categories\" size=\"50\" maxlength=\"50\" value=\"$categoriesValue\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Show forms into a list') . '</td><td>' . "<input type=\"checkbox\" name=\"listBox\"  value=\"1\" $checked />" . "</td></tr>\n";
         return $sortida;
