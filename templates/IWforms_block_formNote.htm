@@ -1,4 +1,5 @@
-{add_additional_header header=$skincssurl}
+{if $noNote == 0}
+{pageaddvar name='stylesheet' value=$skincssurl}
 {$contentBySkin}
 {if $isValidator}
 <div>
@@ -8,5 +9,10 @@
 {if $isAdministrator}
 <div>
     <a href="{modurl modname="blocks" type="admin" func="modify" bid=$bid}">{gt text="Edit estructure"}</a>
+</div>
+{/if}
+{else}
+<div>
+    {gt text="Note do not fount. Please check the id of the note."}
 </div>
 {/if}

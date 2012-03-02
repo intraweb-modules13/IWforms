@@ -1,18 +1,19 @@
 <?php
-class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock
-{
+
+class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
+
     public function init() {
         SecurityUtil::registerPermissionSchema("IWforms:formnoteblock:", "Note identity::");
     }
 
     public function info() {
         return array('text_type' => 'FormNote',
-                     'module' => 'IWforms',
-                     'text_type_long' => $this->__('Display the content of a note in a block'),
-                     'allow_multiple' => true,
-                     'form_content' => false,
-                     'form_refresh' => false,
-                     'show_preview' => true);
+            'module' => 'IWforms',
+            'text_type_long' => $this->__('Display the content of a note in a block'),
+            'allow_multiple' => true,
+            'form_content' => false,
+            'form_refresh' => false,
+            'show_preview' => true);
     }
 
     /**
@@ -29,42 +30,42 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock
         if (!ModUtil::available('IWforms')) {
             return;
         }
-        $content = explode('$$$$$$$[parameter]$$$$$$$', $blockinfo['content']);
-        if ($content[1] == 1)
+
+        $content = unserialize($blockinfo['content']);
+
+        if ($content['blockHideTitle'] == 1)
             $blockinfo['title'] = '';
         $uid = (UserUtil::isLoggedIn()) ? UserUtil::getVar('uid') : '-1';
         //get the headlines saved in the user vars. It is renovate every 10 minutes
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists',
-                                    array('name' => 'formNoteBlock' . $blockinfo['bid'],
-                                          'module' => 'IWforms',
-                                          'uid' => $uid,
-                                          'sv' => $sv));
+        $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists', array('name' => 'formNoteBlock' . $blockinfo['bid'],
+                    'module' => 'IWforms',
+                    'uid' => $uid,
+                    'sv' => $sv));
+
+        $exists = false;
+
 
         if ($exists) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $s = ModUtil::func('IWmain', 'user', 'userGetVar',
-                                array('uid' => $uid,
-                                      'name' => 'formNoteBlock' . $blockinfo['bid'],
-                                      'module' => 'IWforms',
-                                      'sv' => $sv,
-                                      'nult' => true));
+            $s = ModUtil::func('IWmain', 'user', 'userGetVar', array('uid' => $uid,
+                        'name' => 'formNoteBlock' . $blockinfo['bid'],
+                        'module' => 'IWforms',
+                        'sv' => $sv,
+                        'nult' => true));
             // get note
-            $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                      array('fmid' => $blockinfo['url']));
+            $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $blockinfo['url']));
             //check user access to this form
-            $access = ModUtil::func('IWforms', 'user', 'access',
-                                     array('fid' => $note['fid']));
+            $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
             if ($access['level'] < 2) {
                 return false;
             }
             //Get item
-            $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                      array('fid' => $note['fid']));
+            $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $note['fid']));
             if ($form == false) {
                 return false;
             }
-            if ($content[0] == '') {
+            if ($content['content'] == '') {
                 return false;
             }
             if ($form['skincss'] != '') {
@@ -79,40 +80,56 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock
             $blockinfo['content'] = $s;
             return BlockUtil::themesideblock($blockinfo);
         }
+
+
         // get note
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                                  array('fmid' => $blockinfo['url']));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $blockinfo['url']));
+
+        if (!$note) {
+            // create output object
+            $view = Zikula_View::getInstance('IWforms', false);
+            $view->assign('noNote', 1);
+            $s = $view->fetch('IWforms_block_formNote.htm');
+            // copy the block information into user vars
+            $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
+            ModUtil::func('IWmain', 'user', 'userSetVar', array('uid' => $uid,
+                'name' => 'formNoteBlock' . $blockinfo['bid'],
+                'module' => 'IWforms',
+                'sv' => $sv,
+                'value' => $s,
+                'lifetime' => '300'));
+            // Populate block info and pass to theme
+            $blockinfo['content'] = $s;
+            return BlockUtil::themesideblock($blockinfo);
+        }
+
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                                 array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 2) {
             return false;
         }
         //Get item
-        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                                  array('fid' => $note['fid']));
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $note['fid']));
         if ($form == false) {
             return false;
         }
-        if ($content[0] == '') {
+        if ($content['content'] == '') {
             return false;
         }
-        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
-                                         array('fid' => $note['fid'],
-                                               'fmid' => $note['fmid']));
+        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents', array('fid' => $note['fid'],
+                    'fmid' => $note['fmid']));
         if ($note['annonimous'] == 0 && ($uid != '-1' || ($uid == '-1' && $form['unregisterednotusersview'] == 0))) {
             $userName = UserUtil::getVar('uname', $note['user']);
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-            $photo = ModUtil::func('IWmain', 'user', 'getUserPicture',
-                                    array('uname' => $userName,
-                                          'sv' => $sv));
+            $photo = ModUtil::func('IWmain', 'user', 'getUserPicture', array('uname' => $userName,
+                        'sv' => $sv));
             $user = ($note['user'] != '') ? $note['user'] : '-1';
         } else {
             $user = '';
             $userName = '';
             $photo = '';
         }
-        $contentBySkin = str_replace('[$user$]', $userName, $content[0]);
+        $contentBySkin = str_replace('[$user$]', $userName, $content['content']);
         $contentBySkin = str_replace('[$time$]', date('H.i', $note['time']), $contentBySkin);
         $contentBySkin = str_replace('[$noteId$]', $note['fmid'], $contentBySkin);
         $contentBySkin = str_replace('[$formId$]', $note['fid'], $contentBySkin);
@@ -146,16 +163,16 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock
         $view->assign('fmid', $blockinfo['url']);
         $view->assign('bid', $blockinfo['bid']);
         $view->assign('fid', $note['fid']);
+        $view->assign('noNote', 0);
         $s = $view->fetch('IWforms_block_formNote.htm');
         // copy the block information into user vars
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        ModUtil::func('IWmain', 'user', 'userSetVar',
-                       array('uid' => $uid,
-                             'name' => 'formNoteBlock' . $blockinfo['bid'],
-                             'module' => 'IWforms',
-                             'sv' => $sv,
-                             'value' => $s,
-                             'lifetime' => '300'));
+        ModUtil::func('IWmain', 'user', 'userSetVar', array('uid' => $uid,
+            'name' => 'formNoteBlock' . $blockinfo['bid'],
+            'module' => 'IWforms',
+            'sv' => $sv,
+            'value' => $s,
+            'lifetime' => '300'));
         // Populate block info and pass to theme
         $blockinfo['content'] = $s;
         return BlockUtil::themesideblock($blockinfo);
@@ -166,11 +183,15 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock
         if (!SecurityUtil::checkPermission("IWforms:formnoteblock:", $blockinfo['url'] . "::", ACCESS_ADMIN)) {
             return;
         }
-        $fmid = $blockinfo['fmid'];
-        $blockContent = $blockinfo['blockContent'];
-        $blockHideTitle = (isset($blockinfo['blockHideTitle']) && $blockinfo['blockHideTitle'] == 1) ? 1 : 0;
-        $blockinfo['content'] = "$blockContent" . '$$$$$$$[parameter]$$$$$$$' . $blockHideTitle;
-        $blockinfo['url'] = "$fmid";
+
+        $fmid = (int) FormUtil::getPassedValue('fmid', '', 'POST');
+        $blockHideTitle = (int) FormUtil::getPassedValue('blockHideTitle', 0, 'POST');
+        $blockContent = FormUtil::getPassedValue('blockContent', '', 'POST');
+        $content = serialize(array('content' => $blockContent,
+            'blockHideTitle' => $blockHideTitle,
+                ));
+        $blockinfo['content'] = $content;
+        $blockinfo['url'] = $fmid;
         return $blockinfo;
     }
 
@@ -180,13 +201,16 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock
             return;
         }
         $fmid = $blockinfo['url'];
-        $content = explode('$$$$$$$[parameter]$$$$$$$', $blockinfo['content']);
-        $checked = ($content[1] == 1) ? "checked" : "";
-        $blockContent = stripslashes($content[0]);
+
+        $values = unserialize($blockinfo['content']);
+        $blockContent = $values['content'];
+        $checked = ($values['blockHideTitle'] == 1) ? 'checked' : '';
+
         $sortida = '<tr><td valign="top">' . $this->__('Identity of the note that must be schown') . '</td><td>' . "<input type=\"text\" name=\"fmid\" size=\"5\" maxlength=\"5\" value=\"$fmid\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Hide block title') . '</td><td>' . "<input type=\"checkbox\" name=\"blockHideTitle\"" . $checked . " value=\"1\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Block content') . '</td><td>' . "<textarea name=\"blockContent\" rows=\"5\" cols=\"70\">" . $blockContent . "</textarea>" . "</td></tr>\n";
         $sortida .= '<tr><td colspan=\"2\" valign="top"><div class="z-informationmsg">' . $this->__("[\$formId\$] =>Identity of the form, [\$noteId\$] =>Identity of the note, [%id%] => Title of the field, [\$id\$] => Content of the field, [\$user\$] => Username, [\$date\$] => Note creation date, [\$time\$] => Note creation time, [\$avatar\$] => User avatar, [\$reply\$] => Reply to the user if the reply is public") . "</div></td><tr>\n";
         return $sortida;
     }
+
 }

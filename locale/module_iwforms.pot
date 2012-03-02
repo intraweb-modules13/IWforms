@@ -2113,3 +2113,6 @@ msgstr ""
 #: templates/IWforms_user_new.htm:53
 msgid "are required"
 msgstr ""
+
+msgid "Note do not fount. Please check the id of the note."
+msgstr ""
