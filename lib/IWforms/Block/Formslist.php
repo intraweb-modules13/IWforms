@@ -45,10 +45,8 @@ class IWforms_Block_formslist extends Zikula_Controller_AbstractBlock {
                     'module' => 'IWmain_block_flagged',
                     'sv' => $sv));
 
-        
-        $exists = false;
-        
-        
+//        $exists = false;
+
         if ($exists && $have_flags != 'fr') {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $s = ModUtil::func('IWmain', 'user', 'userGetVar', array('uid' => $uid,

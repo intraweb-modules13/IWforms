@@ -43,8 +43,7 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
                     'uid' => $uid,
                     'sv' => $sv));
 
-        $exists = false;
-
+//        $exists = false;
 
         if ($exists) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
@@ -68,9 +67,7 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
             if ($content['content'] == '') {
                 return false;
             }
-            if ($form['skincss'] != '') {
-                $skincssurl = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
-            }
+            $skincssurl = ($content['skincssurl'] != '') ? $content['skincssurl'] : '';
             // Create output object
             $view = Zikula_View::getInstance('IWforms', false);
             $view->assign('contentBySkin', DataUtil::formatForDisplayHTML(stripslashes($s)));
@@ -81,10 +78,8 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
             return BlockUtil::themesideblock($blockinfo);
         }
 
-
         // get note
         $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $blockinfo['url']));
-
         if (!$note) {
             // create output object
             $view = Zikula_View::getInstance('IWforms', false);
@@ -149,9 +144,8 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
         $contentBySkin = str_replace('|int|', '?', $contentBySkin);
         $contentBySkin = str_replace('|amp|', '&', $contentBySkin);
         // load the template defined in the form definition
-        if ($form['skincss'] != '') {
-            $skincssurl = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
-        }
+        $skincssurl = ($content['skincssurl'] != '') ? $content['skincssurl'] : '';
+
         $isValidator = ($access['level'] == 7) ? 1 : 0;
         $isAdministrator = (SecurityUtil::checkPermission('blocks::', "::", ACCESS_ADMIN)) ? 1 : 0;
         // create output object
@@ -187,8 +181,11 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
         $fmid = (int) FormUtil::getPassedValue('fmid', '', 'POST');
         $blockHideTitle = (int) FormUtil::getPassedValue('blockHideTitle', 0, 'POST');
         $blockContent = FormUtil::getPassedValue('blockContent', '', 'POST');
+        $skincssurl = FormUtil::getPassedValue('skincssurl', '', 'POST');
+
         $content = serialize(array('content' => $blockContent,
             'blockHideTitle' => $blockHideTitle,
+            'skincssurl' => $skincssurl,
                 ));
         $blockinfo['content'] = $content;
         $blockinfo['url'] = $fmid;
@@ -205,11 +202,16 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
         $values = unserialize($blockinfo['content']);
         $blockContent = $values['content'];
         $checked = ($values['blockHideTitle'] == 1) ? 'checked' : '';
+        $skincssurl = $values['skincssurl'];
 
         $sortida = '<tr><td valign="top">' . $this->__('Identity of the note that must be schown') . '</td><td>' . "<input type=\"text\" name=\"fmid\" size=\"5\" maxlength=\"5\" value=\"$fmid\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Hide block title') . '</td><td>' . "<input type=\"checkbox\" name=\"blockHideTitle\"" . $checked . " value=\"1\" />" . "</td></tr>\n";
         $sortida .= '<tr><td valign="top">' . $this->__('Block content') . '</td><td>' . "<textarea name=\"blockContent\" rows=\"5\" cols=\"70\">" . $blockContent . "</textarea>" . "</td></tr>\n";
         $sortida .= '<tr><td colspan=\"2\" valign="top"><div class="z-informationmsg">' . $this->__("[\$formId\$] =>Identity of the form, [\$noteId\$] =>Identity of the note, [%id%] => Title of the field, [\$id\$] => Content of the field, [\$user\$] => Username, [\$date\$] => Note creation date, [\$time\$] => Note creation time, [\$avatar\$] => User avatar, [\$reply\$] => Reply to the user if the reply is public") . "</div></td><tr>\n";
+        $sortida .= '<tr><td valign="top">' . $this->__('Styles sheet to aply (give full URL)') . '</td><td>' . "<input type=\"text\" name=\"skincssurl\" size=\"50\" value=\"$skincssurl\" />" . "</td></tr>\n";
+
+
+
         return $sortida;
     }
 

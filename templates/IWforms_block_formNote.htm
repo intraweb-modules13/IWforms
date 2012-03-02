@@ -1,5 +1,7 @@
 {if $noNote == 0}
+{if $skincssurl neq ''}
 {pageaddvar name='stylesheet' value=$skincssurl}
+{/if}
 {$contentBySkin}
 {if $isValidator}
 <div>
