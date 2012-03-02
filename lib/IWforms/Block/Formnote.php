@@ -33,6 +33,9 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
 
         $content = unserialize($blockinfo['content']);
 
+        // load the template defined in the form definition
+        $skincssurl = ($content['skincssurl'] != '') ? $content['skincssurl'] : '';
+
         if ($content['blockHideTitle'] == 1)
             $blockinfo['title'] = '';
         $uid = (UserUtil::isLoggedIn()) ? UserUtil::getVar('uid') : '-1';
@@ -43,7 +46,7 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
                     'uid' => $uid,
                     'sv' => $sv));
 
-//        $exists = false;
+        //$exists = false;
 
         if ($exists) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
@@ -51,28 +54,9 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
                         'name' => 'formNoteBlock' . $blockinfo['bid'],
                         'module' => 'IWforms',
                         'sv' => $sv,
-                        'nult' => true));
-            // get note
-            $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $blockinfo['url']));
-            //check user access to this form
-            $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
-            if ($access['level'] < 2) {
-                return false;
-            }
-            //Get item
-            $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $note['fid']));
-            if ($form == false) {
-                return false;
-            }
-            if ($content['content'] == '') {
-                return false;
-            }
-            $skincssurl = ($content['skincssurl'] != '') ? $content['skincssurl'] : '';
-            // Create output object
-            $view = Zikula_View::getInstance('IWforms', false);
-            $view->assign('contentBySkin', DataUtil::formatForDisplayHTML(stripslashes($s)));
-            $view->assign('skincssurl', $skincssurl);
-            $s = $view->fetch('IWforms_block_formNote.htm');
+                        'nult' => true,
+                    ));
+            PageUtil::addVar('stylesheet', $skincssurl);
             // Populate block info and pass to theme
             $blockinfo['content'] = $s;
             return BlockUtil::themesideblock($blockinfo);
@@ -143,8 +127,6 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
         $contentBySkin = str_replace('|par|', '#', $contentBySkin);
         $contentBySkin = str_replace('|int|', '?', $contentBySkin);
         $contentBySkin = str_replace('|amp|', '&', $contentBySkin);
-        // load the template defined in the form definition
-        $skincssurl = ($content['skincssurl'] != '') ? $content['skincssurl'] : '';
 
         $isValidator = ($access['level'] == 7) ? 1 : 0;
         $isAdministrator = (SecurityUtil::checkPermission('blocks::', "::", ACCESS_ADMIN)) ? 1 : 0;
