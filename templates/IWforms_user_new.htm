@@ -60,17 +60,24 @@
 
 <div class="userForm">
     <div class="formTitle">{$form.title}</div>
-    <form name="newNote" id="newNote" class="z-form" {if not isset($adminView)}action="{modurl modname="IWforms" type="user" func="submitNote"}"{/if} method="post" enctype="multipart/form-data">
+    <form name="newNote" id="newNote" class="z-form" {if not isset($adminView)}action="{modurl modname='IWforms' type='user' func='submitNote'}"{/if} method="post" enctype="multipart/form-data">
           <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="fid" value="{$fid}" />
         {$content}
+        {if $captcha neq ''}
+        <div class="z-formrow">
+            <label>{gt text="Escriu les paraules de protecció"}</label>
+            <div class="z-formnote">
+                {$captcha}
+            </div>
+        </div>
+        {/if}
         {if $requiredText}
         <div class="fieldContent">
             {gt text="Fields marked with an"} <span class="required">*</span> {gt text="are required"}
         </div>
         {/if}
-        <div>&nbsp;</div>
-	{if not isset($adminView)}
+        {if not isset($adminView)}
         <div class="z-center">
             <span class="z-buttons">
                 <a style="cursor:pointer;" onClick="javascript:sendNote()" title="{gt text="Send"}">{img modname='core' src='button_ok.png' set='icons/small'} {gt text="Send"}</a>

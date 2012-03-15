@@ -1,7 +1,7 @@
 <table id="note_{$note.fmid}" class="noteContent" bgcolor="{$note.color}">
     <tr>
         <td width="10%">
-            {if $note.photo neq '' && isset($users[$note.photo].a)}
+            {if $users[$note.photo].a neq '' && isset($users[$note.photo].a)}
             <div style="height:10px; text-align:center;"></div>
             {assign var='user' value=$users[$note.photo].a}
             {$users[$user]}

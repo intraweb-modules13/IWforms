@@ -912,10 +912,9 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                 $checkJS .= $contentArray['checkJS'];
             }
         }
-        $captcha = false;
-        if ($uid == '-1') {
-            $captcha = true;
-        }
+
+        $captcha = (UserUtil::isLoggedIn()) ? '' : ModUtil::func('IWmain', 'user', 'getCaptcha');
+
         if ($form['skincss'] != '' && $form['skinForm'] != '' && $form['expertMode'] == 1 && $form['skinByTemplate'] == 0) {
             $form['skincssurl'] = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
         }
@@ -1242,14 +1241,15 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
         // Confirm authorisation code
         $this->checkCsrfToken();
-        if (!UserUtil::isLoggedIn() &&
-                ModUtil::isHooked('dpCaptcha', 'IWforms') &&
-                ModUtil::available('dpCaptcha')) {
-            if (!ModUtil::callHooks('item', 'transform')) {
-                LogUtil::registerError($this->__('Error with the capcha protect system'));
+        if (!UserUtil::isLoggedIn()) {
+                        // check captcha
+            $captcha = ModUtil::func('IWmain', 'user', 'checkCaptcha');
+            if (!$captcha) {
+                LogUtil::registerError($this->__("Error! The security words are incorrect."));
                 return System::redirect(ModUtil::url('IWforms', 'user', 'newitem', array('fid' => $fid)));
             }
         }
+        
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] != 1 &&
