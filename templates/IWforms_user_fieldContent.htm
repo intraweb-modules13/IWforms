@@ -1,13 +1,13 @@
 {if $field.fieldType eq 1 && $field.access}
 <!--Init text field-->
-<div class="fieldContent">
+<div class="z-formrow">
     {if $field.statusActive}
-    <div class="fieldTitle">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">
             {$field.required}
         </span>
-    </div>
+    </label>
     <div class="field"><input type="text" size="{$size}" name="field{$field.fndid}" id="field{$field.fndid}"/></div>
     {if $field.help neq ''}
     {include file="IWforms_user_fieldContentHelp.htm"}
@@ -23,13 +23,13 @@
 {if $field.fieldType eq 2 && $field.access}
 <!--Init textarea field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">
             {$field.required}
         </span>
-    </div>
+    </label>
     <div class="field"><textarea cols="{$cols}" rows="{$rows}" name="field{$field.fndid}" {if $field.editor eq 1}id="intraweb"{/if}></textarea></div>
     {if $field.help neq ''}
     {include file="IWforms_user_fieldContentHelp.htm"}
@@ -48,11 +48,11 @@
 {if $field.fieldType eq 3 && $field.access}
 <!--Init URL field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">{$field.required}</span>
-    </div>
+    </label>
     <div class="field">
         <div style="float:left; width: 100px;">
             <select name="fieldbis{$field.fndid}" id="fieldbis{$field.fndid}">
@@ -109,11 +109,11 @@
 {if $field.fieldType eq 4 && $field.access}
 <!--Init date field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">{$field.required}</span>
-    </div>
+    </label>
     <div class="field">
         {if $calendar}
         <input size="10" id="calendarDate{$field.fndid}" name="field{$field.fndid}" onfocus="blur();" />
@@ -166,11 +166,11 @@
 {if $field.fieldType eq 5 && $field.access}
 <!--Init time field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">{$field.required}</span>
-    </div>
+    </label>
     <div class="field">
         <select name="field{$field.fndid}" id="field{$field.fndid}">
             <option></option>
@@ -204,11 +204,11 @@
 {if $field.fieldType eq 6 && $field.access}
 <!--Init list field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">{$field.required}</span>
-    </div>
+    </label>
     <div class="field">
         <select name="field{$field.fndid}" id="field{$field.fndid}">
             {foreach item=option from=$options}
@@ -234,11 +234,11 @@
 {if $field.fieldType eq 7 && $field.access}
 <!--Init file field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">{$field.required}</span>
-    </div>
+    </label>
     <div class="field">
         <input type="file" size="30" maxlength="255" name="field{$field.fndid}" id="field{$field.fndid}" />
     </div>
@@ -282,36 +282,14 @@
 <!--End file field-->
 {/if}
 
-{*}
 {if $field.fieldType eq 8 && $field.access}
 <!--Init file field-->
 {if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">{$field.fieldName|safehtml}<span class="required">{$field.required}</span></div>
-    <div class="field">
-        <input type="checkbox" name="field{$field.fndid}" id="field{$field.fndid}" {if $checked}checked{/if} />
-    </div>
-</div>
-{else}
-<div class="fieldContent">
-    <div class="fieldTitleInnactive">{$field.fieldName|safehtml}<span class="required">{$field.required}</span></div>
-    <div class="fieldInnactive">
-        <input class="fieldInnactive" type="checkbox" {if $checked}checked{/if} disabled />
-    </div>
-</div>
-{/if}
-<!--End file field-->
-{/if}
-{*}
-
-{if $field.fieldType eq 8 && $field.access}
-<!--Init file field-->
-{if $field.statusActive}
-<div class="fieldContent">
-    <div class="fieldTitle">
+<div class="z-formrow">
+    <label>
         {$field.fieldName|safehtml}
         <span class="required">{$field.required}</span>
-    </div>
+    </label>
     <div class="field">
         <input type="radio" name="field{$field.fndid}" id="field{$field.fndid}" {if $checked}checked{/if} value="{gt text="Yes"}"/>{gt text="Yes"}
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
