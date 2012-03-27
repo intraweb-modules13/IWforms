@@ -2,9 +2,7 @@
     <tr>
         <td width="10%">
             {if isset($users[$note.photo].a) && $users[$note.photo].a neq ''}
-            <div style="height:10px; text-align:center;"></div>
             {assign var='user' value=$users[$note.photo].a}
-            {$users[$user]}
             {assign var='photoPath' value="$usersPictureFolder/$user"}
             <img src="{$baseurl}{modurl modname='IWforms' type='user' func='getFile' fileName=$photoPath}" />
             {/if}

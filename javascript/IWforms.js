@@ -3,7 +3,7 @@ function chgUsers(gid){
     show_info('chgInfo');
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: chgUsers_response,
         onFailure: chgUsers_failure
@@ -55,7 +55,7 @@ function modifyField(fieldId,char){
     var pars = "module=IWforms&func=modifyField&fndid=" + fieldId + "&char=" + char;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: modifyField_response,
         onFailure: modifyField_failure
@@ -79,7 +79,7 @@ function changeContent(fndid){
     var pars = "module=IWforms&func=changeContent&fndid=" + fndid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: changeContent_response,
         onFailure: changeContent_failure
@@ -124,7 +124,7 @@ function closeForm(fid){
     var pars = "module=IWforms&func=closeForm&fid=" + fid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: closeForm_response,
         onFailure: closeForm_failure
@@ -150,7 +150,7 @@ function IWforms_deleteNote(fmid){
         var pars = "module=IWforms&func=deleteNote&fmid=" + fmid;
         var myAjax = new Ajax.Request("ajax.php",
         {
-            method: 'get',
+            method: 'post',
             parameters: pars,
             onComplete: IWforms_deleteNote_response,
             onFailure: IWforms_deleteNote_failure
@@ -175,7 +175,7 @@ function markNote(fmid){
     var pars = "module=IWforms&func=markNote&fmid=" + fmid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: markNote_response,
         onFailure: markNote_failure
@@ -204,7 +204,7 @@ function setCompleted(fmid){
     var pars = "module=IWforms&func=setCompleted&fmid=" + fmid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: setCompleted_response,
         onFailure: setCompleted_failure
@@ -228,7 +228,7 @@ function validateNote(fmid){
     var pars = "module=IWforms&func=validateNote&fmid=" + fmid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: validateNote_response,
         onFailure: validateNote_failure
@@ -252,7 +252,7 @@ function editNoteManageContent(fmid,toDo){
     var pars = "module=IWforms&func=editNoteManageContent&fmid=" + fmid + "&do=" + toDo;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: editNoteManageContent_response,
         onFailure: editNoteManageContent_failure
@@ -296,7 +296,7 @@ function submitValue(toDo,fmid,checked){
     var pars = "module=IWforms&func=submitValue&fmid=" + fmid + "&value=" + value + "&do=" + toDo + "&checked=" + checked;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: submitValue_response,
         onFailure: submitValue_failure
@@ -339,7 +339,7 @@ function modifyForm(formId,char){
     var pars = "module=IWforms&func=modifyForm&fid=" + formId + "&char=" + char;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: modifyForm_response,
         onFailure: modifyForm_failure
@@ -362,7 +362,7 @@ function changeFormContent(fid){
     var pars = "module=IWforms&func=changeFormContent&fid=" + fid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: changeFormContent_response,
         onFailure: changeFormContent_failure
@@ -405,7 +405,7 @@ function deleteUserNote(fmid){
         var pars = "module=IWforms&func=deleteUserNote&fmid=" + fmid;
         var myAjax = new Ajax.Request("ajax.php",
         {
-            method: 'get',
+            method: 'post',
             parameters: pars,
             onComplete: deleteUserNote_response,
             onFailure: deleteUserNote_failure
@@ -431,7 +431,7 @@ function changeFilter(fid,filter){
         var pars = "module=IWforms&func=changeFilter&fid=" + fid + "&filter=" + filter;
         var myAjax = new Ajax.Request("ajax.php",
         {
-            method: 'get',
+            method: 'post',
             parameters: pars,
             onComplete: changeFilter_response,
             onFailure: changeFilter_failure
@@ -461,7 +461,7 @@ function deleteForm(fid){
         var pars = "module=IWforms&func=deleteForm&fid=" + fid;
         var myAjax = new Ajax.Request("ajax.php",
         {
-            method: 'get',
+            method: 'post',
             parameters: pars,
             onComplete: deleteForm_response,
             onFailure: deleteForm_failure
@@ -490,7 +490,7 @@ function createField(fieldType,fid){
     var pars = "module=IWforms&func=createField&fid=" + fid + "&fieldType=" + fieldType;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: createField_response,
         onFailure: createField_failure
@@ -515,7 +515,7 @@ function deleteFormField(fndid,fid){
         var pars = "module=IWforms&func=deleteFormField&fid=" + fid + "&fndid=" + fndid;
         var myAjax = new Ajax.Request("ajax.php",
         {
-            method: 'get',
+            method: 'post',
             parameters: pars,
             onComplete: deleteFormField_response,
             onFailure: deleteFormField_failure
@@ -540,7 +540,7 @@ function newField(fid){
     var pars = "module=IWforms&func=newField&fid=" + fid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: newField_response,
         onFailure: newField_failure
@@ -563,7 +563,7 @@ function actionToDo(fid,action){
     var pars = "module=IWforms&func=actionToDo&fid=" + fid + "&action=" + action ;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: actionToDo_response,
         onFailure: actionToDo_failure
@@ -608,7 +608,7 @@ function expertModeActivation(fid, type) {
     var pars = "module=IWforms&func=expertModeActivation&fid=" + fid + "&expertMode=" + expertMode + "&skinByTemplate=" + skinByTemplate;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'get',
+        method: 'post',
         parameters: pars,
         onComplete: expertModeActivation_response,
         onFailure: expertModeActivation_failure
