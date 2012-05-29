@@ -811,7 +811,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         if ($fid == -1) {
             AjaxUtil::error('no form id');
         }
-        $content = ModUtil::func('IWforms', 'admin', 'createField');
+        $content = ModUtil::func('IWforms', 'admin', 'createField', array('fid' => $fid));
         AjaxUtil::output(array('fid' => $fid,
             'content' => $content));
     }

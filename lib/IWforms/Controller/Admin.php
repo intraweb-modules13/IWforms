@@ -595,7 +595,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
      * @return:	A form to create a new field
      */
     public function createField($args) {
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
+        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
