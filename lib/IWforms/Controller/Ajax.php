@@ -244,7 +244,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
             AjaxUtil::error(DataUtil::formatForDisplayHTML($this->__('Sorry! No authorization to access this module.')));
         }
-        $fmid = FormUtil::getPassedValue('fmid', -1, 'POST');
+        $fmid = FormUtil::getPassedValue('fmid', -1, 'GET'); // In this case must be GET otherwise the reloadFlaggedBlock() does not work in response
         if ($fmid == -1) {
             AjaxUtil::error('no note id');
         }
@@ -266,6 +266,9 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             'name' => 'have_flags',
             'value' => 'fr',
             'sv' => $sv));
+        
+        //print 'dd';die();
+        
         $userName = ($note['annonimous'] == 0) ? UserUtil::getVar('uname', $note['user']) : '';
         $marked = ($mark == 'marked') ? 1 : 0;
 

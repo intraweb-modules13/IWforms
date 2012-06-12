@@ -175,7 +175,7 @@ function markNote(fmid){
     var pars = "module=IWforms&func=markNote&fmid=" + fmid;
     var myAjax = new Ajax.Request("ajax.php",
     {
-        method: 'post',
+        method: 'get', // In this case must be GET otherwise the reloadFlaggedBlock() does not work in response
         parameters: pars,
         onComplete: markNote_response,
         onFailure: markNote_failure
