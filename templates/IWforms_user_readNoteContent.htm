@@ -49,7 +49,7 @@
             </a>
             {else}
             <div class="messageBody">
-                {$content.content|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+                {$content.content|nl2br|safehtml}
             </div>
             {/if}
         </td>
@@ -59,7 +59,7 @@
     <tr>
         <td colspan="2" width="40%">{gt text="Answer"}</td>
         <td width="60%">
-            {$note.renote|nl2br|safehtml|replace:"|int|":"?"|replace:"|amp|":"&"}
+            {$note.renote|nl2br|safehtml}
         </td>
     </tr>
     {/if}

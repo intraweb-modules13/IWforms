@@ -54,9 +54,9 @@
                 <div style="float:left;" class="messageBody">
                     {if $content.fieldType eq 7 && $content.content neq ''}
                     <img src="modules/IWmain/images/fileIcons/{IWformsfileicon fileName=$content.content}"/>
-                    <a href="{modurl modname='IWforms' type='user' func='download' fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}</a>
+                    <a href="{modurl modname='IWforms' type='user' func='download' fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|safehtml}</a>
                     {else}
-                    {$content.content|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+                    {$content.content|nl2br|safehtml}
                     {/if}
                 </div>
                 {if $content.editable eq 1}

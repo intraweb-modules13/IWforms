@@ -36,7 +36,7 @@
         <div>&nbsp;</div>
     {else}
         {$form.skincssurl}
-        {$note.contentBySkin|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+        {$note.contentBySkin|safehtml}
     {/if}
     {foreachelse}
     <div>{gt text="Not annotations found"}</div>

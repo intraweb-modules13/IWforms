@@ -122,11 +122,6 @@ class IWforms_Block_formnote extends Zikula_Controller_AbstractBlock {
             $contentBySkin = str_replace('[%' . $key . '%]', $value['fieldName'], $contentBySkin);
         }
         $contentBySkin = ($note['publicResponse']) ? str_replace('[$reply$]', $note['renote'], $contentBySkin) : str_replace('[$reply$]', '', $contentBySkin);
-        // this set of changes are required in case the field contents was edited because using Javascript some special chars are modified
-        $contentBySkin = str_replace('|per|', '%', $contentBySkin);
-        $contentBySkin = str_replace('|par|', '#', $contentBySkin);
-        $contentBySkin = str_replace('|int|', '?', $contentBySkin);
-        $contentBySkin = str_replace('|amp|', '&', $contentBySkin);
 
         $isValidator = ($access['level'] == 7) ? 1 : 0;
         $isAdministrator = (SecurityUtil::checkPermission('blocks::', "::", ACCESS_ADMIN)) ? 1 : 0;

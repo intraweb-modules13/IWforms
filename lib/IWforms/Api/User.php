@@ -3,8 +3,8 @@
 class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function getFormDefinition($args) {
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $sv = (isset($args['sv'])) ? $args['sv'] : null;
 
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue', array('sv' => $sv))) {
             // Security check
@@ -14,7 +14,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -31,12 +31,11 @@ class IWforms_Api_User extends Zikula_AbstractApi {
     }
 
     public function getAllForms($args) {
-        $user = FormUtil::getPassedValue('user', isset($args['user']) ? $args['user'] : null, 'POST');
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $user = (isset($args['user'])) ? $args['user'] : null;
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $sv = (isset($args['sv'])) ? $args['sv'] : null;
 
-        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                        array('sv' => $sv))) {
+        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue', array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
                 throw new Zikula_Exception_Forbidden();
@@ -62,19 +61,18 @@ class IWforms_Api_User extends Zikula_AbstractApi {
     }
 
     public function getAllFormFields($args) {
-        $whereArray = FormUtil::getPassedValue('whereArray', isset($args['whereArray']) ? $args['whereArray'] : null, 'POST');
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        $whereArray = (isset($args['whereArray'])) ? $args['whereArray'] : null;
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         $where = '';
         if ($item == false) {
             return LogUtil::registerError($this->__('Could not find form'));
@@ -109,11 +107,10 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      * @return:	An array with the groups information
      */
     public function getAllGroups($args) {
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $sv = (isset($args['sv'])) ? $args['sv'] : null;
 
-        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                        array('sv' => $sv))) {
+        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue', array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
                 throw new Zikula_Exception_Forbidden();
@@ -121,15 +118,14 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //Get item
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid,
-                            'sv' => $sv));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid,
+                    'sv' => $sv));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
@@ -160,12 +156,11 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      * @return:	The user access of an user as a member of a group
      */
     public function getGroupsUserAccess($args) {
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $accessGroupsString = FormUtil::getPassedValue('accessGroupsString', isset($args['accessGroupsString']) ? $args['accessGroupsString'] : null, 'POST');
-        $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $accessGroupsString = (isset($args['accessGroupsString'])) ? $args['accessGroupsString'] : null;
+        $sv = (isset($args['sv'])) ? $args['sv'] : null;
 
-        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                        array('sv' => $sv))) {
+        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue', array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
                 throw new Zikula_Exception_Forbidden();
@@ -173,7 +168,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid) || !isset($accessGroupsString)) {
+        if ($fid == null || !is_numeric($fid) || $accessGroupsString == null) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
         $whereGroup = '';
@@ -188,9 +183,8 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
         //Get item
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid,
-                            'sv' => $sv));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid,
+                    'sv' => $sv));
         if ($item == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
@@ -251,19 +245,18 @@ class IWforms_Api_User extends Zikula_AbstractApi {
     }
 
     public function getAllValidators($args) {
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             throw new Zikula_Exception_Forbidden();
         }
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($item == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -296,9 +289,9 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      * 		2 - Can validate all the fields
      */
     public function isValidator($args) {
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $uid = FormUtil::getPassedValue('uid', isset($args['uid']) ? $args['uid'] : UserUtil::getVar('uid'), 'POST');
-        $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $uid = (isset($args['uid'])) ? $args['uid'] : null;
+        $sv = (isset($args['sv'])) ? $args['sv'] : null;
 
         if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue', array('sv' => $sv))) {
             // Security check
@@ -309,7 +302,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
             $requestByCron = true;
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
         if (!UserUtil::isLoggedIn())
@@ -342,7 +335,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
     }
 
     public function getFormField($args) {
-        $fndid = FormUtil::getPassedValue('fndid', isset($args['fndid']) ? $args['fndid'] : null, 'POST');
+        $fndid = (isset($args['fndid'])) ? $args['fndid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -350,7 +343,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fndid) || !is_numeric($fndid)) {
+        if ($fndid == null || !is_numeric($fndid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -368,7 +361,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function getGroup($args) {
 
-        $gfid = FormUtil::getPassedValue('gfid', isset($args['gfid']) ? $args['gfid'] : null, 'POST');
+        $gfid = (isset($args['gfid'])) ? $args['gfid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -376,7 +369,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($gfid) || !is_numeric($gfid)) {
+        if ($gfid == null || !is_numeric($gfid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -394,7 +387,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function getvalidator($args) {
 
-        $rfid = FormUtil::getPassedValue('rfid', isset($args['rfid']) ? $args['rfid'] : null, 'POST');
+        $rfid = (isset($args['rfid'])) ? $args['rfid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -402,7 +395,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($rfid) || !is_numeric($rfid)) {
+        if ($rfid == null || !is_numeric($rfid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -425,7 +418,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      * @return:	An array with the dependences.
      */
     public function getFormFieldDependancesTo($args) {
-        $fndid = FormUtil::getPassedValue('fndid', isset($args['fndid']) ? $args['fndid'] : null, 'POST');
+        $fndid = (isset($args['fndid'])) ? $args['fndid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -433,13 +426,12 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fndid) || !is_numeric($fndid)) {
+        if ($fndid == null || !is_numeric($fndid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //Get item
-        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormField',
-                        array('fndid' => $fndid));
+        $item = ModUtil::apiFunc('IWforms', 'user', 'getFormField', array('fndid' => $fndid));
         if ($item == false) {
             return LogUtil::registerError($this->__('Can not find the form field'));
         }
@@ -495,7 +487,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function getCategory($args) {
 
-        $cid = FormUtil::getPassedValue('cid', isset($args['cid']) ? $args['cid'] : null, 'POST');
+        $cid = (isset($args['cid'])) ? $args['cid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -503,7 +495,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($cid) || !is_numeric($cid)) {
+        if ($cid == null || !is_numeric($cid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -527,12 +519,12 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getAllNotesFilter($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $filterValue = FormUtil::getPassedValue('filterValue', isset($args['filterValue']) ? $args['filterValue'] : null, 'POST');
-        $filter = FormUtil::getPassedValue('filter', isset($args['filter']) ? $args['filter'] : null, 'POST');
-        $order = FormUtil::getPassedValue('order', isset($args['order']) ? $args['order'] : null, 'POST');
-        $fieldType = FormUtil::getPassedValue('fieldType', isset($args['fieldType']) ? $args['fieldType'] : null, 'POST');
-        $userNotes = FormUtil::getPassedValue('userNotes', isset($args['userNotes']) ? $args['userNotes'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $filterValue = (isset($args['filterValue'])) ? $args['filterValue'] : null;
+        $filter = (isset($args['filter'])) ? $args['filter'] : null;
+        $order = (isset($args['order'])) ? $args['order'] : null;
+        $fieldType = (isset($args['fieldType'])) ? $args['fieldType'] : null;
+        $userNotes = (isset($args['userNotes'])) ? $args['userNotes'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -540,14 +532,13 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
         $where = '';
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if (!$userNotes == 1 && $access['level'] != 2 && $access['level'] < 3 && !SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('You can not access this form to view the annotations'));
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -578,15 +569,15 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getAllNotes($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $init = FormUtil::getPassedValue('init', isset($args['init']) ? $args['init'] - 1 : '-1', 'POST');
-        $ipp = FormUtil::getPassedValue('ipp', isset($args['ipp']) ? $args['ipp'] : '-1', 'POST');
-        $filterValue = FormUtil::getPassedValue('filterValue', isset($args['filterValue']) ? $args['filterValue'] : null, 'POST');
-        $filter = FormUtil::getPassedValue('filter', isset($args['filter']) ? $args['filter'] : null, 'POST');
-        $userNotes = FormUtil::getPassedValue('userNotes', isset($args['userNotes']) ? $args['userNotes'] : null, 'POST');
-        $order = FormUtil::getPassedValue('order', isset($args['order']) ? $args['order'] : null, 'POST');
-        $validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $init = (isset($args['init'])) ? $args['init'] - 1 : '-1';
+        $ipp = (isset($args['ipp'])) ? $args['ipp'] : '-1';
+        $filterValue = (isset($args['filterValue'])) ? $args['filterValue'] : null;
+        $filter = (isset($args['filter'])) ? $args['filter'] : null;
+        $userNotes = (isset($args['userNotes'])) ? $args['userNotes'] : null;
+        $order = (isset($args['order'])) ? $args['order'] : null;
+        $validate = (isset($args['validate'])) ? $args['validate'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -594,14 +585,13 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if (!$userNotes == 1 && $access['level'] != 2 && $access['level'] < 3 && !SecurityUtil::checkPermission('IWforms::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerError($this->__('You can not access this form to view the annotations'));
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
         $where = '';
@@ -661,8 +651,8 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getAllNoteContents($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -670,13 +660,12 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid) || !isset($fmid) || !is_numeric($fmid)) {
+        if ($fid == null || !is_numeric($fid) || $fmid == null || !is_numeric($fmid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 1) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
@@ -728,7 +717,8 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getNoteContent($args) {
 
-        $fnid = FormUtil::getPassedValue('fnid', isset($args['fnid']) ? $args['fnid'] : null, 'POST');
+        $fnid = (isset($args['fnid'])) ? $args['fnid'] : null;
+
         $pntable = DBUtil::getTables();
 
         $myJoin = array();
@@ -772,11 +762,9 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
         // check if user can access the form is validator
         // get note
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $items[$fnid]['fmid']));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $items[$fnid]['fmid']));
         // check if user can access the form is validator and the note is editable
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
@@ -796,7 +784,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getAllUsersNotes($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -804,8 +792,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 7) {
             LogUtil::registerError($this->__('You can not access this form to view the annotations'));
             // Redirect to the main site for the user
@@ -837,7 +824,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getNote($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -845,7 +832,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fmid) || !is_numeric($fmid)) {
+        if ($fmid == null || !is_numeric($fmid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -894,8 +881,8 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function createNote($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $validate = (isset($args['validate'])) ? $args['validate'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
@@ -910,8 +897,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
@@ -941,8 +927,8 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function elementExists($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $fndid = FormUtil::getPassedValue('fndid', isset($args['fndid']) ? $args['fndid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $fndid = (isset($args['fndid'])) ? $args['fndid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -950,7 +936,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fmid) || !is_numeric($fmid) || !isset($fndid) || !is_numeric($fndid)) {
+        if ($fmid == null || !is_numeric($fmid) || $fndid == null || !is_numeric($fndid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -987,11 +973,11 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function createNoteContent($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $fndid = FormUtil::getPassedValue('fndid', isset($args['fndid']) ? $args['fndid'] : null, 'POST');
-        $content = FormUtil::getPassedValue('content', isset($args['content']) ? $args['content'] : null, 'POST');
-        $validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $fndid = (isset($args['fndid'])) ? $args['fndid'] : null;
+        $content = (isset($args['content'])) ? $args['content'] : null;
+        $validate = (isset($args['validate'])) ? $args['validate'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -999,20 +985,18 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid) || !isset($fmid) || !is_numeric($fmid) || !isset($fndid) || !is_numeric($fndid)) {
+        if ($fid == null || !is_numeric($fid) || $fmid == null || !is_numeric($fmid) || $fndid == null || !is_numeric($fndid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         //Get item
-        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($form == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -1043,10 +1027,10 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function updateNoteContent($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $fndid = FormUtil::getPassedValue('fndid', isset($args['fndid']) ? $args['fndid'] : null, 'POST');
-        $items = FormUtil::getPassedValue('items', isset($args['items']) ? $args['items'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $fndid = (isset($args['fndid'])) ? $args['fndid'] : null;
+        $items = (isset($args['items'])) ? $args['items'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -1054,20 +1038,18 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid) || !isset($fmid) || !is_numeric($fmid) || !isset($fndid) || !is_numeric($fndid)) {
+        if ($fid == null || !is_numeric($fid) || $fmid == null || !is_numeric($fmid) || $fndid == null || !is_numeric($fndid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] != 1 && $access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         //Get item
-        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($form == false) {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
@@ -1097,7 +1079,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function closeInsert($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -1105,20 +1087,18 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 3) {
             return LogUtil::registerError($this->__('You can not access this form to send annotations'));
         }
 
         //Get item
-        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                        array('fid' => $fid));
+        $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
         if ($form == false) {
             return LogUtil::registerError($this->__('Could not find form'));
         }
@@ -1146,15 +1126,13 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function deleteNote($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1180,15 +1158,13 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function markNote($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1225,15 +1201,13 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function changeState($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1262,15 +1236,13 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function validateNote($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1289,17 +1261,15 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function submitValue($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $toDo = FormUtil::getPassedValue('toDo', isset($args['toDo']) ? $args['toDo'] : null, 'POST');
-        $value = FormUtil::getPassedValue('value', isset($args['value']) ? $args['value'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $toDo = (isset($args['toDo'])) ? $args['toDo'] : null;
+        $value = $args['value'];
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1319,25 +1289,22 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
     public function submitContentValue($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $fnid = FormUtil::getPassedValue('fnid', isset($args['fnid']) ? $args['fnid'] : null, 'POST');
-        $toDo = FormUtil::getPassedValue('toDo', isset($args['toDo']) ? $args['toDo'] : null, 'POST');
-        $value = FormUtil::getPassedValue('value', isset($args['value']) ? $args['value'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $fnid = (isset($args['fnid'])) ? $args['fnid'] : null;
+        $toDo = (isset($args['toDo'])) ? $args['toDo'] : null;
+        $value = (isset($args['value'])) ? $args['value'] : null;
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $note['fid']));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $note['fid']));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
 
         // get notecontents
-        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getNoteContent',
-                        array('fnid' => $fnid));
+        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getNoteContent', array('fnid' => $fnid));
         if ($noteContent['editable'] != 1) {
             return LogUtil::registerError($this->__('You can not edit this note.'));
         }
@@ -1425,7 +1392,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getFlagged($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -1433,8 +1400,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 7) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1466,12 +1432,11 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getNewNotes($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $uid = FormUtil::getPassedValue('uid', isset($args['uid']) ? $args['uid'] : UserUtil::getVar('uid'), 'POST');
-        $sv = FormUtil::getPassedValue('sv', isset($args['sv']) ? $args['sv'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $uid = (isset($args['uid'])) ? $args['uid'] : null;
+        $sv = (isset($args['sv'])) ? $args['sv'] : null;
 
-        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue',
-                        array('sv' => $sv))) {
+        if (!ModUtil::func('IWmain', 'user', 'checkSecurityValue', array('sv' => $sv))) {
             // Security check
             if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
                 return LogUtil::registerPermissionError();
@@ -1487,10 +1452,9 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
         //check user access to this form
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid,
-                            'uid' => $uid,
-                            'sv' => $sv));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid,
+                    'uid' => $uid,
+                    'sv' => $sv));
 
         if ($access['level'] < 2) {
             return LogUtil::registerError($this->__('You can not access this form to view the annotations'));
@@ -1523,7 +1487,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function sended($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', '::', ACCESS_READ)) {
@@ -1531,7 +1495,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         // Needed argument
-        if (!isset($fid) || !is_numeric($fid)) {
+        if ($fid == null || !is_numeric($fid)) {
             return LogUtil::registerError($this->__('Error! Could not do what you wanted. Please check your input.'));
         }
 
@@ -1560,9 +1524,9 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function setAsViewed($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
-        $value = FormUtil::getPassedValue('value', isset($args['value']) ? $args['value'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
+        $value = (isset($args['value'])) ? $args['value'] : null;
 
         // Needed argument
         if ($fid == null || !is_numeric($fid) || $fmid == null || !is_numeric($fmid) || $value == null) {
@@ -1570,8 +1534,7 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         }
 
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 2) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
         }
@@ -1598,11 +1561,10 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function deleteUserNote($args) {
 
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
 
         //get the note information
-        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote',
-                        array('fmid' => $fmid));
+        $note = ModUtil::apiFunc('IWforms', 'user', 'getNote', array('fmid' => $fmid));
 
         if ($note['user'] != UserUtil::getVar('uid')) {
             return LogUtil::registerError($this->__('You do not have access to manage form'));
@@ -1629,14 +1591,12 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function getTotalNotes($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        //$userNotes = FormUtil::getPassedValue('userNotes', isset($args['userNotes']) ? $args['userNotes'] : null, 'POST');
-        $filterValue = FormUtil::getPassedValue('filterValue', isset($args['filterValue']) ? $args['filterValue'] : null, 'POST');
-        //$validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
-        $filter = FormUtil::getPassedValue('filter', isset($args['filter']) ? $args['filter'] : null, 'POST');
-        $filterValue = FormUtil::getPassedValue('filterValue', isset($args['filterValue']) ? $args['filterValue'] : null, 'POST');
-        $userNotes = FormUtil::getPassedValue('userNotes', isset($args['userNotes']) ? $args['userNotes'] : null, 'POST');
-        $validate = FormUtil::getPassedValue('validate', isset($args['validate']) ? $args['validate'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $filterValue = (isset($args['filterValue'])) ? $args['filterValue'] : null;
+        $filter = (isset($args['filter'])) ? $args['filter'] : null;
+        $userNotes = (isset($args['userNotes'])) ? $args['userNotes'] : null;
+        $validate = (isset($args['validate'])) ? $args['validate'] : null;
+
         $where = '';
         if ($filter == 0) {
             $pntable = DBUtil::getTables();
@@ -1665,10 +1625,9 @@ class IWforms_Api_User extends Zikula_AbstractApi {
             // Return the items
             return count($items);
         } else {
-            $fmidNotes = ModUtil::apiFunc('IWforms', 'user', 'getAllNotesFilter',
-                            array('fid' => $fid,
-                                'filter' => $filter,
-                                'filterValue' => $filterValue));
+            $fmidNotes = ModUtil::apiFunc('IWforms', 'user', 'getAllNotesFilter', array('fid' => $fid,
+                        'filter' => $filter,
+                        'filterValue' => $filterValue));
 
             return count($fmidNotes);
         }
@@ -1682,27 +1641,24 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function fieldsToCreate($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             throw new Zikula_Exception_Forbidden();
         }
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 7) {
             LogUtil::registerError($this->__('You can not access this form to view the annotations'));
             // Redirect to the main site for the user
             return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
         }
-        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
-                        array('fid' => $fid,
-                            'fmid' => $fmid));
+        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents', array('fid' => $fid,
+                    'fmid' => $fmid));
         if (!$noteContent) {
             LogUtil::registerError($this->__('Note content not found'));
-            return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'user', 'manage', array('fid' => $fid,
                                 'order' => $order,
                                 'ipp' => $ipp,
                                 'init' => $init,
@@ -1714,13 +1670,11 @@ class IWforms_Api_User extends Zikula_AbstractApi {
             $fieldsIdsNoteArray[] = $noteContentId['fndid'];
         }
         //get form fields
-        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                        array('fid' => $fid,
-                            'whereArray' => 'active|1'));
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid,
+                    'whereArray' => 'active|1'));
         if (!$fields) {
             LogUtil::registerError($this->__('Note fields not found'));
-            return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'user', 'manage', array('fid' => $fid,
                                 'order' => $order,
                                 'ipp' => $ipp,
                                 'init' => $init,
@@ -1756,27 +1710,24 @@ class IWforms_Api_User extends Zikula_AbstractApi {
      */
     public function fieldsToDelete($args) {
 
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
-        $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'POST');
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
+        $fmid = (isset($args['fmid'])) ? $args['fmid'] : null;
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_READ)) {
             throw new Zikula_Exception_Forbidden();
         }
         //check user access to this form
-        $access = ModUtil::func('IWforms', 'user', 'access',
-                        array('fid' => $fid));
+        $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] < 7) {
             LogUtil::registerError($this->__('You can not access this form to view the annotations'));
             // Redirect to the main site for the user
             return System::redirect(ModUtil::url('IWforms', 'user', 'main'));
         }
-        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents',
-                        array('fid' => $fid,
-                            'fmid' => $fmid));
+        $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents', array('fid' => $fid,
+                    'fmid' => $fmid));
         if (!$noteContent) {
             LogUtil::registerError($this->__('Note content not found'));
-            return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'user', 'manage', array('fid' => $fid,
                                 'order' => $order,
                                 'ipp' => $ipp,
                                 'init' => $init,
@@ -1788,13 +1739,11 @@ class IWforms_Api_User extends Zikula_AbstractApi {
             $fieldsIdsNoteArray[] = $noteContentId['fndid'];
         }
         //get form fields
-        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields',
-                        array('fid' => $fid,
-                            'whereArray' => 'active|1'));
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid,
+                    'whereArray' => 'active|1'));
         if (!$fields) {
             LogUtil::registerError($this->__('Note fields not found'));
-            return System::redirect(ModUtil::url('IWforms', 'user', 'manage',
-                            array('fid' => $fid,
+            return System::redirect(ModUtil::url('IWforms', 'user', 'manage', array('fid' => $fid,
                                 'order' => $order,
                                 'ipp' => $ipp,
                                 'init' => $init,
@@ -1819,21 +1768,19 @@ class IWforms_Api_User extends Zikula_AbstractApi {
         return false;
     }
 
-    public function getlinks($args)
-    {
-        $func = FormUtil::getPassedValue('func', isset($args['func']) ? $args['func'] : null, 'POST');
-        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'POST');
+    public function getlinks($args) {
+        $func = (isset($args['func'])) ? $args['func'] : null;
+        $fid = (isset($args['fid'])) ? $args['fid'] : null;
         if (!UserUtil::isLoggedIn() && is_numeric($fid)) {
-            $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition',
-                    array('fid' => $fid));
+            $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
             $notexport = $form['unregisterednotexport'];
         } else {
             $notexport = 0;
         }
- 	//get user permissions for this form
-	if(isset($fid) && is_numeric($fid)){
+        //get user permissions for this form
+        if ($fid == null && is_numeric($fid)) {
             $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
-	} else {
+        } else {
             $access['level'] = 0;
         }
 
@@ -1854,4 +1801,5 @@ class IWforms_Api_User extends Zikula_AbstractApi {
 
         return $links;
     }
+
 }

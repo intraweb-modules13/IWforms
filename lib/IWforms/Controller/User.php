@@ -269,10 +269,6 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                         $contentBySkin = str_replace('[%' . $key . '%]', $value['fieldName'], $contentBySkin);
                     }
                     $contentBySkin = ($note['publicResponse']) ? str_replace('[$reply$]', $note['renote'], $contentBySkin) : str_replace('[$reply$]', '', $contentBySkin);
-                    $contentBySkin = str_replace('|per|', '%', $contentBySkin);
-                    $contentBySkin = str_replace('|par|', '#', $contentBySkin);
-                    $contentBySkin = str_replace('|int|', '?', $contentBySkin);
-                    $contentBySkin = str_replace('|amp|', '&', $contentBySkin);
                 }
             }
             $notesArray[] = array('user' => $user,

@@ -1,10 +1,10 @@
-function chgUsers(gid){
-    var pars = "module=IWforms&func=chgUsers&gid=" + gid;
+function chgUsers(a){
     show_info('chgInfo');
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
+    var b={
+        gid:a
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=chgUsers",{
+        parameters: b,
         onComplete: chgUsers_response,
         onFailure: chgUsers_failure
     });
@@ -12,17 +12,17 @@ function chgUsers(gid){
 
 function chgUsers_failure(){
     show_info('chgInfo');
-    Element.update('validator', '').innerHTML;
+    $("validator").update('');
 }
 
-function chgUsers_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function chgUsers_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
+    var b=a.getData();
     show_info('chgInfo');
-    Element.update('validator', json.content).innerHTML;
+    $("validator").update(b.content);
 }
 
 /**
@@ -40,62 +40,54 @@ function show_info(info)
         Element.update(info, '&nbsp;');
         Element.addClassName(info, 'z-hide');
     } else {
-        Element.update(info, '<img src="images/ajax/circle-ball-dark-antialiased.gif">');
+        Element.update(info, '<img src="'+Zikula.Config.baseURL+'images/ajax/circle-ball-dark-antialiased.gif">');
         Element.removeClassName(info, 'z-hide');
     }
 }  
 
 
-function modifyField(fieldId,char){
-    if(char == 'collapse'){
-        showfieldinfo(fieldId, expandcollapse);
+function modifyField(a,aa){
+    if(aa == 'collapse'){
+        showfieldinfo(a, expandcollapse);
     }else{
-        showfieldinfo(fieldId, modifyingfield);
+        showfieldinfo(a, modifyingfield);
     }
-    var pars = "module=IWforms&func=modifyField&fndid=" + fieldId + "&char=" + char;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: modifyField_response,
-        onFailure: modifyField_failure
+    var b={
+        fndid:a,
+        charx:aa
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=modifyField",{
+        parameters: b,
+        onComplete: modifyField_response
     });
 }
 
-function modifyField_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function modifyField_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    changeContent(json.fndid);
+    var b=a.getData();
+    changeContent(b.fndid);
 }
 
-function modifyField_failure(){
-
-}
-
-function changeContent(fndid){
-    var pars = "module=IWforms&func=changeContent&fndid=" + fndid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: changeContent_response,
-        onFailure: changeContent_failure
+function changeContent(a){
+    var b={
+        fndid:a
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=changeContent",{
+        parameters: b,
+        onComplete: changeContent_response
     });
 }
 
-function changeContent_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function changeContent_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('field_'+json.fndid, json.content).innerHTML;
-}
-
-function changeContent_failure(){
+    var b=a.getData();
+    $("field_"+b.fndid).update(b.content);
 }
 
 function showfieldinfo(fndid, infotext){
@@ -120,229 +112,203 @@ function send(){
     document.conf.submit();
 }
 
-function closeForm(fid){
-    var pars = "module=IWforms&func=closeForm&fid=" + fid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: closeForm_response,
-        onFailure: closeForm_failure
+function closeForm(a){
+    var b={
+        fid:a
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=closeForm",{
+        parameters: b,
+        onComplete: closeForm_response
     });
 }
 
-function closeForm_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function closeForm_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    alert(json.text);
-    Element.update('option_'+json.fid, json.content).innerHTML;
+    var b=a.getData();
+    alert(b.text);
+    $("option_"+b.fid).update(b.content);
 }
 
-function closeForm_failure(){
-}
-
-function IWforms_deleteNote(fmid){
-    resposta=confirm(deleteUserNote);
+function IWforms_deleteNote(a){
+    var resposta=confirm(deleteUserNote);
     if(resposta){
-        var pars = "module=IWforms&func=deleteNote&fmid=" + fmid;
-        var myAjax = new Ajax.Request("ajax.php",
-        {
-            method: 'post',
-            parameters: pars,
-            onComplete: IWforms_deleteNote_response,
-            onFailure: IWforms_deleteNote_failure
+        var b={
+            fmid:a
+        };
+        var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=deleteNote",{
+            parameters: b,
+            onComplete: IWforms_deleteNote_response
         });
     }
 }
 
-function IWforms_deleteNote_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function IWforms_deleteNote_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    $('note_' + json.fmid).toggle()
+    var b=a.getData();
+    alert(b.text);
+    $("note_"+b.fmid).toggle();
     reloadFlaggedBlock();
 }
 
-function IWforms_deleteNote_failure(){
-}
-
-function markNote(fmid){
-    var pars = "module=IWforms&func=markNote&fmid=" + fmid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'get', // In this case must be GET otherwise the reloadFlaggedBlock() does not work in response
-        parameters: pars,
-        onComplete: markNote_response,
-        onFailure: markNote_failure
+function markNote(a){
+    var b={
+        fmid:a  
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=markNote",{
+        parameters: b,
+        onComplete: markNote_response
     });
 }
 
-function markNote_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function markNote_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    if(json.mark == 'marked'){
-        $(json.fmid).src="images/icons/small/flag.png";
+    var b=a.getData();
+    if(b.mark == 'marked'){
+        $(b.fmid).src=Zikula.Config.baseURL+"images/icons/small/flag.png";
     }else{
-        $(json.fmid).src="modules/IWforms/images/none.gif";
+        $(b.fmid).src=Zikula.Config.baseURL+"modules/IWforms/images/none.gif";
     }
-    Element.update('note_options_'+json.fmid, json.contentOptions).innerHTML;
+    $('note_options_'+b.fmid).update(b.contentOptions);
     reloadFlaggedBlock();
 }
 
-function markNote_failure(){
-}
-
-function setCompleted(fmid){
-    var pars = "module=IWforms&func=setCompleted&fmid=" + fmid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: setCompleted_response,
-        onFailure: setCompleted_failure
+function setCompleted(a){
+    var b={
+        fmid:a  
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=setCompleted",{
+        parameters: b,
+        onComplete: setCompleted_response
     });
 }
 
-function setCompleted_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function setCompleted_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    $('note_'+json.fmid).style.backgroundColor=json.color;
-    Element.update('note_options_'+json.fmid, json.contentOptions).innerHTML;
+    var b=a.getData();
+    $('note_'+b.fmid).style.backgroundColor=b.color;
+    $('note_options_'+b.fmid).update(b.contentOptions);
 }
 
-function setCompleted_failure(){
-}
-
-function validateNote(fmid){
-    var pars = "module=IWforms&func=validateNote&fmid=" + fmid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: validateNote_response,
-        onFailure: validateNote_failure
+function validateNote(a){
+    var b={
+        fmid:a
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=validateNote",{
+        parameters: b,
+        onComplete: validateNote_response
     });
 }
 
-function validateNote_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function validateNote_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    $('note_'+json.fmid).style.backgroundColor=json.color;
-    Element.update('note_options_'+json.fmid, json.contentOptions).innerHTML;
+    var b=a.getData();
+    $('note_'+b.fmid).style.backgroundColor=b.color;
+    $('note_options_'+b.fmid).update(b.contentOptions);
 }
 
-function validateNote_failure(){
-}
-
-function editNoteManageContent(fmid,toDo){
-    var pars = "module=IWforms&func=editNoteManageContent&fmid=" + fmid + "&do=" + toDo;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: editNoteManageContent_response,
-        onFailure: editNoteManageContent_failure
+function editNoteManageContent(a,aa){
+    var b={
+        fmid:a,
+        toDo:aa
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=editNoteManageContent",{
+        parameters: b,
+        onComplete: editNoteManageContent_response
     });
 }
 
-function editNoteManageContent_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function editNoteManageContent_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    if(json.toDo == 'observations'){
-        Element.update('note_observations_'+json.fmid, json.content).innerHTML;
+    var b=a.getData();
+    if(b.toDo == 'observations'){
+        $('note_observations_'+b.fmid).update(b.content);
     }
-    if(json.toDo == 'renote'){
-        Element.update('note_renote_'+json.fmid, json.content).innerHTML;
+    if(b.toDo == 'renote'){
+        $('note_renote_'+b.fmid).update(b.content);
     }
-    if(json.toDo == 'content'){
-        Element.update('note_content_'+json.fmid, json.content).innerHTML;
+    if(b.toDo == 'content'){
+        $('note_content_'+b.fmid).update(b.content);
     }
 }
 
-function editNoteManageContent_failure(){
-}
-
-function submitValue(toDo,fmid,checked){
-    if(toDo == 'observations'){
-        var value = $('submitValueFormO_' + fmid).observations.value;
+function submitValue(a,aa,aaa){
+    if(a == 'observations'){
+        var aaaa = $('submitValueFormO_' + aa).observations.value;
     }
-    if(toDo == 'renote'){
-        var value = $('submitValueFormR_' + fmid).renote.value;
+    if(a == 'renote'){
+        var aaaa = $('submitValueFormR_' + aa).renote.value;
     }
-    if(toDo == 'content'){
-        var value = $('submitValueFormC_' + fmid).content.value;
+    if(a == 'content'){
+        var aaaa = $('submitValueFormC_' + aa).content.value;
     }
-    value = replaceChars('?', "|int|", value);
-    value = replaceChars('&', "|amp|", value);
-    value = replaceChars('#', "|par|", value);
-    value = replaceChars('%', "|per|", value);
-    var pars = "module=IWforms&func=submitValue&fmid=" + fmid + "&value=" + value + "&do=" + toDo + "&checked=" + checked;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: submitValue_response,
-        onFailure: submitValue_failure
+    var b={
+        toDo:a,
+        fmid:aa,
+        checked:aaa,
+        value:aaaa
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=submitValue",{
+        parameters: b,
+        onComplete: submitValue_response
     });
 }
 
 
 function replaceChars(pattern, newstring, entry) {
-    temp = "" + entry; // temporary holder
+    var temp = "" + entry; // temporary holder
     while (temp.indexOf(pattern)>-1) {
-        pos= temp.indexOf(pattern);
+        var pos= temp.indexOf(pattern);
         temp = "" + (temp.substring(0, pos) + newstring +
             temp.substring((pos + pattern.length), temp.length));
     }
     return temp;
 }
 
-function submitValue_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function submitValue_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    if(json.toDo == 'observations'){
-        Element.update('note_observations_'+json.fmid, json.content).innerHTML;
+    var b=a.getData();
+    
+    if(b.toDo == 'observations'){
+        $('note_observations_'+b.fmid).update(b.content);
     }
-    if(json.toDo == 'renote'){
-        Element.update('note_renote_'+json.fmid, json.content).innerHTML;
+    if(b.toDo == 'renote'){
+        $('note_renote_'+b.fmid).update(b.content);
     }
-    if(json.toDo == 'content'){
-        Element.update('note_content_'+json.fmid, json.content).innerHTML;
+    if(b.toDo == 'content'){
+        $('note_content_'+b.fmid).update(b.content);
     }
 }
 
-function submitValue_failure(){
-}
-
-function modifyForm(formId,char){
-    showFormInfo(formId, modifyingform);
-    var pars = "module=IWforms&func=modifyForm&fid=" + formId + "&char=" + char;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: modifyForm_response,
-        onFailure: modifyForm_failure
+function modifyForm(a,aa){
+    showFormInfo(a, modifyingform);
+    var b={
+        fid:a,
+        charx:aa
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=modifyForm",{
+        parameters: b,
+        onComplete: modifyForm_response
     });
 }
 
@@ -355,30 +321,21 @@ function modifyForm_response(req){
     changeFormContent(json.fid);
 }
 
-function modifyForm_failure(){
-}
-
 function changeFormContent(fid){
     var pars = "module=IWforms&func=changeFormContent&fid=" + fid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: changeFormContent_response,
-        onFailure: changeFormContent_failure
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=xxxxxxx",{
+        parameters: b,
+        onComplete: changeFormContent_response
     });
 }
 
-function changeFormContent_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function changeFormContent_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('form_'+json.fid, json.content).innerHTML;
-}
-
-function changeFormContent_failure(){
+    var b=a.getData();
+    $('form_'+b.fid).update(b.content);
 }
 
 function showFormInfo(fid, infotext){
@@ -399,188 +356,162 @@ function showFormInfo(fid, infotext){
     }
 }
 
-function deleteUserNote(fmid){
-    resposta=confirm(deleteUserNoteText);
+function deleteUserNote(a){
+    var resposta=confirm(deleteUserNoteText);
     if(resposta){
-        var pars = "module=IWforms&func=deleteUserNote&fmid=" + fmid;
-        var myAjax = new Ajax.Request("ajax.php",
-        {
-            method: 'post',
-            parameters: pars,
-            onComplete: deleteUserNote_response,
-            onFailure: deleteUserNote_failure
+        var b={
+            fmid:a
+        };
+        var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=deleteUserNote",{
+            parameters: b,
+            onComplete: deleteUserNote_response
         });
     }
 }
 
-function deleteUserNote_response(req){
-    if (req.status != 200 ) {
-        pnshowajaxerror(req.responseText);
-        return;
+function deleteUserNote_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    $('note_' + json.fmid).toggle()
+    var b=a.getData();
+    $('note_'+b.fmid).toggle();
 }
 
-function deleteUserNote_failure(){
-}
-
-function changeFilter(fid,filter){
-    if(filter != 0){
-        Element.update('filterValues', '<img src="images/ajax/circle-ball-dark-antialiased.gif">');
-        var pars = "module=IWforms&func=changeFilter&fid=" + fid + "&filter=" + filter;
-        var myAjax = new Ajax.Request("ajax.php",
-        {
-            method: 'post',
-            parameters: pars,
-            onComplete: changeFilter_response,
-            onFailure: changeFilter_failure
+function changeFilter(a,aa){
+    if(aa != 0){
+        Element.update('filterValues', '<img src="'+Zikula.Config.baseURL+'images/ajax/circle-ball-dark-antialiased.gif">');
+        var b={
+            fid:a,
+            filter:aa
+        };
+        var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=changeFilter",{
+            parameters: b,
+            onComplete: changeFilter_response
         });
     }else{
         sendChange(1);
     }
 }
 
-function changeFilter_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function changeFilter_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('allNotesContent', json.content).innerHTML;
-    Element.update('filterValues', json.filterContent).innerHTML;
-    Element.update('itemsPerPage', '<div style="clear:both;"></div>').innerHTML;
+    var b=a.getData();
+    $('allNotesContent').update(b.content);
+    $('filterValues').update(b.filterContent);
+    $('itemsPerPage').update('<div style="clear:both;"></div>');
 }
 
-function changeFilter_failure(){
-}
-
-function deleteForm(fid){
-    response = confirm(deleteFormText);
+function deleteForm(a){
+    var response = confirm(deleteFormText);
     if (response) {
-        var pars = "module=IWforms&func=deleteForm&fid=" + fid;
-        var myAjax = new Ajax.Request("ajax.php",
-        {
-            method: 'post',
-            parameters: pars,
-            onComplete: deleteForm_response,
-            onFailure: deleteForm_failure
+        var b={
+            fid:a  
+        };
+        var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=deleteForm",{
+            parameters: b,
+            onComplete: deleteForm_response
         });
     }
 }
 
-function deleteForm_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
+function deleteForm_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
+    }
+    var b=a.getData();
+    $('formRow_' + b.fid).toggle();
+}
+
+function createField(a,aa){
+    if(a == 0){
         return;
     }
-    var json = pndejsonize(req.responseText);
-    $('formRow_' + json.fid).toggle();
-}
-
-function deleteForm_failure(){
-}
-
-function createField(fieldType,fid){
-    if(fieldType == 0){
-        alert(chooseFiledType);
-        exit;
-    }
-    Element.update('newFormField', '<img src="images/ajax/circle-ball-dark-antialiased.gif">');
-    var pars = "module=IWforms&func=createField&fid=" + fid + "&fieldType=" + fieldType;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: createField_response,
-        onFailure: createField_failure
+    Element.update('newFormField', '<img src="' +Zikula.Config.baseURL+ 'images/ajax/circle-ball-dark-antialiased.gif">');
+    var b={
+        fieldType:a,
+        fid:aa
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=createField",{
+        parameters: b,
+        onComplete: createField_response
     });
 }
 
-function createField_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function createField_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('newFormField', json.content).innerHTML;
+    var b=a.getData();
+    $('newFormField').update(b.content);
 }
 
-function createField_failure(req){
-}
-
-function deleteFormField(fndid,fid){
-    response = confirm(deleteFormFieldText);
+function deleteFormField(a,aa){
+    var response = confirm(deleteFormFieldText);
     if(response){
-        var pars = "module=IWforms&func=deleteFormField&fid=" + fid + "&fndid=" + fndid;
-        var myAjax = new Ajax.Request("ajax.php",
-        {
-            method: 'post',
-            parameters: pars,
-            onComplete: deleteFormField_response,
-            onFailure: deleteFormField_failure
+        var b = {
+            fndid:a,
+            fid:aa
+        }
+        var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=deleteFormField",{
+            parameters: b,
+            onComplete: deleteFormField_response
         });
     }
 }
 
-function deleteFormField_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function deleteFormField_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    $('fieldrow_' + json.fndid).toggle();
+    var b=a.getData();
+    $('fieldrow_' + b.fndid).toggle();
 }
 
-function deleteFormField_failure(){
-
-}
-
-function newField(fid){
-    var pars = "module=IWforms&func=newField&fid=" + fid;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: newField_response,
-        onFailure: newField_failure
+function newField(a){
+    var b={
+        fid:a  
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=newField",{
+        parameters: b,
+        onComplete: newField_response
     });
 }
 
-function newField_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function newField_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('fieldsList', json.content).innerHTML;
+    var b=a.getData();
+    $('fieldsList').update(b.content);
 }
 
-function newField_failure(){
-}
-
-function actionToDo(fid,action){
-    var pars = "module=IWforms&func=actionToDo&fid=" + fid + "&action=" + action ;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: actionToDo_response,
-        onFailure: actionToDo_failure
+function actionToDo(a,aa){
+    var b = {
+        fid:a,
+        action:aa
+    }
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=actionToDo",{
+        parameters: b,
+        onComplete: actionToDo_response
     });
 }
 
-function actionToDo_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function actionToDo_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('dContent', json.content).innerHTML;
-    Element.update('form_minitabs', json.tabContent).innerHTML;
-}
-
-function actionToDo_failure(){
+    var b=a.getData();
+    $('dContent').update(b.content);
+    $('form_minitabs').update(b.tabContent);
 }
 
 function allowCommentsControl(control) {
@@ -593,36 +524,35 @@ function allowCommentsControl(control) {
     }
 }
 
-function expertModeActivation(fid, type) {
+function expertModeActivation(a, aa) {
     var f=document.forms['formDefinition'];
-    var expertMode = 0;
-    var skinByTemplate = 0;
+    var aaa = 0;
+    var aaaa = 0;
     if (f.expertMode.checked) {
-        expertMode = 1;
+        aaa = 1;
     }
-    if (type == 1) {
+    if (aa == 1) {
         if (f.skinByTemplate.checked) {
-            skinByTemplate = 1;
+            aaaa = 1;
         }
     }
-    var pars = "module=IWforms&func=expertModeActivation&fid=" + fid + "&expertMode=" + expertMode + "&skinByTemplate=" + skinByTemplate;
-    var myAjax = new Ajax.Request("ajax.php",
-    {
-        method: 'post',
-        parameters: pars,
-        onComplete: expertModeActivation_response,
-        onFailure: expertModeActivation_failure
+    var b={
+        fid:a,
+        type:aa,
+        expertMode:aaa,
+        skinByTemplate: aaaa
+    };
+    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=IWforms&func=expertModeActivation",{
+        parameters: b,
+        onComplete: expertModeActivation_response
     });
 }
 
-function expertModeActivation_response(req){
-    if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
-        return;
+function expertModeActivation_response(a){
+    if(!a.isSuccess()){
+        Zikula.showajaxerror(a.getMessage());
+        return
     }
-    var json = pndejsonize(req.responseText);
-    Element.update('expertModeContent', json.content).innerHTML;
-}
-
-function expertModeActivation_failure(){
+    var b=a.getData();
+    $('expertModeContent').update(b.content);
 }

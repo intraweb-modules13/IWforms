@@ -1,7 +1,7 @@
 {if $do eq 'print'}
 <div id="note_renote_{$note.fmid}">
     <div>
-        {$note.renote|nl2br|safehtml|replace:"|per|":"%"|replace:"|par|":"#"|replace:"|int|":"?"|replace:"|amp|":"&"}
+        {$note.renote|nl2br|safehtml}
     </div>
     <div style="float:left;">
         {if $note.publicResponse eq 1}
@@ -20,7 +20,7 @@
 {if $do eq 'edit'}
 <form name="submitValueFormR_{$note.fmid}" id="submitValueFormR_{$note.fmid}" class="z-form" method="post" enctype="multipart/form-data">
     <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
-    <textarea name="renote" style="width: 90%; margin: 10px;" rows="10">{$note.renote|replace:"|per|":"%"|replace:"|int|":"?"|replace:"|amp|":"&"}</textarea>
+    <textarea name="renote" style="width: 90%; margin: 10px;" rows="10">{$note.renote}</textarea>
     <div style="float:left;">
         {if $note.publicResponse eq 1}
         <span style="color: red;">{gt text="The answer is visible to all users who have access to information"}</span>
