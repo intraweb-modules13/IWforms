@@ -121,36 +121,14 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
      */
     public function upgrade($oldversion) {
 
-        $prefix = $GLOBALS['ZConfig']['System']['prefix'];
-
-        //Rename tables
-
-        if (!DBUtil::renameTable('iw_forms', 'IWforms'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms', 'IWforms'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms_cat', 'IWforms_cat'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms_def', 'IWforms_definition'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms_group', 'IWforms_group'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms_note', 'IWforms_note'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms_note_def', 'IWforms_note_definition'))
-            return false;
-        if (!DBUtil::renameTable('iw_forms_validator', 'IWforms_validator'))
-            return false;
-
-
         //ADD new fields to tables
 
-        $c = "ALTER TABLE `{$prefix}_IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
+        $c = "ALTER TABLE `IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
         if (!DBUtil::executeSQL($c)) {
             return false;
         }
 
-        $c = "ALTER TABLE `{$prefix}_IWforms_definition` ADD `iw_filesFolder` VARCHAR (25) NOT NULL";
+        $c = "ALTER TABLE `IWforms_definition` ADD `iw_filesFolder` VARCHAR (25) NOT NULL";
         if (!DBUtil::executeSQL($c)) {
             return false;
         }
@@ -158,25 +136,18 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
 
         // Update z_blocs table
 
-        $c = "UPDATE {$prefix}_blocks SET z_bkey = 'Formnote' WHERE z_bkey = 'formnote'";
+        $c = "UPDATE blocks SET bkey = 'Formnote' WHERE bkey = 'formnote'";
         if (!DBUtil::executeSQL($c)) {
             return false;
         }
 
-        $c = "UPDATE {$prefix}_blocks SET z_bkey = 'Formslist' WHERE z_bkey = 'formslist'";
-        if (!DBUtil::executeSQL($c)) {
-            return false;
-        }
-
-        // Update module_vars table
-        // Update the name (keeps old var value)
-        $c = "UPDATE {$prefix}_module_vars SET z_modname = 'IWforms' WHERE z_bkey = 'iw_forms'";
+        $c = "UPDATE blocks SET bkey = 'Formslist' WHERE bkey = 'formslist'";
         if (!DBUtil::executeSQL($c)) {
             return false;
         }
 
         //Array de noms
-        $oldVarsNames = DBUtil::selectFieldArray("module_vars", 'name', "`z_modname` = 'IWforms'", '', false, '');
+        $oldVarsNames = DBUtil::selectFieldArray("module_vars", 'name', "`modname` = 'IWforms'", '', false, '');
 
         $newVarsNames = Array('characters', 'resumeview', 'newsColor', 'viewedColor', 'completedColor',
             'validatedColor', 'fieldsColor', 'contentColor', 'attached', 'publicFolder');
