@@ -4,7 +4,7 @@
             {if isset($users[$note.photo].a) && $users[$note.photo].a neq ''}
             {assign var='user' value=$users[$note.photo].a}
             {assign var='photoPath' value="$usersPictureFolder/$user"}
-            <img src="{$baseurl}index.php?module=IWforms&amp;func=getFile&amp;fileName={$photoPath}" />
+            <img src="{$baseurl}index.php?module=IWforms&type=user&func=getFile&fileName={$photoPath}" />
             {/if}
         </td>
         <td width="30%">
@@ -53,7 +53,7 @@
             <div id="note_content_{$content.fnid}">
                 <div style="float:left;" class="messageBody">
                     {if $content.fieldType eq 7 && $content.content neq ''}
-                    <img src="modules/IWmain/images/fileIcons/{IWformsfileicon fileName=$content.content}"/>
+                    <img src="modules/IWmain/images/fileIcons/{IWformsfileicon fileName=$content.content}" style="vertical-align: middle;" />
                     <a href="{modurl modname='IWforms' type='user' func='download' fid=$fid fndid=$content.fndid fileName=$content.content}">{$content.content|nl2br|safehtml}</a>
                     {else}
                     {$content.content|nl2br|safehtml}

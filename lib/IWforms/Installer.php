@@ -122,7 +122,6 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
     public function upgrade($oldversion) {
 
         //ADD new fields to tables
-
         $c = "ALTER TABLE `IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
         if (!DBUtil::executeSQL($c)) {
             return false;
@@ -152,7 +151,6 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
         // serialize bloc Formslist content
         $where = "bkey='Formslist'";
         $items = DBUtil::selectObjectArray('blocks', $where, '', '-1', '-1');
-
         foreach ($items as $item) {
             $valuesArray = explode('---', $item['url']);
             $categories = $valuesArray[0];
