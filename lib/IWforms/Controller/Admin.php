@@ -49,6 +49,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                 'caducity' => $caducity,
                 'new' => $new,
                 'lang' => $form['lang'],
+                'defaultNumberOfNotes' => $form['defaultNumberOfNotes'],
+                'defaultOrderForNotes' => $form['defaultOrderForNotes'],
+                'orderFormField' => $form['orderFormField'],
             );
         }
         return $this->view->assign('forms', $formsArray)
@@ -118,6 +121,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $returnURL = FormUtil::getPassedValue('returnURL', isset($args['returnURL']) ? $args['returnURL'] : '', 'POST');
         $filesFolder = FormUtil::getPassedValue('filesFolder', isset($args['filesFolder']) ? $args['filesFolder'] : '', 'POST');
         $lang = FormUtil::getPassedValue('lang', isset($args['lang']) ? $args['lang'] : '', 'POST');
+        $defaultNumberOfNotes = FormUtil::getPassedValue('defaultNumberOfNotes', isset($args['defaultNumberOfNotes']) ? $args['defaultNumberOfNotes'] : '10', 'POST');
+        $defaultOrderForNotes = FormUtil::getPassedValue('defaultOrderForNotes', isset($args['defaultOrderForNotes']) ? $args['defaultOrderForNotes'] : '1', 'POST');
+        $orderFormField = FormUtil::getPassedValue('orderFormField', isset($args['orderFormField']) ? $args['orderFormField'] : 0, 'POST');
 
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
@@ -153,7 +159,10 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                     'returnURL' => $returnURL,
                     'filesFolder' => $filesFolder,
                     'lang' => $lang,
-                ));
+                    'defaultNumberOfNotes' => $defaultNumberOfNotes,
+                    'defaultOrderForNotes' => $defaultOrderForNotes,
+                    'orderFormField' => $orderFormField,
+        ));
         if ($create != false) {
             // Success
             LogUtil::registerStatus($this->__('The form was created successfully'));
@@ -299,7 +308,13 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Could not find form'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
         }
-        $category = ($item['cid'] != 0) ? ModUtil::apiFunc('IWforms', 'user', 'getCategory', array('cid' => $item['cid'])) : "---";
+        if ($item['cid'] != 0) {
+            $category = ModUtil::apiFunc('IWforms', 'user', 'getCategory', array('cid' => $item['cid']));
+            $catName = $category['catName'];
+        } else {
+            $catName = "---";
+        }
+
         if ($item['skincss'] != '') {
             $url = System::getBaseUrl() . 'index.php?module=IWforms&func=getFile&fileName=' . ModUtil::getVar('IWforms', 'attached') . '/' . $item['skincss'];
             $item['skincssurl'] = '<link rel="stylesheet" href="' . $url . '" type="text/css" />';
@@ -311,13 +326,22 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $item['filesFolder'] = $path;
             if (!file_exists($path)) {
                 $folderExists = false;
-            } else {
-                if (!is_writeable($path))
-                    $folderIsWriteable = false;
+            } elseif (!is_writeable($path)) {
+                $folderIsWriteable = false;
             }
         }
 
-        return $this->view->assign('catName', $category['catName'])
+        if ($item['defaultOrderForNotes'] == 3) {
+            if ($item['orderFormField'] > 0) {
+                $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
+                $orderFormField = $fields[$item['orderFormField']]['fndid'] . ' - ' . $fields[$item['orderFormField']]['fieldName'];
+            } else {
+                $orderFormField = '';
+            }
+        }
+
+        return $this->view->assign('catName', $catName)
+                        ->assign('orderFormField', $orderFormField)
                         ->assign('item', $item)
                         ->assign('folderExists', $folderExists)
                         ->assign('folderIsWriteable', $folderIsWriteable)
@@ -1158,6 +1182,8 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             );
         }
 
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
+
         return $this->view->assign('cats', $categories)
                         ->assign('aio', $aio)
                         ->assign('item', $item)
@@ -1166,6 +1192,7 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                         ->assign('new', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['new']))
                         ->assign('caducity', ModUtil::func('IWforms', 'user', 'makeTimeForm', $item['caducity']))
                         ->assign('languages', $languagesArray)
+                        ->assign('fields', $fields)
                         ->fetch('IWforms_admin_form_definitionEdit.htm');
     }
 
@@ -1209,6 +1236,11 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         $returnURL = FormUtil::getPassedValue('returnURL', isset($args['returnURL']) ? $args['returnURL'] : '', 'POST');
         $filesFolder = FormUtil::getPassedValue('filesFolder', isset($args['filesFolder']) ? $args['filesFolder'] : '', 'POST');
         $lang = FormUtil::getPassedValue('lang', isset($args['lang']) ? $args['lang'] : '', 'POST');
+        $defaultNumberOfNotes = FormUtil::getPassedValue('defaultNumberOfNotes', isset($args['defaultNumberOfNotes']) ? $args['defaultNumberOfNotes'] : '10', 'POST');
+        $defaultOrderForNotes = FormUtil::getPassedValue('defaultOrderForNotes', isset($args['defaultOrderForNotes']) ? $args['defaultOrderForNotes'] : '1', 'POST');
+        $orderFormField = FormUtil::getPassedValue('orderFormField', isset($args['orderFormField']) ? $args['orderFormField'] : 0, 'POST');
+
+
         // Security check
         if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
@@ -1287,6 +1319,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             'returnURL' => $returnURL,
             'filesFolder' => $filesFolder,
             'lang' => $lang,
+            'defaultNumberOfNotes' => $defaultNumberOfNotes,
+            'defaultOrderForNotes' => $defaultOrderForNotes,
+            'orderFormField' => $orderFormField,
         );
         if (ModUtil::apiFunc('IWforms', 'admin', 'editForm', array('fid' => $fid,
                     'items' => $items))) {
@@ -2011,6 +2046,9 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
             $skinNoteTemplate = $item->getElementsByTagName('skinNoteTemplate')->item(0)->nodeValue;
             $allowComments = $item->getElementsByTagName('allowComments')->item(0)->nodeValue;
             $allowCommentsModerated = $item->getElementsByTagName('allowCommentsModerated')->item(0)->nodeValue;
+            $defaultNumberOfNotes = $item->getElementsByTagName('defaultNumberOfNotes')->item(0)->nodeValue;
+            $defaultOrderForNotes = $item->getElementsByTagName('defaultOrderForNotes')->item(0)->nodeValue;
+            $orderFormField = $item->getElementsByTagName('orderFormField')->item(0)->nodeValue;
         }
         $create = ModUtil::apiFunc('IWforms', 'admin', 'createNewForm', array('formName' => $formName,
                     'description' => $description,
@@ -2036,7 +2074,11 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                     'skinTemplate' => $skinTemplate,
                     'skinNoteTemplate' => $skinNoteTemplate,
                     'allowComments' => $allowComments,
-                    'allowCommentsModerated' => $allowCommentsModerated));
+                    'allowCommentsModerated' => $allowCommentsModerated,
+                    'defaultNumberOfNotes' => $defaultNumberOfNotes,
+                    'defaultOrderForNotes' => $defaultOrderForNotes,
+                    'orderFormField' => $orderFormField,
+        ));
         if (!$create) {
             LogUtil::registerError($this->__('The form creation has failt'));
             return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
@@ -2105,6 +2147,20 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
         }
         LogUtil::registerStatus($this->__('The form has been imported correcty'));
         return System::redirect(ModUtil::url('IWforms', 'admin', 'main'));
+    }
+
+    public function getFormFields($args) {
+        $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : 0, 'POST');
+        // Security check
+        if (!SecurityUtil::checkPermission('IWforms::', "::", ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        $fields = ModUtil::apiFunc('IWforms', 'user', 'getAllFormFields', array('fid' => $fid));
+
+        return $this->view->assign('fields', $fields)
+                        ->assign('fid', $fid)
+                        ->fetch('IWforms_admin_formFields.htm');
     }
 
 }

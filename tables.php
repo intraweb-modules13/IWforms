@@ -45,6 +45,9 @@ function IWforms_tables() {
         'returnURL' => 'iw_returnURL',
         'filesFolder' => 'iw_filesFolder',
         'lang' => 'iw_lang',
+        'defaultNumberOfNotes' => 'iw_defaultNumberOfNotes',
+        'defaultOrderForNotes' => 'iw_defaultOrderForNotes',
+        'orderFormField' => 'iw_orderFormField',
     );
 
     $tables['IWforms_definition_column_def'] = array('fid' => "I NOTNULL AUTO PRIMARY",
@@ -81,6 +84,9 @@ function IWforms_tables() {
         'returnURL' => "C(150) NOTNULL DEFAULT ''",
         'filesFolder' => "C(25) NOTNULL DEFAULT ''",
         'lang' => "C(2) NOTNULL DEFAULT ''",
+        'defaultNumberOfNotes' => "I(1) NOTNULL DEFAULT '0'",
+        'defaultOrderForNotes' => "I(1) NOTNULL DEFAULT '0'",
+        'orderFormField' => "I NOTNULL DEFAULT '0'",
     );
 
     ObjectUtil::addStandardFieldsToTableDefinition($tables['IWforms_definition_column'], 'pn_');

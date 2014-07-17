@@ -169,7 +169,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
      */
     public function read($args) {
         $fid = FormUtil::getPassedValue('fid', isset($args['fid']) ? $args['fid'] : null, 'GET');
-        $ipp = FormUtil::getPassedValue('ipp', isset($args['ipp']) ? $args['ipp'] : 10, 'REQUEST');
+        $ipp = FormUtil::getPassedValue('ipp', isset($args['ipp']) ? $args['ipp'] : null, 'REQUEST');
         $init = FormUtil::getPassedValue('init', isset($args['init']) ? $args['init'] : 0, 'REQUEST');
         $fidReload = FormUtil::getPassedValue('fidReload', isset($args['fidReload']) ? $args['fidReload'] : null, 'POST');
         $fmid = FormUtil::getPassedValue('fmid', isset($args['fmid']) ? $args['fmid'] : null, 'GET');
@@ -194,6 +194,34 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             LogUtil::registerError($this->__('Could not find form'));
             return false;
         }
+
+        if ($ipp == null) {
+            switch ($form['defaultNumberOfNotes']) {
+                case 1:
+                    $ipp = 10;
+                    break;
+                case 2:
+                    $ipp = 20;
+                    break;
+                case 3:
+                    $ipp = 30;
+                    break;
+                case 4:
+                    $ipp = 50;
+                    break;
+                case 5:
+                    $ipp = 70;
+                    break;
+                case 6:
+                    $ipp = 100;
+                    break;
+                case 7:
+                    $ipp = 500;
+                    break;
+                default:
+            }
+        }
+
         // get user identity
         $uid = UserUtil::getVar('uid');
         if ($uid == '') {
@@ -220,7 +248,9 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                         'validate' => $validate,
                         'u' => $u,
                         'filterValue' => $u,
-                        'filter' => 0));
+                        'filter' => 0,
+                        'defaultOrderForNotes' => $form['defaultOrderForNotes'],
+            ));
         }
         // set the default template
         $template = 'IWforms_user_read.htm';
@@ -230,9 +260,16 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             if ($form['skinNoteTemplate'] != '' && $fmid != null)
                 $template = $form['skinNoteTemplate'];
         }
+
+        $contents = array();
+
         foreach ($notes as $note) {
             $noteContent = ModUtil::apiFunc('IWforms', 'user', 'getAllNoteContents', array('fid' => $fid,
                         'fmid' => $note['fmid']));
+            if ($form['defaultOrderForNotes'] == 3 && $form['orderFormField'] > 0) {
+                $contents[] = $noteContent[$form['orderFormField']]['content'];
+            }
+
             if ($note['annonimous'] == 0 && ($uid != '-1' || ($uid == '-1' && $form['unregisterednotusersview'] == 0))) {
                 $userName = UserUtil::getVar('uname', $note['user']);
                 $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
@@ -277,6 +314,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                     $contentBySkin = ($note['publicResponse']) ? str_replace('[$reply$]', $note['renote'], $contentBySkin) : str_replace('[$reply$]', '', $contentBySkin);
                 }
             }
+
             $notesArray[] = array('user' => $user,
                 'userName' => $userName,
                 'fmid' => $note['fmid'],
@@ -287,14 +325,16 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                 'photo' => $photo,
                 'color' => $color,
                 'content' => $noteContent,
-                'contentBySkin' => $contentBySkin);
+                'contentBySkin' => $contentBySkin,
+                'validate' => $note['validate'],
+            );
         }
-	$users = array();
+        $users = array();
         if (!$hideUsers) {
-	    // get users ho have send a note
+            // get users ho have send a note
             $senders = ModUtil::apiFunc('IWforms', 'user', 'getSenders', array('fid' => $fid));
-            foreach ($senders as $sender){
-		$usersList .= $sender . '$$';
+            foreach ($senders as $sender) {
+                $usersList .= $sender . '$$';
             }
             if ($usersList != '') {
                 $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
@@ -322,6 +362,14 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                 $form['expertMode'] == 1 &&
                 $form['skinByTemplate'] == 0) {
             $form['skincssurl'] = '<link rel="stylesheet" href="' . $form['skincss'] . '" type="text/css" />';
+        }
+
+        if ($form['defaultOrderForNotes'] == 3 && $form['orderFormField'] > 0) {
+            array_multisort($contents, SORT_ASC, $notesArray);
+        }
+
+        if ($form['defaultOrderForNotes'] == 4) {
+            shuffle($notesArray);
         }
 
         return $this->view->assign('notes', $notesArray)
@@ -1258,14 +1306,14 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         // Confirm authorisation code
         $this->checkCsrfToken();
         if (!UserUtil::isLoggedIn()) {
-                        // check captcha
+            // check captcha
             $captcha = ModUtil::func('IWmain', 'user', 'checkCaptcha');
             if (!$captcha) {
                 LogUtil::registerError($this->__("Error! The security words are incorrect."));
                 return System::redirect(ModUtil::url('IWforms', 'user', 'newitem', array('fid' => $fid)));
             }
         }
-        
+
         //check user access to this form
         $access = ModUtil::func('IWforms', 'user', 'access', array('fid' => $fid));
         if ($access['level'] != 1 &&

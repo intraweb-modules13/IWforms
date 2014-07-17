@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: IWforms 3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-03-29 14:56+0200\n"
-"PO-Revision-Date: 2013-10-15 10:56+0100\n"
-"Last-Translator: Albert <aperez16@xtec.cat>\n"
+"PO-Revision-Date: 2014-04-03 13:41+0100\n"
+"Last-Translator: Albert Pérez Monfort <aperez16@gmail.cat>\n"
 "Language-Team: intraweb <intraweb@xtec.cat>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,111 +23,35 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Catalan\n"
-"X-Poedit-Country: SPAIN\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Language: ca_ES\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: pnajax.php:12
-#: pnajax.php:44
-#: pnajax.php:86
-#: pnajax.php:150
-#: pnajax.php:201
-#: pnajax.php:249
-#: pnajax.php:301
-#: pnajax.php:352
-#: pnajax.php:401
-#: pnajax.php:472
-#: pnajax.php:576
-#: pnajax.php:613
-#: pnajax.php:644
-#: pnajax.php:670
-#: pnajax.php:741
-#: pnajax.php:778
-#: pnajax.php:807
-#: pnajax.php:842
-#: pnajax.php:856
-#: pnajax.php:904
-#: pnuserapi.php:11
-#: pnuserapi.php:42
-#: pnuserapi.php:79
-#: pnuserapi.php:128
-#: pnuserapi.php:182
-#: pnuserapi.php:262
-#: pnuserapi.php:916
-#: pnuserapi.php:1703
-#: pnuserapi.php:1778
-#: pnadmin.php:12
-#: pnadmin.php:59
-#: pnadmin.php:103
-#: pnadmin.php:164
-#: pnadmin.php:273
-#: pnadmin.php:311
-#: pnadmin.php:355
-#: pnadmin.php:376
-#: pnadmin.php:420
-#: pnadmin.php:600
-#: pnadmin.php:620
-#: pnadmin.php:669
-#: pnadmin.php:714
-#: pnadmin.php:779
-#: pnadmin.php:835
-#: pnadmin.php:892
-#: pnadmin.php:933
-#: pnadmin.php:991
-#: pnadmin.php:1048
-#: pnadmin.php:1114
-#: pnadmin.php:1184
-#: pnadmin.php:1248
-#: pnadmin.php:1352
-#: pnadmin.php:1428
-#: pnadmin.php:1499
-#: pnadmin.php:1568
-#: pnadmin.php:1599
-#: pnadmin.php:1622
-#: pnadmin.php:1670
-#: pnadmin.php:1691
-#: pnadmin.php:1722
-#: pnadmin.php:1762
-#: pnadmin.php:1791
-#: pnadmin.php:1822
-#: pnadmin.php:1861
-#: pnadmin.php:1893
-#: pnadmin.php:2062
-#: pnadminapi.php:28
-#: pnadminapi.php:65
-#: pnadminapi.php:72
-#: pnadminapi.php:93
-#: pnadminapi.php:100
-#: pnadminapi.php:122
-#: pnadminapi.php:154
-#: pnadminapi.php:182
-#: pnadminapi.php:209
-#: pnadminapi.php:236
-#: pnadminapi.php:263
-#: pnadminapi.php:290
-#: pnadminapi.php:328
-#: pnadminapi.php:355
-#: pnadminapi.php:382
-#: pnadminapi.php:416
-#: pnadminapi.php:443
-#: pnadminapi.php:627
-#: pnadminapi.php:758
-#: pnuser.php:12
-#: pnuser.php:81
-#: pnuser.php:180
-#: pnuser.php:355
-#: pnuser.php:619
-#: pnuser.php:664
-#: pnuser.php:693
-#: pnuser.php:790
-#: pnuser.php:812
-#: pnuser.php:841
-#: pnuser.php:973
-#: pnuser.php:1259
-#: pnuser.php:1466
-#: pnuser.php:1507
-#: pnuser.php:1720
+#: pnajax.php:12 pnajax.php:44 pnajax.php:86 pnajax.php:150 pnajax.php:201
+#: pnajax.php:249 pnajax.php:301 pnajax.php:352 pnajax.php:401 pnajax.php:472
+#: pnajax.php:576 pnajax.php:613 pnajax.php:644 pnajax.php:670 pnajax.php:741
+#: pnajax.php:778 pnajax.php:807 pnajax.php:842 pnajax.php:856 pnajax.php:904
+#: pnuserapi.php:11 pnuserapi.php:42 pnuserapi.php:79 pnuserapi.php:128
+#: pnuserapi.php:182 pnuserapi.php:262 pnuserapi.php:916 pnuserapi.php:1703
+#: pnuserapi.php:1778 pnadmin.php:12 pnadmin.php:59 pnadmin.php:103
+#: pnadmin.php:164 pnadmin.php:273 pnadmin.php:311 pnadmin.php:355
+#: pnadmin.php:376 pnadmin.php:420 pnadmin.php:600 pnadmin.php:620
+#: pnadmin.php:669 pnadmin.php:714 pnadmin.php:779 pnadmin.php:835
+#: pnadmin.php:892 pnadmin.php:933 pnadmin.php:991 pnadmin.php:1048
+#: pnadmin.php:1114 pnadmin.php:1184 pnadmin.php:1248 pnadmin.php:1352
+#: pnadmin.php:1428 pnadmin.php:1499 pnadmin.php:1568 pnadmin.php:1599
+#: pnadmin.php:1622 pnadmin.php:1670 pnadmin.php:1691 pnadmin.php:1722
+#: pnadmin.php:1762 pnadmin.php:1791 pnadmin.php:1822 pnadmin.php:1861
+#: pnadmin.php:1893 pnadmin.php:2062 pnadminapi.php:28 pnadminapi.php:65
+#: pnadminapi.php:72 pnadminapi.php:93 pnadminapi.php:100 pnadminapi.php:122
+#: pnadminapi.php:154 pnadminapi.php:182 pnadminapi.php:209 pnadminapi.php:236
+#: pnadminapi.php:263 pnadminapi.php:290 pnadminapi.php:328 pnadminapi.php:355
+#: pnadminapi.php:382 pnadminapi.php:416 pnadminapi.php:443 pnadminapi.php:627
+#: pnadminapi.php:758 pnuser.php:12 pnuser.php:81 pnuser.php:180
+#: pnuser.php:355 pnuser.php:619 pnuser.php:664 pnuser.php:693 pnuser.php:790
+#: pnuser.php:812 pnuser.php:841 pnuser.php:973 pnuser.php:1259
+#: pnuser.php:1466 pnuser.php:1507 pnuser.php:1720
 msgid "Sorry! No authorization to access this module."
 msgstr "No teniu autorització per accedir a aquest mòdul"
 
@@ -135,126 +59,39 @@ msgstr "No teniu autorització per accedir a aquest mòdul"
 msgid "The form was created successfully"
 msgstr "El formulari s'ha creat correctament"
 
-#: pnuserapi.php:17
-#: pnuserapi.php:83
-#: pnuserapi.php:134
-#: pnuserapi.php:188
-#: pnuserapi.php:266
-#: pnuserapi.php:320
-#: pnuserapi.php:366
-#: pnuserapi.php:393
-#: pnuserapi.php:420
-#: pnuserapi.php:453
-#: pnuserapi.php:524
-#: pnuserapi.php:568
-#: pnuserapi.php:622
-#: pnuserapi.php:692
-#: pnuserapi.php:860
-#: pnuserapi.php:969
-#: pnuserapi.php:1019
-#: pnuserapi.php:1073
-#: pnuserapi.php:1123
-#: pnuserapi.php:1550
-#: pnuserapi.php:1585
-#: pnadmin.php:168
-#: pnadmin.php:277
-#: pnadmin.php:315
-#: pnadmin.php:380
-#: pnadmin.php:424
-#: pnadmin.php:1626
-#: pnadmin.php:1865
-#: pnadmin.php:1897
-#: pnadminapi.php:32
-#: pnadminapi.php:76
-#: pnadminapi.php:132
-#: pnadminapi.php:164
-#: pnadminapi.php:186
-#: pnadminapi.php:213
-#: pnadminapi.php:240
-#: pnadminapi.php:267
-#: pnadminapi.php:294
-#: pnadminapi.php:332
-#: pnadminapi.php:359
-#: pnadminapi.php:386
-#: pnadminapi.php:420
-#: pnadminapi.php:447
-#: pnadminapi.php:531
-#: pnadminapi.php:562
-#: pnadminapi.php:596
-#: pnadminapi.php:631
-#: pnadminapi.php:762
+#: pnuserapi.php:17 pnuserapi.php:83 pnuserapi.php:134 pnuserapi.php:188
+#: pnuserapi.php:266 pnuserapi.php:320 pnuserapi.php:366 pnuserapi.php:393
+#: pnuserapi.php:420 pnuserapi.php:453 pnuserapi.php:524 pnuserapi.php:568
+#: pnuserapi.php:622 pnuserapi.php:692 pnuserapi.php:860 pnuserapi.php:969
+#: pnuserapi.php:1019 pnuserapi.php:1073 pnuserapi.php:1123 pnuserapi.php:1550
+#: pnuserapi.php:1585 pnadmin.php:168 pnadmin.php:277 pnadmin.php:315
+#: pnadmin.php:380 pnadmin.php:424 pnadmin.php:1626 pnadmin.php:1865
+#: pnadmin.php:1897 pnadminapi.php:32 pnadminapi.php:76 pnadminapi.php:132
+#: pnadminapi.php:164 pnadminapi.php:186 pnadminapi.php:213 pnadminapi.php:240
+#: pnadminapi.php:267 pnadminapi.php:294 pnadminapi.php:332 pnadminapi.php:359
+#: pnadminapi.php:386 pnadminapi.php:420 pnadminapi.php:447 pnadminapi.php:531
+#: pnadminapi.php:562 pnadminapi.php:596 pnadminapi.php:631 pnadminapi.php:762
 #: pnuser.php:1470
 msgid "Error! Could not do what you wanted. Please check your input."
 msgstr "No s'ha pogut carregar el que volíeu. Reviseu les dades"
 
-#: pnajax.php:58
-#: pnajax.php:96
-#: pnajax.php:160
-#: pnajax.php:446
-#: pnajax.php:590
-#: pnajax.php:623
-#: pnajax.php:916
-#: pnuserapi.php:88
-#: pnuserapi.php:142
-#: pnuserapi.php:201
-#: pnuserapi.php:272
-#: pnuserapi.php:922
-#: pnuserapi.php:1031
-#: pnuserapi.php:1085
-#: pnuserapi.php:1135
-#: pnadmin.php:173
-#: pnadmin.php:282
-#: pnadmin.php:320
-#: pnadmin.php:385
-#: pnadmin.php:429
-#: pnadmin.php:541
-#: pnadmin.php:547
-#: pnadmin.php:674
-#: pnadmin.php:680
-#: pnadmin.php:719
-#: pnadmin.php:725
-#: pnadmin.php:784
-#: pnadmin.php:840
-#: pnadmin.php:897
-#: pnadmin.php:938
-#: pnadmin.php:996
-#: pnadmin.php:1053
-#: pnadmin.php:1059
-#: pnadmin.php:1119
-#: pnadmin.php:1125
-#: pnadmin.php:1131
-#: pnadmin.php:1189
-#: pnadmin.php:1259
-#: pnadmin.php:1358
-#: pnadmin.php:1365
-#: pnadmin.php:1434
-#: pnadmin.php:1441
-#: pnadmin.php:1632
-#: pnadmin.php:1833
-#: pnadmin.php:1914
-#: pnadminapi.php:127
-#: pnadminapi.php:159
-#: pnadminapi.php:191
-#: pnadminapi.php:218
-#: pnadminapi.php:245
-#: pnadminapi.php:272
-#: pnadminapi.php:299
-#: pnadminapi.php:337
-#: pnadminapi.php:425
-#: pnadminapi.php:452
-#: pnadminapi.php:491
-#: pnadminapi.php:636
-#: pnadminapi.php:672
-#: pnadminapi.php:702
-#: pnadminapi.php:712
-#: pnuser.php:93
-#: pnuser.php:194
-#: pnuser.php:375
-#: pnuser.php:723
-#: pnuser.php:856
-#: pnuser.php:983
-#: pnuser.php:1513
-#: pnuser.php:1601
+#: pnajax.php:58 pnajax.php:96 pnajax.php:160 pnajax.php:446 pnajax.php:590
+#: pnajax.php:623 pnajax.php:916 pnuserapi.php:88 pnuserapi.php:142
+#: pnuserapi.php:201 pnuserapi.php:272 pnuserapi.php:922 pnuserapi.php:1031
+#: pnuserapi.php:1085 pnuserapi.php:1135 pnadmin.php:173 pnadmin.php:282
+#: pnadmin.php:320 pnadmin.php:385 pnadmin.php:429 pnadmin.php:541
+#: pnadmin.php:547 pnadmin.php:674 pnadmin.php:680 pnadmin.php:719
+#: pnadmin.php:725 pnadmin.php:784 pnadmin.php:840 pnadmin.php:897
+#: pnadmin.php:938 pnadmin.php:996 pnadmin.php:1053 pnadmin.php:1059
+#: pnadmin.php:1119 pnadmin.php:1125 pnadmin.php:1131 pnadmin.php:1189
+#: pnadmin.php:1259 pnadmin.php:1358 pnadmin.php:1365 pnadmin.php:1434
+#: pnadmin.php:1441 pnadmin.php:1632 pnadmin.php:1833 pnadmin.php:1914
+#: pnadminapi.php:127 pnadminapi.php:159 pnadminapi.php:191 pnadminapi.php:218
+#: pnadminapi.php:245 pnadminapi.php:272 pnadminapi.php:299 pnadminapi.php:337
+#: pnadminapi.php:425 pnadminapi.php:452 pnadminapi.php:491 pnadminapi.php:636
+#: pnadminapi.php:672 pnadminapi.php:702 pnadminapi.php:712 pnuser.php:93
+#: pnuser.php:194 pnuser.php:375 pnuser.php:723 pnuser.php:856 pnuser.php:983
+#: pnuser.php:1513 pnuser.php:1601
 msgid "Could not find form"
 msgstr "No s'ha trobat el formulari"
 
@@ -262,29 +99,24 @@ msgstr "No s'ha trobat el formulari"
 msgid "Global validator"
 msgstr "Validador/a global"
 
-#: pnadmin.php:394
-#: pntemplates/iw_forms_admin_form_addGroup.htm:22
+#: pnadmin.php:394 pntemplates/iw_forms_admin_form_addGroup.htm:22
 #: pntemplates/iw_forms_user_main.htm:35
 msgid "Only writing"
 msgstr "Només d'escriptura"
 
-#: pnadmin.php:394
-#: pntemplates/iw_forms_admin_form_addGroup.htm:23
+#: pnadmin.php:394 pntemplates/iw_forms_admin_form_addGroup.htm:23
 #: pntemplates/iw_forms_user_main.htm:37
 #: pntemplates/iw_forms_admin_form_fieldCharContent.htm:175
 msgid "Only reading"
 msgstr "Només de lectura"
 
-#: pnadmin.php:394
-#: pntemplates/iw_forms_admin_form_addGroup.htm:24
+#: pnadmin.php:394 pntemplates/iw_forms_admin_form_addGroup.htm:24
 #: pntemplates/iw_forms_user_main.htm:39
 #: pntemplates/iw_forms_admin_form_fieldCharContent.htm:172
 msgid "Reading and writing"
 msgstr "De lectura i escriptura"
 
-#: pnajax.php:718
-#: pnadmin.php:395
-#: pnuser.php:535
+#: pnajax.php:718 pnadmin.php:395 pnuser.php:535
 #: pntemplates/iw_forms_admin_formChars.htm:5
 #: pntemplates/iw_forms_admin_formChars.htm:16
 #: pntemplates/iw_forms_admin_formChars.htm:27
@@ -322,9 +154,7 @@ msgstr "De lectura i escriptura"
 msgid "Yes"
 msgstr "Sí"
 
-#: pnajax.php:717
-#: pnadmin.php:395
-#: pnuser.php:534
+#: pnajax.php:717 pnadmin.php:395 pnuser.php:534
 #: pntemplates/iw_forms_admin_formChars.htm:7
 #: pntemplates/iw_forms_admin_formChars.htm:18
 #: pntemplates/iw_forms_admin_formChars.htm:29
@@ -362,8 +192,7 @@ msgstr "Sí"
 msgid "No"
 msgstr "No"
 
-#: pnadmin.php:396
-#: pnadmin.php:1011
+#: pnadmin.php:396 pnadmin.php:1011
 msgid "Unregistered users"
 msgstr "Usuaris no registrats"
 
@@ -371,84 +200,66 @@ msgstr "Usuaris no registrats"
 msgid "Has changed the order of the fields"
 msgstr "S'ha modificat l'ordre dels camps"
 
-#: pnadmin.php:572
-#: pntemplates/iw_forms_admin_form_fieldAdd.htm:11
+#: pnadmin.php:572 pntemplates/iw_forms_admin_form_fieldAdd.htm:11
 msgid "Choose a type of field"
 msgstr "Trieu un tipus de camp"
 
-#: pnadmin.php:573
-#: pnuser.php:1540
+#: pnadmin.php:573 pnuser.php:1540
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:12
 msgid "Text"
 msgstr "Text"
 
-#: pnadmin.php:574
-#: pnuser.php:1541
+#: pnadmin.php:574 pnuser.php:1541
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:13
 msgid "Text area"
 msgstr "Àrea de text"
 
-#: pnadmin.php:575
-#: pnuser.php:1542
-#: pnuser.php:1634
+#: pnadmin.php:575 pnuser.php:1542 pnuser.php:1634
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:14
 msgid "URL"
 msgstr "URL"
 
-#: pnadmin.php:576
-#: pnuser.php:1537
-#: pnuser.php:1543
-#: pnuser.php:1630
+#: pnadmin.php:576 pnuser.php:1537 pnuser.php:1543 pnuser.php:1630
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:15
 msgid "Date"
 msgstr "Data"
 
-#: pnadmin.php:577
-#: pnuser.php:1544
+#: pnadmin.php:577 pnuser.php:1544
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:16
 msgid "Time"
 msgstr "Hora"
 
-#: pnadmin.php:578
-#: pnuser.php:1545
+#: pnadmin.php:578 pnuser.php:1545
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:17
 msgid "List of options"
 msgstr "Llista d'opcions"
 
-#: pnadmin.php:579
-#: pntemplates/iw_forms_admin_form_fieldAdd.htm:18
+#: pnadmin.php:579 pntemplates/iw_forms_admin_form_fieldAdd.htm:18
 msgid "File"
 msgstr "Fitxer"
 
-#: pnadmin.php:580
-#: pnuser.php:1546
+#: pnadmin.php:580 pnuser.php:1546
 #: pntemplates/iw_forms_admin_form_fieldAdd.htm:19
 msgid "Yes/No"
 msgstr "Sí/no"
 
-#: pnadmin.php:581
-#: pntemplates/iw_forms_admin_form_fieldAdd.htm:20
+#: pnadmin.php:581 pntemplates/iw_forms_admin_form_fieldAdd.htm:20
 msgid "Information"
 msgstr "Informació"
 
-#: pnadmin.php:582
-#: pntemplates/iw_forms_admin_form_fieldAdd.htm:21
+#: pnadmin.php:582 pntemplates/iw_forms_admin_form_fieldAdd.htm:21
 msgid "Dividing line"
 msgstr "Línia divisòria"
 
-#: pnadmin.php:583
-#: pntemplates/iw_forms_admin_form_fieldAdd.htm:22
+#: pnadmin.php:583 pntemplates/iw_forms_admin_form_fieldAdd.htm:22
 msgid "Box"
 msgstr "Caixa"
 
-#: pnajax.php:830
-#: pnadmin.php:584
-#: pnadmin.php:643
+#: pnajax.php:830 pnadmin.php:584 pnadmin.php:643
 msgid "Final box"
 msgstr "Final de caixa"
 
-#: pnajax.php:820
-#: pnadmin.php:633
+#: pnajax.php:820 pnadmin.php:633
 msgid "Field name"
 msgstr "Nom del camp"
 
@@ -476,8 +287,7 @@ msgstr "S'ha donat accés a un grup al formulari"
 msgid "Has added a new validator"
 msgstr "S'ha afegit un validador/a nou"
 
-#: pnajax.php:764
-#: pnadmin.php:913
+#: pnajax.php:764 pnadmin.php:913
 msgid "Dropped the annotations of the form"
 msgstr "S'han esborrat les anotacions del formulari"
 
@@ -489,9 +299,7 @@ msgstr "No s'ha trobat el validador/a"
 msgid "Has deleted a validator"
 msgstr "S'ha esborrat un validador/a"
 
-#: pnadmin.php:1002
-#: pnadminapi.php:363
-#: pnadminapi.php:390
+#: pnadmin.php:1002 pnadminapi.php:363 pnadminapi.php:390
 msgid "Can not find the group"
 msgstr "No s'ha trobat el grup"
 
@@ -511,8 +319,7 @@ msgstr "S'han modificat les dependències"
 msgid "The main points of the form have been published successfully"
 msgstr "Les dades principals del formulari s'han editat correctament"
 
-#: pnadmin.php:1370
-#: pnuser.php:1236
+#: pnadmin.php:1370 pnuser.php:1236
 msgid "Name_field"
 msgstr "Nom_del_fitxer"
 
@@ -525,8 +332,12 @@ msgid "The field of the form has been published successfully"
 msgstr "El camp del formulari s'ha editat correctament"
 
 #: pnadmin.php:1575
-msgid "The name of the directory of the files public is not valid because it matches the name of the home directory of files on the site."
-msgstr "El nom del directori dels fitxers públics no és vàlid perquè coincideix amb el nom del directori inicial dels fitxers del lloc."
+msgid ""
+"The name of the directory of the files public is not valid because it "
+"matches the name of the home directory of files on the site."
+msgstr ""
+"El nom del directori dels fitxers públics no és vàlid perquè coincideix amb "
+"el nom del directori inicial dels fitxers del lloc."
 
 #: pnadmin.php:1586
 msgid "Has changed the configuration of the module"
@@ -536,8 +347,7 @@ msgstr "S'ha modificat la configuració del mòdul"
 msgid "New category created"
 msgstr "S'ha creat una categoria nova"
 
-#: pnadmin.php:1728
-#: pnadmin.php:1767
+#: pnadmin.php:1728 pnadmin.php:1767
 msgid "No such category found"
 msgstr "No s'ha trobat la categoria"
 
@@ -550,20 +360,31 @@ msgid "Has changed the category"
 msgstr "S'ha modificat la categoria"
 
 #: pnadmin.php:1871
-msgid "Has made a copy of the form. Edit the characteristics that create appropriate"
-msgstr "S'ha fet una còpia del formulari. Edita'n les característiques que creguis oportunes"
+msgid ""
+"Has made a copy of the form. Edit the characteristics that create appropriate"
+msgstr ""
+"S'ha fet una còpia del formulari. Edita'n les característiques que creguis "
+"oportunes"
 
 #: pnadmin.php:1876
 msgid "There was an error in the copy of the forum"
 msgstr "S'ha produït un error en la còpia del formulari"
 
 #: lib/IWforms/Controller/Admin.php:1975
-msgid "Error! It is not possible to create the export file because the form folder defined in the module settings does not exist."
-msgstr "No ha estat possible crear el fitxer d'exportació perquè no s'ha trobat el directori dels formularis definit en els paràmetres del mòdul."
+msgid ""
+"Error! It is not possible to create the export file because the form folder "
+"defined in the module settings does not exist."
+msgstr ""
+"No ha estat possible crear el fitxer d'exportació perquè no s'ha trobat el "
+"directori dels formularis definit en els paràmetres del mòdul."
 
 #: lib/IWforms/Controller/Admin.php:1979
-msgid "Error! It is not possible to create the export file because the form folder defined in the module settings is not writable."
-msgstr "No ha estat possible crear el fitxer d'exportació perquè el directori dels formularis definit en els paràmetres del mòdul no té drets d'escriptura."
+msgid ""
+"Error! It is not possible to create the export file because the form folder "
+"defined in the module settings is not writable."
+msgstr ""
+"No ha estat possible crear el fitxer d'exportació perquè el directori dels "
+"formularis definit en els paràmetres del mòdul no té drets d'escriptura."
 
 #: pnadmin.php:2025
 msgid "Error exporting file"
@@ -581,8 +402,7 @@ msgstr "S'ha produït un error en pujar el fitxer d'importació al servidor"
 msgid "Error loading xml document."
 msgstr "S'ha produït un error en la càrrega del fitxer xml."
 
-#: pnadmin.php:2160
-#: pnadmin.php:2222
+#: pnadmin.php:2160 pnadmin.php:2222
 msgid "The form creation has failt"
 msgstr "La creació del formulari ha fallat"
 
@@ -590,22 +410,13 @@ msgstr "La creació del formulari ha fallat"
 msgid "The form has been imported correcty"
 msgstr "El formulari s'ha importat correctament"
 
-#: pnuserapi.php:563
-#: pnuserapi.php:617
-#: pnuserapi.php:820
-#: pnuserapi.php:1510
-#: pnuserapi.php:1709
-#: pnuserapi.php:1784
-#: pnuser.php:186
-#: pnuser.php:361
-#: pnuser.php:625
-#: pnuser.php:677
-#: pnuser.php:1476
+#: pnuserapi.php:563 pnuserapi.php:617 pnuserapi.php:820 pnuserapi.php:1510
+#: pnuserapi.php:1709 pnuserapi.php:1784 pnuser.php:186 pnuser.php:361
+#: pnuser.php:625 pnuser.php:677 pnuser.php:1476
 msgid "You can not access this form to view the annotations"
 msgstr "No podeu accedir a aquest formulari per veure'n les anotacions"
 
-#: pnuser.php:486
-#: pnuser.php:1629
+#: pnuser.php:486 pnuser.php:1629
 msgid "user"
 msgstr "usuari/ària remitent"
 
@@ -613,26 +424,18 @@ msgstr "usuari/ària remitent"
 msgid "Field synchronized successfully."
 msgstr "Trieu un tipus de camp"
 
-#: pnuserapi.php:698
-#: pnuserapi.php:780
-#: pnuserapi.php:791
-#: pnuserapi.php:929
-#: pnuserapi.php:1025
-#: pnuserapi.php:1036
-#: pnuserapi.php:1079
-#: pnuserapi.php:1091
-#: pnuserapi.php:1129
-#: pnuser.php:863
-#: pnuser.php:869
-#: pnuser.php:990
-#: pnuser.php:1279
-#: pnuser.php:1593
+#: pnuserapi.php:698 pnuserapi.php:780 pnuserapi.php:791 pnuserapi.php:929
+#: pnuserapi.php:1025 pnuserapi.php:1036 pnuserapi.php:1079 pnuserapi.php:1091
+#: pnuserapi.php:1129 pnuser.php:863 pnuser.php:869 pnuser.php:990
+#: pnuser.php:1279 pnuser.php:1593
 msgid "You can not access this form to send annotations"
 msgstr "No podeu accedir a aquest formulari per enviar-hi anotacions"
 
 #: pnuser.php:878
-msgid "The form is only one answer and know that you've already sent an annotation."
-msgstr "El formulari és de resposta única i consta que ja has enviat una anotació."
+msgid ""
+"The form is only one answer and know that you've already sent an annotation."
+msgstr ""
+"El formulari és de resposta única i consta que ja has enviat una anotació."
 
 #: pnuser.php:888
 msgid "Has not been found fields in the form"
@@ -640,43 +443,48 @@ msgstr "No s'han trobat els camps del formulari"
 
 #: pnuser.php:1269
 msgid "Error with the capcha protect system"
-msgstr "S'ha produït un error en el sistema de seguretat contra enviament fraudulents"
+msgstr ""
+"S'ha produït un error en el sistema de seguretat contra enviament fraudulents"
 
-#: pnuser.php:1358
-#: pnuser.php:1423
+#: pnuser.php:1358 pnuser.php:1423
 msgid "The entry has been edited"
 msgstr "L'anotació ha estat editada"
 
-#: pnuser.php:1360
-#: pnuser.php:1425
+#: pnuser.php:1360 pnuser.php:1425
 msgid "There was an error in the edition of the annotation"
 msgstr "S'ha produit un error en l'edició de l'anotació"
 
-#: pnuser.php:1374
-#: pnuser.php:1439
+#: pnuser.php:1374 pnuser.php:1439
 msgid "The entry has been created"
 msgstr "L'anotació ha estat creada"
 
-#: pnuser.php:1376
-#: pnuser.php:1441
+#: pnuser.php:1376 pnuser.php:1441
 msgid "There was an error in the creation of the annotation"
 msgstr "S'ha produit un error en la creació de l'anotació"
 
-#: pnuser.php:1391
-#: pnuser.php:1407
-msgid "There was a problem in the attachment file. Probably the annotation was sent without the file or attachment."
-msgstr "Hi ha hagut un problema en l'adjunció de fitxers. Probablement l'anotació s'ha enviat sense el fitxer o fitxers adjunts."
+#: pnuser.php:1391 pnuser.php:1407
+msgid ""
+"There was a problem in the attachment file. Probably the annotation was sent "
+"without the file or attachment."
+msgstr ""
+"Hi ha hagut un problema en l'adjunció de fitxers. Probablement l'anotació "
+"s'ha enviat sense el fitxer o fitxers adjunts."
 
 #: pnuser.php:1520
 msgid "You do not have access to this form"
 msgstr "No podeu accedir a aquest formulari"
 
 #: pnuser.php:1526
-msgid "The export is not possible because the directory for temporary files don't exist on the server. If the problem persists it communicates to the administrator at the portal."
-msgstr "L'exportació no és possible perquè falta el directori per a fitxers temporals del servidor. Si el problema persisteix comunica-ho a l'administrador/a del portal."
+msgid ""
+"The export is not possible because the directory for temporary files don't "
+"exist on the server. If the problem persists it communicates to the "
+"administrator at the portal."
+msgstr ""
+"L'exportació no és possible perquè falta el directori per a fitxers "
+"temporals del servidor. Si el problema persisteix comunica-ho a "
+"l'administrador/a del portal."
 
-#: pnuser.php:1535
-#: pntemplates/iw_forms_user_userNoteContent.htm:38
+#: pnuser.php:1535 pntemplates/iw_forms_user_userNoteContent.htm:38
 msgid "State of the note"
 msgstr "Estat de la nota"
 
@@ -684,8 +492,7 @@ msgstr "Estat de la nota"
 msgid "Referring"
 msgstr "Remitent"
 
-#: pnuser.php:1552
-#: pntemplates/iw_forms_user_export.htm:106
+#: pnuser.php:1552 pntemplates/iw_forms_user_export.htm:106
 #: pntemplates/iw_forms_admin_form_minitab.htm:5
 msgid "Field"
 msgstr "Camps"
@@ -703,34 +510,21 @@ msgid "State"
 msgstr "Estat"
 
 #: pnuser.php:1682
-msgid "There was an error in the creation of information. The export was not possible"
-msgstr "S'ha produït un error en la creació de la informació. La exportació no ha estat possible"
+msgid ""
+"There was an error in the creation of information. The export was not "
+"possible"
+msgstr ""
+"S'ha produït un error en la creació de la informació. La exportació no ha "
+"estat possible"
 
-#: pnajax.php:166
-#: pnajax.php:217
-#: pnajax.php:262
-#: pnajax.php:314
-#: pnajax.php:365
-#: pnajax.php:432
-#: pnajax.php:503
-#: pnajax.php:655
-#: pnuserapi.php:1170
-#: pnuserapi.php:1203
-#: pnuserapi.php:1247
-#: pnuserapi.php:1285
-#: pnuserapi.php:1315
-#: pnuserapi.php:1347
-#: pnuserapi.php:1453
-#: pnuserapi.php:1591
-#: pnuserapi.php:1623
+#: pnajax.php:166 pnajax.php:217 pnajax.php:262 pnajax.php:314 pnajax.php:365
+#: pnajax.php:432 pnajax.php:503 pnajax.php:655 pnuserapi.php:1170
+#: pnuserapi.php:1203 pnuserapi.php:1247 pnuserapi.php:1285 pnuserapi.php:1315
+#: pnuserapi.php:1347 pnuserapi.php:1453 pnuserapi.php:1591 pnuserapi.php:1623
 msgid "You do not have access to manage form"
 msgstr "No teniu accés a gestionar el formulari"
 
-#: pnajax.php:172
-#: pnajax.php:269
-#: pnajax.php:321
-#: pnajax.php:371
-#: pnajax.php:519
+#: pnajax.php:172 pnajax.php:269 pnajax.php:321 pnajax.php:371 pnajax.php:519
 #: pnajax.php:661
 msgid "There was an error in the modified form"
 msgstr "S'ha produit un error en la modificació del formulari"
@@ -747,13 +541,11 @@ msgstr "Has obert l'entrada de dades al formulari"
 msgid "There was an error to remove the annotation"
 msgstr "S'ha produït un error a l'esborrar l'anotació"
 
-#: pnajax.php:417
-#: pnajax.php:492
+#: pnajax.php:417 pnajax.php:492
 msgid "For some reason it is not possible to edit the field's content."
 msgstr "Per alguna raó no és possible editar el contingut del camp."
 
-#: pnajax.php:420
-#: pnuserapi.php:1354
+#: pnajax.php:420 pnuserapi.php:1354
 msgid "You can not edit this note."
 msgstr "No podeu editar aquesta anotació."
 
@@ -777,54 +569,26 @@ msgstr "S'han esborrat els validadors del formulari"
 msgid "Has been removed form"
 msgstr "S'ha esborrat el formulari"
 
-#: pnuserapi.php:942
-#: pnuserapi.php:1045
-#: pnadminapi.php:54
-#: pnadminapi.php:82
-#: pnadminapi.php:107
-#: pnadminapi.php:140
-#: pnadminapi.php:170
-#: pnadminapi.php:540
+#: pnuserapi.php:942 pnuserapi.php:1045 pnadminapi.php:54 pnadminapi.php:82
+#: pnadminapi.php:107 pnadminapi.php:140 pnadminapi.php:170 pnadminapi.php:540
 #: pnadminapi.php:792
 msgid "Error! Creation attempt failed."
 msgstr "L'intent de creació ha fallat."
 
-#: pnuserapi.php:1175
-#: pnuserapi.php:1180
-#: pnadminapi.php:195
-#: pnadminapi.php:225
-#: pnadminapi.php:252
-#: pnadminapi.php:279
-#: pnadminapi.php:309
-#: pnadminapi.php:317
-#: pnadminapi.php:341
-#: pnadminapi.php:368
-#: pnadminapi.php:395
-#: pnadminapi.php:570
+#: pnuserapi.php:1175 pnuserapi.php:1180 pnadminapi.php:195 pnadminapi.php:225
+#: pnadminapi.php:252 pnadminapi.php:279 pnadminapi.php:309 pnadminapi.php:317
+#: pnadminapi.php:341 pnadminapi.php:368 pnadminapi.php:395 pnadminapi.php:570
 msgid "Error! Sorry! Deletion attempt failed."
 msgstr "L'intent d'esborrament ha fallat."
 
-#: pnuserapi.php:896
-#: pnuserapi.php:1099
-#: pnuserapi.php:1147
-#: pnuserapi.php:1224
-#: pnuserapi.php:1260
-#: pnuserapi.php:1294
-#: pnuserapi.php:1325
-#: pnuserapi.php:1364
-#: pnuserapi.php:1603
-#: pnuserapi.php:1633
-#: pnadminapi.php:431
-#: pnadminapi.php:464
-#: pnadminapi.php:508
-#: pnadminapi.php:609
-#: pnadminapi.php:649
-#: pnadminapi.php:680
+#: pnuserapi.php:896 pnuserapi.php:1099 pnuserapi.php:1147 pnuserapi.php:1224
+#: pnuserapi.php:1260 pnuserapi.php:1294 pnuserapi.php:1325 pnuserapi.php:1364
+#: pnuserapi.php:1603 pnuserapi.php:1633 pnadminapi.php:431 pnadminapi.php:464
+#: pnadminapi.php:508 pnadminapi.php:609 pnadminapi.php:649 pnadminapi.php:680
 msgid "Error! Update attempt failed."
 msgstr "No s'ha pogut actualitzar."
 
-#: pnadminapi.php:567
-#: pnadminapi.php:601
+#: pnadminapi.php:567 pnadminapi.php:601
 msgid "No such item found."
 msgstr "No s'ha trobat l'element."
 
@@ -848,33 +612,13 @@ msgstr "Importa un formulari"
 msgid "Configure the module"
 msgstr "Configura el mòdul"
 
-#: pnuserapi.php:25
-#: pnuserapi.php:65
-#: pnuserapi.php:107
-#: pnuserapi.php:157
-#: pnuserapi.php:223
-#: pnuserapi.php:244
-#: pnuserapi.php:286
-#: pnuserapi.php:343
-#: pnuserapi.php:374
-#: pnuserapi.php:401
-#: pnuserapi.php:428
-#: pnuserapi.php:474
-#: pnuserapi.php:505
-#: pnuserapi.php:532
-#: pnuserapi.php:584
-#: pnuserapi.php:667
-#: pnuserapi.php:730
-#: pnuserapi.php:774
-#: pnuserapi.php:835
-#: pnuserapi.php:868
-#: pnuserapi.php:986
-#: pnuserapi.php:1395
-#: pnuserapi.php:1427
-#: pnuserapi.php:1468
-#: pnuserapi.php:1525
-#: pnuserapi.php:1563
-#: pnuserapi.php:1676
+#: pnuserapi.php:25 pnuserapi.php:65 pnuserapi.php:107 pnuserapi.php:157
+#: pnuserapi.php:223 pnuserapi.php:244 pnuserapi.php:286 pnuserapi.php:343
+#: pnuserapi.php:374 pnuserapi.php:401 pnuserapi.php:428 pnuserapi.php:474
+#: pnuserapi.php:505 pnuserapi.php:532 pnuserapi.php:584 pnuserapi.php:667
+#: pnuserapi.php:730 pnuserapi.php:774 pnuserapi.php:835 pnuserapi.php:868
+#: pnuserapi.php:986 pnuserapi.php:1395 pnuserapi.php:1427 pnuserapi.php:1468
+#: pnuserapi.php:1525 pnuserapi.php:1563 pnuserapi.php:1676
 msgid "Error! Could not load items."
 msgstr "S'ha produït un error en carregar elements."
 
@@ -882,13 +626,11 @@ msgstr "S'ha produït un error en carregar elements."
 msgid "Can not find the form field"
 msgstr "No s'ha trobat el camp del formulari"
 
-#: pnuserapi.php:1717
-#: pnuserapi.php:1792
+#: pnuserapi.php:1717 pnuserapi.php:1792
 msgid "Note content not found"
 msgstr "No s'ha trobat el contingut de l'anotació"
 
-#: pnuserapi.php:1735
-#: pnuserapi.php:1810
+#: pnuserapi.php:1735 pnuserapi.php:1810
 msgid "Note fields not found"
 msgstr "No s'han trobat els camps de l'anotació"
 
@@ -922,7 +664,9 @@ msgstr "Mostra la llista dels formularis on pot accedir l'usuari/ària"
 
 #: pnblocks/formslist.php:189
 msgid "Identities of the categories to show (default is all)"
-msgstr "Identitats de les categories a mostrar separades per una barra vertical '|' (per defecte són totes)"
+msgstr ""
+"Identitats de les categories a mostrar separades per una barra vertical "
+"'|' (per defecte són totes)"
 
 #: pnblocks/formslist.php:190
 msgid "Show forms into a list"
@@ -947,15 +691,27 @@ msgstr "Contingut del bloc"
 #: pnblocks/formnote.php:230
 #: pntemplates/iw_forms_admin_form_definition.htm:177
 #: pntemplates/iw_forms_admin_form_definitionExpertMode.htm:61
-msgid "[$formId$] =>Identity of the form, [$noteId$] =>Identity of the note, [%id%] => Title of the field, [$id$] => Content of the field, [$user$] => Username, [$date$] => Note creation date, [$time$] => Note creation time, [$avatar$] => User avatar, [$reply$] => Reply to the user if the reply is public"
-msgstr "[$formId$] =>Identitat del formulari, [$noteId$] =>Identity de l'anotació, [%id%] => Títol del camp, [$id$] => Contingut del camp, [$user$] => Nom d'usuari/ària, [$date$] => Data de creació de l'anotació, [$time$] => Hora de creació de l'anotació, [$avatar$] => Avatar de l'usuari/ària, [$reply$] => Resposta a l'usuari/ària si la resposta és pública"
+msgid ""
+"[$formId$] =>Identity of the form, [$noteId$] =>Identity of the note, [%id%] "
+"=> Title of the field, [$id$] => Content of the field, [$user$] => Username, "
+"[$date$] => Note creation date, [$time$] => Note creation time, [$avatar$] "
+"=> User avatar, [$reply$] => Reply to the user if the reply is public"
+msgstr ""
+"[$formId$] =>Identitat del formulari, [$noteId$] =>Identity de l'anotació, "
+"[%id%] => Títol del camp, [$id$] => Contingut del camp, [$user$] => Nom "
+"d'usuari/ària, [$date$] => Data de creació de l'anotació, [$time$] => Hora "
+"de creació de l'anotació, [$avatar$] => Avatar de l'usuari/ària, [$reply$] "
+"=> Resposta a l'usuari/ària si la resposta és pública"
 
 #: lib/IWforms/Installer.php:14
-msgid "Module IWmain is needed. You have to install the IWmain module before installing it."
-msgstr "El mòdul IWmain és necessari. L'heu de tenir instal·lat i actiu abans d'instal·lar aquest."
+msgid ""
+"Module IWmain is needed. You have to install the IWmain module before "
+"installing it."
+msgstr ""
+"El mòdul IWmain és necessari. L'heu de tenir instal·lat i actiu abans "
+"d'instal·lar aquest."
 
-#: lib/IWforms/Version.php:6
-#: lib/IWforms/Version.php:8
+#: lib/IWforms/Version.php:6 lib/IWforms/Version.php:8
 msgid "IWforms"
 msgstr "IWforms"
 
@@ -974,8 +730,7 @@ msgstr "Notes enviades"
 #: pntemplates/iw_forms_admin_form_definition.htm:11
 #: pntemplates/iw_forms_admin_main.htm:10
 #: pntemplates/iw_forms_admin_create.htm:20
-#: pntemplates/iw_forms_user_read.htm:9
-#: pntemplates/iw_forms_user_export.htm:5
+#: pntemplates/iw_forms_user_read.htm:9 pntemplates/iw_forms_user_export.htm:5
 msgid "Form name"
 msgstr "Nom del formulari"
 
@@ -1002,14 +757,12 @@ msgstr "Trieu un fitxer"
 msgid "Ok"
 msgstr "D'acord"
 
-#: pntemplates/iw_forms_user_main.htm:4
-#: pntemplates/iw_forms_admin_main.htm:5
+#: pntemplates/iw_forms_user_main.htm:4 pntemplates/iw_forms_admin_main.htm:5
 msgid "Forms list"
 msgstr "Llista de formularis"
 
 #: pntemplates/iw_forms_user_mainOptions.htm:34
-#: pntemplates/iw_forms_user_main.htm:14
-#: pntemplates/iw_forms_user_main.htm:19
+#: pntemplates/iw_forms_user_main.htm:14 pntemplates/iw_forms_user_main.htm:19
 #: pntemplates/iw_forms_block_formsList.htm:7
 #: pntemplates/iw_forms_block_formsList.htm:12
 msgid "Open the entry of annotations and editing"
@@ -1201,8 +954,7 @@ msgstr "Crea una categoria nova"
 msgid "Name"
 msgstr "Nom"
 
-#: pnversion.php:11
-#: pntemplates/iw_forms_admin_editCat.htm:14
+#: pnversion.php:11 pntemplates/iw_forms_admin_editCat.htm:14
 #: pntemplates/iw_forms_admin_form_fields.htm:20
 #: pntemplates/iw_forms_admin_conf.htm:16
 #: pntemplates/iw_forms_admin_addCat.htm:13
@@ -1338,20 +1090,41 @@ msgstr "No s'ha trobat el directori per als fitxers públics."
 
 #: pntemplates/iw_forms_admin_conf.htm:87
 msgid "You should give write permissions in this folder or set it as public"
-msgstr "Hauríeu de donar permisos d'escriptura a aquest directori o establir-lo com a públic"
+msgstr ""
+"Hauríeu de donar permisos d'escriptura a aquest directori o establir-lo com "
+"a públic"
 
 #: pntemplates/iw_forms_admin_conf.htm:97
-msgid "DpCaptcha module is not available. If you are planning to open the forms to unregistered users you may want to install them this module."
-msgstr "El mòdul dpCaptcha no està disponible. Si teniu previst obrir els formularis als usuaris no registrats et recomanem que instal·lis aquest mòdul."
+msgid ""
+"DpCaptcha module is not available. If you are planning to open the forms to "
+"unregistered users you may want to install them this module."
+msgstr ""
+"El mòdul dpCaptcha no està disponible. Si teniu previst obrir els formularis "
+"als usuaris no registrats et recomanem que instal·lis aquest mòdul."
 
 #: pntemplates/iw_forms_admin_conf.htm:100
 #: pntemplates/iw_forms_admin_conf.htm:108
-msgid "The module dpCaptcha prevents robots can send notes to forms automatically. With this module successfully activated and you get linked to when a user sends an unregistered entry, is obliged to recognize and write a set of characters that can not recognize an automated system."
-msgstr "El mòdul dpCaptcha evita que robots puguin enviar anotacions als formularis de forma automàtica. Amb aquest mòdul correctament activat i enllaçat aconseguiràs que quan un usuari/ària no registrat enviï una anotació, es vegi obligat a reconèixer i escriure un conjunt de caràcters que no pot reconèixer un sistema automàtic."
+msgid ""
+"The module dpCaptcha prevents robots can send notes to forms automatically. "
+"With this module successfully activated and you get linked to when a user "
+"sends an unregistered entry, is obliged to recognize and write a set of "
+"characters that can not recognize an automated system."
+msgstr ""
+"El mòdul dpCaptcha evita que robots puguin enviar anotacions als formularis "
+"de forma automàtica. Amb aquest mòdul correctament activat i enllaçat "
+"aconseguiràs que quan un usuari/ària no registrat enviï una anotació, es "
+"vegi obligat a reconèixer i escriure un conjunt de caràcters que no pot "
+"reconèixer un sistema automàtic."
 
 #: pntemplates/iw_forms_admin_conf.htm:105
-msgid "The module is not bound dpCaptcha (hook). If you are planning to open the forms to unregistered users recommend linking this module. You can do this from the administration of the modules."
-msgstr "El mòdul dpCaptcha no està enllaçat (hook). Si teniu previst obrir els formularis als usuaris no registrats et recomanem que enllacis aquest mòdul. Podeu fer-ho des de l'administració dels mòduls."
+msgid ""
+"The module is not bound dpCaptcha (hook). If you are planning to open the "
+"forms to unregistered users recommend linking this module. You can do this "
+"from the administration of the modules."
+msgstr ""
+"El mòdul dpCaptcha no està enllaçat (hook). Si teniu previst obrir els "
+"formularis als usuaris no registrats et recomanem que enllacis aquest mòdul. "
+"Podeu fer-ho des de l'administració dels mòduls."
 
 #: pntemplates/iw_forms_admin_conf.htm:113
 msgid "Color for the new notes"
@@ -1588,8 +1361,7 @@ msgstr "Baixa un lloc"
 msgid "Up one place"
 msgstr "Puja un lloc"
 
-#: pntemplates/iw_forms_user_menu.htm:3
-#: pntemplates/iw_forms_admin_menu.htm:4
+#: pntemplates/iw_forms_user_menu.htm:3 pntemplates/iw_forms_admin_menu.htm:4
 msgid "Forms"
 msgstr "Formularis"
 
@@ -1691,7 +1463,9 @@ msgstr "Els validadors poden tancar les anotacions"
 #: pntemplates/iw_forms_admin_form_definition.htm:51
 #: pntemplates/iw_forms_admin_create.htm:69
 msgid "Validators can close the entries or the release of the book-entry form"
-msgstr "Els validadors poden tancar les entrades o l'edició de les anotacions en el formulari"
+msgstr ""
+"Els validadors poden tancar les entrades o l'edició de les anotacions en el "
+"formulari"
 
 #: pntemplates/iw_forms_admin_form_definitionEdit.htm:62
 #: pntemplates/iw_forms_admin_form_definition.htm:59
@@ -1703,13 +1477,16 @@ msgstr "El formulari està inicialment tancat"
 #: pntemplates/iw_forms_admin_form_definition.htm:67
 #: pntemplates/iw_forms_admin_create.htm:77
 msgid "Unregistered users can not see the data of senders of entries"
-msgstr "Els usuaris no registrats no poden veure les dades dels remitents de les anotacions"
+msgstr ""
+"Els usuaris no registrats no poden veure les dades dels remitents de les "
+"anotacions"
 
 #: pntemplates/iw_forms_admin_form_definitionEdit.htm:70
 #: pntemplates/iw_forms_admin_form_definition.htm:75
 #: pntemplates/iw_forms_admin_create.htm:81
 msgid "Unregistered users can not export the contents of the annotations"
-msgstr "Els usuaris no registrats no poden exportar els continguts de les anotacions"
+msgstr ""
+"Els usuaris no registrats no poden exportar els continguts de les anotacions"
 
 #: pntemplates/iw_forms_admin_form_definitionEdit.htm:74
 #: pntemplates/iw_forms_admin_form_definition.htm:83
@@ -1717,7 +1494,8 @@ msgstr "Els usuaris no registrats no poden exportar els continguts de les anotac
 #: pntemplates/iw_forms_user_manageNoteContentRenote.htm:28
 #: pntemplates/iw_forms_admin_create.htm:85
 msgid "The answer is visible to all users who have access to information"
-msgstr "La resposta és visible per a tots els usuaris que tenen accés a la informació"
+msgstr ""
+"La resposta és visible per a tots els usuaris que tenen accés a la informació"
 
 #: pntemplates/iw_forms_admin_form_definitionEdit.htm:34
 #: pntemplates/iw_forms_admin_form_definition.htm:91
@@ -1741,7 +1519,8 @@ msgstr "Les anotacions permeten comentaris"
 #: pntemplates/iw_forms_admin_form_definition.htm:107
 #: pntemplates/iw_forms_admin_create.htm:94
 msgid "The validators can decide if a particular note allow comments"
-msgstr "Els validadors poden decidir si una nota en particular admet comentaris"
+msgstr ""
+"Els validadors poden decidir si una nota en particular admet comentaris"
 
 #: pntemplates/iw_forms_admin_form_definitionEdit.htm:88
 #: pntemplates/iw_forms_admin_form_definition.htm:115
@@ -1817,11 +1596,15 @@ msgstr "Extensions restringides (separades per comes)"
 
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:48
 msgid "Thumbnail width (only images gif, jpg and png. 0 for original size)"
-msgstr "Amplada de la miniatura (només per a imatges gif, jpg i png. Poseu 0 per que sigui la mida original)"
+msgstr ""
+"Amplada de la miniatura (només per a imatges gif, jpg i png. Poseu 0 per que "
+"sigui la mida original)"
 
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:52
 msgid "Thumbnail height (only images gif, jpg and png. 0 for original size)"
-msgstr "Alçada de la miniatura (només per a imatges gif, jpg i png. Poseu 0 per que sigui la mida original)"
+msgstr ""
+"Alçada de la miniatura (només per a imatges gif, jpg i png. Poseu 0 per que "
+"sigui la mida original)"
 
 #: pntemplates/iw_forms_admin_form_fieldCharContent.htm:15
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:58
@@ -1857,8 +1640,12 @@ msgid "List options"
 msgstr "Opcions de la llista"
 
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:98
-msgid "The options must be separated by the hyphen (-). To leave empty the first option, you must write a hyphen before the first one."
-msgstr "Les opcions s'han de separar amb el guió (-). Per deixar la primera opció buida, cal escriure un guió abans de la primera opció."
+msgid ""
+"The options must be separated by the hyphen (-). To leave empty the first "
+"option, you must write a hyphen before the first one."
+msgstr ""
+"Les opcions s'han de separar amb el guió (-). Per deixar la primera opció "
+"buida, cal escriure un guió abans de la primera opció."
 
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:99
 msgid "List of members into a groups"
@@ -1866,7 +1653,9 @@ msgstr "Llista de membres d'un grup d'usuaris"
 
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:107
 msgid "The group's members are added to the list defined in the option above."
-msgstr "Els membres del grup se sumen a la llista d'opcions definida a l'opció anterior."
+msgstr ""
+"Els membres del grup se sumen a la llista d'opcions definida a l'opció "
+"anterior."
 
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:113
 msgid "The validators can filter using this field"
@@ -1942,7 +1731,8 @@ msgstr "Actiu/no actiu"
 #: pntemplates/iw_forms_user_fieldContent.htm:253
 #: pntemplates/iw_forms_admin_form_fieldEdit.htm:213
 msgid "If the file is public will be accessible to everyone from a URL like:"
-msgstr "Si el fitxer és públic serà accessible per a tothom des d'una URL de l'estil:"
+msgstr ""
+"Si el fitxer és públic serà accessible per a tothom des d'una URL de l'estil:"
 
 #: pntemplates/iw_forms_user_manageNoteContentRenote.htm:10
 #: pntemplates/iw_forms_user_manageNoteContentRenote.htm:30
@@ -2086,7 +1876,9 @@ msgstr "Inicialment tancat"
 
 #: pntemplates/iw_forms_admin_formChars.htm:56
 msgid "NR can not see users information"
-msgstr "Els usuaris no registrats no poden veure les dades dels remitents de les anotacions"
+msgstr ""
+"Els usuaris no registrats no poden veure les dades dels remitents de les "
+"anotacions"
 
 #: pntemplates/iw_forms_admin_formChars.htm:66
 msgid "NR can not export"
@@ -2182,8 +1974,14 @@ msgid "type"
 msgstr "de tipus"
 
 #: pntemplates/iw_forms_admin_form_fieldDelete.htm:13
-msgid "Unable to delete the field as there are other areas that are depending on. Clear dependencies before deleting the field. Here is the list of areas affected:"
-msgstr "No és possible esborrar el camp ja que hi ha altres camps que el tenen com a depenent. Esborra les dependències abans d'esborrar aquest camp. Aquí teniu la llista de camps afectats:"
+msgid ""
+"Unable to delete the field as there are other areas that are depending on. "
+"Clear dependencies before deleting the field. Here is the list of areas "
+"affected:"
+msgstr ""
+"No és possible esborrar el camp ja que hi ha altres camps que el tenen com a "
+"depenent. Esborra les dependències abans d'esborrar aquest camp. Aquí teniu "
+"la llista de camps afectats:"
 
 #: pntemplates/iw_forms_admin_form_fieldCharContent.htm:4
 msgid "Expand"
@@ -2244,7 +2042,9 @@ msgstr "Definició"
 
 #: pntemplates/iw_forms_admin_create.htm:99
 msgid "Use expert mode (options available after creation during edition)"
-msgstr "Fes ús del mode expert (les opcions estaran disponibles durant l'edició després d'haver creat el formulari)"
+msgstr ""
+"Fes ús del mode expert (les opcions estaran disponibles durant l'edició "
+"després d'haver creat el formulari)"
 
 #: pntemplates/iw_forms_admin_form.htm:30
 msgid "...expand/collapse..."
@@ -2256,8 +2056,11 @@ msgstr "...plaga/desplega..."
 #: pntemplates/iw_forms_user_requiredJS.htm:24
 #: pntemplates/iw_forms_user_requiredJS.htm:31
 #: pntemplates/iw_forms_user_requiredJS.htm:38
-msgid "There are one or more form fields that are required and you have not filled"
-msgstr "Hi ha algun o alguns camps del formulari que són requerits i no els has emplenat"
+msgid ""
+"There are one or more form fields that are required and you have not filled"
+msgstr ""
+"Hi ha algun o alguns camps del formulari que són requerits i no els has "
+"emplenat"
 
 #: pntemplates/iw_forms_user_fieldContent.htm:17
 #: pntemplates/iw_forms_user_fieldContent.htm:42
@@ -2346,15 +2149,19 @@ msgid "The value of time is wrong"
 msgstr "El valor d'hora és incorrecte"
 
 #: pntemplates/iw_forms_user_checkJS.htm:27
-msgid "The extension of the attachment is not supported. The extensions are possible:"
-msgstr "L'extensió del fitxer adjunt no és admesa. Les extensions possibles són: "
+msgid ""
+"The extension of the attachment is not supported. The extensions are "
+"possible:"
+msgstr ""
+"L'extensió del fitxer adjunt no és admesa. Les extensions possibles són: "
 
 #: pntemplates/iw_forms_admin_conf.htm:92
 msgid "This directory has not been declared as public."
 msgstr "Aquest directori no ha estat declarat com a públic"
 
 msgid "Note do not fount. Please check the id of the note."
-msgstr "No s'ha trobat l'anotació. Si us plau, reviseu la identitat de l'anotació."
+msgstr ""
+"No s'ha trobat l'anotació. Si us plau, reviseu la identitat de l'anotació."
 
 msgid "Error! The security words are incorrect."
 msgstr "Les paraules de seguretat introduídes no són correctes."
@@ -2366,7 +2173,8 @@ msgid "Confirms that want to send the annotation"
 msgstr "Confirmeu que voleu enviar l'anotació"
 
 msgid "Could not find form fields, then it is not possible to copy the form"
-msgstr "No s'han trobat els camps del formulari i no és possible fer-ne una còpia"
+msgstr ""
+"No s'han trobat els camps del formulari i no és possible fer-ne una còpia"
 
 msgid "All languages"
 msgstr "Tots els idiomes"
@@ -2377,3 +2185,46 @@ msgstr "Idioma del formulari"
 msgid "Filter by user"
 msgstr "Filtre per usuari/ària"
 
+msgid "General parameters"
+msgstr "Paràmetres generals"
+
+msgid "Notes users read view"
+msgstr "Vista de lectura les notes per part dels usuaris"
+
+msgid "Sending notes beheavor"
+msgstr "Comportament en l'enviament de notes"
+
+msgid "Activation"
+msgstr "Activació"
+
+msgid "Default number of notes for page in users read view"
+msgstr "Nombre de notes per pàgina per defecte a la vista de lectura"
+
+msgid "Default order for notes"
+msgstr "Ordre per defecte de les notes"
+
+msgid "Cronologicaly inverse"
+msgstr "Ordre cronològic invers"
+
+msgid "Cronologicaly"
+msgstr "Ordre cronològic"
+
+msgid "Alphabetical"
+msgstr "Ordre alfabètic"
+
+msgid "Random order"
+msgstr "Ordenació aleatòria"
+
+msgid "Ordenation form field"
+msgstr "Camp d'ordenació"
+
+msgid "Select an option..."
+msgstr "Seleccioneu una opció..."
+
+msgid ""
+"There are not defined fields. You should select this option editing this "
+"form after fields creation. The default option is Cronologicaly inverse"
+msgstr ""
+"No hi ha camps definits. Podreu seleccionar aquesta opció si editeu el "
+"formulari una vegada hagueu creat camps. L'opció per defecte és Ordenació "
+"cronològica inversa"
