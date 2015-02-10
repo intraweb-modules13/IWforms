@@ -196,7 +196,20 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
             case '3.0.0':
                 DBUtil::changeTable('IWforms_definition');
 			case '3.0.1':
+				//Implement Scribite Hooks
 				HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+				//Templates to tpl
+				$commands = array();
+				$commands[] ="ALTER TABLE 'IWforms_definition' ALTER COLUMN 'skinFormTemplate' SET DEFAULT 'IWforms_user_new.tpl'";
+				$commands[] ="ALTER TABLE 'IWforms_definition' ALTER COLUMN 'skinTemplate' SET DEFAULT 'IWforms_user_read.tpl'";
+				$commands[] ="ALTER TABLE 'IWforms_definition' ALTER COLUMN 'skinNoteTemplate' SET DEFAULT 'IWforms_user_read.tpl'";
+				// Load DB connection
+				$dbEvent = new Zikula_Event('doctrine.init_connection');
+				$connection = $this->eventManager->notify($dbEvent)->getData();
+				foreach ($commands as $sql) {
+    				$stmt = $connection->prepare($sql);
+    				$stmt->execute();
+				}
 			case '3.0.2':
         }
 

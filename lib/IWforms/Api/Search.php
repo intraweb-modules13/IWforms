@@ -52,7 +52,7 @@ class IWforms_Api_Search extends Zikula_AbstractApi {
             // we can return it easily when required
             $renderer = Zikula_View::getInstance($this->name);
             $options = $renderer->assign('active', !isset($args['active']) || isset($args['active']['IWforms']))
-                    ->fetch('IWforms_search_options.htm');
+                    ->fetch('IWforms_search_options.tpl');
         }
 
         return $options;

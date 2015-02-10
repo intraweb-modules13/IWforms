@@ -4,7 +4,7 @@
 <script type="text/javascript" src="modules/IWmain/js/calendar/jscal2.js"></script>
 <script type="text/javascript" src="modules/IWmain/js/calendar/lang/ca.js"></script>
 
-{include file="IWforms_admin_menu.htm"}
+{include file="IWforms_admin_menu.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='filenew.png' set='icons/large' __alt=''}</div>
     <h2>{gt text="Create a new form"}</h2>
@@ -159,7 +159,7 @@
                     <input id="expertMode" name="expertMode" type="checkbox" value="1" />
                 </div>
                 <div id="expertModeContent">
-                    {include file="IWforms_admin_form_definitionExpertMode.htm"}
+                    {include file="IWforms_admin_form_definitionExpertMode.tpl"}
                 </div>
             </fieldset>
             <fieldset>

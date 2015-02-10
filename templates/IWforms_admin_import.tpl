@@ -1,4 +1,4 @@
-{include file="IWforms_admin_menu.htm"}
+{include file="IWforms_admin_menu.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='fileimport.png' set='icons/large' __alt=''}</div>
     <div style="height:10px;">&nbsp;</div>

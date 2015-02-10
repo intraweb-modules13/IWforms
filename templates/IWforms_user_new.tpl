@@ -54,7 +54,7 @@
 {pageaddvar name='stylesheet' value=$form.skincssurl}
 {/if}
 {if not isset($adminView)}
-{include file="IWforms_user_menu.htm"}
+{include file="IWforms_user_menu.tpl"}
 {/if}
 
 <div class="userForm">

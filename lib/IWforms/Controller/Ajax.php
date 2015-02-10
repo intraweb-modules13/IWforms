@@ -28,7 +28,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('groupMembers', $groupMembers);
         $view->assign('action', 'chgUsers');
-        $content = $view->fetch('IWforms_admin_ajax.htm');
+        $content = $view->fetch('IWforms_admin_ajax.tpl');
         return new Zikula_Response_Ajax(array('content' => $content,
         ));
     }
@@ -133,7 +133,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             'imgHeight' => $field['imgHeight']);
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('field', $fields_array);
-        $content = $view->fetch('IWforms_admin_form_fieldCharContent.htm');
+        $content = $view->fetch('IWforms_admin_form_fieldCharContent.tpl');
         return new Zikula_Response_Ajax(array('content' => $content,
             'fndid' => $fndid,
         ));
@@ -179,7 +179,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             'fid' => $form['fid']);
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('form', $form_array);
-        $content = $view->fetch('IWforms_user_mainOptions.htm');
+        $content = $view->fetch('IWforms_user_mainOptions.tpl');
         $text = ($form['closeInsert'] == 0) ? $this->__('Has closed input data on the form') : $this->__('Has opened input data on the form');
         return new Zikula_Response_Ajax(array('content' => $content,
             'text' => $text,
@@ -289,7 +289,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             'validate' => $note['validate']));
         $view->assign('IWmessages', $IWmessages);
         $view->assign('fid', $note['fid']);
-        $contentOptions = $view->fetch('IWforms_user_manageNoteContentOptions.htm');
+        $contentOptions = $view->fetch('IWforms_user_manageNoteContentOptions.tpl');
         return new Zikula_Response_Ajax(array('fmid' => $fmid,
             'mark' => $mark,
             'contentOptions' => $contentOptions,
@@ -341,7 +341,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             'validate' => $note['validate']));
         $view->assign('IWmessages', $IWmessages);
         $view->assign('fid', $note['fid']);
-        $contentOptions = $view->fetch('IWforms_user_manageNoteContentOptions.htm');
+        $contentOptions = $view->fetch('IWforms_user_manageNoteContentOptions.tpl');
         return new Zikula_Response_Ajax(array('fmid' => $fmid,
             'color' => ModUtil::func('IWforms', 'user', 'calcColor', array('validate' => $note['validate'],
                 'state' => $note['state'],
@@ -392,7 +392,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             'validate' => $note['validate']));
         $view->assign('IWmessages', $IWmessages);
         $view->assign('fid', $note['fid']);
-        $contentOptions = $view->fetch('IWforms_user_manageNoteContentOptions.htm');
+        $contentOptions = $view->fetch('IWforms_user_manageNoteContentOptions.tpl');
         return new Zikula_Response_Ajax(array('fmid' => $fmid,
             'color' => ModUtil::func('IWforms', 'user', 'calcColor', array('validate' => $note['validate'],
                 'state' => $note['state'])),
@@ -443,7 +443,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         $view->assign('do', 'edit');
         if ($toDo == 'observations') {
             $view->assign('note', $note);
-            $content = $view->fetch('IWforms_user_manageNoteContentObs.htm');
+            $content = $view->fetch('IWforms_user_manageNoteContentObs.tpl');
         }
         if ($toDo == 'renote') {
             $view->assign('note', $note);
@@ -454,12 +454,12 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
                 return false;
             }
             $view->assign('form', $form);
-            $content = $view->fetch('IWforms_user_manageNoteContentRenote.htm');
+            $content = $view->fetch('IWforms_user_manageNoteContentRenote.tpl');
         }
         if ($toDo == 'content') {
             $fmid = $fnid;
             $view->assign('noteContent', $noteContent);
-            $content = $view->fetch('IWforms_user_manageNoteContentEdit.htm');
+            $content = $view->fetch('IWforms_user_manageNoteContentEdit.tpl');
         }
 
         return new Zikula_Response_Ajax(array('fmid' => $fmid,
@@ -524,18 +524,18 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         if ($toDo == 'observations') {
             $note['observations'] = $value;
             $view->assign('note', $note);
-            $content = $view->fetch('IWforms_user_manageNoteContentObs.htm');
+            $content = $view->fetch('IWforms_user_manageNoteContentObs.tpl');
         }
         if ($toDo == 'renote') {
             $checked = FormUtil::getPassedValue('checked', -1, 'POST');
             $note['renote'] = $value;
             $view->assign('note', $note);
-            $content = $view->fetch('IWforms_user_manageNoteContentRenote.htm');
+            $content = $view->fetch('IWforms_user_manageNoteContentRenote.tpl');
             $modid = ModUtil::getIdFromName('IWmessages');
             $modinfo = ModUtil::getInfo($modid);
             if ($checked == 'true' && $modinfo['state'] == 3 && $note['annonimous'] == 0) {
                 $view->assign('fmid', $fmid);
-                $noteOrigen = $view->fetch('IWforms_user_origenNote.htm');
+                $noteOrigen = $view->fetch('IWforms_user_origenNote.tpl');
 
 // set copy whit a private message to user
                 ModUtil::apiFunc('IWmessages', 'user', 'create', array('image' => '',
@@ -552,7 +552,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
             $view->assign('value', $value);
             $view->assign('fnid', $fnid);
             $fmid = $fnid;
-            $content = $view->fetch('IWforms_user_manageNoteContentEdit.htm');
+            $content = $view->fetch('IWforms_user_manageNoteContentEdit.tpl');
         }
         return new Zikula_Response_Ajax(array('fmid' => $fmid,
             'content' => $content,
@@ -619,7 +619,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         $form['new'] = ModUtil::func('IWforms', 'user', 'makeTimeForm', $form['new']);
         $form['caducity'] = ModUtil::func('IWforms', 'user', 'makeTimeForm', $form['caducity']);
         $view->assign('form', $form);
-        $content = $view->fetch('IWforms_admin_formChars.htm');
+        $content = $view->fetch('IWforms_admin_formChars.tpl');
         return new Zikula_Response_Ajax(array('content' => $content,
             'fid' => $fid,
         ));
@@ -715,9 +715,9 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         $view->assign('fid', $fid);
         $view->assign('filter', 1);
         $view->assign('filterType', $filterType);
-        $filterContent = $view->fetch('IWforms_user_manageFilter.htm');
+        $filterContent = $view->fetch('IWforms_user_manageFilter.tpl');
         $view->assign('total', 0);
-        $content = $view->fetch('IWforms_user_manageAllNotesContent.htm');
+        $content = $view->fetch('IWforms_user_manageAllNotesContent.tpl');
         return new Zikula_Response_Ajax(array('filterContent' => $filterContent,
             'content' => $content,
             'toDo' => $toDo,
@@ -897,7 +897,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
 
         $view = Zikula_View::getInstance('IWforms', false);
         $view->assign('item', $form);
-        $content = $view->fetch('IWforms_admin_form_definitionExpertMode.htm');
+        $content = $view->fetch('IWforms_admin_form_definitionExpertMode.tpl');
 
         return new Zikula_Response_Ajax(array('content' => $content,
         ));

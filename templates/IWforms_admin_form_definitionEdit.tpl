@@ -103,7 +103,7 @@
             </div>
             <div id="orderFieldDiv">
                 {if $item.defaultOrderForNotes eq 3}
-                    {include file="IWforms_admin_formFields.htm"}
+                    {include file="IWforms_admin_formFields.tpl"}
                 {/if}
             </div>
             <div class="z-formrow">
@@ -149,7 +149,7 @@
                 <input id="expertMode" name="expertMode" type="checkbox" {if $item.expertMode}checked{/if} value="1" onClick="javascript:expertModeActivation({$item.fid},0)"/>
             </div>
             <div id="expertModeContent">
-                {include file="IWforms_admin_form_definitionExpertMode.htm"}
+                {include file="IWforms_admin_form_definitionExpertMode.tpl"}
             </div>
         </fieldset>
         <fieldset>

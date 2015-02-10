@@ -73,13 +73,13 @@
     <tr>
         <td colspan="2" width="40%">{gt text="Private notes of those responsible"}</td>
         <td width="60%">
-            {include file="IWforms_user_manageNoteContentObs.htm" do="print"}
+            {include file="IWforms_user_manageNoteContentObs.tpl" do="print"}
         </td>
     </tr>
     <tr>
         <td colspan="2" width="40%">{gt text="Answer"}</td>
         <td width="60%">
-            {include file="IWforms_user_manageNoteContentRenote.htm" do="print"}
+            {include file="IWforms_user_manageNoteContentRenote.tpl" do="print"}
         </td>
     </tr>
     <tr>
@@ -92,7 +92,7 @@
             </div>
             {/if}
             <div style="float:right" id="note_options_{$note.fmid}">
-                {include file="IWforms_user_manageNoteContentOptions.htm"}
+                {include file="IWforms_user_manageNoteContentOptions.tpl"}
             </div>
         </td>
     </tr>

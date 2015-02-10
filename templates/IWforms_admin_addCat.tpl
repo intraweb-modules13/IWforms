@@ -1,4 +1,4 @@
-{include file="IWforms_admin_menu.htm"}
+{include file="IWforms_admin_menu.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt=''}</div>
     <h2>{gt text="Creates a new category"}</h2>

@@ -58,7 +58,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         return $this->view->assign('forms', $forms_array)
                         ->assign('func', '')
                         ->assign('fid', '')
-                        ->fetch('IWforms_user_main.htm');
+                        ->fetch('IWforms_user_main.tpl');
     }
 
     /**
@@ -253,7 +253,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             ));
         }
         // set the default template
-        $template = 'IWforms_user_read.htm';
+        $template = 'IWforms_user_read.tpl';
         if ($form['expertMode'] && $form['skinByTemplate'] == 1) {
             if ($form['skinTemplate'] != '' && $fmid == null)
                 $template = $form['skinTemplate'];
@@ -656,7 +656,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                         ->assign('completedColor', ModUtil::getVar('IWforms', 'completedColor'))
                         ->assign('validatedColor', ModUtil::getVar('IWforms', 'validatedColor'))
                         ->assign('IWmessages', $IWmessages)
-                        ->fetch('IWforms_user_manage.htm');
+                        ->fetch('IWforms_user_manage.tpl');
     }
 
     /**
@@ -764,7 +764,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             }
             return $this->view->assign('formsArray', $formsArray)
                             ->assign('fid', '')
-                            ->fetch('IWforms_user_sendedWhatForm.htm');
+                            ->fetch('IWforms_user_sendedWhatForm.tpl');
         }
         //Get item
         $form = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
@@ -812,11 +812,11 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                     ->assign('fieldsColor', ModUtil::getVar('IWforms', 'fieldsColor'))
                     ->assign('contentColor', ModUtil::getVar('IWforms', 'contentColor'))
                     ->assign('color', ModUtil::getVar('IWforms', 'viewedColor'))
-                    ->fetch('IWforms_user_sended.htm');
+                    ->fetch('IWforms_user_sended.tpl');
         }
 
         return $this->view->assign('content', $content)
-                        ->fetch('IWforms_user_sendedView.htm');
+                        ->fetch('IWforms_user_sendedView.tpl');
     }
 
     /**
@@ -947,7 +947,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                 $noteValidationArray[] = array($noteContent['fndid'] => $noteContent['validate']);
             }
         }
-        $template = 'IWforms_user_new.htm';
+        $template = 'IWforms_user_new.tpl';
         if ($form['skinForm'] != '' && $form['skinByTemplate'] == 0 && $form['expertMode'] == 1) {
             $content = DataUtil::formatForDisplayHTML($form['skinForm']);
         }
@@ -1254,14 +1254,14 @@ class IWforms_Controller_User extends Zikula_AbstractController {
             }
             $view->assign('fieldType', $field['fieldType']);
             $view->assign('fndid', $field['fndid']);
-            $requiredJS .= $view->fetch('IWforms_user_requiredJS.htm');
+            $requiredJS .= $view->fetch('IWforms_user_requiredJS.tpl');
         }
         //Check some specific fields
         if ($statusActive && $fieldContent == 1) {
             $view->assign('fndid', $field['fndid']);
             $view->assign('fieldType', $field['fieldType']);
             $view->assign('extensions', ModUtil::getVar('IWmain', 'extensions'));
-            $checkJS .= $view->fetch('IWforms_user_checkJS.htm');
+            $checkJS .= $view->fetch('IWforms_user_checkJS.tpl');
         }
         $fieldsArray = array('fndid' => $field['fndid'],
             'fid' => $field['fid'],
@@ -1282,7 +1282,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         $view->assign('field', $fieldsArray);
         $publicFileURL = '<strong>' . System::getBaseUrl() . 'file.php?<br />file=' . ModUtil::getVar('IWforms', 'publicFolder') . '/<br />' . $this->__('Name_field') . '</strong>';
         $view->assign('publicFileURL', $publicFileURL);
-        $content = $view->fetch('IWforms_user_fieldContent.htm');
+        $content = $view->fetch('IWforms_user_fieldContent.tpl');
         return array('content' => $content,
             'checkJS' => $checkJS,
             'requiredJS' => $requiredJS,
@@ -1605,7 +1605,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
                         ->assign('fieldsTypes', $fieldsTypes)
                         ->assign('fieldsOrder', $fieldsOrder)
                         ->assign('fields', $fieldsArray)
-                        ->fetch('IWforms_user_export.htm');
+                        ->fetch('IWforms_user_export.tpl');
     }
 
     /**
@@ -1842,7 +1842,7 @@ class IWforms_Controller_User extends Zikula_AbstractController {
         }
         $items[] = array('text' => $text);
         return $this->view->assign('items', $items)
-                        ->fetch('IWforms_user_pager.htm');
+                        ->fetch('IWforms_user_pager.tpl');
     }
 
 }
