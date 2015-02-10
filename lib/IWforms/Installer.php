@@ -77,7 +77,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
                 ->setVar('contentColor', '#FFFFE0')
                 ->setVar('attached', 'forms')
                 ->setVar('publicFolder', 'forms/public');
-
+		HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
         //Successfull
         return true;
     }
@@ -108,7 +108,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
                 ->delVar('contentColor')
                 ->delVar('attached')
                 ->delVar('publicFolder');
-
+		HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());
         //Deletion successfull
         return true;
     }
@@ -122,7 +122,7 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
     public function upgrade($oldversion) {
 
         switch ($oldversion) {
-            case '2.0':
+            case ($oldversion < '3.0.0'):
                 //ADD new fields to tables
                 $c1 = "ALTER TABLE `IWforms_definition` ADD `iw_returnURL` VARCHAR (150) NOT NULL";
                 if (!DBUtil::executeSQL($c1)) {
@@ -195,6 +195,9 @@ class IWforms_Installer extends Zikula_AbstractInstaller {
                 }
             case '3.0.0':
                 DBUtil::changeTable('IWforms_definition');
+			case '3.0.1':
+				HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+			case '3.0.2':
         }
 
         return true;
