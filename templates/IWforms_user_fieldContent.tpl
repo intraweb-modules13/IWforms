@@ -30,9 +30,10 @@
             {$field.required}
         </span>
     </label>
-    <div class="field"><textarea cols="{$cols}" rows="{$rows}" name="field{$field.fndid}" {if $field.editor eq 1}id="intraweb"{/if}></textarea></div>
+    <div class="field"><textarea cols="{$cols}" rows="{$rows}" name="field{$field.fndid}" id="field{$field.fndid}"{if $field.editor neq 1} class="noeditor"{/if}></textarea></div>
     {if $field.help neq ''}
     {include file="IWforms_user_fieldContentHelp.tpl"}
+	
     {/if}
 </div>
 <div style="clear:both"></div>
@@ -337,3 +338,4 @@
 </fieldset>
 <!--end close fieldset field-->
 {/if}
+{notifydisplayhooks eventname='iwforms.ui_hooks.iwforms.form_edit'}

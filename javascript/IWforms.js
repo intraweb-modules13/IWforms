@@ -255,6 +255,7 @@ function editNoteManageContent_response(a) {
     }
     if (b.toDo == 'content') {
         $('note_content_' + b.fmid).update(b.content);
+		S5cribite.createEditors();
     }
 }
 
@@ -601,4 +602,24 @@ function orderField_response(a) {
     var b = a.getData();
 
     $('orderFieldDiv').update(b.content);
+}
+function toggleHtmlEditor(textareaId) {
+	if (typeof tinyMCE != "undefined") {
+		if (jQuery('#'+textareaId).hasClass('noeditor')) {
+			jQuery('#'+textareaId).removeClass('noeditor');
+			Scribite.createEditor(textareaId);
+		} else {
+			Scribite.destroyEditor(textareaId);
+			//Scribite.editorCollection.get(textareaId).remove();
+			//tinymce.get(textareaId).remove();
+			jQuery('#'+textareaId).addClass('noeditor');
+		}
+	}
+}
+function sendNoteContent(fnid){
+	textareaId = 'textarea_'+fnid;
+	if (!jQuery('#'+textareaId).hasClass('noeditor')) {
+		Scribite.renderToElement(textareaId);
+	}
+	submitValue('content',fnid);
 }

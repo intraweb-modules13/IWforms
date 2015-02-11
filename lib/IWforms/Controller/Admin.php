@@ -2162,21 +2162,5 @@ class IWforms_Controller_Admin extends Zikula_AbstractController {
                         ->assign('fid', $fid)
                         ->fetch('IWforms_admin_formFields.tpl');
     }
-    public function provadb(){
-        //$sql1 = "ALTER TABLE IWforms_definition ALTER iw_skinFormTemplate SET DEFAULT 'IWforms_user_new.htm'";
-        $a1=DBUtil::getTableConstraints('IWforms_definition');
-        echo $a1;
-        echo "<pre>";
-        print_r($a1);
-        echo "</pre>";
-        echo $a1['iw_skinFormTemplate']['default'];
-        /*if ($a1['iw_skinFormTemplate']['default'] == 'IWforms_user_new.tpl'){
-            DBUtil::executeSQL($sql1);
-            echo "<br>".DBUtil::getTableOptions('IWforms_definition')['iw_skinFormTemplate']['default'];
-        } else {
-            echo "<br>No changes";
-        }*/
-        return $this->view->fetch('IWforms_user_main.tpl');
-    }
 
 }

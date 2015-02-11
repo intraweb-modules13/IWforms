@@ -1,3 +1,4 @@
+{pageaddvar name=javascript value=jQuery}
 <script language="javascript">
     function sendChange(value){
         if(value == 1){
@@ -79,6 +80,7 @@
         </tr>
     </table>
 </div>
+{notifydisplayhooks eventname='iwforms.ui_hooks.iwforms.form_edit'}
 <script type="text/javascript">
     var deleteUserNote = '{{gt text="Delete the note"}}';
 </script>
