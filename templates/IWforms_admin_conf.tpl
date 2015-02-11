@@ -3,7 +3,7 @@
 <script type="text/javascript" src="modules/IWmain/js/PopupWindow.js"></script>
 {include file="IWforms_admin_menu.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt=''}</div>
+    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large'}</div>
     <h2>{gt text="Configure the module"}</h2>
     <h3>{gt text="Categories"}</h3>
     <table class="z-datatable">

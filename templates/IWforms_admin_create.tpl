@@ -6,7 +6,7 @@
 
 {include file="IWforms_admin_menu.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='filenew.png' set='icons/large' __alt=''}</div>
+    <div class="z-adminpageicon">{img modname='core' src='filenew.png' set='icons/large'}</div>
     <h2>{gt text="Create a new form"}</h2>
     <ul id="admintabs" class="z-clearfix">
         <li>

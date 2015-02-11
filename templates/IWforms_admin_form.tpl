@@ -10,7 +10,7 @@
 {include file="IWforms_admin_menu.tpl"}
 {ajaxheader modname=IWforms filename=IWforms.js}
 <div class="z-admincontainer ">
-    <div class="z-adminpageicon">{img modname='core' src='kcmdf.png' set='icons/large' __alt=''}</div>
+    <div class="z-adminpageicon">{img modname='core' src='kcmdf.png' set='icons/large'}</div>
     <h2>{gt text="Managing a form"}</h2>
     <ul id="admintabs" class="z-clearfix">
         {include file="IWforms_admin_form_minitab.tpl"}

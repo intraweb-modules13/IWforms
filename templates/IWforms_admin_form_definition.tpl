@@ -105,7 +105,7 @@
         {$orderFormField}
         {/if}
         {elseif $item.defaultOrderForNotes eq 4}
-        {gt text="Random order"
+        {gt text="Random order"}
         {else}
         {/if}
     </div>

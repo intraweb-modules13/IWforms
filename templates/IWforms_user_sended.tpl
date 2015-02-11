@@ -4,6 +4,6 @@
     {include file="IWforms_user_userNoteContent.tpl" fid=$form.fid}
 {/foreach}
 <script type="text/javascript">
-    var deleteUserNoteText = '{{gt text="Delete the note"}}';
+    var deleteUserNoteText = "{{gt text="Delete the note"}}";
 </script>
 {/if}

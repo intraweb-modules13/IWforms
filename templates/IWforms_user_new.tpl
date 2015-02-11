@@ -5,7 +5,10 @@
         {{$requiredJS}}
         {{$checkJS}}
 	
-        if(!error){resposta=confirm("{{gt text="Confirms that want to send the annotation"}}");}
+        if(!error){
+			//for gt detection
+			resposta=confirm("{{gt text="Confirms that want to send the annotation"}}");
+		}
 		
         if(!error && resposta){
             f.submit();

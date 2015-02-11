@@ -577,7 +577,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
         }
         $charx = $this->request->getPost()->get('charx', '');
         if (!$charx) {
-            throw new Zikula_Exception_Fatal($this->__('no char defined'));
+            throw new Zikula_Exception_Fatal($this->__("no char defined"));
         }
 //Get form information
         $itemForm = ModUtil::apiFunc('IWforms', 'user', 'getFormDefinition', array('fid' => $fid));
@@ -802,7 +802,7 @@ class IWforms_Controller_Ajax extends Zikula_Controller_AbstractAjax {
                     'fieldType' => $fieldType,
                     'fieldName' => $this->__('Field name')));
         if (!$createField) {
-            throw new Zikula_Exception_Fatal($this->__('creation error'));
+            throw new Zikula_Exception_Fatal($this->__("creation error"));
         }
         ModUtil::apiFunc('IWforms', 'admin', 'reorder', array('fid' => $fid));
         //If field type is fileset create a fieldset end field </fieldset> and edit it
